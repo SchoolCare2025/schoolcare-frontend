@@ -18,7 +18,7 @@ const Footer = () => {
             
             <div className="w-80">
                 <h1 className="text-black font-semibold">Useful links</h1>
-                <div>
+                <div className="text-2xl">
                    <ul className="grid gap-1.5 my-4 sm:text-[15px]">
                     <a href=""><li>Home</li></a>
                     <a href=""><li>About Us</li></a>
@@ -31,9 +31,8 @@ const Footer = () => {
 
             <div className="w-80 sm:w-[20rem] rounded">
                 <span className="text-black font-semibold">Leave Us a Message</span>
-                {/* <textarea className="my-3 overflow-auto resize-none focus:outline-none focus:ring-0" name="" id="" cols="" rows="4"></textarea> */}
-
-                <button className="bg-cosBlue px-4 py-0.5 text-cosWhite rounded-md hover:bg-greenColor transition duration-300 ease-in-out transform">Send</button>
+                <textarea className="w-full max-w-md mx-auto p-2 my-3 border border-gray-300 rounded-md overflow-auto resize-none focus:outline-none focus:ring-2 focus:ring-cosBlue" name="" id="" rows="4"></textarea>
+                <button className="bg-cosBlue px-4 py-0.5 font-bold text-cosWhite rounded-md hover:bg-greenColor transition duration-300 ease-in-out transform">Send</button>
 
             </div>
         </div>

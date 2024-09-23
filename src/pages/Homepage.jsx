@@ -30,7 +30,7 @@ at your fingertips.</p>
 </div>
 
     <form action="" className='sm:mb-72 sm:mx-[10%] sm:max-w-[75%] sm:absolute sm:mt-10 md:block w-full md:max-w-[50%] md:mx-[0] bg-cosWhite p-5 rounded-[12px] shadow-2xl md:absolute md:right-[2%] md:px-8 md:pb-16 md:top-[15%] lg:max-w-[32%] xl:right-[8%]'>
-      <p className='mb-4'>Fill up the form below to access result</p>
+      <p className='mb-4 font-semibold text-[18px]'>Fill up the form below to access result</p>
       <div className='grid grid-cols-2 sm:gap-x-4 md:gap-4'>
 
       <div className=''>

@@ -30,9 +30,15 @@ export default {
         'testiFont':     "#212121",
         'starColor':     "#FF9900",
         'greenColor': "#008000",
+        'inputColors': "#F0F0F0",
+
         'hoverBtnColor': {
           '75': 'rgba(rgba(2, 141, 219, 1)',
         },
+      //   'bgTestimonials': {
+      //     DEFAULT: "#04427B",
+      //     '65': 'rgba(4, 58, 123, 0.65)',
+      //  },
         
         'bgTestimonials': {
          DEFAULT: "#04427B",

@@ -7,9 +7,12 @@
         @apply py-3 px-4 rounded-xl border-2 border-cosBorder 
          transition-all duration-300 
         placeholder-cosInputText max-w-40
-        w-full focus:outline-none mb-1.5
+        w-full focus:outline-none mb-1.5;
     }
     .options{
         @apply text-optionsColor;
+    }
+    .formInputs{
+        @apply py-4 px-4 outline-none transition-all duration-300 placeholder-cosInputText w-full bg-inputColors;
     }
 }

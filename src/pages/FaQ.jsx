@@ -2,7 +2,7 @@
 
 const  FaQ = () => {
     return (  
-         <div className="px-10 my-4">
+         <div className="px-12 my-8">
 
             <h1 className="sm:text-[25px] font-semibold">Frequently Asked Questions</h1>
             <p>Below are the answers to some important Frequently Asked Questions by our clients. If your question is not  answered  below,
@@ -11,7 +11,7 @@ const  FaQ = () => {
 
 
 
-            <details class="group" open> 
+            <details class="group" open className="border-b"> 
             <summary
                 class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
                 <h1>How does MYSKUL.COM.NG works?</h1>
@@ -53,7 +53,7 @@ const  FaQ = () => {
            </div>
         </details>
 
-        <details class="group" open> 
+        <details class="group" open className="border-b"> 
             <summary
                 class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
                 <h1>I see an “Incomplete” or “Absent” status on my result. What does
@@ -74,7 +74,7 @@ const  FaQ = () => {
            </div>
         </details>
 
-        <details class="group" open> 
+        <details class="group" open className="border-b"> 
             <summary
                 class="flex cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
                 <h1>How long will my result be available online?</h1>
@@ -95,7 +95,6 @@ const  FaQ = () => {
            </div>
         </details>
 
-        
          </div>
     );
 } 
