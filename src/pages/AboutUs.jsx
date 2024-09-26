@@ -1,55 +1,51 @@
-import YoungLady from '../assets/images/youngLady.jpg';
+import YoungLady from "../assets/images/youngLady.jpg";
 
-const AboutUs = () => {
-    return ( 
-        <div className="w-full my-36 px-12 overflow-hidden md:px-3">
-            <h2 className='text-center text-4xl font-bold my-16'>About Us</h2>
+const AboutUs = ({ className = "my-40" }) => {
+	return (
+		<div className={`w-full overflow-hidden px-12 md:px-3 ${className}`}>
+			<h2 className="mb-16 text-center text-4xl font-bold">About Us</h2>
+			<div
+				className="mx-4 flex flex-col-reverse items-center justify-between gap-24 md:flex-row
+					md:items-center md:justify-center md:gap-4 lg:justify-center sxl:px-9"
+			>
+				<div className="w-[100%] md:mt-5 md:w-[50%] sxl:w-[50%]">
+					<p className="text-xl md:px-2 md:text-base lg:text-[18px] sxl:pr-24">
+						Myschool.com allows students from registered schools to check their results online, both
+						termly results, annual results and entrance exam results with ease. Schools with an
+						official website already can contact us to have result system integrated in their
+						website. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid vero, assumenda
+						inventore beatae laudantium ducimus. Consectetur distinctio eligendi provident totam
+						dolorum ea quo adipisci perspiciatis!
+					</p>
+				</div>
 
-            <div className="flex mx-4 sm:flex-col-reverse justify-between items-center gap-24 md:flex-row md:gap-4 md:justify-center md:items-center lg:justify-center sxl:px-9">
-                <div className="sm:w-[100%] md:w-[50%] md:mt-5 sxl:w-[50%]">
-                <p className='text-xl md:text-base md:px-2 lg:text-[18px] sxl:pr-24'>
-                   Myschool.com allows students from
-                   registered schools to check their results
-                   online, both termly results, annual results
-                   and entrance exam results with ease.
-                   Schools with an official website already
-                   can contact us to have result system
-                  integrated in their website. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquid vero, assumenda inventore beatae laudantium ducimus.
-                  Consectetur distinctio eligendi provident totam dolorum ea quo adipisci perspiciatis!
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, aut.
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur dolore, 
-                  ab, et obcaecati impedit saepe possimus repudiandae, pariatur error eveniet aut dignissimos. 
-                  Quo sequi excepturi alias voluptas beatae, enim saepe sunt, deleniti quidem ad quis inventore. Deleniti
-                   rerum quis magni sapiente. Eum qui nulla eligendi perspiciatis modi enim molestiae culpa maiores facilis
-                    minima iusto magni autem, architecto est earum. Quos adipisci officia quo sapiente doloremque dolor, quod in, nostrum nam, 
-                    alias neque commodi. Quia, harum? Laudantium cumque ratione repellat voluptates rerum nam libero quasi. Quam eveniet illo sit 
-                    dicta iure in quos officia architecto, aut provident fugiat ad fuga maxime. Nesciunt unde at aliquam. Necessitatibus laborum sunt minus! Cum 
-                    consequatur dolores possimus quis quidem ea odio aperiam nihil aliquid accusamus architecto recusandae atque adipisci eos fugit, 
-                    reprehenderit maiores est et velit sapiente voluptatibus.
-                </p>
+				<div
+					className="relative w-full rounded-lg md:w-[50%] lg:items-center lg:justify-center
+						sxl:w-[50%]"
+				>
+					<div
+						className="absolute left-[-10%] top-10 flex h-10 w-44 items-center justify-center
+							rounded-xl bg-cosWhite py-4 pl-10 pr-6 text-center text-[10px] font-semibold
+							text-resultBtn shadow-xl max-md:px-0 md:right-96 md:top-32"
+					>
+						<p>Get access to academic results</p>
+					</div>
 
-                </div>
+					<div className="md:w-[105%] sxl:w-full">
+						<img src={YoungLady} alt="" className="h-auto w-full rounded-2xl" />
+					</div>
 
-            <div className='sm:w-[100%] md:w-[50%] rounded-lg relative lg:justify-center lg:items-center sxl:w-[50%]'>
-                <div className='bg-cosWhite absolute top-32 right-96 rounded-xl py-4 pl-10 pr-6 text-resultBtn shadow-xl font-semibold sm:left-[-10%] sm:w-44 sm:text-[10px] sm:h-10 sm:px-0 sm:top-10 sm:text-center sm:flex sm:justify-center sm:items-center'>
-                    <p>Get access to academic results</p>
-                </div>
+					<div
+						className="absolute right-[-10%] top-32 flex h-10 w-36 items-center justify-center
+							rounded-xl bg-cosWhite px-1 py-4 text-center text-xs font-semibold text-cosBlue
+							shadow-xl md:top-48 md:px-3 lg:top-72 sxl:top-80"
+					>
+						<p>Track your performance</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
 
-            <div className=' md:w-[105%] sxl:w-full'>
-                <img src= {YoungLady} alt="" className='rounded-2xl sm:h-auto sm:w-full'/>
-            </div>
-
-            <div className='bg-cosWhite absolute top-72 right-2 rounded-xl py-4 px-3 text-cosBlue shadow-xl font-semibold sm:right-[-10%] sm:w-36 sm:text-xs sm:h-10 sm:px-1 sm:top-32 sm:text-center sm:flex sm:justify-center sm:items-center md:top-48 sxl:top-80'>
-                    <p>Track your performance</p>
-            </div>
-                 
-            </div>
-
-            </div>
-
-        </div>
-     );
-}
- 
 export default AboutUs;

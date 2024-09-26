@@ -1,23 +1,23 @@
-import React from 'react'
-import Homepage from './Homepage'
-import Registered from './registered'
-import AboutUs from './AboutUs'
-import Services from './Services'
-import Testimonials from './Testinonials'
-import FeaturedSchools from './FeaturedSchools'
-import Blog from './Blog'
+import React from "react";
+import AboutUs from "./AboutUs";
+import Blog from "./Blog";
+import FeaturedSchools from "./FeaturedSchools";
+import Homepage from "./Homepage";
+import Services from "./Services";
+import Testimonials from "./Testinonials";
+import Registered from "./registered";
 
-
-export const LandingPage = () => {
-    return (
-        <div>
-            <Homepage />
-            <Registered />
-            <AboutUs />
-            <Services />
-            <Testimonials />
-            <FeaturedSchools />
-            <Blog /> 
-        </div>
-    )
-}
+const LandingPage = () => {
+	return (
+		<div>
+			<Homepage />
+			<Registered />
+			<AboutUs />
+			<Services />
+			<Testimonials />
+			<FeaturedSchools />
+			<Blog />
+		</div>
+	);
+};
+export default LandingPage;

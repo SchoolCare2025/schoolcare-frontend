@@ -1,42 +1,63 @@
 const Footer = () => {
-    return ( 
-        <div className="w-full bg-footerBg flex sm:gap-8 px-12 py-24 justify-between max-w-auto">
-            <div className="w-80">
-                <h1 className="text-black font-semibold">MY SKUL</h1>
+	return (
+		<div
+			className="max-w-auto flex w-full justify-between gap-8 bg-footerBg px-12 py-24 text-[10px]
+				md:text-[20px]"
+		>
+			<div className="w-80">
+				<h1 className="font-semibold text-black md:text-[30px]">MY SKUL</h1>
 
-                <div className="my-4">
-                <p>Get access to all academic results with ease.
-                   Whether you're eagerly anticipating your final
-                   exam results or need to track your performance
-                   throughout the semester,
-                </p>
-                </div>
-                <p>Phone: 09038746894</p>
-                <p>Email:myskul.email@gmail.com</p>
-                
-            </div>
-            
-            <div className="w-80">
-                <h1 className="text-black font-semibold">Useful links</h1>
-                <div className="text-2xl">
-                   <ul className="grid gap-1.5 my-4 sm:text-[15px]">
-                    <a href=""><li>Home</li></a>
-                    <a href=""><li>About Us</li></a>
-                    <a href=""><li>How it Works</li></a>
-                    <a href=""><li>FAQs</li></a>
-                    <a href=""><li>Contact Us</li></a>
-                   </ul>
-                </div>
-            </div>
+				<div className="my-4">
+					<p>
+						Get access to all academic results with ease. Whether you're eagerly anticipating your
+						final exam results or need to track your performance throughout the semester,
+					</p>
+				</div>
+				<p>Phone: 09038746894</p>
+				<p>Email:myskul.email@gmail.com</p>
+			</div>
 
-            <div className="w-80 sm:w-[20rem] rounded">
-                <span className="text-black font-semibold">Leave Us a Message</span>
-                <textarea className="w-full max-w-md mx-auto p-2 my-3 border border-gray-300 rounded-md overflow-auto resize-none focus:outline-none focus:ring-2 focus:ring-cosBlue" name="" id="" rows="4"></textarea>
-                <button className="bg-cosBlue px-4 py-0.5 font-bold text-cosWhite rounded-md hover:bg-greenColor transition duration-300 ease-in-out transform">Send</button>
+			<div className="w-80">
+				<h1 className="font-semibold text-black md:text-[30px]">Useful links</h1>
+				<div className="">
+					<ul className="my-4 grid gap-1.5">
+						<a href="/">
+							<li>Home</li>
+						</a>
+						<a href="/AboutUs">
+							<li>About Us</li>
+						</a>
+						<a href="/HowItWorks">
+							<li>How it Works</li>
+						</a>
+						<a href="/FaQ">
+							<li>FAQs</li>
+						</a>
+						<a href="/ContactUs">
+							<li>Contact Us</li>
+						</a>
+					</ul>
+				</div>
+			</div>
 
-            </div>
-        </div>
-     );
-}
- 
+			<div className="w-[20rem] rounded md:w-80">
+				<span className="font-semibold text-black md:text-[30px]">Leave Us a Message</span>
+				<textarea
+					className="mx-auto my-3 w-full max-w-md resize-none overflow-auto rounded-md border
+						border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-cosBlue"
+					name=""
+					id=""
+					rows="4"
+				></textarea>
+				<button
+					className="transform rounded-md bg-cosBlue px-4 py-0.5 font-bold text-cosWhite transition
+						duration-300 ease-in-out hover:bg-greenColor"
+				>
+					Send
+				</button>
+			</div>
+		</div>
+	);
+};
+
 export default Footer;
