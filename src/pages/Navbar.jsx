@@ -17,14 +17,16 @@ const Navbar = () => {
 		}
 	}, [nav]);
 
+	const mergeClasses = (...classes) => classes.filter(Boolean).join(" ");
+
 	return (
 		<nav className="flex items-center justify-between bg-cosWhite px-12 py-4">
 			<div className="w-[6%] sxl:w-[5%]">
 				<img src={Logo} alt="Logo" />
 			</div>
 			<ul
-				className="hidden md:flex md:gap-4 md:text-base md:font-semibold lg:gap-12 lg:text-lg
-					lg:font-normal xl:gap-14 xl:text-xl"
+				className="hidden text-base font-normal lg:flex lg:gap-12 lg:text-lg lg:font-semibold xl:gap-14
+					xl:text-xl"
 			>
 				<li className="hover:text-cosBlue">
 					<a href="/">Home</a>
@@ -42,11 +44,11 @@ const Navbar = () => {
 					<a href="ContactUs">Contact Us</a>
 				</li>
 			</ul>
-			<button className="hidden rounded-lg bg-cosBlue p-2 px-3 text-xl text-textWhite md:block">
+			<button className="hidden rounded-lg bg-cosBlue p-2 px-3 text-xl text-textWhite lg:block">
 				<a href="/RegisterSchool">Register School</a>
 			</button>
 
-			<div onClick={handleNav} className="block sm:text-5xl md:hidden">
+			<div onClick={handleNav} className="relative z-[200] block text-5xl lg:hidden">
 				{nav ? (
 					<i className="ri-close-line text-4xl font-bold"></i>
 				) : (
@@ -55,13 +57,12 @@ const Navbar = () => {
 			</div>
 
 			<div
-				className={
-					nav
-						? `fixed left-1/2 top-[54%] z-10 grid h-[90%] w-[100%] -translate-x-1/2 -translate-y-1/2
-							transform items-center justify-center bg-cosWhite text-black duration-500 ease-in-out
-							md:hidden`
-						: "fixed left-[-100%] top-0 h-full w-[60%] duration-500 ease-in-out"
-				}
+				className={mergeClasses(
+					`fixed inset-[0_0_0_auto] z-[150] flex w-full flex-col items-center justify-center
+					bg-cosWhite text-black transition-transform duration-500 ease-in-out lg:hidden`,
+
+					nav ? "translate-x-0" : "-translate-x-full"
+				)}
 			>
 				<ul className="pt-24 text-center text-2xl">
 					<li className="mx-4 mb-5 hover:text-cosBlue">

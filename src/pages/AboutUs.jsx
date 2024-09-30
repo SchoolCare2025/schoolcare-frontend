@@ -32,7 +32,7 @@ const AboutUs = ({ className = "my-40" }) => {
 					</div>
 
 					<div className="md:w-[105%] sxl:w-full">
-						<img src={YoungLady} alt="" className="h-auto w-full rounded-2xl" />
+						<img src={YoungLady} alt="" className="h-auto w-full min-w-[300px] rounded-2xl" />
 					</div>
 
 					<div

@@ -1,11 +1,11 @@
 const Footer = () => {
 	return (
 		<div
-			className="max-w-auto flex w-full justify-between gap-8 bg-footerBg px-12 py-24 text-[10px]
-				md:text-[20px]"
+			className="max-w-auto flex w-full justify-between gap-8 bg-footerBg px-5 py-24 text-[14px]
+				sm:px-12 lg:text-[20px]"
 		>
 			<div className="w-80">
-				<h1 className="font-semibold text-black md:text-[30px]">MY SKUL</h1>
+				<h1 className="font-semibold text-black lg:text-[30px]">MY SKUL</h1>
 
 				<div className="my-4">
 					<p>
@@ -18,7 +18,7 @@ const Footer = () => {
 			</div>
 
 			<div className="w-80">
-				<h1 className="font-semibold text-black md:text-[30px]">Useful links</h1>
+				<h1 className="font-semibold text-black lg:text-[28px]">Useful links</h1>
 				<div className="">
 					<ul className="my-4 grid gap-1.5">
 						<a href="/">
@@ -40,17 +40,17 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<div className="w-[20rem] rounded md:w-80">
-				<span className="font-semibold text-black md:text-[30px]">Leave Us a Message</span>
+			<div className="w-[20rem] rounded lg:w-80">
+				<span className="font-semibold text-black lg:text-[30px]">Leave Us a Message</span>
 				<textarea
-					className="mx-auto my-3 w-full max-w-md resize-none overflow-auto rounded-md border
+					className="mx-auto my-3 w-full max-w-lg resize-none overflow-auto rounded-lg border
 						border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-cosBlue"
 					name=""
 					id=""
 					rows="4"
 				></textarea>
 				<button
-					className="transform rounded-md bg-cosBlue px-4 py-0.5 font-bold text-cosWhite transition
+					className="transform rounded-lg bg-cosBlue px-4 py-0.5 font-bold text-cosWhite transition
 						duration-300 ease-in-out hover:bg-greenColor"
 				>
 					Send
