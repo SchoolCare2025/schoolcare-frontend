@@ -6,7 +6,7 @@ const AboutUs = ({ className = "my-40" }) => {
 			<h2 className="mb-16 text-center text-4xl font-bold">About Us</h2>
 			<div
 				className="mx-4 flex flex-col-reverse items-center justify-between gap-24 md:flex-row
-					md:items-center md:justify-center md:gap-4 lg:justify-center sxl:px-9"
+					md:items-center md:justify-center md:gap-9 lg:justify-center sxl:px-9"
 			>
 				<div className="w-[100%] md:mt-5 md:w-[50%] sxl:w-[50%]">
 					<p className="text-xl md:px-2 md:text-base lg:text-[18px] sxl:pr-24">

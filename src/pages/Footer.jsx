@@ -2,10 +2,10 @@ const Footer = () => {
 	return (
 		<div
 			className="max-w-auto flex w-full justify-between gap-8 bg-footerBg px-5 py-24 text-[14px]
-				sm:px-12 lg:text-[20px]"
+				sm:px-12 lg:text-[18px]"
 		>
 			<div className="w-80">
-				<h1 className="font-semibold text-black lg:text-[30px]">MY SKUL</h1>
+				<h1 className="font-semibold text-black lg:text-[20px]">MY SKUL</h1>
 
 				<div className="my-4">
 					<p>
@@ -18,7 +18,7 @@ const Footer = () => {
 			</div>
 
 			<div className="w-80">
-				<h1 className="font-semibold text-black lg:text-[28px]">Useful links</h1>
+				<h1 className="font-semibold text-black lg:text-[20px]">Useful links</h1>
 				<div className="">
 					<ul className="my-4 grid gap-1.5">
 						<a href="/">
@@ -41,7 +41,7 @@ const Footer = () => {
 			</div>
 
 			<div className="w-[20rem] rounded lg:w-80">
-				<span className="font-semibold text-black lg:text-[30px]">Leave Us a Message</span>
+				<span className="font-semibold text-black lg:text-[20px]">Leave Us a Message</span>
 				<textarea
 					className="mx-auto my-3 w-full max-w-lg resize-none overflow-auto rounded-lg border
 						border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-cosBlue"

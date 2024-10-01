@@ -41,7 +41,7 @@ const Homepage = () => {
 			<form
 				action=""
 				className="absolute mx-auto mt-6 w-full max-w-[376px] rounded-[12px] bg-cosWhite p-5 shadow-2xl
-					max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[2%] lg:top-[15%] lg:max-w-[450px]
+					max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[2%] lg:top-[35%] lg:max-w-[450px]
 					lg:px-8 lg:pb-16 xl:right-[8%]"
 			>
 				<p className="mb-4 text-[18px] font-semibold">Fill up the form below to access result</p>

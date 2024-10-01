@@ -4,7 +4,7 @@ import RegisteredIcon from "../assets/images/registeredIcon.svg";
 const Registered = () => {
 	return (
 		<div
-			className="mt-[60%] flex h-32 w-full items-center justify-center gap-x-24 bg-cosBlue sm:gap-x-28
+			className="mt-[80%] flex h-32 w-full items-center justify-center gap-x-24 bg-cosBlue sm:gap-x-28
 				lg:my-40 lg:mt-[20%] lg:gap-48"
 		>
 			<div className="flex sm:flex-col sm:items-center lg:flex-row lg:gap-3">
