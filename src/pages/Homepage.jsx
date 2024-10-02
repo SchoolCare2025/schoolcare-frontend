@@ -1,4 +1,3 @@
-import React from "react";
 import bgImage from "../assets/images/collegeStd.jpg";
 
 const Homepage = () => {
@@ -9,8 +8,7 @@ const Homepage = () => {
 
 	return (
 		<div
-			className="w-full px-2 pb-[12rem] pt-[4rem] lg:grid lg:grid-cols-2 lg:gap-8 lg:px-14 lg:pb-48
-				xl:pb-52"
+			className="w-full px-2 pb-[9rem] pt-[4rem] lg:grid lg:grid-cols-2 lg:gap-8 lg:px-14"
 			style={backgroundImageStyle}
 		>
 			<div className="lg:mr-10 lg:px-2">
@@ -41,8 +39,8 @@ const Homepage = () => {
 			<form
 				action=""
 				className="absolute mx-auto mt-6 w-full max-w-[376px] rounded-[12px] bg-cosWhite p-5 shadow-2xl
-					max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[2%] lg:top-[35%] lg:max-w-[450px]
-					lg:px-8 lg:pb-16 xl:right-[8%]"
+					max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[2%] lg:top-[23%] lg:max-w-[450px]
+					lg:scale-[1.12] lg:px-8 lg:pb-16 xl:right-[8%]"
 			>
 				<p className="mb-4 text-[18px] font-semibold">Fill up the form below to access result</p>
 				<div className="grid grid-cols-2 gap-x-4 lg:gap-4">
