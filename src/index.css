@@ -2,17 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components  {
-    .input{
-        @apply py-3 px-4 rounded-xl border-2 border-cosBorder 
-         transition-all duration-300 
-        placeholder-cosInputText max-w-40
-        w-full focus:outline-none mb-1.5;
-    }
-    .options{
-        @apply text-optionsColor;
-    }
-    .formInputs{
-        @apply py-4 px-4 outline-none transition-all duration-300 placeholder-cosInputText w-full bg-inputColors;
-    }
+/* ------------------*/
+/* Custom Properties */
+/*-------------------*/
+@layer base {
+}
+
+/* ------------------*/
+/* General CSS Reset */
+/*-------------------*/
+@layer base {
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html {
+		height: 100%;
+	}
+
+	body {
+		min-height: 100%;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	input:focus-visible {
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+	}
+
+	img {
+		width: 100%;
+		max-inline-size: 100%;
+		max-width: unset;
+	}
+
+	button {
+		outline: transparent;
+	}
+
+	body {
+		line-height: 1.5;
+	}
+}
+
+@layer components {
+	.input {
+		@apply mb-1.5 w-full max-w-40 rounded-xl border-2 border-cosBorder px-4 py-3 placeholder-cosInputText transition-all duration-300 focus:outline-none;
+	}
+	.options {
+		@apply text-optionsColor;
+	}
+	.formInputs {
+		@apply w-full bg-inputColors px-4 py-4 placeholder-cosInputText outline-none transition-all duration-300;
+	}
 }

@@ -2,4 +2,3 @@ dist
 pnpm-lock.yaml
 *.md
 *.tsbuildinfo
-eslint-typegen.d.ts

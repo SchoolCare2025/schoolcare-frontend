@@ -1,4 +1,4 @@
-export const HowItWorks = () => {
+const HowItWorks = () => {
 	return (
 		<div
 			className="mb-36 mt-12 grid gap-10 px-14 md:grid-cols-2 md:items-center md:justify-center
