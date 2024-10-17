@@ -1,6 +1,6 @@
 const RegisterSchoolAddress = () => {
 	return (
-		<div className="px-10 md:px-24 lg:px-16 sxl:px-28 xl:px-64 my-32">
+		<div className="my-32 px-10 md:px-24 lg:px-16 sxl:px-28 xl:px-64">
 			<h1 className="text-[26px] font-bold">Tell us more about your school</h1>
 			<p className="text-cosInputText">Please fill in the details below</p>
 
