@@ -15,7 +15,7 @@ function Navbar() {
 function DesktopNavigation() {
 	return (
 		<article className="ml-[100px] flex w-full items-center justify-between">
-			<nav className="flex min-w-fit gap-9 text-[20px] font-medium">
+			<nav className="flex min-w-fit gap-9 font-medium">
 				<NavLink to="/">Home</NavLink>
 				<NavLink to="/AboutUs">About us</NavLink>
 				<NavLink to="/HowItWorks">How it works</NavLink>
@@ -25,7 +25,7 @@ function DesktopNavigation() {
 
 			<div className="flex items-center gap-5">
 				<span className="block size-[27px] rounded-full bg-[hsl(0,0%,85%)]" />
-				<p className="text-[20px] font-semibold">Redeemed Secondary School</p>
+				<p className="font-semibold">Redeemed Secondary School</p>
 			</div>
 		</article>
 	);

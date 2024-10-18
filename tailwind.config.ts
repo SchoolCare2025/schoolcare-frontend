@@ -1,19 +1,32 @@
+/* eslint-disable perfectionist/sort-objects */
 import type { Config } from "tailwindcss";
 
 const config = {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-	plugins: [],
 	theme: {
+		screens: {
+			lg: "1000px",
+			md: "768px",
+			sm: "480px",
+			sxl: "1200px",
+			xl: "1440px",
+		},
+
 		extend: {
+			fontFamily: {
+				montserrat: ["Montserrat", "sans-serif"],
+				inter: ["Inter", "sans-serif"],
+			},
+
 			borderRadius: {
 				full: "50%",
 			},
+
 			colors: {
-				schoolapp: {
+				school: {
 					blue: "var(--color-blue)",
 				},
 
-				// eslint-disable-next-line perfectionist/sort-objects
 				bgColor: "#04427B",
 				bgTestimonials: {
 					65: "rgba(4, 58, 123, 0.65)",
@@ -40,13 +53,6 @@ const config = {
 				testiFont: "#212121",
 				textWhite: "#FFFFFF",
 			},
-		},
-		screens: {
-			lg: "1000px",
-			md: "768px",
-			sm: "480px",
-			sxl: "1200px",
-			xl: "1440px",
 		},
 	},
 } satisfies Config;

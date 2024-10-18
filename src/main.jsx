@@ -4,7 +4,7 @@ import App from "./App";
 import "remixicon/fonts/remixicon.css";
 import "./tailwind.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.body).render(
 	<React.StrictMode>
 		<App />
 	</React.StrictMode>
