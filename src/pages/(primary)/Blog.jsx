@@ -1,7 +1,7 @@
-import SchoolChild1 from "../assets/images/skulChild1 1.png";
-import SchoolChild2 from "../assets/images/skulChild3 1.png";
-import SchoolFootballPitch from "../assets/images/skulFootball 1.png";
-import SchoolTenisGirl from "../assets/images/skulTenisGirl 1.png";
+import SchoolChild1 from "../../assets/images/skulChild1 1.png";
+import SchoolChild2 from "../../assets/images/skulChild3 1.png";
+import SchoolFootballPitch from "../../assets/images/skulFootball 1.png";
+import SchoolTenisGirl from "../../assets/images/skulTenisGirl 1.png";
 
 const Blogs = () => {
 	return (

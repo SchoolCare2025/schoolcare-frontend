@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
 	return (
 		<div
@@ -21,21 +23,21 @@ const Footer = () => {
 				<h1 className="font-semibold text-black lg:text-[20px]">Useful links</h1>
 				<div className="">
 					<ul className="my-4 grid gap-1.5">
-						<a href="/">
+						<Link href="/">
 							<li>Home</li>
-						</a>
-						<a href="/AboutUs">
+						</Link>
+						<Link href="/AboutUs">
 							<li>About Us</li>
-						</a>
-						<a href="/HowItWorks">
+						</Link>
+						<Link href="/HowItWorks">
 							<li>How it Works</li>
-						</a>
-						<a href="/FaQ">
+						</Link>
+						<Link href="/FaQ">
 							<li>FAQs</li>
-						</a>
-						<a href="/ContactUs">
+						</Link>
+						<Link href="/ContactUs">
 							<li>Contact Us</li>
-						</a>
+						</Link>
 					</ul>
 				</div>
 			</div>

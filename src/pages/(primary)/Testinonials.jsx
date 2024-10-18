@@ -1,5 +1,6 @@
-import Schul1 from "../assets/images/School1.png";
-import Schul2 from "../assets/images/School2.png";
+import Schul1 from "../../assets/images/School1.png";
+import Schul2 from "../../assets/images/School2.png";
+
 const Testimonials = () => {
 	return (
 		<div className="text-center">

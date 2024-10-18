@@ -5,6 +5,9 @@ const config = {
 	plugins: [],
 	theme: {
 		extend: {
+			borderRadius: {
+				full: "50%",
+			},
 			colors: {
 				bgColor: "#04427B",
 				bgTestimonials: {

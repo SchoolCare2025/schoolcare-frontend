@@ -1,4 +1,4 @@
-import bgImage from "../assets/images/collegeStd.jpg";
+import bgImage from "../../assets/images/collegeStd.jpg";
 
 const Homepage = () => {
 	const backgroundImageStyle = {
@@ -144,8 +144,6 @@ const Homepage = () => {
 					Check Result
 				</button>
 			</form>
-
-			<div></div>
 		</div>
 	);
 };

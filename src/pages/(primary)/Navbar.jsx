@@ -1,6 +1,11 @@
+import clsx from "clsx";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import Logo from "../assets/images/myskulLogo.png";
+import { Link } from "react-router-dom";
+import { twJoin } from "tailwind-merge";
+import Logo from "../../assets/images/myskulLogo.png";
+
+const cnJoin = (...classNames) => twJoin(clsx(classNames));
 
 const Navbar = () => {
 	const [nav, SetNav] = useState(false);
@@ -17,8 +22,6 @@ const Navbar = () => {
 		}
 	}, [nav]);
 
-	const mergeClasses = (...classes) => classes.filter(Boolean).join(" ");
-
 	return (
 		<nav className="flex items-center justify-between bg-cosWhite px-12 py-4">
 			<div className="w-[6%] sxl:w-[5%]">
@@ -29,23 +32,23 @@ const Navbar = () => {
 					xl:text-xl"
 			>
 				<li className="hover:text-cosBlue">
-					<a href="/">Home</a>
+					<Link to="/">Home</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<a href="/AboutUs">About Us</a>
+					<Link to="/AboutUs">About Us</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<a href="/HowItWorks">How it Works</a>
+					<Link to="/HowItWorks">How it Works</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<a href="/FaQ">FAQs</a>
+					<Link to="/FaQ">FAQs</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<a href="ContactUs">Contact Us</a>
+					<Link to="/ContactUs">Contact Us</Link>
 				</li>
 			</ul>
 			<button className="hidden rounded-lg bg-cosBlue p-2 px-3 text-xl text-textWhite lg:block">
-				<a href="/RegisterSchool">Register School</a>
+				<Link to="/RegisterSchool">Register School</Link>
 			</button>
 
 			<div onClick={handleNav} className="relative z-[200] block text-5xl lg:hidden">
@@ -57,7 +60,7 @@ const Navbar = () => {
 			</div>
 
 			<div
-				className={mergeClasses(
+				className={cnJoin(
 					`fixed inset-[0_0_0_auto] z-[150] flex w-full flex-col items-center justify-center
 					bg-cosWhite text-black transition-transform duration-500 ease-in-out lg:hidden`,
 
@@ -66,19 +69,19 @@ const Navbar = () => {
 			>
 				<ul className="pt-24 text-center text-2xl">
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<a href="/Homepage">Home</a>
+						<Link to="/Homepage">Home</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<a href="/AboutUs">About Us</a>
+						<Link to="/AboutUs">About Us</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<a href="HowItWorks">How it Works</a>
+						<Link to="HowItWorks">How it Works</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<a href="/FaQ">FAQs</a>
+						<Link to="/FaQ">FAQs</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<a href="ContactUs">Contact Us</a>
+						<Link to="ContactUs">Contact Us</Link>
 					</li>
 				</ul>
 				<button className="rounded-lg bg-cosBlue py-2 text-xl text-textWhite">Get Started</button>

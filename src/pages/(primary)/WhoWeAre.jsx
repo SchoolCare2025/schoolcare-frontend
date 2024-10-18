@@ -1,7 +1,4 @@
-import React from "react";
-import Navbar from "./Navbar";
-
-import Coworkers from "../assets/images/coworkers.png";
+import Coworkers from "../../assets/images/coworkers.png";
 
 const WhoWeAre = () => {
 	return (
