@@ -9,6 +9,11 @@ const config = {
 				full: "50%",
 			},
 			colors: {
+				schoolapp: {
+					blue: "var(--color-blue)",
+				},
+
+				// eslint-disable-next-line perfectionist/sort-objects
 				bgColor: "#04427B",
 				bgTestimonials: {
 					65: "rgba(4, 58, 123, 0.65)",
@@ -31,7 +36,6 @@ const config = {
 				optionsColor: "#6C6B6C",
 				resultBtn: "#FF59BD",
 				slitePlink: "#E0F4FF",
-
 				starColor: "#FF9900",
 				testiFont: "#212121",
 				textWhite: "#FFFFFF",

@@ -1,5 +1,5 @@
 function DashboardPage() {
-	return <div />;
+	return <div className="text-schoolapp-blue">Dashboard</div>;
 }
 
 export default DashboardPage;

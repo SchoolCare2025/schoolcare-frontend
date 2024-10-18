@@ -6,6 +6,9 @@
 /* Custom Properties */
 /*-------------------*/
 @layer base {
+	:root {
+		--color-blue: hsl(202, 98%, 43%);
+	}
 }
 
 /* ------------------*/
