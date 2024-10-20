@@ -1,8 +1,37 @@
 /* eslint-disable perfectionist/sort-objects */
 import type { Config } from "tailwindcss";
+import animationPlugin from "tailwindcss-animate";
+import plugin from "tailwindcss/plugin";
 
 const config = {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+	plugins: [
+		animationPlugin,
+
+		plugin((pluginObj) => {
+			const customScrollBar = {
+				".custom-scrollbar": {
+					"&::-webkit-scrollbar": {
+						width: "10px",
+					},
+
+					"&::-webkit-scrollbar-track": {
+						backgroundColor: "hsl(0, 0%, 76%)",
+						borderRadius: "10px 10px 0 0",
+					},
+
+					"&::-webkit-scrollbar-thumb": {
+						backgroundColor: "theme(colors.gray.600)",
+						border: "1px solid hsl(0, 0%, 76%)",
+						borderRadius: "10px",
+					},
+				},
+			};
+
+			pluginObj.addComponents([customScrollBar]);
+		}),
+	],
+
 	theme: {
 		screens: {
 			lg: "1000px",
@@ -25,6 +54,23 @@ const config = {
 			colors: {
 				school: {
 					blue: "var(--color-blue)",
+					gray: "var(--color-gray)",
+				},
+
+				shadcn: {
+					background: "hsl(0,0%,0%)",
+					foreground: "hsl(222.2 47.4% 11.2%)",
+					popover: "theme(colors.shadcn.background)",
+					primary: "theme(colors.shadcn.foreground)",
+					"primary-foreground": "hsl(210 40% 98%)",
+					"popover-foreground": "theme(colors.shadcn.foreground)",
+					accent: "hsl(210 40% 96.1%)",
+					"accent-foreground": "theme(colors.shadcn.foreground)",
+					input: "hsl(214.3 31.8% 91.4%)",
+					border: "theme(colors.shadcn.input)",
+					ring: "hsl(215 20.2% 65.1%)",
+					muted: "theme(colors.shadcn.accent)",
+					"muted-foreground": "hsl(215.4 16.3% 46.9%)",
 				},
 
 				bgColor: "#04427B",

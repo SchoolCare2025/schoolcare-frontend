@@ -15,6 +15,13 @@ const WhoWeAre = lazy(() => import("./pages/(primary)/WhoWeAre"));
 // (dashboard)
 const DashboardLayout = lazy(() => import("./pages/(dashboard)/layout"));
 const DashboardPage = lazy(() => import("./pages/(dashboard)/page"));
+// (dashboard)/register
+const RegisterClassPage = lazy(() => import("./pages/(dashboard)/register/class.page"));
+const RegisterStudentPage = lazy(() => import("./pages/(dashboard)/register/student.page"));
+const RegisterSubjectPage = lazy(() => import("./pages/(dashboard)/register/subject.page"));
+// (dashboard)/students
+const AddScoresPage = lazy(() => import("./pages/(dashboard)/students/add-scores.page"));
+const ViewStudentsPage = lazy(() => import("./pages/(dashboard)/students/view.page"));
 
 const routes = createRoutesFromElements(
 	<Route>
@@ -31,6 +38,11 @@ const routes = createRoutesFromElements(
 
 		<Route path="/dashboard" element={<DashboardLayout />}>
 			<Route index={true} element={<DashboardPage />} />
+			<Route path="register/student" element={<RegisterStudentPage />} />
+			<Route path="register/subject" element={<RegisterSubjectPage />} />
+			<Route path="register/class" element={<RegisterClassPage />} />
+			<Route path="students/view" element={<ViewStudentsPage />} />
+			<Route path="students/add-scores" element={<AddScoresPage />} />
 		</Route>
 	</Route>
 );

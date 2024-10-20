@@ -8,6 +8,7 @@
 @layer base {
 	:root {
 		--color-blue: hsl(202, 98%, 43%);
+		--color-gray: hsl(313, 0%, 42%);
 	}
 }
 

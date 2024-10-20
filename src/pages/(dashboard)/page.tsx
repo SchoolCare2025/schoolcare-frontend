@@ -1,5 +1,6 @@
 import { getElementList } from "@/components/common";
 import { BookIcon, SchoolIcon, StudentIcon } from "@/components/icons";
+import Main from "./_components/Main";
 
 const infoCardArray = [
 	{
@@ -20,32 +21,35 @@ const infoCardArray = [
 ];
 
 function DashboardPage() {
-	const [InfoCardList] = getElementList("base");
+	const [InfoCardList] = getElementList();
 
 	return (
-		<main className="w-full px-10 py-4">
-			<section className="flex gap-10">
-				<InfoCardList
-					each={infoCardArray}
-					render={(item) => (
-						<article className="flex w-full flex-col items-center rounded-[30px] bg-white py-8">
-							<span
-								className="flex size-[70px] items-center justify-center rounded-full border-[3px]
-									border-school-blue"
-							>
-								{item.icon}
-							</span>
+		<Main className="w-full px-10 py-4">
+			<InfoCardList
+				as="section"
+				className="flex gap-10"
+				each={infoCardArray}
+				render={(item) => (
+					<article
+						key={item.title}
+						className="flex w-full flex-col items-center rounded-[30px] bg-white py-8"
+					>
+						<span
+							className="flex size-[70px] items-center justify-center rounded-full border-[3px]
+								border-school-blue"
+						>
+							{item.icon}
+						</span>
 
-							<h3 className="mt-1 text-[12px] font-medium">{item.title}</h3>
+						<h3 className="mt-1 text-[12px] font-medium">{item.title}</h3>
 
-							<h4 className="text-[24px] font-bold">{item.description}</h4>
+						<h4 className="text-[24px] font-bold">{item.description}</h4>
 
-							<div className="mt-3 h-4 w-full bg-school-blue" />
-						</article>
-					)}
-				/>
-			</section>
-		</main>
+						<div className="mt-3 h-4 w-full bg-school-blue" />
+					</article>
+				)}
+			/>
+		</Main>
 	);
 }
 
