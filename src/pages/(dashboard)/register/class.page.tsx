@@ -102,7 +102,7 @@ function RegisterClassPage() {
 					</Form.Item>
 
 					<Form.Item control={methods.control} name="class_grades" className="gap-4">
-						<Form.Label>Class Grade</Form.Label>
+						<Form.Label className="font-medium">Class Grade</Form.Label>
 
 						<Form.InputPrimitive
 							ref={tagInputRef}

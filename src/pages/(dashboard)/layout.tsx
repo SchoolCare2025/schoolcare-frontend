@@ -4,7 +4,7 @@ import VaulSidebar from "./_components/VaulSidebar";
 
 function DashBoardLayout() {
 	return (
-		<div className="flex min-h-screen flex-col">
+		<div className="flex min-h-svh flex-col">
 			<Navbar />
 
 			<div className="flex grow bg-[hsl(0,0%,85%)]">
