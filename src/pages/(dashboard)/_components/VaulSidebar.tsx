@@ -26,8 +26,13 @@ const sideBarLinksArray = [
 	},
 	{
 		icon: "streamline:interface-edit-view-eye-eyeball-open-view",
-		label: "View Students",
-		link: "students/view",
+		label: "View All Students",
+		link: "students/view-all",
+	},
+	{
+		icon: "streamline:interface-edit-view-eye-eyeball-open-view",
+		label: "View Single Student",
+		link: "students/view-single",
 	},
 	{
 		icon: "solar:upload-minimalistic-linear",

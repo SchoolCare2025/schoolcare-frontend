@@ -1,7 +1,7 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { validateTagValue } from "@/lib/utils/validateTagValue";
-import { type KeyboardEvent, type MouseEvent, useRef } from "react";
+import { validateInputValue } from "@/lib/utils/validateInputValue";
+import type { KeyboardEvent, MouseEvent } from "react";
 import { useForm } from "react-hook-form";
 import Main from "../_components/Main";
 
@@ -15,8 +15,6 @@ function RegisterClassPage() {
 
 	const [TagList] = getElementList();
 
-	const tagInputRef = useRef<HTMLInputElement>(null);
-
 	const handleAddTags = (event: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>) => {
 		const isEnterKey = (event as KeyboardEvent).key === "Enter";
 
@@ -26,16 +24,18 @@ function RegisterClassPage() {
 			event.preventDefault();
 		}
 
-		const validClassGrades = validateTagValue(
+		const inputField = event.currentTarget;
+
+		const validClassGrade = validateInputValue(
 			methods.getValues().class_grades,
-			tagInputRef.current?.value
+			inputField.value.trim()
 		);
 
-		if (!validClassGrades) return;
+		if (!validClassGrade) return;
 
-		methods.setValue("class_grades", [...methods.getValues().class_grades, validClassGrades]);
+		methods.setValue("class_grades", [...methods.getValues().class_grades, validClassGrade]);
 
-		tagInputRef.current && (tagInputRef.current.value = "");
+		inputField.value = "";
 	};
 
 	const handleRemoveTags = (tag: string) => () => {
@@ -58,7 +58,7 @@ function RegisterClassPage() {
 					className="gap-8"
 					onSubmit={(event) => void methods.handleSubmit((data) => console.info(data))(event)}
 				>
-					<Form.Item control={methods.control} name="class_name" className="gap-4">
+					<Form.Item<typeof methods.control> name="class_name" className="gap-4">
 						<Form.Label className="font-medium">Class Name</Form.Label>
 
 						<Form.Controller
@@ -71,7 +71,7 @@ function RegisterClassPage() {
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
-										<Select.Value placeholder="Select class" />
+										<Select.Value placeholder="Choose class" />
 									</Select.Trigger>
 
 									<Select.Content
@@ -101,12 +101,10 @@ function RegisterClassPage() {
 						/>
 					</Form.Item>
 
-					<Form.Item control={methods.control} name="class_grades" className="gap-4">
+					<Form.Item<typeof methods.control> name="class_grades" className="gap-4">
 						<Form.Label className="font-medium">Class Grade</Form.Label>
 
 						<Form.InputPrimitive
-							ref={tagInputRef}
-							type="text"
 							placeholder="Jss1 A"
 							className="h-[75px] rounded-[20px] border-2 border-school-gray px-8 text-[14px]
 								md:text-base"
@@ -119,7 +117,7 @@ function RegisterClassPage() {
 						className="max-w-fit self-end rounded-[10px] bg-school-blue px-8 py-2.5 text-[18px]
 							font-bold text-white"
 					>
-						Add
+						Register
 					</button>
 				</Form.Root>
 			</section>
