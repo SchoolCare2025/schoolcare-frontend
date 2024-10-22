@@ -1,32 +1,28 @@
+import { useToggle } from "@zayne-labs/toolkit/react";
 import clsx from "clsx";
-import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { twJoin } from "tailwind-merge";
-import Logo from "../../assets/images/myskulLogo.png";
+import Logo from "../../../assets/images/myskulLogo.png";
 
 const cnJoin = (...classNames) => twJoin(clsx(classNames));
 
 const Navbar = () => {
-	const [nav, SetNav] = useState(false);
-
-	const handleNav = () => {
-		SetNav(!nav);
-	};
+	const [isNavOpen, toggleNavOpen] = useToggle(false);
 
 	useEffect(() => {
-		if (nav) {
+		if (isNavOpen) {
 			document.body.style.overflow = "hidden";
 		} else {
 			document.body.style.overflow = "auto";
 		}
-	}, [nav]);
+	}, [isNavOpen]);
 
 	return (
 		<nav className="flex items-center justify-between bg-cosWhite px-12 py-4">
-			<div className="w-[6%] sxl:w-[5%]">
+			<Link to="/" className="block w-[6%] sxl:w-[5%]">
 				<img src={Logo} alt="Logo" />
-			</div>
+			</Link>
 			<ul
 				className="hidden text-base font-normal lg:flex lg:gap-12 lg:text-lg lg:font-semibold xl:gap-14
 					xl:text-xl"
@@ -51,8 +47,8 @@ const Navbar = () => {
 				<Link to="/RegisterSchool">Register School</Link>
 			</button>
 
-			<div onClick={handleNav} className="relative z-[200] block text-5xl lg:hidden">
-				{nav ? (
+			<div onClick={toggleNavOpen} className="relative z-[200] block text-5xl lg:hidden">
+				{isNavOpen ? (
 					<i className="ri-close-line text-4xl font-bold"></i>
 				) : (
 					<i className="ri-menu-fill text-4xl font-bold"></i>
@@ -64,7 +60,7 @@ const Navbar = () => {
 					`fixed inset-[0_0_0_auto] z-[150] flex w-full flex-col items-center justify-center
 					bg-cosWhite text-black transition-transform duration-500 ease-in-out lg:hidden`,
 
-					nav ? "translate-x-0" : "-translate-x-full"
+					isNavOpen ? "translate-x-0" : "-translate-x-full"
 				)}
 			>
 				<ul className="pt-24 text-center text-2xl">

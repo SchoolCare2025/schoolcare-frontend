@@ -1,4 +1,4 @@
-import bgImage from "../../assets/images/collegeStd.jpg";
+import bgImage from "../../../assets/images/collegeStd.jpg";
 
 const Homepage = () => {
 	const backgroundImageStyle = {

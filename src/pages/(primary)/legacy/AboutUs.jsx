@@ -1,4 +1,4 @@
-import YoungLady from "../../assets/images/youngLady.jpg";
+import YoungLady from "../../../assets/images/youngLady.jpg";
 
 const AboutUs = ({ className = "my-40" }) => {
 	return (

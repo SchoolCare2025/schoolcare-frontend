@@ -2,7 +2,7 @@ import React from "react";
 
 const RegisterSchool = () => {
 	return (
-		<div className="my-32 px-10 md:px-24 lg:px-16 sxl:px-28 xl:px-64">
+		<div className="bg-cosWhite px-10 md:px-24 lg:px-16 sxl:px-28 xl:px-64">
 			<div className="w-[100%]">
 				<div className="flex justify-between font-semibold md:w-[100%]">
 					<h1 className="mb-4 hover:underline">Personal Information</h1>

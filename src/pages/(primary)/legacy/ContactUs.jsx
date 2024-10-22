@@ -1,4 +1,4 @@
-import AiImage from "../../assets/images/AiImage.png";
+import AiImage from "../../../assets/images/AiImage.png";
 
 const ContactUs = () => {
 	return (

@@ -1,4 +1,4 @@
-import Coworkers from "../../assets/images/coworkers.png";
+import Coworkers from "../../../assets/images/coworkers.png";
 
 const WhoWeAre = () => {
 	return (
