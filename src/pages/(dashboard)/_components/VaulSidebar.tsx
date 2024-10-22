@@ -1,43 +1,44 @@
 import { IconBox, Show, getElementList } from "@/components/common";
+import { RouteIndicator } from "@/components/icons";
 import { FocusScope } from "@radix-ui/react-focus-scope";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Drawer } from "vaul";
 
 const sideBarLinksArray = [
 	{
 		icon: "mynaui:grid",
 		label: "Dash Board",
-		link: "",
+		link: "/dashboard",
 	},
 	{
 		icon: "streamline:user-add-plus",
 		label: "Register Students",
-		link: "register/student",
+		link: "/dashboard/register/student",
 	},
 	{
 		icon: "fluent:document-one-page-add-24-regular",
 		label: "Register Class",
-		link: "register/class",
+		link: "/dashboard/register/class",
 	},
 	{
 		icon: "fluent:document-one-page-add-24-regular",
 		label: "Register Subjects",
-		link: "register/subject",
+		link: "/dashboard/register/subject",
 	},
 	{
 		icon: "streamline:interface-edit-view-eye-eyeball-open-view",
 		label: "View All Students",
-		link: "students/view-all",
+		link: "/dashboard/students/view-all",
 	},
 	{
 		icon: "streamline:interface-edit-view-eye-eyeball-open-view",
 		label: "View Single Student",
-		link: "students/view-single",
+		link: "/dashboard/students/view-single",
 	},
 	{
 		icon: "solar:upload-minimalistic-linear",
 		label: "Input Student Scores",
-		link: "students/add-scores",
+		link: "/dashboard/students/add-scores",
 	},
 	{
 		icon: "mage:logout",
@@ -48,6 +49,8 @@ const sideBarLinksArray = [
 
 export default function VaulSidebar() {
 	const [SideBarLinkList] = getElementList();
+
+	const pathname = useLocation().pathname;
 
 	return (
 		// NOTE - These classes allow the sidebar to scroll only within itself
@@ -81,8 +84,10 @@ export default function VaulSidebar() {
 							className="mt-7 flex flex-col gap-11"
 							each={sideBarLinksArray}
 							render={(item) => (
-								<li key={item.label} className="flex items-center gap-3">
-									<IconBox icon={item.icon} className="size-5" />
+								<li key={item.label} className="relative flex items-center gap-3">
+									{pathname === item.link && <RouteIndicator className="absolute" />}
+
+									<IconBox icon={item.icon} className="ml-5 size-5" />
 
 									<Show when={item.link !== null}>
 										<Show.Content>
