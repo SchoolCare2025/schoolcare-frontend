@@ -3,6 +3,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 
 // (primary)
 const SignInPage = lazy(() => import("./pages/(primary)/signin.page"));
+const RegisterSchoolStepOne = lazy(() => import("./pages/(primary)/register/step-1.page"));
+
 // (primary) - legacy
 const AboutUs = lazy(() => import("./pages/(primary)/legacy/AboutUs"));
 const ContactUs = lazy(() => import("./pages/(primary)/legacy/ContactUs"));
@@ -40,6 +42,7 @@ const routes = createRoutesFromElements(
 		</Route>
 
 		<Route path="/signin" element={<SignInPage />} />
+		<Route path="/register/step-1" element={<RegisterSchoolStepOne />} />
 
 		<Route path="/dashboard" element={<DashboardLayout />}>
 			<Route index={true} element={<DashboardPage />} />
