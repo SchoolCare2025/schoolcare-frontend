@@ -2,7 +2,7 @@ import { lazy } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
 // (primary)
-// const
+const SignInPage = lazy(() => import("./pages/(primary)/signin.page"));
 // (primary) - legacy
 const AboutUs = lazy(() => import("./pages/(primary)/legacy/AboutUs"));
 const ContactUs = lazy(() => import("./pages/(primary)/legacy/ContactUs"));
@@ -38,6 +38,8 @@ const routes = createRoutesFromElements(
 			<Route path="RegisterSchoolAddress" element={<RegisterSchoolAddress />} />
 			<Route path="AboutUs" element={<AboutUs />} />
 		</Route>
+
+		<Route path="/signin" element={<SignInPage />} />
 
 		<Route path="/dashboard" element={<DashboardLayout />}>
 			<Route index={true} element={<DashboardPage />} />

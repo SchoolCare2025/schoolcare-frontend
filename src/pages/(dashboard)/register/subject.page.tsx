@@ -2,7 +2,7 @@ import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { validateInputValue } from "@/lib/utils/validateInputValue";
 import { useForm } from "react-hook-form";
-import Main from "../_components/Main";
+import Main from "../../_components/Main";
 
 function RegisterSubjectPage() {
 	const methods = useForm({

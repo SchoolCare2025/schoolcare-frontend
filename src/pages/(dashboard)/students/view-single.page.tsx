@@ -1,6 +1,6 @@
 import { Form } from "@/components/ui";
 import { useForm } from "react-hook-form";
-import Main from "../_components/Main";
+import Main from "../../_components/Main";
 
 function ViewSingleStudent() {
 	const methods = useForm({
