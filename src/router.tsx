@@ -3,7 +3,8 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 
 // (primary)
 const SignInPage = lazy(() => import("./pages/(primary)/signin.page"));
-const RegisterSchoolStepOne = lazy(() => import("./pages/(primary)/register/step-1.page"));
+const RegisterSchoolPersonalInfo = lazy(() => import("./pages/(primary)/register/personal-info.page"));
+const RegisterSchoolAddress = lazy(() => import("./pages/(primary)/register/address.page"));
 
 // (primary) - legacy
 const AboutUs = lazy(() => import("./pages/(primary)/legacy/AboutUs"));
@@ -12,8 +13,6 @@ const FaQ = lazy(() => import("./pages/(primary)/legacy/FaQ"));
 const HowItWorks = lazy(() => import("./pages/(primary)/legacy/HowItWorks"));
 const LandingPage = lazy(() => import("./pages/(primary)/legacy/LandingPage"));
 const MainLayout = lazy(() => import("./pages/(primary)/legacy/MainLayout"));
-const RegisterSchool = lazy(() => import("./pages/(primary)/legacy/RegisterSchool"));
-const RegisterSchoolAddress = lazy(() => import("./pages/(primary)/legacy/RegisterSchoolAddress"));
 const WhoWeAre = lazy(() => import("./pages/(primary)/legacy/WhoWeAre"));
 
 // (dashboard)
@@ -36,13 +35,12 @@ const routes = createRoutesFromElements(
 			<Route path="FaQ" element={<FaQ />} />
 			<Route path="ContactUs" element={<ContactUs />} />
 			<Route path="HowItWorks" element={<HowItWorks />} />
-			<Route path="RegisterSchool" element={<RegisterSchool />} />
-			<Route path="RegisterSchoolAddress" element={<RegisterSchoolAddress />} />
 			<Route path="AboutUs" element={<AboutUs />} />
 		</Route>
 
 		<Route path="/signin" element={<SignInPage />} />
-		<Route path="/register/step-1" element={<RegisterSchoolStepOne />} />
+		<Route path="/register/personal-info" element={<RegisterSchoolPersonalInfo />} />
+		<Route path="/register/address" element={<RegisterSchoolAddress />} />
 
 		<Route path="/dashboard" element={<DashboardLayout />}>
 			<Route index={true} element={<DashboardPage />} />

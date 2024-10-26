@@ -3,8 +3,9 @@ import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
 import Main from "@/pages/_components/Main";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-function StepOne() {
+function PersonalInfoPage() {
 	const methods = useForm({
 		defaultValues: {
 			code: "",
@@ -13,8 +14,10 @@ function StepOne() {
 		},
 	});
 
+	const navigate = useNavigate();
+
 	return (
-		<Main className="mt-[56px] flex flex-col gap-8 px-[92px]">
+		<Main className="mt-[56px] flex flex-col gap-8 px-7 md:px-[92px]">
 			<header>
 				<h1 className="text-[18px] font-bold md:text-[30px]">Register your school</h1>
 				<p className="mt-2 text-[10px] md:text-[18px]">Please fill in the details below</p>
@@ -72,8 +75,9 @@ function StepOne() {
 					<button
 						type="submit"
 						className="flex max-w-fit items-center gap-3 self-end rounded-[4px] bg-school-blue px-3
-							py-[6px] text-[14px] font-semibold text-white md:rounded-[8px] md:px-5 md:py-2
+							py-[6px] text-[14px] font-semibold text-white md:rounded-[8px] md:px-5 md:py-[10px]
 							md:text-[18px]"
+						onClick={() => navigate("/register/address")}
 					>
 						Next
 						<IconBox icon="material-symbols:arrow-forward-ios-rounded" />
@@ -84,4 +88,4 @@ function StepOne() {
 	);
 }
 
-export default StepOne;
+export default PersonalInfoPage;
