@@ -3,7 +3,7 @@ import { Form, Select } from "@/components/ui";
 import { validateInputValue } from "@/lib/utils/validateInputValue";
 import type { KeyboardEvent, MouseEvent } from "react";
 import { useForm } from "react-hook-form";
-import Main from "../../_components/Main";
+import Main from "../_components/Main";
 
 function RegisterClassPage() {
 	const methods = useForm({

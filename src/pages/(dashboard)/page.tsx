@@ -1,6 +1,6 @@
 import { getElementList } from "@/components/common";
 import { BookIcon, SchoolIcon, StudentIcon } from "@/components/icons";
-import Main from "../_components/Main";
+import Main from "./_components/Main";
 
 const infoCardArray = [
 	{

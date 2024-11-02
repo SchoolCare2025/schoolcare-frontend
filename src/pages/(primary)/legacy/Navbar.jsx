@@ -44,7 +44,7 @@ const Navbar = () => {
 				</li>
 			</ul>
 			<button className="hidden rounded-lg bg-cosBlue p-2 px-3 text-xl text-textWhite lg:block">
-				<Link to="/RegisterSchool">Register School</Link>
+				<Link to="/register/personal-info">Register School</Link>
 			</button>
 
 			<div onClick={toggleNavOpen} className="relative z-[200] block text-5xl lg:hidden">

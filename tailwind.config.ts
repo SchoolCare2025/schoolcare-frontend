@@ -51,6 +51,18 @@ const config = {
 				full: "50%",
 			},
 
+			keyframes: {
+				shake: {
+					"0%, 100%": { transform: "translateX(0rem)" },
+					"25%": { transform: "translateX(0.6rem)" },
+					"75%": { transform: "translateX(-0.6rem)" },
+				},
+			},
+
+			animation: {
+				shake: "shake 0.2s ease-in-out 0s 3",
+			},
+
 			colors: {
 				school: {
 					blue: "var(--color-blue)",

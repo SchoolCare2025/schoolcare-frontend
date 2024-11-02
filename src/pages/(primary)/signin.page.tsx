@@ -2,7 +2,8 @@ import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import Main from "../_components/Main";
+
+const onSubmit = (data: unknown) => console.info(data);
 
 function SigninPage() {
 	const methods = useForm({
@@ -13,7 +14,7 @@ function SigninPage() {
 	});
 
 	return (
-		<Main className="mt-[56px] flex flex-col gap-8 px-[92px]">
+		<main className="flex flex-col gap-8 px-[92px]">
 			<header className="text-center">
 				<h1 className="text-[30px] font-bold">Welcome</h1>
 				<p className="text-[18px] font-bold">We are pleased to have you back</p>
@@ -23,7 +24,7 @@ function SigninPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit((data) => console.info(data))(event)}
+					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<Form.Item<typeof methods.control> name="email" className="gap-4">
 						<Form.Label className="font-medium">School email address*</Form.Label>
@@ -65,7 +66,7 @@ function SigninPage() {
 					</button>
 				</Form.Root>
 			</section>
-		</Main>
+		</main>
 	);
 }
 
