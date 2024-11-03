@@ -336,21 +336,21 @@ function FormController<TFieldValues = never>(props: FormControllerProps<TFieldV
 }
 
 type FormErrorRenderProps = {
-	errorMessage: string;
-	errorMessageArray: string[];
-	index: number;
-	props: { className: string; onAnimationEnd: React.ReactEventHandler<HTMLElement> };
+	className: string;
+	field: { errorMessage: string; errorMessageArray: string[]; index: number };
+	onAnimationEnd?: React.ReactEventHandler<HTMLElement>;
 };
 
 type FormErrorMessagePrimitiveProps<TFieldValues extends FieldValues> = {
 	className?: string;
 	classNames?: {
+		container?: string;
 		errorMessage?: string;
 		errorMessageAnimation?: string;
-		errorMessageContainer?: string;
 	};
 	control: Control<TFieldValues>; // == Here for type inference of errorField prop
 	render: (props: FormErrorRenderProps) => React.ReactNode;
+	withAnimationOnInvalid?: boolean;
 } & (
 	| {
 			errorField: keyof TFieldValues;
@@ -374,13 +374,34 @@ function FormErrorMessagePrimitive<TFieldValues extends FieldValues>(
 function FormErrorMessagePrimitive<TFieldValues extends FieldValues>(
 	props: FormErrorMessagePrimitiveProps<TFieldValues>
 ) {
-	const { className, control, errorField, render, type = "regular" } = props;
+	const {
+		className,
+		classNames,
+		control,
+		errorField,
+		render,
+		type = "regular",
+		withAnimationOnInvalid = true,
+	} = props;
 
 	const formState = useFormState({ control });
 
 	const wrapperRef = useRef<HTMLUListElement>(null);
 
-	const errorAnimationClass = "animate-shake";
+	const errorAnimationClass = classNames?.errorMessageAnimation ?? "animate-shake";
+
+	useEffect(() => {
+		if (!withAnimationOnInvalid) return;
+
+		const errorMessageElements = wrapperRef.current?.children;
+
+		if (!errorMessageElements) return;
+
+		for (const element of errorMessageElements) {
+			element.classList.add(errorAnimationClass);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [formState.submitCount]);
 
 	useEffect(() => {
 		const errorMessageElements = wrapperRef.current?.children;
@@ -413,24 +434,20 @@ function FormErrorMessagePrimitive<TFieldValues extends FieldValues>(
 
 	const [ErrorMessageList] = getElementList();
 
-	const onAnimationEnd: React.AnimationEventHandler<HTMLElement> = (event) => {
-		event.currentTarget.classList.remove(errorAnimationClass);
-	};
+	const onAnimationEnd: React.AnimationEventHandler<HTMLElement> | undefined = withAnimationOnInvalid
+		? (event) => event.currentTarget.classList.remove(errorAnimationClass)
+		: undefined;
 
 	return (
 		<ErrorMessageList
 			ref={wrapperRef}
 			each={errorMessageArray}
-			className="flex flex-col"
+			className={cnMerge("flex flex-col", classNames?.container)}
 			render={(errorMessage, index) => {
 				return render({
-					errorMessage,
-					errorMessageArray,
-					index,
-					props: {
-						className: cnMerge(errorAnimationClass, className),
-						onAnimationEnd,
-					},
+					className: cnMerge(errorAnimationClass, className, classNames?.errorMessage),
+					field: { errorMessage, errorMessageArray, index },
+					onAnimationEnd,
 				});
 			}}
 		/>
@@ -470,11 +487,11 @@ function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValu
 			control={control}
 			errorField={errorField as string}
 			type={type as "root"}
-			render={({ errorMessage, index, props: { className: renderClasses, ...restOfProps } }) => (
+			render={({ field: { errorMessage, index }, ...restOfProps }) => (
 				<p
 					key={errorMessage}
-					className={cnMerge("ml-[15px]", renderClasses, className, index === 0 && "mt-1")}
 					{...restOfProps}
+					className={cnMerge("ml-[15px]", restOfProps.className, className, index === 0 && "mt-1")}
 				>
 					<span>*</span>
 					{errorMessage}
