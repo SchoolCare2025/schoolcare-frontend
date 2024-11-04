@@ -1,6 +1,7 @@
 /* eslint-disable perfectionist/sort-object-types */
 import type { Prettify } from "@zayne-labs/toolkit/type-helpers";
-import { create } from "zustand";
+import { create, type StateCreator } from "zustand";
+import { persist } from "zustand/middleware";
 
 export type StepOneData = {
 	email: string;
@@ -13,7 +14,6 @@ export type StepTwoData = {
 	nationality: string;
 	address: string;
 	state: string;
-	city: string;
 	local_govt: string;
 	postal_code: number | null;
 };
@@ -31,7 +31,6 @@ export type FormStore = {
 export const initialFormState = {
 	formStepData: {
 		address: "",
-		city: "",
 		email: "",
 		local_govt: "",
 		name: "",
@@ -42,7 +41,7 @@ export const initialFormState = {
 	},
 } satisfies Omit<FormStore, "actions">;
 
-export const useFormStore = create<FormStore>()((set, get) => ({
+const stateObjectFn: StateCreator<FormStore> = (set, get) => ({
 	...initialFormState,
 
 	actions: {
@@ -54,4 +53,13 @@ export const useFormStore = create<FormStore>()((set, get) => ({
 			set({ formStepData: { ...formStepData, ...updatedFormData } });
 		},
 	} satisfies FormStore["actions"],
-}));
+});
+
+export const useFormStore = create(
+	persist(stateObjectFn, {
+		migrate: (persistedState) => persistedState,
+		name: "formStepData",
+		partialize: ({ formStepData }) => ({ formStepData }),
+		version: 1,
+	})
+);

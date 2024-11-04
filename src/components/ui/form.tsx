@@ -49,24 +49,24 @@ function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
 	);
 }
 
-type FormItemProps<TControl, TFieldValues extends FieldValues> =
-	TControl extends Control<infer TValues>
-		? {
-				children: React.ReactNode;
-				className?: string;
-				name: keyof TValues;
-			}
-		: {
-				children: React.ReactNode;
-				className?: string;
-				control?: Control<TFieldValues>;
-				name: keyof TFieldValues;
-			};
+type FormItemProps<TControl, TFieldValues extends FieldValues> = (TControl extends Control<infer TValues>
+	? {
+			control?: never;
+			name: keyof TValues;
+		}
+	: {
+			control?: Control<TFieldValues>;
+			name: keyof TFieldValues;
+		}) & {
+	children: React.ReactNode;
+	className?: string;
+	withWrapper?: boolean;
+};
 
 function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
 	props: FormItemProps<TControl, TFieldValues>
 ) {
-	const { children, className, name } = props;
+	const { children, className, name, withWrapper = true } = props;
 
 	const uniqueId = useId();
 
@@ -75,9 +75,15 @@ function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
 		[name, uniqueId]
 	);
 
+	const WrapperElement = withWrapper ? "div" : ReactFragment;
+
+	const wrapperElementProps = withWrapper && {
+		className: cnMerge("flex flex-col", className),
+	};
+
 	return (
 		<FormItemProvider value={value}>
-			<div className={cnMerge("flex flex-col", className)}>{children}</div>
+			<WrapperElement {...wrapperElementProps}>{children}</WrapperElement>
 		</FormItemProvider>
 	);
 }
@@ -184,12 +190,12 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 
 	const WrapperElement = shouldHaveEyeIcon ? FormInputGroup : ReactFragment;
 
-	const WrapperElementProps = shouldHaveEyeIcon && {
+	const wrapperElementProps = shouldHaveEyeIcon && {
 		className: cnMerge("w-full", classNames?.inputGroup, errors?.[name] && errorClassName),
 	};
 
 	return (
-		<WrapperElement {...WrapperElementProps}>
+		<WrapperElement {...wrapperElementProps}>
 			<input
 				id={id}
 				name={name}
@@ -478,20 +484,22 @@ type FormErrorMessageProps<TControl, TFieldValues extends FieldValues> =
 function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValues>(
 	props: FormErrorMessageProps<TControl, TFieldValues>
 ) {
-	const { className, errorField, type } = props;
+	const { className, type = "regular" } = props;
+
+	const { name } = useFormItemContext();
 
 	const { control } = useHookFormContext();
 
 	return (
 		<FormErrorMessagePrimitive
 			control={control}
-			errorField={errorField as string}
+			errorField={name}
 			type={type as "root"}
 			render={({ field: { errorMessage, index }, ...restOfProps }) => (
 				<p
 					key={errorMessage}
 					{...restOfProps}
-					className={cnMerge("ml-[15px]", restOfProps.className, className, index === 0 && "mt-1")}
+					className={cnMerge("text-[13px]", restOfProps.className, className, index === 0 && "mt-1")}
 				>
 					<span>*</span>
 					{errorMessage}

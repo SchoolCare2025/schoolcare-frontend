@@ -1,24 +1,55 @@
-import { IconBox } from "@/components/common";
+import { getElementList, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { type StepTwoData, initialFormState, useFormStore } from "@/store/formStore";
+import { callNigeriaApi, type LGA, type State } from "@/lib/api/callNigeriaApi";
+import { type StepTwoData, useFormStore } from "@/store/formStore";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Main from "../_components/Main";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const AddressSchema = z.object({
+	address: z.string().min(1, "Address is required"),
+	local_govt: z.string().min(1, "LGA is required"),
+	nationality: z.string().min(1, "Nationality is required"),
+	postal_code: z.number().min(1, "Postal code is required"),
+	state: z.string().min(1, "State is required"),
+});
 
 function AddressPage() {
+	const {
+		actions: { updateFormData },
+		formStepData,
+	} = useFormStore((state) => state);
+
 	const methods = useForm({
-		defaultValues: initialFormState.formStepData,
+		defaultValues: formStepData,
+		resolver: zodResolver(AddressSchema),
 	});
 
 	const navigate = useNavigate();
-
-	const { updateFormData } = useFormStore((state) => state.actions);
 
 	const onSubmit = (data: StepTwoData) => {
 		updateFormData(data);
 
 		navigate("/register/address");
 	};
+
+	const stateQueryResult = useQuery({
+		queryFn: () => callNigeriaApi<State[]>("/states"),
+		queryKey: ["states"],
+	});
+
+	const state = methods.watch("state").toUpperCase();
+
+	const LGAQueryResult = useQuery({
+		enabled: Boolean(state),
+		queryFn: () => callNigeriaApi<LGA[]>("/:state/lgas", { params: { state } }),
+		queryKey: ["lgas", state],
+	});
+
+	const [StateList] = getElementList("base");
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -59,22 +90,21 @@ function AddressPage() {
 										}}
 									>
 										<Select.Item
-											value="male"
+											value="Nigeria"
 											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
 												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 										>
-											Male
-										</Select.Item>
-										<Select.Item
-											value="female"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Female
+											Nigeria
 										</Select.Item>
 									</Select.Content>
 								</Select.Root>
 							)}
+						/>
+
+						<Form.ErrorMessage
+							control={methods.control}
+							errorField="nationality"
+							className="text-red-600"
 						/>
 					</Form.Item>
 
@@ -88,115 +118,64 @@ function AddressPage() {
 							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
+
+						<Form.ErrorMessage
+							control={methods.control}
+							errorField="address"
+							className="text-red-600"
+						/>
 					</Form.Item>
 
-					<div className="flex justify-between md:gap-[75px]">
-						<Form.Item<typeof methods.control>
-							name="state"
-							className="w-full max-w-[170px] gap-4 md:max-w-full"
-						>
-							<Form.Label className="font-medium">State</Form.Label>
+					<Form.Item<typeof methods.control> name="state" className="w-full gap-4">
+						<Form.Label className="font-medium">State</Form.Label>
 
-							<Form.Controller
-								render={({ field }) => (
-									<Select.Root
-										name={field.name}
-										value={field.value}
-										onValueChange={field.onChange}
+						<Form.Controller
+							render={({ field }) => (
+								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
+									<Select.Trigger
+										classNames={{
+											base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
+											text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
+											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+										}}
 									>
-										<Select.Trigger
-											classNames={{
-												base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
-												text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
-												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
-											}}
-										>
-											<Select.Value placeholder="Choose state" />
-										</Select.Trigger>
+										<Select.Value placeholder="Choose state" />
+									</Select.Trigger>
 
-										<Select.Content
-											classNames={{
-												base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-												backdrop-blur-lg`,
-												viewport: "gap-1",
-											}}
-										>
-											<Select.Item
-												value="male"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Male
-											</Select.Item>
-											<Select.Item
-												value="female"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Female
-											</Select.Item>
-										</Select.Content>
-									</Select.Root>
-								)}
-							/>
-						</Form.Item>
-
-						<Form.Item<typeof methods.control>
-							name="name"
-							className="w-full max-w-[170px] gap-4 md:max-w-full"
-						>
-							<Form.Label className="font-semibold">City</Form.Label>
-
-							<Form.Controller
-								render={({ field }) => (
-									<Select.Root
-										name={field.name}
-										value={field.value}
-										onValueChange={field.onChange}
+									<Select.Content
+										classNames={{
+											base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
+											backdrop-blur-lg`,
+											viewport: "gap-1",
+										}}
 									>
-										<Select.Trigger
-											classNames={{
-												base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
-												text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
-												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
-											}}
-										>
-											<Select.Value placeholder="Choose city" />
-										</Select.Trigger>
+										<StateList
+											each={stateQueryResult.data ?? []}
+											render={(item) => (
+												<Select.Item
+													key={item.name}
+													value={item.name}
+													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+												>
+													{item.name}
+												</Select.Item>
+											)}
+										/>
+									</Select.Content>
+								</Select.Root>
+							)}
+						/>
 
-										<Select.Content
-											classNames={{
-												base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-												backdrop-blur-lg`,
-												viewport: "gap-1",
-											}}
-										>
-											<Select.Item
-												value="steeze"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Steeze
-											</Select.Item>
-											<Select.Item
-												value="cooking"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Cooking
-											</Select.Item>
-										</Select.Content>
-									</Select.Root>
-								)}
-							/>
-						</Form.Item>
-					</div>
+						<Form.ErrorMessage
+							control={methods.control}
+							errorField="state"
+							className="text-red-600"
+						/>
+					</Form.Item>
 
-					<div className="flex justify-between md:gap-[75px]">
-						<Form.Item<typeof methods.control>
-							name="local_govt"
-							className="w-full max-w-[170px] gap-4 md:max-w-full"
-						>
+					<div className="flex justify-between gap-10 md:gap-[75px]">
+						<Form.Item<typeof methods.control> name="local_govt" className="w-full gap-4">
 							<Form.Label className="font-medium">LGA</Form.Label>
 
 							<Form.Controller
@@ -213,7 +192,7 @@ function AddressPage() {
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
-											<Select.Value placeholder="Choose state" />
+											<Select.Value placeholder="Choose LGA" />
 										</Select.Trigger>
 
 										<Select.Content
@@ -223,30 +202,33 @@ function AddressPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<Select.Item
-												value="male"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Male
-											</Select.Item>
-											<Select.Item
-												value="female"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Female
-											</Select.Item>
+											<StateList
+												each={LGAQueryResult.data ?? []}
+												render={(item) => (
+													<Select.Item
+														key={item.name}
+														value={item.name}
+														className="h-12 bg-gray-200 font-medium text-black
+															focus:bg-gray-300 focus:text-black
+															data-[state=checked]:bg-gray-300 md:text-base"
+													>
+														{item.name}
+													</Select.Item>
+												)}
+											/>
 										</Select.Content>
 									</Select.Root>
 								)}
 							/>
+
+							<Form.ErrorMessage
+								control={methods.control}
+								errorField="local_govt"
+								className="text-red-600"
+							/>
 						</Form.Item>
 
-						<Form.Item<typeof methods.control>
-							name="postal_code"
-							className="w-full max-w-[170px] gap-4 md:max-w-full"
-						>
+						<Form.Item<typeof methods.control> name="postal_code" className="w-full gap-4">
 							<Form.Label className="font-semibold">School postal code</Form.Label>
 
 							<Form.Input
@@ -255,13 +237,19 @@ function AddressPage() {
 								className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
 									md:h-[75px] md:rounded-[20px] md:text-base"
 							/>
+
+							<Form.ErrorMessage
+								control={methods.control}
+								errorField="postal_code"
+								className="text-red-600"
+							/>
 						</Form.Item>
 					</div>
 
 					<div className="mt-5 flex gap-4 self-end">
 						<button
 							type="button"
-							className="flex max-w-fit items-center gap-3 rounded-[4px] border-[3px]
+							className="flex max-w-fit items-center gap-3 rounded-[4px] border-2
 								border-[hsl(0,0%,26%)] px-3 py-[6px] text-[14px] font-semibold text-[hsl(0,0%,13%)]
 								md:rounded-[8px] md:px-5 md:py-2 md:text-[18px]"
 							onClick={() => navigate("/register/personal-info")}
@@ -269,6 +257,7 @@ function AddressPage() {
 							<IconBox icon="material-symbols:arrow-forward-ios-rounded" className="rotate-180" />
 							Back
 						</button>
+
 						<button
 							type="submit"
 							className="flex max-w-fit items-center gap-3 rounded-[4px] bg-school-blue px-3

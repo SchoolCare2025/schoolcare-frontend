@@ -1,7 +1,7 @@
 import { IconBox } from "@/components/common";
 import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
-import { type StepOneData, initialFormState, useFormStore } from "@/store/formStore";
+import { type StepOneData, useFormStore } from "@/store/formStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -16,14 +16,17 @@ const PersonalInfoSchema = z.object({
 });
 
 function PersonalInfoPage() {
+	const {
+		actions: { updateFormData },
+		formStepData,
+	} = useFormStore((state) => state);
+
 	const methods = useForm<StepOneData>({
-		defaultValues: initialFormState.formStepData,
+		defaultValues: formStepData,
 		resolver: zodResolver(PersonalInfoSchema),
 	});
 
 	const navigate = useNavigate();
-
-	const { updateFormData } = useFormStore((state) => state.actions);
 
 	const onSubmit = (data: StepOneData) => {
 		updateFormData(data);

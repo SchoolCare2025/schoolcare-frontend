@@ -1,5 +1,16 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lazy } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			gcTime: 10 * (60 * 1000),
+			staleTime: Infinity,
+		},
+	},
+});
 
 // (primary) - legacy
 const AboutUs = lazy(() => import("./pages/(primary)/legacy/AboutUs"));
@@ -33,36 +44,31 @@ const routes = createRoutesFromElements(
 
 		<Route path="/dashboard" Component={lazy(() => import("./pages/(dashboard)/layout"))}>
 			<Route index={true} Component={lazy(() => import("./pages/(dashboard)/page"))} />
+			<Route
+				path="register/student"
+				Component={lazy(() => import("./pages/(dashboard)/register/student.page"))}
+			/>
+			<Route
+				path="register/subject"
+				Component={lazy(() => import("./pages/(dashboard)/register/subject.page"))}
+			/>
+			<Route
+				path="register/class"
+				Component={lazy(() => import("./pages/(dashboard)/register/class.page"))}
+			/>
 
-			<Route path="register">
-				<Route
-					path="student"
-					Component={lazy(() => import("./pages/(dashboard)/register/student.page"))}
-				/>
-				<Route
-					path="subject"
-					Component={lazy(() => import("./pages/(dashboard)/register/subject.page"))}
-				/>
-				<Route
-					path="class"
-					Component={lazy(() => import("./pages/(dashboard)/register/class.page"))}
-				/>
-			</Route>
-
-			<Route path="students">
-				<Route
-					path="view-all"
-					Component={lazy(() => import("./pages/(dashboard)/students/view-all.page"))}
-				/>
-				<Route
-					path="view-single"
-					Component={lazy(() => import("./pages/(dashboard)/students/view-single.page"))}
-				/>
-				<Route
-					path="add-scores"
-					Component={lazy(() => import("./pages/(dashboard)/students/add-scores.page"))}
-				/>
-			</Route>
+			<Route
+				path="students/view-all"
+				Component={lazy(() => import("./pages/(dashboard)/students/view-all.page"))}
+			/>
+			<Route
+				path="students/view-single"
+				Component={lazy(() => import("./pages/(dashboard)/students/view-single.page"))}
+			/>
+			<Route
+				path="students/add-scores"
+				Component={lazy(() => import("./pages/(dashboard)/students/add-scores.page"))}
+			/>
 		</Route>
 	</Route>
 );
@@ -70,5 +76,10 @@ const routes = createRoutesFromElements(
 const browserRouter = createBrowserRouter(routes);
 
 export function Router() {
-	return <RouterProvider future={{ v7_startTransition: true }} router={browserRouter} />;
+	return (
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider future={{ v7_startTransition: true }} router={browserRouter} />
+			<ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
+		</QueryClientProvider>
+	);
 }
