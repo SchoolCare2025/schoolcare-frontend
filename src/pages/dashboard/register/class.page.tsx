@@ -106,8 +106,8 @@ function RegisterClassPage() {
 
 						<Form.InputPrimitive
 							placeholder="Jss1 A"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray px-8 text-[14px]
-								md:text-base"
+							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+								text-[14px] md:text-base"
 							onKeyDown={handleAddTags}
 						/>
 					</Form.Item>

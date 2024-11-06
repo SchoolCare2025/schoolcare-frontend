@@ -57,9 +57,8 @@ const stateObjectFn: StateCreator<FormStore> = (set, get) => ({
 
 export const useFormStore = create(
 	persist(stateObjectFn, {
-		migrate: (persistedState) => persistedState,
 		name: "formStepData",
 		partialize: ({ formStepData }) => ({ formStepData }),
-		version: 1,
+		version: 3,
 	})
 );

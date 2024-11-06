@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import Main from "../_components/Main";
+import { cnMerge } from "@/lib/utils/cn";
 
 const PersonalInfoSchema = z.object({
 	email: z.string().email("Please enter a valid email!"),
@@ -66,11 +67,7 @@ function PersonalInfoPage() {
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
-						<Form.ErrorMessage
-							control={methods.control}
-							errorField="name"
-							className="text-red-600"
-						/>
+						<Form.ErrorMessage className="text-red-600" />
 					</Form.Item>
 
 					<Form.Item<typeof methods.control> name="email" className="gap-4">
@@ -83,11 +80,7 @@ function PersonalInfoPage() {
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
-						<Form.ErrorMessage
-							control={methods.control}
-							errorField="email"
-							className="text-red-600"
-						/>
+						<Form.ErrorMessage className="text-red-600" />
 					</Form.Item>
 
 					<Form.Item<typeof methods.control> name="school_ID" className="gap-4">
@@ -101,18 +94,18 @@ function PersonalInfoPage() {
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
-						<Form.ErrorMessage
-							control={methods.control}
-							errorField="school_ID"
-							className="text-red-600"
-						/>
+						<Form.ErrorMessage className="text-red-600" />
 					</Form.Item>
 
 					<button
+						disabled={!methods.formState.isValid || methods.formState.isSubmitting}
 						type="submit"
-						className="mt-5 flex max-w-fit items-center gap-3 self-end rounded-[4px] bg-school-blue
-							px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px] md:px-5
-							md:py-[10px] md:text-[18px]"
+						className={cnMerge(
+							`flex min-w-[77px] max-w-fit items-center justify-center gap-3 self-end rounded-[4px]
+							bg-school-blue px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
+							md:px-5 md:py-2 md:text-[18px]`,
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+						)}
 					>
 						Next
 						<IconBox icon="material-symbols:arrow-forward-ios-rounded" />

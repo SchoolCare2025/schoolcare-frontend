@@ -29,17 +29,18 @@ function RegisterStudentPage() {
 
 						<Form.Input
 							placeholder="Enter student's surname"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray px-8 text-[14px]
-								md:text-base"
+							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+								text-[14px] md:text-base"
 						/>
 					</Form.Item>
+
 					<Form.Item<typeof methods.control> name="other_names" className="gap-4">
 						<Form.Label className="font-medium">Other Names*</Form.Label>
 
 						<Form.Input
 							placeholder="Enter student's other names"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray px-8 text-[14px]
-								md:text-base"
+							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+								text-[14px] md:text-base"
 						/>
 					</Form.Item>
 

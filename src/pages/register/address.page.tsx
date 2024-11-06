@@ -8,18 +8,23 @@ import { useNavigate } from "react-router-dom";
 import Main from "../_components/Main";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { callBackendApi } from "@/lib/api/callBackendApi/callBackendApi";
+import { cnMerge } from "@/lib/utils/cn";
 
 const AddressSchema = z.object({
 	address: z.string().min(1, "Address is required"),
 	local_govt: z.string().min(1, "LGA is required"),
 	nationality: z.string().min(1, "Nationality is required"),
-	postal_code: z.number().min(1, "Postal code is required"),
+	postal_code: z
+		.string()
+		.min(1, "Postal code is required")
+		.min(6, "Postal code must be at least 6 digits"),
 	state: z.string().min(1, "State is required"),
 });
 
 function AddressPage() {
 	const {
-		actions: { updateFormData },
+		actions: { resetFormStore, updateFormData },
 		formStepData,
 	} = useFormStore((state) => state);
 
@@ -30,10 +35,18 @@ function AddressPage() {
 
 	const navigate = useNavigate();
 
-	const onSubmit = (data: StepTwoData) => {
-		updateFormData(data);
+	const onSubmit = async (stepTwoData: StepTwoData) => {
+		updateFormData(stepTwoData);
 
-		navigate("/register/address");
+		await callBackendApi("/school/register/", {
+			body: { ...formStepData, ...stepTwoData },
+			method: "POST",
+
+			onSuccess: () => {
+				resetFormStore();
+				navigate("/");
+			},
+		});
 	};
 
 	const stateQueryResult = useQuery({
@@ -41,12 +54,14 @@ function AddressPage() {
 		queryKey: ["states"],
 	});
 
-	const state = methods.watch("state").toUpperCase();
+	const state = methods.watch("state");
+
+	const stateCode = stateQueryResult.data?.find((item) => item.name === state)?.state_code ?? "";
 
 	const LGAQueryResult = useQuery({
-		enabled: Boolean(state),
-		queryFn: () => callNigeriaApi<LGA[]>("/:state/lgas", { params: { state } }),
-		queryKey: ["lgas", state],
+		enabled: Boolean(stateCode),
+		queryFn: () => callNigeriaApi<LGA[]>("/:state/lgas", { params: { state: stateCode } }),
+		queryKey: ["lgas", stateCode],
 	});
 
 	const [StateList] = getElementList("base");
@@ -101,11 +116,7 @@ function AddressPage() {
 							)}
 						/>
 
-						<Form.ErrorMessage
-							control={methods.control}
-							errorField="nationality"
-							className="text-red-600"
-						/>
+						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Item>
 
 					<Form.Item<typeof methods.control> name="address" className="gap-4">
@@ -119,11 +130,7 @@ function AddressPage() {
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
-						<Form.ErrorMessage
-							control={methods.control}
-							errorField="address"
-							className="text-red-600"
-						/>
+						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Item>
 
 					<Form.Item<typeof methods.control> name="state" className="w-full gap-4">
@@ -167,11 +174,7 @@ function AddressPage() {
 							)}
 						/>
 
-						<Form.ErrorMessage
-							control={methods.control}
-							errorField="state"
-							className="text-red-600"
-						/>
+						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Item>
 
 					<div className="flex justify-between gap-10 md:gap-[75px]">
@@ -221,11 +224,7 @@ function AddressPage() {
 								)}
 							/>
 
-							<Form.ErrorMessage
-								control={methods.control}
-								errorField="local_govt"
-								className="text-red-600"
-							/>
+							<Form.ErrorMessage control={methods.control} className="text-red-600" />
 						</Form.Item>
 
 						<Form.Item<typeof methods.control> name="postal_code" className="w-full gap-4">
@@ -238,11 +237,7 @@ function AddressPage() {
 									md:h-[75px] md:rounded-[20px] md:text-base"
 							/>
 
-							<Form.ErrorMessage
-								control={methods.control}
-								errorField="postal_code"
-								className="text-red-600"
-							/>
+							<Form.ErrorMessage control={methods.control} className="text-red-600" />
 						</Form.Item>
 					</div>
 
@@ -259,13 +254,20 @@ function AddressPage() {
 						</button>
 
 						<button
+							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 							type="submit"
-							className="flex max-w-fit items-center gap-3 rounded-[4px] bg-school-blue px-3
-								py-[6px] text-[14px] font-semibold text-white md:rounded-[8px] md:px-5 md:py-2
-								md:text-[18px]"
+							className={cnMerge(
+								`flex min-w-[77px] max-w-fit items-center justify-center gap-3 rounded-[4px]
+								bg-school-blue px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
+								md:px-5 md:py-2 md:text-[18px]`,
+								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+							)}
 						>
-							Next
-							<IconBox icon="material-symbols:arrow-forward-ios-rounded" />
+							{methods.formState.isSubmitting ? (
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-5" />
+							) : (
+								"Submit"
+							)}
 						</button>
 					</div>
 				</Form.Root>

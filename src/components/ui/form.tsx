@@ -32,9 +32,15 @@ type ContextValue = {
 	uniqueId: string;
 };
 
-const [FormItemProvider, useFormItemContext] = createCustomContext<ContextValue>({
-	hookName: "useFormItemContext",
-	providerName: "FormItemProvider",
+const [StrictFormItemProvider, useStrictFormItemContext] = createCustomContext<ContextValue>({
+	hookName: "useStrictFormItemContext",
+	providerName: "StrictFormItemProvider",
+});
+
+const [LaxFormItemProvider, useLaxFormItemContext] = createCustomContext<ContextValue, false>({
+	hookName: "useLaxFormItemContext",
+	providerName: "LaxFormItemProvider",
+	strict: false,
 });
 
 function FormRoot<TValues extends FieldValues>(props: FormRootProps<TValues>) {
@@ -82,14 +88,16 @@ function FormItem<TControl, TFieldValues extends FieldValues = FieldValues>(
 	};
 
 	return (
-		<FormItemProvider value={value}>
-			<WrapperElement {...wrapperElementProps}>{children}</WrapperElement>
-		</FormItemProvider>
+		<StrictFormItemProvider value={value}>
+			<LaxFormItemProvider value={value}>
+				<WrapperElement {...wrapperElementProps}>{children}</WrapperElement>
+			</LaxFormItemProvider>
+		</StrictFormItemProvider>
 	);
 }
 
 function FormLabel({ children, className }: { children: string; className?: string }) {
-	const { uniqueId } = useFormItemContext();
+	const { uniqueId } = useStrictFormItemContext();
 
 	return (
 		<label htmlFor={uniqueId} className={className}>
@@ -149,8 +157,7 @@ export type FormInputPrimitiveProps<TFieldValues extends FieldValues = FieldValu
 	React.ComponentPropsWithRef<"input">,
 	"children"
 > & {
-	classNames?: { eyeIcon?: string; input?: string; inputGroup?: string };
-	errorClassName?: string;
+	classNames?: { error?: string; eyeIcon?: string; input?: string; inputGroup?: string };
 	name?: keyof TFieldValues;
 	withEyeIcon?: boolean;
 } & (
@@ -163,18 +170,15 @@ const inputTypesWithoutFullWith = new Set<React.HTMLInputTypeAttribute>(["checkb
 function FormInputPrimitive<TFieldValues extends FieldValues>(
 	props: FormInputPrimitiveProps<TFieldValues>
 ) {
-	const contextValues = useFormItemContext();
+	const contextValues = useLaxFormItemContext();
 
 	const {
 		className,
 		classNames,
 		control,
-		errorClassName,
 		formState,
-		// eslint-disable-next-line react/no-unstable-default-props
-		id = contextValues.uniqueId,
-		// eslint-disable-next-line react/no-unstable-default-props
-		name = contextValues.name,
+		id = contextValues?.uniqueId,
+		name = contextValues?.name,
 		type = "text",
 		withEyeIcon = true,
 		...restOfProps
@@ -191,7 +195,7 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 	const WrapperElement = shouldHaveEyeIcon ? FormInputGroup : ReactFragment;
 
 	const wrapperElementProps = shouldHaveEyeIcon && {
-		className: cnMerge("w-full", classNames?.inputGroup, errors?.[name] && errorClassName),
+		className: cnMerge("w-full", classNames?.inputGroup, name && errors?.[name] && classNames?.error),
 	};
 
 	return (
@@ -207,7 +211,7 @@ function FormInputPrimitive<TFieldValues extends FieldValues>(
 					disabled:cursor-not-allowed disabled:opacity-50`,
 					className,
 					classNames?.input,
-					type !== "password" && errors?.[name] && errorClassName
+					type !== "password" && name && errors?.[name] && classNames?.error
 				)}
 				{...restOfProps}
 			/>
@@ -243,7 +247,7 @@ function FormInput(
 ) {
 	const { rules, ...restOfProps } = props;
 
-	const { name } = useFormItemContext();
+	const { name } = useStrictFormItemContext();
 	const { formState, register } = useHookFormContext();
 
 	return (
@@ -268,17 +272,15 @@ type FormTextAreaPrimitiveProps<TFieldValues extends FieldValues = FieldValues> 
 function FormTextAreaPrimitive<TFieldValues extends FieldValues>(
 	props: FormTextAreaPrimitiveProps<TFieldValues>
 ) {
-	const contextValues = useFormItemContext();
+	const contextValues = useLaxFormItemContext();
 
 	const {
 		className,
 		control,
 		errorClassName,
 		formState,
-		// eslint-disable-next-line react/no-unstable-default-props
-		id = contextValues.uniqueId,
-		// eslint-disable-next-line react/no-unstable-default-props
-		name = contextValues.name,
+		id = contextValues?.uniqueId,
+		name = contextValues?.name,
 		...restOfProps
 	} = props;
 
@@ -308,7 +310,7 @@ function FormTextArea(
 ) {
 	const { rules, ...restOfProps } = props;
 
-	const { name } = useFormItemContext();
+	const { name } = useStrictFormItemContext();
 	const { formState, register } = useHookFormContext();
 
 	return (
@@ -334,7 +336,7 @@ type FormControllerProps<TFieldValues> = Omit<
 
 function FormController<TFieldValues = never>(props: FormControllerProps<TFieldValues>) {
 	const { control } = useHookFormContext<FieldValues, FieldPath<FieldValues>>();
-	const { name } = useFormItemContext();
+	const { name } = useStrictFormItemContext();
 
 	return (
 		<ControllerPrimitive name={name} control={control} {...(props as Omit<ControllerProps, "name">)} />
@@ -406,8 +408,7 @@ function FormErrorMessagePrimitive<TFieldValues extends FieldValues>(
 		for (const element of errorMessageElements) {
 			element.classList.add(errorAnimationClass);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formState.submitCount]);
+	}, [errorAnimationClass, withAnimationOnInvalid]);
 
 	useEffect(() => {
 		const errorMessageElements = wrapperRef.current?.children;
@@ -423,8 +424,7 @@ function FormErrorMessagePrimitive<TFieldValues extends FieldValues>(
 
 			window.scrollBy({ behavior: "smooth", top: -100 });
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formState.submitCount]);
+	}, [errorField, formState.errors]);
 
 	const message = (
 		type === "root"
@@ -465,13 +465,13 @@ type FormErrorMessageProps<TControl, TFieldValues extends FieldValues> =
 			? {
 					className?: string;
 					control?: never;
-					errorField: keyof TValues;
+					errorField?: keyof TValues;
 					type?: "regular";
 				}
 			: {
 					className?: string;
 					control?: Control<TFieldValues>; // == Here for type inference of errorField prop
-					errorField: keyof TFieldValues;
+					errorField?: keyof TFieldValues;
 					type?: "regular";
 				})
 	| {
@@ -484,16 +484,16 @@ type FormErrorMessageProps<TControl, TFieldValues extends FieldValues> =
 function FormErrorMessage<TControl, TFieldValues extends FieldValues = FieldValues>(
 	props: FormErrorMessageProps<TControl, TFieldValues>
 ) {
-	const { className, type = "regular" } = props;
+	const contextValues = useLaxFormItemContext();
 
-	const { name } = useFormItemContext();
+	const { className, errorField = contextValues?.name, type = "regular" } = props;
 
 	const { control } = useHookFormContext();
 
 	return (
 		<FormErrorMessagePrimitive
 			control={control}
-			errorField={name}
+			errorField={errorField as string}
 			type={type as "root"}
 			render={({ field: { errorMessage, index }, ...restOfProps }) => (
 				<p

@@ -12,14 +12,14 @@ const queryClient = new QueryClient({
 	},
 });
 
-// (primary) - legacy
-const AboutUs = lazy(() => import("./pages/(primary)/legacy/AboutUs"));
-const ContactUs = lazy(() => import("./pages/(primary)/legacy/ContactUs"));
-const FaQ = lazy(() => import("./pages/(primary)/legacy/FaQ"));
-const HowItWorks = lazy(() => import("./pages/(primary)/legacy/HowItWorks"));
-const LandingPage = lazy(() => import("./pages/(primary)/legacy/LandingPage"));
-const MainLayout = lazy(() => import("./pages/(primary)/legacy/MainLayout"));
-const WhoWeAre = lazy(() => import("./pages/(primary)/legacy/WhoWeAre"));
+// Legacy
+const AboutUs = lazy(() => import("./pages/legacy/AboutUs"));
+const ContactUs = lazy(() => import("./pages/legacy/ContactUs"));
+const FaQ = lazy(() => import("./pages/legacy/FaQ"));
+const HowItWorks = lazy(() => import("./pages/legacy/HowItWorks"));
+const LandingPage = lazy(() => import("./pages/legacy/LandingPage"));
+const MainLayout = lazy(() => import("./pages/legacy/MainLayout"));
+const WhoWeAre = lazy(() => import("./pages/legacy/WhoWeAre"));
 
 const routes = createRoutesFromElements(
 	<Route>
@@ -32,42 +32,43 @@ const routes = createRoutesFromElements(
 			<Route path="AboutUs" element={<AboutUs />} />
 		</Route>
 
-		<Route path="/signin" Component={lazy(() => import("./pages/(primary)/signin.page"))} />
+		<Route path="/signin" Component={lazy(() => import("./pages/signin.page"))} />
 
-		<Route path="/register" Component={lazy(() => import("./pages/(primary)/register/layout"))}>
+		<Route path="/register" Component={lazy(() => import("./pages/register/layout"))}>
 			<Route
 				path="personal-info"
-				Component={lazy(() => import("./pages/(primary)/register/personal-info.page"))}
+				Component={lazy(() => import("./pages/register/personal-info.page"))}
 			/>
-			<Route path="address" Component={lazy(() => import("./pages/(primary)/register/address.page"))} />
+			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 
-		<Route path="/dashboard" Component={lazy(() => import("./pages/(dashboard)/layout"))}>
-			<Route index={true} Component={lazy(() => import("./pages/(dashboard)/page"))} />
+		<Route path="/dashboard" Component={lazy(() => import("./pages/dashboard/layout"))}>
+			<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
+
 			<Route
 				path="register/student"
-				Component={lazy(() => import("./pages/(dashboard)/register/student.page"))}
+				Component={lazy(() => import("./pages/dashboard/register/student.page"))}
 			/>
 			<Route
 				path="register/subject"
-				Component={lazy(() => import("./pages/(dashboard)/register/subject.page"))}
+				Component={lazy(() => import("./pages/dashboard/register/subject.page"))}
 			/>
 			<Route
 				path="register/class"
-				Component={lazy(() => import("./pages/(dashboard)/register/class.page"))}
+				Component={lazy(() => import("./pages/dashboard/register/class.page"))}
 			/>
 
 			<Route
 				path="students/view-all"
-				Component={lazy(() => import("./pages/(dashboard)/students/view-all.page"))}
+				Component={lazy(() => import("./pages/dashboard/students/view-all.page"))}
 			/>
 			<Route
 				path="students/view-single"
-				Component={lazy(() => import("./pages/(dashboard)/students/view-single.page"))}
+				Component={lazy(() => import("./pages/dashboard/students/view-single.page"))}
 			/>
 			<Route
 				path="students/add-scores"
-				Component={lazy(() => import("./pages/(dashboard)/students/add-scores.page"))}
+				Component={lazy(() => import("./pages/dashboard/students/add-scores.page"))}
 			/>
 		</Route>
 	</Route>
