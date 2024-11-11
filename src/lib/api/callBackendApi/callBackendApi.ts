@@ -11,8 +11,10 @@ const fetchClient = createFetchClient({
 		const accessToken = localStorage.getItem("accessToken");
 		const refreshToken = localStorage.getItem("refreshToken");
 
-		if (!exemptedRoutesFromAuth.has(window.location.pathname) && !refreshToken && !accessToken) {
-			const message = "No session available! Redirecting to login...";
+		const isTokenAbsent = !refreshToken || !accessToken;
+
+		if (!exemptedRoutesFromAuth.has(window.location.pathname) && isTokenAbsent) {
+			const message = "Session is unavailable! Redirecting to login...";
 
 			toast.error(message, { duration: 2000 });
 
