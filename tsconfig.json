@@ -9,6 +9,6 @@
 		"allowJs": true
 	},
 
-	"include": ["src/**/*.tsx", "src/**/*.ts", "tailwind.config.ts"],
+	"include": ["src/**/*.tsx", "src/**/*.ts", "tailwind.config.ts", "vite.config.ts"],
 	"exclude": ["dist", "node_modules/**"]
 }

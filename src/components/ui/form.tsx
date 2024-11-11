@@ -1,6 +1,6 @@
 import { cnMerge } from "@/lib/utils/cn";
 import { toArray } from "@zayne-labs/toolkit";
-import { type PolymorphicPropsWithRef, createCustomContext, useToggle } from "@zayne-labs/toolkit/react";
+import { type PolymorphicProps, createCustomContext, useToggle } from "@zayne-labs/toolkit/react";
 import { getOtherChildren, getSlotElement } from "@zayne-labs/toolkit/react/utils";
 import { Fragment as ReactFragment, useEffect, useId, useMemo, useRef } from "react";
 import {
@@ -128,7 +128,7 @@ type FormSideItemProps = {
 };
 
 function FormInputLeftItem<TElement extends React.ElementType = "span">(
-	props: PolymorphicPropsWithRef<TElement, FormSideItemProps>
+	props: PolymorphicProps<TElement, FormSideItemProps>
 ) {
 	const { children, className, ...restOfProps } = props;
 
@@ -141,7 +141,7 @@ function FormInputLeftItem<TElement extends React.ElementType = "span">(
 FormInputLeftItem.slot = Symbol.for("leftItem");
 
 function FormInputRightItem<TElement extends React.ElementType = "span">(
-	props: PolymorphicPropsWithRef<TElement, FormSideItemProps>
+	props: PolymorphicProps<TElement, FormSideItemProps>
 ) {
 	const { as: Element = "span", children, className, ...restOfProps } = props;
 

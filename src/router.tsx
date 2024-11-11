@@ -2,12 +2,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lazy } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import RootLayout from "./pages/layout";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			gcTime: 10 * (60 * 1000),
-			staleTime: Infinity,
 		},
 	},
 });
@@ -22,7 +22,7 @@ const MainLayout = lazy(() => import("./pages/legacy/MainLayout"));
 const WhoWeAre = lazy(() => import("./pages/legacy/WhoWeAre"));
 
 const routes = createRoutesFromElements(
-	<Route>
+	<Route element={<RootLayout />}>
 		<Route path="/" element={<MainLayout />}>
 			<Route index={true} element={<LandingPage />} />
 			<Route path="WhoWeAre" element={<WhoWeAre />} />
@@ -42,34 +42,36 @@ const routes = createRoutesFromElements(
 			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 
-		<Route path="/dashboard" Component={lazy(() => import("./pages/dashboard/layout"))}>
-			<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
+		<Route Component={lazy(() => import("./pages/_components/protect.layout.tsx"))}>
+			<Route path="/dashboard" Component={lazy(() => import("./pages/dashboard/layout"))}>
+				<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
 
-			<Route
-				path="register/student"
-				Component={lazy(() => import("./pages/dashboard/register/student.page"))}
-			/>
-			<Route
-				path="register/subject"
-				Component={lazy(() => import("./pages/dashboard/register/subject.page"))}
-			/>
-			<Route
-				path="register/class"
-				Component={lazy(() => import("./pages/dashboard/register/class.page"))}
-			/>
+				<Route
+					path="register/student"
+					Component={lazy(() => import("./pages/dashboard/register/student.page"))}
+				/>
+				<Route
+					path="register/subject"
+					Component={lazy(() => import("./pages/dashboard/register/subject.page"))}
+				/>
+				<Route
+					path="register/class"
+					Component={lazy(() => import("./pages/dashboard/register/class.page"))}
+				/>
 
-			<Route
-				path="students/view-all"
-				Component={lazy(() => import("./pages/dashboard/students/view-all.page"))}
-			/>
-			<Route
-				path="students/view-single"
-				Component={lazy(() => import("./pages/dashboard/students/view-single.page"))}
-			/>
-			<Route
-				path="students/add-scores"
-				Component={lazy(() => import("./pages/dashboard/students/add-scores.page"))}
-			/>
+				<Route
+					path="students/view-all"
+					Component={lazy(() => import("./pages/dashboard/students/view-all.page"))}
+				/>
+				<Route
+					path="students/view-single"
+					Component={lazy(() => import("./pages/dashboard/students/view-single.page"))}
+				/>
+				<Route
+					path="students/add-scores"
+					Component={lazy(() => import("./pages/dashboard/students/add-scores.page"))}
+				/>
+			</Route>
 		</Route>
 	</Route>
 );

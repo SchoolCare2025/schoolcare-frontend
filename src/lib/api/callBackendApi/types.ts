@@ -4,3 +4,8 @@ export type LoginData = {
 	refresh: string;
 	school: string;
 };
+
+export type ClassData = {
+	school_class: string;
+	subject_names: string[];
+};

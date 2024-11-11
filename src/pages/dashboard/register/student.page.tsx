@@ -1,16 +1,64 @@
+import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
+import { type ClassData, callBackendApi } from "@/lib/api/callBackendApi";
+import { cnMerge } from "@/lib/utils/cn";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 import Main from "../_components/Main";
 
+const RegisterStudentSchema = z.object({
+	gender: z.string().min(1, "Gender is required"),
+	other_names: z.string().min(1, "Please enter other names"),
+	school_class: z.string().min(1, "Please choose the student's class"),
+	surname: z.string().min(1, "Surname is required"),
+});
+
+type RegisterStudentData = z.infer<typeof RegisterStudentSchema>;
+
 function RegisterStudentPage() {
-	const methods = useForm({
+	const methods = useForm<RegisterStudentData>({
 		defaultValues: {
 			gender: "",
 			other_names: "",
 			school_class: "",
 			surname: "",
 		},
+		mode: "onTouched",
+		resolver: zodResolver(RegisterStudentSchema),
 	});
+
+	const [ClassList] = getElementList("base");
+
+	const classesQueryResult = useQuery({
+		queryFn: () => {
+			return callBackendApi<ClassData[], unknown, "onlySuccess">("/school/classes/", {
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["classes"],
+	});
+
+	const navigate = useNavigate();
+
+	const onSubmit = async (data: RegisterStudentData) => {
+		const { other_names, surname, ...restOfData } = data;
+
+		await callBackendApi("/school/students/", {
+			body: {
+				...restOfData,
+				name: `${surname} ${other_names}`,
+			},
+			method: "POST",
+
+			onSuccess: () => {
+				navigate("/dashboard");
+			},
+		});
+	};
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -22,7 +70,7 @@ function RegisterStudentPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit((data) => console.info(data))(event)}
+					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<Form.Item<typeof methods.control> name="surname" className="gap-4">
 						<Form.Label className="font-medium">Surname*</Form.Label>
@@ -32,6 +80,8 @@ function RegisterStudentPage() {
 							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
 								text-[14px] md:text-base"
 						/>
+
+						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Item>
 
 					<Form.Item<typeof methods.control> name="other_names" className="gap-4">
@@ -42,6 +92,8 @@ function RegisterStudentPage() {
 							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
 								text-[14px] md:text-base"
 						/>
+
+						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Item>
 
 					<div className="flex gap-[70px]">
@@ -90,6 +142,8 @@ function RegisterStudentPage() {
 									</Select.Root>
 								)}
 							/>
+
+							<Form.ErrorMessage control={methods.control} className="text-red-600" />
 						</Form.Item>
 
 						<Form.Item<typeof methods.control> name="school_class" className="w-full gap-4">
@@ -119,33 +173,42 @@ function RegisterStudentPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<Select.Item
-												value="steeze"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Steeze
-											</Select.Item>
-											<Select.Item
-												value="cooking"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Cooking
-											</Select.Item>
+											<ClassList
+												each={classesQueryResult.data?.data ?? []}
+												render={(item) => (
+													<Select.Item
+														value={item.school_class}
+														className="h-12 bg-gray-200 font-medium text-black
+															focus:bg-gray-300 focus:text-black
+															data-[state=checked]:bg-gray-300 md:text-base"
+													>
+														{item.school_class}
+													</Select.Item>
+												)}
+											/>
 										</Select.Content>
 									</Select.Root>
 								)}
 							/>
+
+							<Form.ErrorMessage control={methods.control} className="text-red-600" />
 						</Form.Item>
 					</div>
 
 					<button
+						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						type="submit"
-						className="max-w-fit self-center rounded-[10px] bg-school-blue px-8 py-2.5 text-[18px]
-							font-bold text-white"
+						className={cnMerge(
+							`flex h-[47px] w-full max-w-[150px] items-center justify-center self-center
+							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`,
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+						)}
 					>
-						Register
+						{methods.formState.isSubmitting ? (
+							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+						) : (
+							"Register"
+						)}
 					</button>
 				</Form.Root>
 			</section>

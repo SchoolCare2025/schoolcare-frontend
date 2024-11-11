@@ -1,15 +1,15 @@
-import { getElementList, IconBox } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { callNigeriaApi, type LGA, type State } from "@/lib/api/callNigeriaApi";
+import { callBackendApi } from "@/lib/api/callBackendApi";
+import { type LGA, type State, callNigeriaApi } from "@/lib/api/callNigeriaApi";
+import { cnMerge } from "@/lib/utils/cn";
 import { type StepTwoData, useFormStore } from "@/store/formStore";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Main from "../_components/Main";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { callBackendApi } from "@/lib/api/callBackendApi/callBackendApi";
-import { cnMerge } from "@/lib/utils/cn";
+import Main from "../_components/Main";
 
 const AddressSchema = z.object({
 	address: z.string().min(1, "Address is required"),
