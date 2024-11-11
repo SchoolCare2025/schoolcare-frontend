@@ -2,24 +2,28 @@ import { type CallApiExtraOptions, createFetchClient } from "@zayne-labs/callapi
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
 import { toast } from "sonner";
 
-const exemptedRoutesFromAuth = new Set(["/signin", "/register/personal-info", "/register/address"]);
+const routesExemptedFromAuthHeader = new Set(["/signin", "/register/personal-info", "/register/address"]);
 
 const fetchClient = createFetchClient({
 	baseURL: "https://srm-api.onrender.com/api",
 
 	onRequest: (ctx) => {
-		const accessToken = localStorage.getItem("accessToken");
 		const refreshToken = localStorage.getItem("refreshToken");
 
-		const isTokenAbsent = !refreshToken || !accessToken;
-
-		if (!exemptedRoutesFromAuth.has(window.location.pathname) && isTokenAbsent) {
+		if (!refreshToken) {
 			const message = "Session is unavailable! Redirecting to login...";
 
 			toast.error(message, { duration: 2000 });
 
 			throw new Error(message);
 		}
+
+		const accessToken = localStorage.getItem("accessToken");
+
+		const skipAuthHeader =
+			routesExemptedFromAuthHeader.has(window.location.pathname) || ctx.options.meta?.skipAuthHeader;
+
+		if (skipAuthHeader) return;
 
 		ctx.options.auth = accessToken;
 	},

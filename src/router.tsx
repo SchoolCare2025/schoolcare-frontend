@@ -42,7 +42,7 @@ const routes = createRoutesFromElements(
 			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 
-		<Route Component={lazy(() => import("./pages/_components/protect.layout.tsx"))}>
+		<Route Component={lazy(() => import("./pages/protect.layout.tsx"))}>
 			<Route path="/dashboard" Component={lazy(() => import("./pages/dashboard/layout"))}>
 				<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
 

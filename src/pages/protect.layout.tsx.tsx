@@ -17,6 +17,7 @@ function ProtectionLayout() {
 
 		const result = await callBackendApi("/token/refresh/", {
 			body: { refresh: refreshToken },
+			meta: { skipAuthHeader: true },
 			method: "POST",
 		});
 
@@ -41,7 +42,7 @@ function ProtectionLayout() {
 			if (sessionResult.error) {
 				await refreshSession(sessionResult);
 
-				return callBackendApi("/check-user-session/");
+				return callBackendApi("/check-user-session/", { throwOnError: true });
 			}
 
 			return sessionResult.data;
