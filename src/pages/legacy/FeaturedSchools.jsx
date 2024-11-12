@@ -1,8 +1,8 @@
-import School1 from "../../../assets/images/School1.png";
-import School2 from "../../../assets/images/School2.png";
-import School3 from "../../../assets/images/school3.png";
-import School4 from "../../../assets/images/school4.png";
-import School5 from "../../../assets/images/school5.png";
+import School1 from "../../assets/images/School1.png";
+import School2 from "../../assets/images/School2.png";
+import School3 from "../../assets/images/school3.png";
+import School4 from "../../assets/images/school4.png";
+import School5 from "../../assets/images/school5.png";
 
 const FeaturedSchools = () => {
 	return (

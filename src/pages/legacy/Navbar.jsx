@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { twJoin } from "tailwind-merge";
-import Logo from "../../../assets/images/myskulLogo.png";
+import Logo from "../../assets/images/myskulLogo.png";
 
 const cnJoin = (...classNames) => twJoin(clsx(classNames));
 
