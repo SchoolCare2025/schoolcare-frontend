@@ -15,14 +15,12 @@ const AboutUs = ({ className = "my-40" }) => {
 						official website already can contact us to have result system integrated in their
 						website. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid vero, assumenda
 						inventore beatae laudantium ducimus. Consectetur distinctio eligendi provident totam
-						dolorum ea quo adipisci perspiciatis!
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum consequatur
-						 consequuntur iusto fugiat amet voluptatum commodi, tenetur provident maxime possimus
-						  pariatur magnam hic nobis cumque dignissimos voluptatem iste esse quo nam 
-						  quidem quas explicabo blanditiis adipisci nesciunt! Error ducimus corporis quas, 
-						enim asperiores sapiente exercitationem! Placeat necessitatibus vel 
-						ducimus explicabo? Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-						Commodi, nihil!
+						dolorum ea quo adipisci perspiciatis! Lorem ipsum dolor sit amet, consectetur adipisicing
+						elit. Dolorum consequatur consequuntur iusto fugiat amet voluptatum commodi, tenetur
+						provident maxime possimus pariatur magnam hic nobis cumque dignissimos voluptatem iste
+						esse quo nam quidem quas explicabo blanditiis adipisci nesciunt! Error ducimus corporis
+						quas, enim asperiores sapiente exercitationem! Placeat necessitatibus vel ducimus
+						explicabo? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi, nihil!
 					</p>
 				</div>
 

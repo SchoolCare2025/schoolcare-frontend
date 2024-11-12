@@ -16,7 +16,9 @@ const Blogs = () => {
 					<div>
 						<img className="h-full w-full" src={SchoolChild1} alt="" />
 					</div>
-					<h1 className="my-1 text-[24px] font-semibold"><a href="">St. Charles begins 2023/24...</a></h1>
+					<h1 className="my-1 text-[24px] font-semibold">
+						<a href="">St. Charles begins 2023/24...</a>
+					</h1>
 					<p className="py-4 text-[20px]">
 						St Charles resumes academic session after the 3 months holidays
 					</p>
@@ -29,7 +31,9 @@ const Blogs = () => {
 					<div>
 						<img className="h-full w-full" src={SchoolChild2} alt="" />
 					</div>
-					<h1 className="my-1 text-[24px] font-semibold"><a href="">GTC, Agba resumes 2023/2024...</a></h1>
+					<h1 className="my-1 text-[24px] font-semibold">
+						<a href="">GTC, Agba resumes 2023/2024...</a>
+					</h1>
 					<p className="py-4 text-[20px]">
 						GTC, Agba resumes academic session after the 3 months holidays
 					</p>
@@ -42,7 +46,9 @@ const Blogs = () => {
 					<div>
 						<img className="h-full w-full" src={SchoolTenisGirl} alt="" />
 					</div>
-					<h1 className="my-1 text-[24px] font-semibold"><a href="">FGGC College Sports Festival...</a></h1>
+					<h1 className="my-1 text-[24px] font-semibold">
+						<a href="">FGGC College Sports Festival...</a>
+					</h1>
 					<p className="py-4 text-[20px]">
 						FGGC College Sports Festival has Lorem ipsum dolor sit amet.
 					</p>
@@ -55,7 +61,9 @@ const Blogs = () => {
 					<div className="">
 						<img className="h-full w-full" src={SchoolFootballPitch} alt="" />
 					</div>
-					<h1 className="my-1 text-[24px] font-semibold"><a href="">Royal Comp. College Inter-house Sports...</a></h1>
+					<h1 className="my-1 text-[24px] font-semibold">
+						<a href="">Royal Comp. College Inter-house Sports...</a>
+					</h1>
 					<p className="py-4 text-[20px]">
 						Royal begins Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
 					</p>

@@ -15,8 +15,8 @@ const HowItWorks = () => {
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Sign Up</h1>
 						<p className="text-[18px]">
-							To begin using our system, please sign up with your school name and email and have access to your school admin
-							portal.
+							To begin using our system, please sign up with your school name and email and have
+							access to your school admin portal.
 						</p>
 					</div>
 				</div>
@@ -50,8 +50,9 @@ const HowItWorks = () => {
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Register Student(s)</h1>
 						<p className="text-[18px]">
-							The school ICT admin should log in to the school admin dashboard and register students.
-							Please copy each student's registration number and distribute it to them. A registration number is a unique identifier assigned to a student, serving as their
+							The school ICT admin should log in to the school admin dashboard and register
+							students. Please copy each student's registration number and distribute it to them. A
+							registration number is a unique identifier assigned to a student, serving as their
 							identity.
 						</p>
 					</div>
@@ -88,9 +89,9 @@ const HowItWorks = () => {
 						<h1 className="text-[21px] font-semibold">Submit Scores</h1>
 						<p className="text-[18px]">
 							After inputing the scores of the students for each of the subject, the admin can click
-							on submit to allow the system to compute the final result of each of the
-							students. The school ICT admin updates the status to 'View Result' for student viewing.
-							Note: Only the admin can change the status.
+							on submit to allow the system to compute the final result of each of the students. The
+							school ICT admin updates the status to 'View Result' for student viewing. Note: Only
+							the admin can change the status.
 						</p>
 					</div>
 				</div>

@@ -51,7 +51,8 @@ const Footer = () => {
 				></textarea>
 				<button
 					className="transform rounded-md bg-cosBlue px-4 py-0.5 font-bold text-cosWhite transition
-						duration-300 ease-in-out hover:bg-greenColor">
+						duration-300 ease-in-out hover:bg-greenColor"
+				>
 					Send
 				</button>
 			</div>
