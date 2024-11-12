@@ -14,7 +14,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px] lg:text-[21px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
 				</div>
 
 				<div
@@ -24,7 +24,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px] lg:text-[21px]">Online Result Checker</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">Online Result Checker</p>
 				</div>
 
 				<div
@@ -34,7 +34,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px] lg:text-[21px]">
+					<p className="pl-2 text-[20px] md:text-[18px]">
 						Professional School Website
 					</p>
 				</div>
@@ -46,7 +46,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px] lg:text-[21px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
 				</div>
 
 				<div
@@ -56,7 +56,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px] lg:text-[21px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
 				</div>
 
 				<div
@@ -66,7 +66,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px] lg:text-[21px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
 				</div>
 			</div>
 		</div>

@@ -24,8 +24,7 @@ const Navbar = () => {
 				<img src={Logo} alt="Logo" />
 			</Link>
 			<ul
-				className="hidden text-base font-normal lg:flex lg:gap-12 lg:text-lg lg:font-semibold xl:gap-14
-					xl:text-xl"
+				className="hidden text-base font-normal lg:flex lg:gap-12 lg:text-lg xl:gap-14 				xl:text-xl"
 			>
 				<li className="hover:text-cosBlue">
 					<Link to="/">Home</Link>
@@ -80,7 +79,7 @@ const Navbar = () => {
 						<Link to="ContactUs">Contact Us</Link>
 					</li>
 				</ul>
-				<button className="rounded-lg bg-cosBlue py-2 text-xl text-textWhite">Get Started</button>
+				<button className="rounded-lg bg-cosBlue px-3 py-2 text-xl text-textWhite">Get Started</button>
 			</div>
 		</nav>
 	);

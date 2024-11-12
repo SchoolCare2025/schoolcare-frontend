@@ -15,7 +15,7 @@ const HowItWorks = () => {
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Sign Up</h1>
 						<p className="text-[18px]">
-							To begin using our system, please sign up with your school and access the school admin
+							To begin using our system, please sign up with your school name and email and have access to your school admin
 							portal.
 						</p>
 					</div>
@@ -33,7 +33,7 @@ const HowItWorks = () => {
 						<h1 className="text-[21px] font-semibold">Add Admin/Editor(s)</h1>
 						<p className="text-[18px]">
 							Log in to your school admin dashboard and add the ICT admin or teacher responsible for
-							managing the school management system's admin section
+							managing the school management system's admin section for your school.
 						</p>
 					</div>
 				</div>
@@ -50,9 +50,8 @@ const HowItWorks = () => {
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Register Student(s)</h1>
 						<p className="text-[18px]">
-							The school admin should log in to the school admin dashboard to register students.
-							Please copy each student's registration number and distribute it to them. Each
-							registration number is a unique identifier assigned to a student, serving as their
+							The school ICT admin should log in to the school admin dashboard and register students.
+							Please copy each student's registration number and distribute it to them. A registration number is a unique identifier assigned to a student, serving as their
 							identity.
 						</p>
 					</div>
@@ -71,7 +70,7 @@ const HowItWorks = () => {
 						<h1 className="text-[21px] font-semibold">Input student CA and Exam scores.</h1>
 						<p className="text-[18px]">
 							Select subjects and input the CA and Exam scores of each of the students for each
-							subjects, className and className grade.
+							subjects and class.
 						</p>
 					</div>
 				</div>
@@ -89,8 +88,8 @@ const HowItWorks = () => {
 						<h1 className="text-[21px] font-semibold">Submit Scores</h1>
 						<p className="text-[18px]">
 							After inputing the scores of the students for each of the subject, the admin can click
-							on submit scores to allow the system to compute the final result of each of the
-							students The school admin updates the status to 'View Result' for student viewing.
+							on submit to allow the system to compute the final result of each of the
+							students. The school ICT admin updates the status to 'View Result' for student viewing.
 							Note: Only the admin can change the status.
 						</p>
 					</div>

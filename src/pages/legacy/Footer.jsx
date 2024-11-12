@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 const Footer = () => {
 	return (
 		<div
@@ -7,7 +5,7 @@ const Footer = () => {
 				sm:px-12 lg:text-[18px]"
 		>
 			<div className="w-80">
-				<h1 className="font-semibold text-black lg:text-[20px]">MY SKUL</h1>
+				<h1 className="font-semibold text-black lg:text-[20px]">SchoolCare</h1>
 
 				<div className="my-4">
 					<p>
@@ -23,21 +21,21 @@ const Footer = () => {
 				<h1 className="font-semibold text-black lg:text-[20px]">Useful links</h1>
 				<div className="">
 					<ul className="my-4 grid gap-1.5">
-						<Link href="/">
+						<a href="/" className="hover:text-cosBlue">
 							<li>Home</li>
-						</Link>
-						<Link href="/AboutUs">
+						</a>
+						<a href="/AboutUs" className="hover:text-cosBlue">
 							<li>About Us</li>
-						</Link>
-						<Link href="/HowItWorks">
+						</a>
+						<a href="/HowItWorks" className="hover:text-cosBlue">
 							<li>How it Works</li>
-						</Link>
-						<Link href="/FaQ">
+						</a>
+						<a href="/FaQ" className="hover:text-cosBlue">
 							<li>FAQs</li>
-						</Link>
-						<Link href="/ContactUs">
+						</a>
+						<a href="/ContactUs" className="hover:text-cosBlue">
 							<li>Contact Us</li>
-						</Link>
+						</a>
 					</ul>
 				</div>
 			</div>
@@ -52,9 +50,8 @@ const Footer = () => {
 					rows="4"
 				></textarea>
 				<button
-					className="transform rounded-lg bg-cosBlue px-4 py-0.5 font-bold text-cosWhite transition
-						duration-300 ease-in-out hover:bg-greenColor"
-				>
+					className="transform rounded-md bg-cosBlue px-4 py-0.5 font-bold text-cosWhite transition
+						duration-300 ease-in-out hover:bg-greenColor">
 					Send
 				</button>
 			</div>
