@@ -11,15 +11,16 @@ const sideBarLinksArray = [
 		link: "/dashboard",
 	},
 	{
-		icon: "streamline:user-add-plus",
-		label: "Register Students",
-		link: "/dashboard/register/student",
-	},
-	{
 		icon: "fluent:document-one-page-add-24-regular",
 		label: "Register Class",
 		link: "/dashboard/register/class",
 	},
+	{
+		icon: "streamline:user-add-plus",
+		label: "Register Students",
+		link: "/dashboard/register/student",
+	},
+
 	{
 		icon: "fluent:document-one-page-add-24-regular",
 		label: "Register Subjects",

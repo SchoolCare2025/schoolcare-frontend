@@ -1,33 +1,52 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { validateInputValue } from "@/lib/utils/validateInputValue";
+import { type AllSubjects, callBackendApi } from "@/lib/api/callBackendApi";
+import { cnMerge } from "@/lib/utils/cn";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import Main from "../_components/Main";
 
+const RegisterSubjectSchema = z.object({
+	subject: z.string().min(1, "Subject is required"),
+});
+
+type RegisterSubjectFormData = z.infer<typeof RegisterSubjectSchema>;
+
 function RegisterSubjectPage() {
-	const methods = useForm({
+	const methods = useForm<RegisterSubjectFormData>({
 		defaultValues: {
-			subjects: [] as string[],
+			subject: "",
 		},
+		resolver: zodResolver(RegisterSubjectSchema),
 	});
 
-	const [SubjectList] = getElementList();
+	const [SubjectList] = getElementList("base");
 
-	const handleAddSubject = (value: string) => {
-		const validSubject = validateInputValue(methods.getValues().subjects, value);
+	const subjectQueryResult = useQuery({
+		queryFn: () => {
+			return callBackendApi<AllSubjects, unknown, "onlySuccess">("/main-subject", {
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["subjects"],
+		staleTime: Infinity,
+	});
 
-		if (!validSubject) return;
+	const onSubmit = async (data: RegisterSubjectFormData) => {
+		await callBackendApi("/school/subjects", {
+			body: data,
+			method: "POST",
 
-		methods.setValue("subjects", [...methods.getValues().subjects, validSubject]);
+			onResponseError: (ctx) => {
+				methods.setError("root.serverError", {
+					message: ctx.errorData.error?.message,
+				});
+			},
+		});
 	};
-
-	const handleRemoveTags = (tag: string) => () => {
-		const newTagState = methods.getValues().subjects.filter((tagItem) => tagItem !== tag);
-
-		methods.setValue("subjects", newTagState);
-	};
-
-	const watchedSubjects = methods.watch("subjects");
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -39,14 +58,14 @@ function RegisterSubjectPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-8"
-					onSubmit={(event) => void methods.handleSubmit((data) => console.info(data))(event)}
+					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="subjects" className="gap-4">
-						<Form.Label className="font-medium">Class Name</Form.Label>
+					<Form.Item<typeof methods.control> name="subject" className="gap-4">
+						<Form.Label className="font-medium">Select Subject</Form.Label>
 
 						<Form.Controller
 							render={({ field }) => (
-								<Select.Root name={field.name} onValueChange={handleAddSubject}>
+								<Select.Root name={field.name} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
 											base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
@@ -64,58 +83,43 @@ function RegisterSubjectPage() {
 											viewport: "gap-1",
 										}}
 									>
-										<Select.Item
-											value="steeze"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Steeze
-										</Select.Item>
-										<Select.Item
-											value="cooking"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Cooking
-										</Select.Item>
+										<SubjectList
+											each={subjectQueryResult.data?.data ?? []}
+											render={(item) => (
+												<Select.Item
+													value={item}
+													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+												>
+													{item}
+												</Select.Item>
+											)}
+										/>
 									</Select.Content>
 								</Select.Root>
 							)}
 						/>
+
+						<Form.ErrorMessage className="text-red-600" />
 					</Form.Item>
 
+					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
+
 					<button
+						disabled={methods.formState.isSubmitting}
 						type="submit"
-						className="max-w-fit self-end rounded-[10px] bg-school-blue px-8 py-2.5 text-[18px]
-							font-bold text-white"
+						className={cnMerge(
+							`mt-12 flex h-[56px] w-full max-w-[150px] items-center justify-center self-end
+							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`
+						)}
 					>
-						Register
+						{methods.formState.isSubmitting ? (
+							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+						) : (
+							"Register"
+						)}
 					</button>
 				</Form.Root>
-			</section>
-
-			<section>
-				<SubjectList
-					className="flex flex-wrap gap-2 text-xs font-medium text-school-blue lg:text-base"
-					each={watchedSubjects}
-					render={(subject, index) => (
-						<li
-							key={`${subject}-${index}`}
-							className="flex min-w-20 items-center justify-between gap-2.5 rounded-[60px]
-								bg-school-blue px-8 py-2.5 text-white"
-						>
-							<p>{subject}</p>
-
-							<button
-								className="transition-transform duration-100 active:scale-[1.12]"
-								type="button"
-								onClick={handleRemoveTags(subject)}
-							>
-								<IconBox icon="gridicons:cross" className="size-[17px]" />
-							</button>
-						</li>
-					)}
-				/>
 			</section>
 		</Main>
 	);

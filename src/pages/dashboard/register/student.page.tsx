@@ -1,6 +1,6 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { type ClassData, callBackendApi } from "@/lib/api/callBackendApi";
+import { type ClassGradeData, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -16,10 +16,10 @@ const RegisterStudentSchema = z.object({
 	surname: z.string().min(1, "Surname is required"),
 });
 
-type RegisterStudentData = z.infer<typeof RegisterStudentSchema>;
+type RegisterStudentFormData = z.infer<typeof RegisterStudentSchema>;
 
 function RegisterStudentPage() {
-	const methods = useForm<RegisterStudentData>({
+	const methods = useForm<RegisterStudentFormData>({
 		defaultValues: {
 			gender: "",
 			other_names: "",
@@ -30,33 +30,32 @@ function RegisterStudentPage() {
 		resolver: zodResolver(RegisterStudentSchema),
 	});
 
-	const [ClassList] = getElementList("base");
+	const [ClassGradeList] = getElementList("base");
 
-	const classesQueryResult = useQuery({
+	const classGradeQueryResult = useQuery({
 		queryFn: () => {
-			return callBackendApi<ClassData[], unknown, "onlySuccess">("/school/classes/", {
+			return callBackendApi<ClassGradeData[], unknown, "onlySuccess">("/school/class-grades", {
 				resultMode: "onlySuccess",
 				throwOnError: true,
 			});
 		},
-		queryKey: ["classes"],
+		queryKey: ["class-grades"],
+		staleTime: Infinity,
 	});
 
 	const navigate = useNavigate();
 
-	const onSubmit = async (data: RegisterStudentData) => {
+	const onSubmit = async (data: RegisterStudentFormData) => {
 		const { other_names, surname, ...restOfData } = data;
 
-		await callBackendApi("/school/students/", {
+		await callBackendApi("/school/students", {
 			body: {
 				...restOfData,
 				name: `${surname} ${other_names}`,
 			},
 			method: "POST",
 
-			onSuccess: () => {
-				navigate("/dashboard");
-			},
+			onSuccess: () => navigate("/dashboard"),
 		});
 	};
 
@@ -114,7 +113,7 @@ function RegisterStudentPage() {
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
-											<Select.Value placeholder="Choose student's class" />
+											<Select.Value placeholder="Choose student's gender" />
 										</Select.Trigger>
 
 										<Select.Content
@@ -125,14 +124,14 @@ function RegisterStudentPage() {
 											}}
 										>
 											<Select.Item
-												value="male"
+												value="Male"
 												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
 													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 											>
 												Male
 											</Select.Item>
 											<Select.Item
-												value="female"
+												value="Female"
 												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
 													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 											>
@@ -173,16 +172,16 @@ function RegisterStudentPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<ClassList
-												each={classesQueryResult.data?.data ?? []}
+											<ClassGradeList
+												each={classGradeQueryResult.data?.data ?? []}
 												render={(item) => (
 													<Select.Item
-														value={item.school_class}
+														value={`${item.school_class} ${item.grade}`}
 														className="h-12 bg-gray-200 font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
-														{item.school_class}
+														{item.school_class} {item.grade}
 													</Select.Item>
 												)}
 											/>
@@ -199,7 +198,7 @@ function RegisterStudentPage() {
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						type="submit"
 						className={cnMerge(
-							`flex h-[47px] w-full max-w-[150px] items-center justify-center self-center
+							`flex h-[56px] w-full max-w-[150px] items-center justify-center self-center
 							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}

@@ -3,6 +3,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lazy } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import RootLayout from "./pages/layout";
+import { useQueryClientStore } from "./store/react-query/queryClientStore";
+import { sessionQuery } from "./store/react-query/queryFactory";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -12,6 +14,8 @@ const queryClient = new QueryClient({
 	},
 });
 
+useQueryClientStore.setState({ queryClient });
+
 // Legacy
 const AboutUs = lazy(() => import("./pages/legacy/AboutUs"));
 const ContactUs = lazy(() => import("./pages/legacy/ContactUs"));
@@ -20,6 +24,12 @@ const HowItWorks = lazy(() => import("./pages/legacy/HowItWorks"));
 const LandingPage = lazy(() => import("./pages/legacy/LandingPage"));
 const MainLayout = lazy(() => import("./pages/legacy/MainLayout"));
 const WhoWeAre = lazy(() => import("./pages/legacy/WhoWeAre"));
+
+const sessionLoader = () => {
+	void queryClient.prefetchQuery(sessionQuery());
+
+	return null;
+};
 
 const routes = createRoutesFromElements(
 	<Route element={<RootLayout />}>
@@ -42,7 +52,7 @@ const routes = createRoutesFromElements(
 			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 
-		<Route Component={lazy(() => import("./pages/protect.layout.tsx"))}>
+		<Route Component={lazy(() => import("./pages/protect.layout.tsx"))} loader={sessionLoader}>
 			<Route path="/dashboard" Component={lazy(() => import("./pages/dashboard/layout"))}>
 				<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
 

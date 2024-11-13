@@ -38,7 +38,7 @@ function AddressPage() {
 	const onSubmit = async (stepTwoData: StepTwoData) => {
 		updateFormData(stepTwoData);
 
-		await callBackendApi("/school/register/", {
+		await callBackendApi("/school/register", {
 			body: { ...formStepData, ...stepTwoData },
 			method: "POST",
 

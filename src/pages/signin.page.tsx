@@ -1,6 +1,6 @@
 import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
-import { callBackendApi, type LoginData } from "@/lib/api/callBackendApi";
+import { type LoginData, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -27,7 +27,7 @@ function SigninPage() {
 	const navigate = useNavigate();
 
 	const onSubmit = async (data: SignupFormValues) => {
-		await callBackendApi<LoginData>("/login/", {
+		await callBackendApi<LoginData>("/login", {
 			body: data,
 			method: "POST",
 

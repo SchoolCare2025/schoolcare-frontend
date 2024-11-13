@@ -1,50 +1,50 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { validateInputValue } from "@/lib/utils/validateInputValue";
-import type { KeyboardEvent, MouseEvent } from "react";
+import { type AllClasses, callBackendApi } from "@/lib/api/callBackendApi";
+import { cnMerge } from "@/lib/utils/cn";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import Main from "../_components/Main";
 
+const RegisterClassSchema = z.object({
+	grade: z.string().min(1, "Grade is required"),
+	school_class: z.string().min(1, "School class is required"),
+});
+
+type RegisterClassFormData = z.infer<typeof RegisterClassSchema>;
+
 function RegisterClassPage() {
-	const methods = useForm({
+	const methods = useForm<RegisterClassFormData>({
 		defaultValues: {
-			class_grades: [] as string[],
-			class_name: "",
+			grade: "",
+			school_class: "",
 		},
+		resolver: zodResolver(RegisterClassSchema),
 	});
 
-	const [TagList] = getElementList();
+	const [ClassList] = getElementList("base");
 
-	const handleAddTags = (event: KeyboardEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>) => {
-		const isEnterKey = (event as KeyboardEvent).key === "Enter";
+	const classQueryResult = useQuery({
+		queryFn: () => {
+			return callBackendApi<AllClasses, unknown, "onlySuccess">("/main-class", {
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["classes"],
+		staleTime: Infinity,
+	});
 
-		if (event.type === "keydown" && !isEnterKey) return;
-
-		if (event.type === "keydown") {
-			event.preventDefault();
-		}
-
-		const inputField = event.currentTarget;
-
-		const validClassGrade = validateInputValue(
-			methods.getValues().class_grades,
-			inputField.value.trim()
-		);
-
-		if (!validClassGrade) return;
-
-		methods.setValue("class_grades", [...methods.getValues().class_grades, validClassGrade]);
-
-		inputField.value = "";
+	const onSubmit = async (data: RegisterClassFormData) => {
+		await callBackendApi("/school/classes", {
+			body: data,
+			method: "POST",
+		});
 	};
 
-	const handleRemoveTags = (tag: string) => () => {
-		const newTagState = methods.getValues().class_grades.filter((tagItem) => tagItem !== tag);
-
-		methods.setValue("class_grades", newTagState);
-	};
-
-	const watchedTags = methods.watch("class_grades");
+	const watchedSchoolClass = methods.watch("school_class");
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -56,9 +56,9 @@ function RegisterClassPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-8"
-					onSubmit={(event) => void methods.handleSubmit((data) => console.info(data))(event)}
+					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="class_name" className="gap-4">
+					<Form.Item<typeof methods.control> name="school_class" className="gap-4">
 						<Form.Label className="font-medium">Class Name</Form.Label>
 
 						<Form.Controller
@@ -81,69 +81,67 @@ function RegisterClassPage() {
 											viewport: "gap-1",
 										}}
 									>
-										<Select.Item
-											value="steeze"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Steeze
-										</Select.Item>
-										<Select.Item
-											value="cooking"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Cooking
-										</Select.Item>
+										<ClassList
+											each={classQueryResult.data?.data ?? []}
+											render={(item) => (
+												<Select.Item
+													key={item}
+													value={item}
+													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+												>
+													{item}
+												</Select.Item>
+											)}
+										/>
 									</Select.Content>
 								</Select.Root>
 							)}
 						/>
+
+						<Form.ErrorMessage className="text-red-600" />
 					</Form.Item>
 
-					<Form.Item<typeof methods.control> name="class_grades" className="gap-4">
+					<Form.Item<typeof methods.control> name="grade" className="gap-4">
 						<Form.Label className="font-medium">Class Grade</Form.Label>
 
-						<Form.InputPrimitive
-							placeholder="Jss1 A"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-								text-[14px] md:text-base"
-							onKeyDown={handleAddTags}
-						/>
+						<Form.InputGroup
+							className="h-[75px] w-full gap-4 rounded-[20px] border-2 border-school-gray bg-white
+								px-8 text-[14px] md:text-base"
+						>
+							<Form.InputLeftItem className="shrink-0">{watchedSchoolClass}</Form.InputLeftItem>
+
+							<Form.Input
+								placeholder="Enter grades A-Z"
+								maxLength={1}
+								onChange={(event) => {
+									const input = event.target;
+
+									input.value = input.value.toUpperCase();
+								}}
+							/>
+						</Form.InputGroup>
+
+						<Form.ErrorMessage className="text-red-600" />
 					</Form.Item>
 
+					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
+
 					<button
+						disabled={methods.formState.isSubmitting}
 						type="submit"
-						className="max-w-fit self-end rounded-[10px] bg-school-blue px-8 py-2.5 text-[18px]
-							font-bold text-white"
+						className={cnMerge(
+							`mt-12 flex h-[56px] w-full max-w-[150px] items-center justify-center self-end
+							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`
+						)}
 					>
-						Register
+						{methods.formState.isSubmitting ? (
+							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+						) : (
+							"Register"
+						)}
 					</button>
 				</Form.Root>
-			</section>
-
-			<section>
-				<TagList
-					className="flex flex-wrap gap-2 text-xs font-medium text-school-blue lg:text-base"
-					each={watchedTags}
-					render={(tag, index) => (
-						<li
-							key={`${tag}-${index}`}
-							className="flex min-w-20 items-center justify-between gap-2.5 rounded-[60px] border
-								border-school-blue bg-white px-8 py-2.5"
-						>
-							<p>{tag}</p>
-
-							<button
-								className="transition-transform duration-100 active:scale-[1.12]"
-								type="button"
-								onClick={handleRemoveTags(tag)}
-							>
-								<IconBox icon="gridicons:cross" className="size-[17px]" />
-							</button>
-						</li>
-					)}
-				/>
 			</section>
 		</Main>
 	);

@@ -1,6 +1,6 @@
 /* eslint-disable perfectionist/sort-object-types */
 import type { Prettify } from "@zayne-labs/toolkit/type-helpers";
-import { create, type StateCreator } from "zustand";
+import { type StateCreator, create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type StepOneData = {
@@ -28,7 +28,7 @@ export type FormStore = {
 	};
 };
 
-export const initialFormState = {
+const initialFormState = {
 	formStepData: {
 		address: "",
 		email: "",
