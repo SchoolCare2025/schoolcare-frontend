@@ -1,11 +1,12 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { type ClassGradeData, callBackendApi } from "@/lib/api/callBackendApi";
+import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
+import { classGradesQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { z } from "zod";
 import Main from "../_components/Main";
 
@@ -32,18 +33,7 @@ function RegisterStudentPage() {
 
 	const [ClassGradeList] = getElementList("base");
 
-	const classGradeQueryResult = useQuery({
-		queryFn: () => {
-			return callBackendApi<ClassGradeData[], unknown, "onlySuccess">("/school/class-grades", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
-		queryKey: ["class-grades"],
-		staleTime: Infinity,
-	});
-
-	const navigate = useNavigate();
+	const classGradeQueryResult = useQuery(classGradesQuery());
 
 	const onSubmit = async (data: RegisterStudentFormData) => {
 		const { other_names, surname, ...restOfData } = data;
@@ -55,7 +45,16 @@ function RegisterStudentPage() {
 			},
 			method: "POST",
 
-			onSuccess: () => navigate("/dashboard"),
+			onResponseError: (ctx) => {
+				methods.setError("root.serverError", {
+					message: ctx.errorData.errors?.message,
+				});
+			},
+
+			onSuccess: (ctx) => {
+				toast.success(ctx.data.message);
+				methods.reset();
+			},
 		});
 	};
 

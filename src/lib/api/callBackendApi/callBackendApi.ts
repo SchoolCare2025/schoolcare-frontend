@@ -1,11 +1,27 @@
-import { type CallApiExtraOptions, createFetchClient } from "@zayne-labs/callapi";
+import {
+	type CallApiExtraOptions,
+	type SuccessResponseContext,
+	createFetchClient,
+} from "@zayne-labs/callapi";
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
+import { toast } from "sonner";
 import { includeAuthToRequest } from "./utils/includeAuthToRequest";
 
 const fetchClient = createFetchClient({
 	baseURL: "https://srm-api.onrender.com/api",
 
 	onRequest: (ctx) => includeAuthToRequest(ctx),
+
+	onSuccess: [
+		(ctx: SuccessResponseContext<{ message: string }>) => {
+			const shouldDisplayToast =
+				!ctx.data.message || !(ctx.options.meta?.toast as { success: boolean } | undefined)?.success;
+
+			if (shouldDisplayToast) return;
+
+			toast.success(ctx.data.message, { duration: 2000 });
+		},
+	],
 });
 
 type ApiSuccessResponse<TData> = UnmaskType<{
@@ -15,7 +31,7 @@ type ApiSuccessResponse<TData> = UnmaskType<{
 }>;
 
 type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
-	error?: TErrorData & { message?: string };
+	errors?: TErrorData & { message?: string };
 	message: string;
 	status: "error";
 }>;

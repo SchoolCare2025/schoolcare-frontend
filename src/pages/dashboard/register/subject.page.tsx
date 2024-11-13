@@ -42,7 +42,7 @@ function RegisterSubjectPage() {
 
 			onResponseError: (ctx) => {
 				methods.setError("root.serverError", {
-					message: ctx.errorData.error?.message,
+					message: ctx.errorData.errors?.message,
 				});
 			},
 		});
@@ -109,7 +109,7 @@ function RegisterSubjectPage() {
 						disabled={methods.formState.isSubmitting}
 						type="submit"
 						className={cnMerge(
-							`mt-12 flex h-[56px] w-full max-w-[150px] items-center justify-center self-end
+							`mt-5 flex h-[56px] w-full max-w-[150px] items-center justify-center self-end
 							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`
 						)}
 					>

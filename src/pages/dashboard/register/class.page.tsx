@@ -1,7 +1,8 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { type AllClasses, callBackendApi } from "@/lib/api/callBackendApi";
+import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
+import { allClassesQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -24,23 +25,22 @@ function RegisterClassPage() {
 		resolver: zodResolver(RegisterClassSchema),
 	});
 
-	const [ClassList] = getElementList("base");
+	const allClassesQueryResult = useQuery(allClassesQuery());
 
-	const classQueryResult = useQuery({
-		queryFn: () => {
-			return callBackendApi<AllClasses, unknown, "onlySuccess">("/main-class", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
-		queryKey: ["classes"],
-		staleTime: Infinity,
-	});
+	const [ClassList] = getElementList("base");
 
 	const onSubmit = async (data: RegisterClassFormData) => {
 		await callBackendApi("/school/classes", {
 			body: data,
 			method: "POST",
+
+			onResponseError: (ctx) => {
+				methods.setError("root.serverError", {
+					message: ctx.errorData.errors?.message,
+				});
+			},
+
+			onSuccess: () => methods.resetField("grade"),
 		});
 	};
 
@@ -82,7 +82,7 @@ function RegisterClassPage() {
 										}}
 									>
 										<ClassList
-											each={classQueryResult.data?.data ?? []}
+											each={allClassesQueryResult.data?.data ?? []}
 											render={(item) => (
 												<Select.Item
 													key={item}

@@ -1,13 +1,40 @@
+import { getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
+import { useQueryClientStore } from "@/store/react-query/queryClientStore";
+import { classGradesQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
 import Main from "../_components/Main";
 
+const ViewAllStudentsSchema = z.object({
+	class: z.string().min(1, "Class is required"),
+});
+
+type ViewAllStudentsFormData = z.infer<typeof ViewAllStudentsSchema>;
+
 function ViewAllStudentsPage() {
-	const methods = useForm({
+	const navigate = useNavigate();
+
+	const methods = useForm<ViewAllStudentsFormData>({
 		defaultValues: {
 			class: "",
 		},
+		resolver: zodResolver(ViewAllStudentsSchema),
 	});
+
+	const classGradeQueryResult = useQuery(classGradesQuery());
+
+	const [ClassGradeList] = getElementList("base");
+
+	const onSubmit = async (data: ViewAllStudentsFormData) => {
+		await useQueryClientStore.getState().queryClient.prefetchQuery(studentsByClassQuery(data.class));
+
+		// FIXME - Redirect to table
+		navigate("/dashboard");
+	};
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -19,7 +46,7 @@ function ViewAllStudentsPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit((data) => console.info(data))(event)}
+					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<Form.Item<typeof methods.control> name="class" className="w-full gap-4">
 						<Form.Label className="font-medium">Choose class</Form.Label>
@@ -44,20 +71,18 @@ function ViewAllStudentsPage() {
 											viewport: "gap-1",
 										}}
 									>
-										<Select.Item
-											value="steeze"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Steeze
-										</Select.Item>
-										<Select.Item
-											value="cooking"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Cooking
-										</Select.Item>
+										<ClassGradeList
+											each={classGradeQueryResult.data?.data ?? []}
+											render={(item) => (
+												<Select.Item
+													value={`${item.school_class} ${item.grade}`}
+													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+												>
+													{item.school_class} {item.grade}
+												</Select.Item>
+											)}
+										/>
 									</Select.Content>
 								</Select.Root>
 							)}

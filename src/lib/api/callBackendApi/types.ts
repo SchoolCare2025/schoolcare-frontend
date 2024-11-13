@@ -10,7 +10,7 @@ export type ClassGradeData = {
 	school_class: string;
 };
 
-export type ClassData = {
+export type SchoolClassData = {
 	school_class: string;
 	subject_names: string[];
 };
@@ -18,3 +18,9 @@ export type ClassData = {
 export type AllClasses = string[];
 
 export type AllSubjects = string[];
+
+export type AllStudentsByClass = {
+	gender: string;
+	name: string;
+	school_class: string;
+};

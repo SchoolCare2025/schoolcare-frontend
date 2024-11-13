@@ -12,7 +12,7 @@ const checkUserSession = async () => {
 		return callBackendApi("/check-user-session", { throwOnError: true });
 	}
 
-	if (error) {
+	if (error && error.name !== "AbortError") {
 		toast.error(
 			error.name === "TypeError"
 				? "No network connection"
