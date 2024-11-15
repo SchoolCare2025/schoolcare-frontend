@@ -1,7 +1,7 @@
 import {
 	type AllClasses,
-	type AllStudentsByClass,
-	type ClassGradeData,
+	type ClassesData,
+	type StudentsByClassOrID,
 	callBackendApi,
 } from "@/lib/api/callBackendApi";
 import { checkUserSession } from "@/lib/api/callBackendApi/utils";
@@ -11,7 +11,7 @@ export const sessionQuery = () => {
 	return queryOptions({
 		queryFn: () => checkUserSession(),
 		queryKey: ["session"],
-		refetchInterval: 10 * 60 * 1000,
+		refetchInterval: 9 * 60 * 1000,
 		retry: false,
 		staleTime: Infinity,
 	});
@@ -30,10 +30,10 @@ export const allClassesQuery = () => {
 	});
 };
 
-export const classGradesQuery = () => {
+export const classesQuery = () => {
 	return queryOptions({
 		queryFn: () => {
-			return callBackendApi<ClassGradeData[], unknown, "onlySuccess">("/school/class-grades", {
+			return callBackendApi<ClassesData[], unknown, "onlySuccess">("/school/classes", {
 				resultMode: "onlySuccess",
 				throwOnError: true,
 			});
@@ -46,7 +46,7 @@ export const classGradesQuery = () => {
 export const studentsByClassQuery = (studentClass: string) => {
 	return queryOptions({
 		queryFn: () => {
-			return callBackendApi<AllStudentsByClass, unknown, "onlySuccess">(
+			return callBackendApi<StudentsByClassOrID, unknown, "onlySuccess">(
 				"/school/students/class-students",
 				{
 					meta: {
@@ -63,6 +63,27 @@ export const studentsByClassQuery = (studentClass: string) => {
 			);
 		},
 		queryKey: ["students", studentClass],
+		staleTime: 2 * 60 * 1000,
+	});
+};
+
+export const studentsByIDQuery = (studentId: string) => {
+	return queryOptions({
+		queryFn: () => {
+			return callBackendApi<StudentsByClassOrID, unknown, "onlySuccess">("/school/students/:id", {
+				meta: {
+					toast: {
+						success: true,
+					},
+				},
+				params: {
+					id: studentId,
+				},
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["students", studentId],
 		staleTime: 2 * 60 * 1000,
 	});
 };

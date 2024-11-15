@@ -5,7 +5,7 @@ export type LoginData = {
 	school: string;
 };
 
-export type ClassGradeData = {
+export type ClassesData = {
 	grade: string;
 	school_class: string;
 };
@@ -19,7 +19,7 @@ export type AllClasses = string[];
 
 export type AllSubjects = string[];
 
-export type AllStudentsByClass = {
+export type StudentsByClassOrID = {
 	gender: string;
 	name: string;
 	school_class: string;

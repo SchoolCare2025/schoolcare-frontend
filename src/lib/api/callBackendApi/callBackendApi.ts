@@ -1,11 +1,23 @@
-import {
-	type CallApiExtraOptions,
-	type SuccessResponseContext,
-	createFetchClient,
-} from "@zayne-labs/callapi";
+import { type CallApiConfig, type SuccessContext, createFetchClient } from "@zayne-labs/callapi";
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
 import { toast } from "sonner";
 import { includeAuthToRequest } from "./utils/includeAuthToRequest";
+
+/* eslint-disable ts-eslint/consistent-type-definitions */
+
+type GlobalMeta = {
+	skipAuthHeaderAddition?: boolean;
+	skipSessionCheck?: boolean;
+	toast?: {
+		success: boolean;
+	};
+};
+
+declare module "@zayne-labs/callapi" {
+	interface Register {
+		meta: GlobalMeta;
+	}
+}
 
 const fetchClient = createFetchClient({
 	baseURL: "https://srm-api.onrender.com/api",
@@ -13,13 +25,12 @@ const fetchClient = createFetchClient({
 	onRequest: (ctx) => includeAuthToRequest(ctx),
 
 	onSuccess: [
-		(ctx: SuccessResponseContext<{ message: string }>) => {
-			const shouldDisplayToast =
-				!ctx.data.message || !(ctx.options.meta?.toast as { success: boolean } | undefined)?.success;
+		(ctx: SuccessContext<{ message: string }>) => {
+			const shouldDisplayToast = !ctx.data.message || !ctx.options.meta?.toast?.success;
 
 			if (shouldDisplayToast) return;
 
-			toast.success(ctx.data.message, { duration: 2000 });
+			toast.success(ctx.data.message);
 		},
 	],
 });
@@ -36,14 +47,14 @@ type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
 	status: "error";
 }>;
 
-type Params<TData, TError, TResultMode extends CallApiExtraOptions["resultMode"]> = Parameters<
+type Params<TData, TError, TResultMode extends CallApiConfig["resultMode"]> = Parameters<
 	typeof fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
 >;
 
 const callBackendApi = <
 	TData = unknown,
 	TError = unknown,
-	TResultMode extends CallApiExtraOptions["resultMode"] = CallApiExtraOptions["resultMode"],
+	TResultMode extends CallApiConfig["resultMode"] = CallApiConfig["resultMode"],
 >(
 	...args: Params<TData, TError, TResultMode>
 ) => {

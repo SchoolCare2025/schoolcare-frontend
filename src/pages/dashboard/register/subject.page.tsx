@@ -42,7 +42,7 @@ function RegisterSubjectPage() {
 
 			onResponseError: (ctx) => {
 				methods.setError("root.serverError", {
-					message: ctx.errorData.errors?.message,
+					message: ctx.error.errorData.errors?.message,
 				});
 			},
 		});

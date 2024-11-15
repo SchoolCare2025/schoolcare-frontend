@@ -2,7 +2,7 @@ import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
-import { classGradesQuery } from "@/store/react-query/queryFactory";
+import { classesQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -31,9 +31,9 @@ function RegisterStudentPage() {
 		resolver: zodResolver(RegisterStudentSchema),
 	});
 
-	const [ClassGradeList] = getElementList("base");
+	const [ClassesList] = getElementList("base");
 
-	const classGradeQueryResult = useQuery(classGradesQuery());
+	const classesQueryResult = useQuery(classesQuery());
 
 	const onSubmit = async (data: RegisterStudentFormData) => {
 		const { other_names, surname, ...restOfData } = data;
@@ -47,7 +47,7 @@ function RegisterStudentPage() {
 
 			onResponseError: (ctx) => {
 				methods.setError("root.serverError", {
-					message: ctx.errorData.errors?.message,
+					message: ctx.error.errorData.errors?.message,
 				});
 			},
 
@@ -171,8 +171,8 @@ function RegisterStudentPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<ClassGradeList
-												each={classGradeQueryResult.data?.data ?? []}
+											<ClassesList
+												each={classesQueryResult.data?.data ?? []}
 												render={(item) => (
 													<Select.Item
 														value={`${item.school_class} ${item.grade}`}

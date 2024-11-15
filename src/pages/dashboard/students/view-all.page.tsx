@@ -1,7 +1,7 @@
 import { getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
-import { classGradesQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
+import { classesQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -25,9 +25,9 @@ function ViewAllStudentsPage() {
 		resolver: zodResolver(ViewAllStudentsSchema),
 	});
 
-	const classGradeQueryResult = useQuery(classGradesQuery());
+	const classesQueryResult = useQuery(classesQuery());
 
-	const [ClassGradeList] = getElementList("base");
+	const [ClassesList] = getElementList("base");
 
 	const onSubmit = async (data: ViewAllStudentsFormData) => {
 		await useQueryClientStore.getState().queryClient.prefetchQuery(studentsByClassQuery(data.class));
@@ -71,8 +71,8 @@ function ViewAllStudentsPage() {
 											viewport: "gap-1",
 										}}
 									>
-										<ClassGradeList
-											each={classGradeQueryResult.data?.data ?? []}
+										<ClassesList
+											each={classesQueryResult.data?.data ?? []}
 											render={(item) => (
 												<Select.Item
 													value={`${item.school_class} ${item.grade}`}
