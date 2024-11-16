@@ -1,0 +1,100 @@
+import { cnMerge } from "@/lib/utils/cn";
+import type { InferProps } from "@zayne-labs/toolkit/react";
+
+function TableRoot(props: InferProps<"table">) {
+	const { className, ...restOfProps } = props;
+
+	return (
+		<div className="relative w-full overflow-auto">
+			<table className={cnMerge("w-full caption-bottom text-sm", className)} {...restOfProps} />
+		</div>
+	);
+}
+
+function TableHeader(props: InferProps<HTMLTableSectionElement>) {
+	const { className, ...restOfProps } = props;
+
+	return <thead className={cnMerge("[&_tr]:border-b", className)} {...restOfProps} />;
+}
+
+function TableBody(props: InferProps<HTMLTableSectionElement>) {
+	const { className, ...restOfProps } = props;
+
+	return <tbody className={cnMerge("[&_tr:last-child]:border-0", className)} {...restOfProps} />;
+}
+
+function TableFooter(props: InferProps<HTMLTableSectionElement>) {
+	const { className, ...restOfProps } = props;
+
+	return (
+		<tfoot
+			className={cnMerge("border-t bg-shadcn-muted/50 font-medium [&>tr]:last:border-b-0", className)}
+			{...restOfProps}
+		/>
+	);
+}
+
+function TableRow(props: InferProps<HTMLTableRowElement>) {
+	const { className, ...restOfProps } = props;
+
+	return (
+		<tr
+			className={cnMerge(
+				"border-b transition-colors hover:bg-shadcn-muted/50 data-[state=selected]:bg-shadcn-muted",
+				className
+			)}
+			{...restOfProps}
+		/>
+	);
+}
+
+function TableHead(props: InferProps<HTMLTableCellElement>) {
+	const { className, ...restOfProps } = props;
+
+	return (
+		<th
+			className={cnMerge(
+				`h-12 px-4 text-left align-middle font-medium text-shadcn-muted-foreground
+				[&:has([role=checkbox])]:pr-0`,
+				className
+			)}
+			{...restOfProps}
+		/>
+	);
+}
+
+function TableCell(props: InferProps<HTMLTableCellElement>) {
+	const { className, ...restOfProps } = props;
+
+	<td
+		className={cnMerge("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+		{...restOfProps}
+	/>;
+}
+
+function TableCaption(props: InferProps<HTMLTableCaptionElement>) {
+	const { className, ...restOfProps } = props;
+
+	return (
+		<caption
+			className={cnMerge("mt-4 text-sm text-shadcn-muted-foreground", className)}
+			{...restOfProps}
+		/>
+	);
+}
+
+export const Root = TableRoot;
+
+export const Header = TableHeader;
+
+export const Body = TableBody;
+
+export const Footer = TableFooter;
+
+export const Row = TableRow;
+
+export const Head = TableHead;
+
+export const Cell = TableCell;
+
+export const Caption = TableCaption;
