@@ -7,7 +7,6 @@ export type StepOneData = {
 	email: string;
 	logo?: File;
 	name: string;
-	school_ID: string;
 };
 
 export type StepTwoData = {
@@ -36,7 +35,6 @@ const initialFormState = {
 		name: "",
 		nationality: "",
 		postal_code: null,
-		school_ID: "",
 		state: "",
 	},
 } satisfies Omit<FormStore, "actions">;

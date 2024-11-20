@@ -2,7 +2,13 @@ import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import type { RequestContext } from "@zayne-labs/callapi";
 import { toast } from "sonner";
 
-const routesExemptedFromAuthHeader = new Set(["/signin", "/register/personal-info", "/register/address"]);
+const routesExemptedFromAuthHeader = new Set([
+	"/signin",
+	"/register/personal-info",
+	"/register/address",
+	"/admin/verify",
+	"/admin/register",
+]);
 
 const includeAuthToRequest = async (ctx: RequestContext) => {
 	const shouldSkipAuthHeaderAddition =

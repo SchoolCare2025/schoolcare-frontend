@@ -1,19 +1,18 @@
 import { IconBox } from "@/components/common";
 import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
+import { cnMerge } from "@/lib/utils/cn";
 import { type StepOneData, useFormStore } from "@/store/formStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import Main from "../_components/Main";
-import { cnMerge } from "@/lib/utils/cn";
 
 const PersonalInfoSchema = z.object({
 	email: z.string().email("Please enter a valid email!"),
 	logo: z.custom<File>((file) => file instanceof File).optional(),
 	name: z.string().min(1, "Name is required").max(50, "Name is too long"),
-	school_ID: z.string().min(1, "School ID is required"),
 });
 
 function PersonalInfoPage() {
@@ -76,20 +75,6 @@ function PersonalInfoPage() {
 						<Form.Input
 							type="email"
 							placeholder="Enter school email"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
-								md:h-[75px] md:rounded-[20px] md:text-base"
-						/>
-
-						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
-
-					<Form.Item<typeof methods.control> name="school_ID" className="gap-4">
-						<Form.Label className="text-[14px] font-semibold md:text-base">
-							School Code/ID
-						</Form.Label>
-
-						<Form.Input
-							placeholder="Enter school code/id"
 							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>

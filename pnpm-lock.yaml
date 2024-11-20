@@ -21,8 +21,8 @@ importers:
         specifier: ^5.59.20
         version: 5.59.20(react@19.0.0-rc-bf7e210c-20241017)
       '@zayne-labs/callapi':
-        specifier: 1.0.0-rc.27
-        version: 1.0.0-rc.27
+        specifier: 1.0.0-rc.32
+        version: 1.0.0-rc.32
       '@zayne-labs/toolkit':
         specifier: ^0.6.4
         version: 0.6.4(@types/react@18.3.12)(react@19.0.0-rc-bf7e210c-20241017)(zustand@5.0.1(@types/react@18.3.12)(react@19.0.0-rc-bf7e210c-20241017))
@@ -1146,8 +1146,8 @@ packages:
     peerDependencies:
       vite: ^4 || ^5
 
-  '@zayne-labs/callapi@1.0.0-rc.27':
-    resolution: {integrity: sha512-fVDWmUAAhNepkozysEluCqO/oZxH5d84Kkj5nWWaIhJy2xJbRZZx+GdKzWeSc1VMWseekH+x5+mhiU+sE+qK3w==}
+  '@zayne-labs/callapi@1.0.0-rc.32':
+    resolution: {integrity: sha512-mZcLxcyt4AvP1Al9PRYzqGqwWlGzwU8oyMSuZVKQLN4fspmA1bYnoZtSm8pH+0ndUXEAhEMykso7fkFRCLkxBQ==}
     engines: {node: '>=v18.17.0'}
 
   '@zayne-labs/eslint-config@0.2.9':
@@ -3877,7 +3877,7 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@zayne-labs/callapi@1.0.0-rc.27': {}
+  '@zayne-labs/callapi@1.0.0-rc.32': {}
 
   '@zayne-labs/eslint-config@0.2.9(@eslint-react/eslint-plugin@1.16.1(eslint@9.14.0(jiti@1.21.6))(typescript@5.6.3))(@tanstack/eslint-plugin-query@5.60.1(eslint@9.14.0(jiti@1.21.6))(typescript@5.6.3))(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@1.21.6))(typescript@5.6.3))(eslint-plugin-react-hooks@5.0.0(eslint@9.14.0(jiti@1.21.6)))(eslint-plugin-react-refresh@0.4.14(eslint@9.14.0(jiti@1.21.6)))(eslint-plugin-tailwindcss@3.17.5(tailwindcss@3.4.14))(eslint@9.14.0(jiti@1.21.6))(typescript@5.6.3)':
     dependencies:

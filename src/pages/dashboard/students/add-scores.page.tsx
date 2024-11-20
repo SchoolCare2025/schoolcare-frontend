@@ -1,4 +1,7 @@
+import { getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
+import { classesQuery, schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import Main from "../_components/Main";
 
@@ -10,6 +13,12 @@ function AddScoresPage() {
 			term: "",
 		},
 	});
+
+	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
+	const schoolTermQueryResult = useQuery(schoolTermQuery());
+	const classesQueryResult = useQuery(classesQuery());
+
+	const [List] = getElementList("base");
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -25,7 +34,7 @@ function AddScoresPage() {
 				>
 					<div className="flex gap-[70px]">
 						<Form.Item<typeof methods.control> name="session" className="w-full gap-4">
-							<Form.Label className="font-medium">Choose class</Form.Label>
+							<Form.Label className="font-medium">Session</Form.Label>
 
 							<Form.Controller
 								render={({ field }) => (
@@ -41,7 +50,7 @@ function AddScoresPage() {
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
-											<Select.Value placeholder="Choose student's class" />
+											<Select.Value placeholder="Choose session" />
 										</Select.Trigger>
 
 										<Select.Content
@@ -51,27 +60,27 @@ function AddScoresPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<Select.Item
-												value="steeze"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Steeze
-											</Select.Item>
-											<Select.Item
-												value="cooking"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Cooking
-											</Select.Item>
+											<List
+												each={schoolSessionQueryResult.data?.data ?? []}
+												render={(item) => (
+													<Select.Item
+														value={item}
+														className="h-12 bg-gray-200 font-medium text-black
+															focus:bg-gray-300 focus:text-black
+															data-[state=checked]:bg-gray-300 md:text-base"
+													>
+														{item}
+													</Select.Item>
+												)}
+											/>
 										</Select.Content>
 									</Select.Root>
 								)}
 							/>
 						</Form.Item>
+
 						<Form.Item<typeof methods.control> name="term" className="w-full gap-4">
-							<Form.Label className="font-medium">Choose class</Form.Label>
+							<Form.Label className="font-medium">Term</Form.Label>
 
 							<Form.Controller
 								render={({ field }) => (
@@ -87,7 +96,7 @@ function AddScoresPage() {
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
-											<Select.Value placeholder="Choose student's class" />
+											<Select.Value placeholder="Choose term" />
 										</Select.Trigger>
 
 										<Select.Content
@@ -97,20 +106,19 @@ function AddScoresPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<Select.Item
-												value="steeze"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Steeze
-											</Select.Item>
-											<Select.Item
-												value="cooking"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-											>
-												Cooking
-											</Select.Item>
+											<List
+												each={schoolTermQueryResult.data?.data ?? []}
+												render={(item) => (
+													<Select.Item
+														value={item}
+														className="h-12 bg-gray-200 font-medium text-black
+															focus:bg-gray-300 focus:text-black
+															data-[state=checked]:bg-gray-300 md:text-base"
+													>
+														{item}
+													</Select.Item>
+												)}
+											/>
 										</Select.Content>
 									</Select.Root>
 								)}
@@ -141,20 +149,18 @@ function AddScoresPage() {
 											viewport: "gap-1",
 										}}
 									>
-										<Select.Item
-											value="steeze"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Steeze
-										</Select.Item>
-										<Select.Item
-											value="cooking"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
-										>
-											Cooking
-										</Select.Item>
+										<List
+											each={classesQueryResult.data?.data ?? []}
+											render={(item) => (
+												<Select.Item
+													value={item.school_class}
+													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+												>
+													{item.school_class}
+												</Select.Item>
+											)}
+										/>
 									</Select.Content>
 								</Select.Root>
 							)}

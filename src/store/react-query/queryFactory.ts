@@ -87,3 +87,29 @@ export const studentsByIDQuery = (studentId: string) => {
 		staleTime: 2 * 60 * 1000,
 	});
 };
+
+export const schoolSessionQuery = () => {
+	return queryOptions({
+		queryFn: () => {
+			return callBackendApi<string[], unknown, "onlySuccess">("/session", {
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["school-session"],
+		staleTime: Infinity,
+	});
+};
+
+export const schoolTermQuery = () => {
+	return queryOptions({
+		queryFn: () => {
+			return callBackendApi<string[], unknown, "onlySuccess">("/term", {
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["school-term"],
+		staleTime: Infinity,
+	});
+};

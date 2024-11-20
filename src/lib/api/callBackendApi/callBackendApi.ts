@@ -42,7 +42,7 @@ type ApiSuccessResponse<TData> = UnmaskType<{
 }>;
 
 type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
-	errors?: TErrorData & { message?: string };
+	errors?: Record<string, string> & TErrorData & { message?: string };
 	message: string;
 	status: "error";
 }>;

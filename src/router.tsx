@@ -83,6 +83,12 @@ const routes = createRoutesFromElements(
 				/>
 			</Route>
 		</Route>
+
+		<Route path="/admin" Component={lazy(() => import("./pages/admin/layout"))}>
+			<Route path="register" Component={lazy(() => import("./pages/admin/register/page"))} />
+
+			<Route path="verify" Component={lazy(() => import("./pages/admin/verify/page"))} />
+		</Route>
 	</Route>
 );
 
