@@ -1,4 +1,5 @@
 /* eslint-disable perfectionist/sort-object-types */
+import type { InputScoresResponse } from "@/lib/api/callBackendApi";
 import type { Prettify } from "@zayne-labs/toolkit/type-helpers";
 import { type StateCreator, create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -17,17 +18,17 @@ export type StepTwoData = {
 	postal_code: number | null;
 };
 
-export type FormStore = {
+export type RegisterFormStore = {
 	formStepData: Prettify<StepOneData & StepTwoData>;
 
 	actions: {
 		resetFormStore: () => void;
 
-		updateFormData: (updatedFormData: Partial<FormStore["formStepData"]>) => void;
+		updateFormData: (updatedFormData: Partial<RegisterFormStore["formStepData"]>) => void;
 	};
 };
 
-const initialFormState = {
+const initialRegisterFormState = {
 	formStepData: {
 		address: "",
 		email: "",
@@ -37,26 +38,60 @@ const initialFormState = {
 		postal_code: null,
 		state: "",
 	},
-} satisfies Omit<FormStore, "actions">;
+} satisfies Omit<RegisterFormStore, "actions">;
 
-const stateObjectFn: StateCreator<FormStore> = (set, get) => ({
-	...initialFormState,
+const registerStateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
+	...initialRegisterFormState,
 
 	actions: {
-		resetFormStore: () => set(initialFormState),
+		resetFormStore: () => set(initialRegisterFormState),
 
 		updateFormData: (updatedFormData) => {
 			const { formStepData } = get();
 
 			set({ formStepData: { ...formStepData, ...updatedFormData } });
 		},
-	} satisfies FormStore["actions"],
+	} satisfies RegisterFormStore["actions"],
 });
 
-export const useFormStore = create(
-	persist(stateObjectFn, {
-		name: "formStepData",
+export const useRegisterFormStore = create(
+	persist(registerStateObjectFn, {
+		name: "registerFormStepData",
 		partialize: ({ formStepData }) => ({ formStepData }),
+		version: 3,
+	})
+);
+
+type InputScoresFormStore = {
+	responseData: InputScoresResponse;
+	actions: {
+		resetFormStore: () => void;
+	};
+};
+
+const initialInputScoreFormState = {
+	responseData: {
+		class_session_term: {
+			school_class: "",
+			session: "",
+			term: "",
+		},
+		students: [],
+	},
+} satisfies Omit<InputScoresFormStore, "actions">;
+
+const inputScoreStateObjectFn: StateCreator<InputScoresFormStore> = (set) => ({
+	...initialInputScoreFormState,
+
+	actions: {
+		resetFormStore: () => set(initialInputScoreFormState),
+	},
+});
+
+export const useInputScoreFormStore = create(
+	persist(inputScoreStateObjectFn, {
+		name: "inputScoreFormResponseData",
+		partialize: ({ responseData }) => ({ responseData }),
 		version: 3,
 	})
 );

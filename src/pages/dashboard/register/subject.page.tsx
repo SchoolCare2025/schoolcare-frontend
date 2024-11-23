@@ -1,7 +1,8 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { type AllSubjects, callBackendApi } from "@/lib/api/callBackendApi";
+import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
+import { allSubjectsQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -24,16 +25,7 @@ function RegisterSubjectPage() {
 
 	const [SubjectList] = getElementList("base");
 
-	const subjectQueryResult = useQuery({
-		queryFn: () => {
-			return callBackendApi<AllSubjects, unknown, "onlySuccess">("/main-subject", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
-		queryKey: ["subjects"],
-		staleTime: Infinity,
-	});
+	const subjectQueryResult = useQuery(allSubjectsQuery());
 
 	const onSubmit = async (data: RegisterSubjectFormData) => {
 		await callBackendApi("/school/subjects", {
@@ -78,8 +70,7 @@ function RegisterSubjectPage() {
 
 									<Select.Content
 										classNames={{
-											base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-											backdrop-blur-lg`,
+											base: "bg-white/90 p-0 backdrop-blur-lg",
 											viewport: "gap-1",
 										}}
 									>

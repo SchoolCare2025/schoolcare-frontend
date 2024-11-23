@@ -1,4 +1,5 @@
-import { type CallApiConfig, type SuccessContext, createFetchClient } from "@zayne-labs/callapi";
+import { type SuccessContext, createFetchClient } from "@zayne-labs/callapi";
+import type { CallApiConfigWithRequiredURL } from "@zayne-labs/callapi/withConfig";
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
 import { toast } from "sonner";
 import { includeAuthToRequest } from "./utils/includeAuthToRequest";
@@ -47,22 +48,17 @@ type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
 	status: "error";
 }>;
 
-type Params<TData, TError, TResultMode extends CallApiConfig["resultMode"]> = Parameters<
-	typeof fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
->;
-
 const callBackendApi = <
 	TData = unknown,
 	TError = unknown,
-	TResultMode extends CallApiConfig["resultMode"] = CallApiConfig["resultMode"],
+	TResultMode extends
+		CallApiConfigWithRequiredURL["resultMode"] = CallApiConfigWithRequiredURL["resultMode"],
 >(
-	...args: Params<TData, TError, TResultMode>
+	...args: Parameters<
+		typeof fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
+	>
 ) => {
-	const callApiResult = fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>(
-		...args
-	);
-
-	return callApiResult;
+	return fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>(...args);
 };
 
 export { callBackendApi };

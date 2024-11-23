@@ -78,16 +78,22 @@ const routes = createRoutesFromElements(
 					Component={lazy(() => import("./pages/dashboard/students/view-single.page"))}
 				/>
 				<Route
-					path="students/add-scores"
-					Component={lazy(() => import("./pages/dashboard/students/add-scores.page"))}
+					path="students/input-scores"
+					Component={lazy(() => import("./pages/dashboard/students/input-scores/page"))}
+				/>
+				<Route
+					path="students/input-scores/table"
+					Component={lazy(() => import("./pages/dashboard/students/input-scores/table.page"))}
+				/>
+				<Route
+					path="students/input-scores/upload"
+					Component={lazy(() => import("./pages/dashboard/students/input-scores/upload.page"))}
 				/>
 			</Route>
 		</Route>
 
 		<Route path="/admin" Component={lazy(() => import("./pages/admin/layout"))}>
 			<Route path="register" Component={lazy(() => import("./pages/admin/register/page"))} />
-
-			<Route path="verify" Component={lazy(() => import("./pages/admin/verify/page"))} />
 		</Route>
 	</Route>
 );

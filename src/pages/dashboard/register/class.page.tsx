@@ -76,8 +76,7 @@ function RegisterClassPage() {
 
 									<Select.Content
 										classNames={{
-											base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-											backdrop-blur-lg`,
+											base: "bg-white/90 p-0 backdrop-blur-lg",
 											viewport: "gap-1",
 										}}
 									>

@@ -3,7 +3,7 @@ import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { type LGA, type State, callNigeriaApi } from "@/lib/api/callNigeriaApi";
 import { cnMerge } from "@/lib/utils/cn";
-import { type StepTwoData, useFormStore } from "@/store/formStore";
+import { type StepTwoData, useRegisterFormStore } from "@/store/formStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -26,7 +26,7 @@ function AddressPage() {
 	const {
 		actions: { resetFormStore, updateFormData },
 		formStepData,
-	} = useFormStore((state) => state);
+	} = useRegisterFormStore((state) => state);
 
 	const methods = useForm({
 		defaultValues: formStepData,
@@ -99,8 +99,7 @@ function AddressPage() {
 
 									<Select.Content
 										classNames={{
-											base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-											backdrop-blur-lg`,
+											base: "bg-white/90 p-0 backdrop-blur-lg",
 											viewport: "gap-1",
 										}}
 									>
@@ -151,8 +150,7 @@ function AddressPage() {
 
 									<Select.Content
 										classNames={{
-											base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-											backdrop-blur-lg`,
+											base: "bg-white/90 p-0 backdrop-blur-lg",
 											viewport: "gap-1",
 										}}
 									>
@@ -200,8 +198,7 @@ function AddressPage() {
 
 										<Select.Content
 											classNames={{
-												base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-												backdrop-blur-lg`,
+												base: "bg-white/90 p-0 backdrop-blur-lg",
 												viewport: "gap-1",
 											}}
 										>

@@ -1,5 +1,6 @@
 import {
 	type AllClasses,
+	type AllSubjects,
 	type ClassesData,
 	type StudentsByClassOrID,
 	callBackendApi,
@@ -39,6 +40,19 @@ export const classesQuery = () => {
 			});
 		},
 		queryKey: ["class-grades"],
+		staleTime: Infinity,
+	});
+};
+
+export const allSubjectsQuery = () => {
+	return queryOptions({
+		queryFn: () => {
+			return callBackendApi<AllSubjects, unknown, "onlySuccess">("/main-subject", {
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["subjects"],
 		staleTime: Infinity,
 	});
 };
@@ -110,6 +124,23 @@ export const schoolTermQuery = () => {
 			});
 		},
 		queryKey: ["school-term"],
+		staleTime: Infinity,
+	});
+};
+
+export const schoolSubjectsQuery = (school: string) => {
+	return queryOptions({
+		enabled: Boolean(school),
+		queryFn: () => {
+			return callBackendApi<Array<{ subject: string }>, unknown, "onlySuccess">("/school/subjects", {
+				query: {
+					school,
+				},
+				resultMode: "onlySuccess",
+				throwOnError: true,
+			});
+		},
+		queryKey: ["school-subjects", school],
 		staleTime: Infinity,
 	});
 };

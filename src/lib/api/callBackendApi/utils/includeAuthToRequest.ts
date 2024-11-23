@@ -27,7 +27,7 @@ const includeAuthToRequest = async (ctx: RequestContext) => {
 		throw new Error(message);
 	}
 
-	if (!ctx.request.url?.endsWith("/check-user-session") && !ctx.options.meta?.skipSessionCheck) {
+	if (!ctx.request.fullURL?.endsWith("/check-user-session") && !ctx.options.meta?.skipSessionCheck) {
 		// TODO - Figure out a way to make a callApi refetch just like react query
 		await useQueryClientStore.getState().queryClient.refetchQueries({
 			queryKey: ["session"],

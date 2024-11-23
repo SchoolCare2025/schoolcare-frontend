@@ -54,8 +54,8 @@ function TableHead(props: InferProps<HTMLTableCellElement>) {
 	return (
 		<th
 			className={cnMerge(
-				`h-12 px-4 text-left align-middle font-medium text-shadcn-muted-foreground
-				[&:has([role=checkbox])]:pr-0`,
+				`h-10 px-2 text-left align-middle font-medium text-shadcn-muted-foreground
+				[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]`,
 				className
 			)}
 			{...restOfProps}
@@ -66,10 +66,15 @@ function TableHead(props: InferProps<HTMLTableCellElement>) {
 function TableCell(props: InferProps<HTMLTableCellElement>) {
 	const { className, ...restOfProps } = props;
 
-	<td
-		className={cnMerge("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
-		{...restOfProps}
-	/>;
+	return (
+		<td
+			className={cnMerge(
+				"p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+				className
+			)}
+			{...restOfProps}
+		/>
+	);
 }
 
 function TableCaption(props: InferProps<HTMLTableCaptionElement>) {

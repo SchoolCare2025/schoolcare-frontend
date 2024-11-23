@@ -1,17 +1,33 @@
 import { getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
+import { type InputScoresResponse, callBackendApi } from "@/lib/api/callBackendApi";
+import { useInputScoreFormStore } from "@/store/formStore";
 import { classesQuery, schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import Main from "../_components/Main";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+import Main from "../../_components/Main";
+
+const AddScoresSchema = z.object({
+	school_class: z.string().min(1, "Class is required"),
+	session: z.string().min(1, "Session is required"),
+	term: z.string().min(1, "Term is required"),
+});
+
+type AddScoresFormData = z.infer<typeof AddScoresSchema>;
 
 function AddScoresPage() {
-	const methods = useForm({
+	const navigate = useNavigate();
+
+	const methods = useForm<AddScoresFormData>({
 		defaultValues: {
-			class: "",
+			school_class: "",
 			session: "",
 			term: "",
 		},
+		resolver: zodResolver(AddScoresSchema),
 	});
 
 	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
@@ -19,6 +35,20 @@ function AddScoresPage() {
 	const classesQueryResult = useQuery(classesQuery());
 
 	const [List] = getElementList("base");
+
+	const onSubmit = async (data: AddScoresFormData) => {
+		await callBackendApi<InputScoresResponse>("/school/results/get-class-session-term", {
+			body: data,
+			method: "POST",
+
+			onSuccess: (ctx) => {
+				if (!ctx.data.data) return;
+
+				useInputScoreFormStore.setState({ responseData: ctx.data.data });
+				navigate("/dashboard/students/input-scores/table");
+			},
+		});
+	};
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -30,7 +60,7 @@ function AddScoresPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit((data) => console.info(data))(event)}
+					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<div className="flex gap-[70px]">
 						<Form.Item<typeof methods.control> name="session" className="w-full gap-4">
@@ -55,8 +85,7 @@ function AddScoresPage() {
 
 										<Select.Content
 											classNames={{
-												base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-												backdrop-blur-lg`,
+												base: "bg-white/90 p-0 backdrop-blur-lg",
 												viewport: "gap-1",
 											}}
 										>
@@ -101,8 +130,7 @@ function AddScoresPage() {
 
 										<Select.Content
 											classNames={{
-												base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-												backdrop-blur-lg`,
+												base: "bg-white/90 p-0 backdrop-blur-lg",
 												viewport: "gap-1",
 											}}
 										>
@@ -126,7 +154,7 @@ function AddScoresPage() {
 						</Form.Item>
 					</div>
 
-					<Form.Item<typeof methods.control> name="class" className="w-full gap-4">
+					<Form.Item<typeof methods.control> name="school_class" className="w-full gap-4">
 						<Form.Label className="font-medium">Choose class</Form.Label>
 
 						<Form.Controller
@@ -144,8 +172,7 @@ function AddScoresPage() {
 
 									<Select.Content
 										classNames={{
-											base: `border-medinfo-primary-main border-[1.4px] bg-white/90 p-0
-											backdrop-blur-lg`,
+											base: "bg-white/90 p-0 backdrop-blur-lg",
 											viewport: "gap-1",
 										}}
 									>
@@ -153,11 +180,11 @@ function AddScoresPage() {
 											each={classesQueryResult.data?.data ?? []}
 											render={(item) => (
 												<Select.Item
-													value={item.school_class}
+													value={`${item.school_class} ${item.grade}`}
 													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
 														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 												>
-													{item.school_class}
+													{`${item.school_class} ${item.grade}`}
 												</Select.Item>
 											)}
 										/>

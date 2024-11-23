@@ -1,9 +1,11 @@
 import { IconBox } from "@/components/common";
 import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
+import { DropZone } from "@/components/ui/drop-zone";
 import { cnMerge } from "@/lib/utils/cn";
-import { type StepOneData, useFormStore } from "@/store/formStore";
+import { type StepOneData, useRegisterFormStore } from "@/store/formStore";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { MyCustomCss } from "@zayne-labs/toolkit/react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -19,7 +21,7 @@ function PersonalInfoPage() {
 	const {
 		actions: { updateFormData },
 		formStepData,
-	} = useFormStore((state) => state);
+	} = useRegisterFormStore((state) => state);
 
 	const methods = useForm<StepOneData>({
 		defaultValues: formStepData,
@@ -39,14 +41,6 @@ function PersonalInfoPage() {
 			<header>
 				<h1 className="text-[18px] font-bold md:text-[30px]">Register your school</h1>
 				<p className="mt-2 text-[10px] md:text-[18px]">Please fill in the details below</p>
-
-				<span
-					className="relative mt-4 block size-[110px] rounded-full bg-gray-200 md:mt-8 md:size-[200px]"
-				>
-					<button type="button">
-						<EditIcon className="absolute bottom-2 right-3 size-[18px] md:size-[40px]" />
-					</button>
-				</span>
 			</header>
 
 			<section>
@@ -55,6 +49,40 @@ function PersonalInfoPage() {
 					className="mt-3 gap-8 md:gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
+					<Form.Item<typeof methods.control> name="logo">
+						<Form.Controller
+							render={({ field }) => (
+								<DropZone
+									classNames={{ base: "max-w-fit" }}
+									onDrop={({ acceptedFiles }) => field.onChange(acceptedFiles[0])}
+								>
+									{({ acceptedFiles }) => (
+										<span
+											className="relative mt-4 block size-[110px] rounded-full bg-gray-200
+												bg-cover [background-image:var(--image)] md:mt-8 md:size-[200px]"
+											style={
+												{
+													"--image": acceptedFiles[0]
+														? `url(${URL.createObjectURL(acceptedFiles[0])})`
+														: "",
+												} as MyCustomCss
+											}
+										>
+											<button type="button">
+												<EditIcon
+													className={cnMerge(
+														"absolute bottom-2 right-3 size-[18px] md:size-[40px]",
+														acceptedFiles[0] && "[&_path]:stroke-school-blue"
+													)}
+												/>
+											</button>
+										</span>
+									)}
+								</DropZone>
+							)}
+						/>
+					</Form.Item>
+
 					<Form.Item<typeof methods.control> name="name" className="gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">
 							Name of School

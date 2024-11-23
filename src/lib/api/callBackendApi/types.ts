@@ -24,3 +24,20 @@ export type StudentsByClassOrID = {
 	name: string;
 	school_class: string;
 };
+
+export type InputScoresResponse = {
+	class_session_term: {
+		school_class: string;
+		session: string;
+		term: string;
+	};
+	students: Array<{
+		name: string;
+		reg_number: string;
+	}>;
+};
+
+export type SessionData = {
+	email: string;
+	school: string;
+};
