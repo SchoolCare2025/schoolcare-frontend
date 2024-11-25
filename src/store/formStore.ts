@@ -6,7 +6,7 @@ import { persist } from "zustand/middleware";
 
 export type StepOneData = {
 	email: string;
-	logo?: File;
+	logo?: File | null;
 	name: string;
 };
 
@@ -19,10 +19,14 @@ export type StepTwoData = {
 };
 
 export type RegisterFormStore = {
+	logoPreview: string;
+
 	formStepData: Prettify<StepOneData & StepTwoData>;
 
 	actions: {
 		resetFormStore: () => void;
+
+		updateLogoPreview: (logoPreview: string) => void;
 
 		updateFormData: (updatedFormData: Partial<RegisterFormStore["formStepData"]>) => void;
 	};
@@ -33,11 +37,14 @@ const initialRegisterFormState = {
 		address: "",
 		email: "",
 		local_govt: "",
+		logo: null,
 		name: "",
 		nationality: "",
 		postal_code: null,
 		state: "",
 	},
+
+	logoPreview: "",
 } satisfies Omit<RegisterFormStore, "actions">;
 
 const registerStateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
@@ -51,6 +58,8 @@ const registerStateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
 
 			set({ formStepData: { ...formStepData, ...updatedFormData } });
 		},
+
+		updateLogoPreview: (logoPreview) => set({ logoPreview }),
 	} satisfies RegisterFormStore["actions"],
 });
 

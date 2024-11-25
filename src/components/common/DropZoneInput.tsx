@@ -18,7 +18,7 @@ export function DropZoneInput(props: DropZoneInputProps) {
 
 	const existingFiles = toArray(value).filter(Boolean);
 
-	const handleFileUpload: DropZoneProps["onDrop"] = ({ acceptedFiles }) => {
+	const handleFileUpload: DropZoneProps["onUpload"] = ({ acceptedFiles }) => {
 		const newFileState = [...existingFiles, ...acceptedFiles];
 
 		onChange(newFileState.at(-1) as File);
@@ -26,7 +26,7 @@ export function DropZoneInput(props: DropZoneInputProps) {
 
 	return (
 		<DropZone
-			onDrop={handleFileUpload}
+			onUpload={handleFileUpload}
 			classNames={{
 				base: `items-center gap-2 rounded-[8px] border-[3px] border-dashed border-gray-600 px-4
 				py-[60px]`,
@@ -70,7 +70,7 @@ export function DropZoneImagePreview(props: ImagePreviewProps) {
 
 	const handleRemoveImage = (file: File) => () => {
 		const updatedFileState = newFilesArray.filter((item) => {
-			if (item instanceof File && file instanceof File) {
+			if (isFile(item) && isFile(file)) {
 				return item.name !== file.name;
 			}
 
@@ -91,7 +91,7 @@ export function DropZoneImagePreview(props: ImagePreviewProps) {
 			render={(file) => {
 				return (
 					<li
-						key={file instanceof File ? file.name : file}
+						key={isFile(file) ? file.name : file}
 						className={cnMerge(
 							"flex items-center justify-between p-2 text-xs",
 							classNames?.listItem

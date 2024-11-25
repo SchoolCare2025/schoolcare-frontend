@@ -5,6 +5,7 @@ import { DropZone } from "@/components/ui/drop-zone";
 import { cnMerge } from "@/lib/utils/cn";
 import { type StepOneData, useRegisterFormStore } from "@/store/formStore";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { handleImagePreview } from "@zayne-labs/toolkit";
 import type { MyCustomCss } from "@zayne-labs/toolkit/react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +20,9 @@ const PersonalInfoSchema = z.object({
 
 function PersonalInfoPage() {
 	const {
-		actions: { updateFormData },
+		actions: { updateFormData, updateLogoPreview },
 		formStepData,
+		logoPreview,
 	} = useRegisterFormStore((state) => state);
 
 	const methods = useForm<StepOneData>({
@@ -33,7 +35,7 @@ function PersonalInfoPage() {
 	const onSubmit = (data: StepOneData) => {
 		updateFormData(data);
 
-		navigate("/register/address");
+		void navigate("/register/address");
 	};
 
 	return (
@@ -53,26 +55,31 @@ function PersonalInfoPage() {
 						<Form.Controller
 							render={({ field }) => (
 								<DropZone
-									classNames={{ base: "max-w-fit" }}
-									onDrop={({ acceptedFiles }) => field.onChange(acceptedFiles[0])}
+									classNames={{ input: "hidden" }}
+									onUpload={({ acceptedFiles }) => {
+										field.onChange(acceptedFiles[0]);
+
+										handleImagePreview({
+											file: acceptedFiles[0],
+											onSuccess: (ctx) => updateLogoPreview(ctx.result),
+										});
+									}}
 								>
-									{({ acceptedFiles }) => (
+									{({ inputRef }) => (
 										<span
 											className="relative mt-4 block size-[110px] rounded-full bg-gray-200
-												bg-cover [background-image:var(--image)] md:mt-8 md:size-[200px]"
+												bg-cover md:mt-8 md:size-[200px]"
 											style={
 												{
-													"--image": acceptedFiles[0]
-														? `url(${URL.createObjectURL(acceptedFiles[0])})`
-														: "",
+													backgroundImage: logoPreview ? `url(${logoPreview})` : "",
 												} as MyCustomCss
 											}
 										>
-											<button type="button">
+											<button type="button" onClick={() => inputRef.current?.click()}>
 												<EditIcon
 													className={cnMerge(
 														"absolute bottom-2 right-3 size-[18px] md:size-[40px]",
-														acceptedFiles[0] && "[&_path]:stroke-school-blue"
+														logoPreview && "[&_path]:stroke-school-blue"
 													)}
 												/>
 											</button>

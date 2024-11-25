@@ -103,7 +103,7 @@ const browserRouter = createBrowserRouter(routes);
 export function Router() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<RouterProvider future={{ v7_startTransition: true }} router={browserRouter} />
+			<RouterProvider router={browserRouter} />
 			<ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
 		</QueryClientProvider>
 	);

@@ -8,15 +8,19 @@ function RegisterLayout() {
 					md:text-[18px]"
 			>
 				<NavLink
+					onClick={(event) => event.preventDefault()}
 					to="/register/personal-info"
-					className="underline-offset-8 md:underline-offset-[10px] [&.active]:underline"
+					className="pointer-events-none underline-offset-8 md:underline-offset-[10px]
+						[&.active]:underline"
 				>
 					Personal Information
 				</NavLink>
 
 				<NavLink
+					onClick={(event) => event.preventDefault()}
 					to="/register/address"
-					className="underline-offset-8 md:underline-offset-[10px] [&.active]:underline"
+					className="pointer-events-none underline-offset-8 md:underline-offset-[10px]
+						[&.active]:underline"
 				>
 					Address
 				</NavLink>
