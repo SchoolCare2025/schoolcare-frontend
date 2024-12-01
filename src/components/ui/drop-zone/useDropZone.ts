@@ -44,7 +44,7 @@ export type DropZoneProps = {
 export type UseDropZoneProps = DropZoneProps & InputProps;
 
 const useDropZone = (props: UseDropZoneProps) => {
-	const inputRef = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	const {
 		accept,
@@ -58,7 +58,7 @@ const useDropZone = (props: UseDropZoneProps) => {
 		onUpload,
 		onUploadError,
 		onUploadSuccess,
-		ref = inputRef,
+		ref,
 		validationSettings,
 		validator,
 		...restOfInputProps
@@ -124,12 +124,7 @@ const useDropZone = (props: UseDropZoneProps) => {
 		toggleIsDragging(false);
 	};
 
-	const getRenderProps = () =>
-		({
-			acceptedFiles,
-			inputRef: ref as React.RefObject<HTMLInputElement>,
-			isDragging,
-		}) satisfies RenderProps;
+	const getRenderProps = () => ({ acceptedFiles, inputRef, isDragging }) satisfies RenderProps;
 
 	const getChildren = () => (isFunction(children) ? children(getRenderProps()) : children);
 
@@ -144,6 +139,18 @@ const useDropZone = (props: UseDropZoneProps) => {
 		onDrop: handleFileUpload,
 	});
 
+	const refCallback: React.RefCallback<HTMLInputElement> = useCallbackRef((node) => {
+		inputRef.current = node;
+
+		if (!ref) return;
+
+		if (isFunction(ref)) {
+			return ref(node);
+		}
+
+		(ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+	});
+
 	const getInputProps = (): InputProps => ({
 		accept: allowedFileTypes ? allowedFileTypes.join(", ") : accept,
 		className: cnMerge(
@@ -155,7 +162,7 @@ const useDropZone = (props: UseDropZoneProps) => {
 			handleFileUpload(event);
 			onChange?.(event);
 		},
-		ref,
+		ref: refCallback,
 		type: "file",
 		...restOfInputProps,
 	});

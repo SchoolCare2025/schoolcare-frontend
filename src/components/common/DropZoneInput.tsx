@@ -28,16 +28,23 @@ export function DropZoneInput(props: DropZoneInputProps) {
 		<DropZone
 			onUpload={handleFileUpload}
 			classNames={{
-				base: `items-center gap-2 rounded-[8px] border-[3px] border-dashed border-gray-600 px-4
+				base: `w-full items-center gap-2 rounded-[8px] border-[3px] border-dashed border-gray-600 px-4
 				py-[60px]`,
 			}}
 			allowedFileTypes={["text/csv"]}
 			validationSettings={{ maxFileSize: 6 }}
 		>
-			<span className="block shrink-0 md:size-10">
+			;
+			<span
+				className="block shrink-0 md:size-10"
+				aria-flowto={String.raw`<div
+					class="w-full items-center gap-2 rounded-[8px] border-[3px] border-dashed border-gray-600 px-4 py-[60px]"
+				>
+					<div>flow</div>
+				</div>`}
+			>
 				<IconBox icon="solar:file-send-outline" className="size-full" />
 			</span>
-
 			<p>
 				Drag and drop or{" "}
 				<button type="button" className="text-school-blue">
