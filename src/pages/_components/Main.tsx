@@ -4,7 +4,7 @@ function Main(props: React.ComponentPropsWithoutRef<"main">) {
 	const { children, className, ...restOfProps } = props;
 
 	return (
-		<main className={cnMerge("grow", className)} {...restOfProps}>
+		<main className={cnMerge("flex grow flex-col", className)} {...restOfProps}>
 			{children}
 		</main>
 	);

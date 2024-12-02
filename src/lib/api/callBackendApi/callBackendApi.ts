@@ -1,32 +1,39 @@
-import { type CallApiExtraOptions, createFetchClient } from "@zayne-labs/callapi";
+import { type SuccessContext, createFetchClient } from "@zayne-labs/callapi";
+import type { CallApiConfigWithRequiredURL } from "@zayne-labs/callapi/withConfig";
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
 import { toast } from "sonner";
+import { includeAuthToRequest } from "./utils/includeAuthToRequest";
 
-const routesExemptedFromAuthHeader = new Set(["/signin", "/register/personal-info", "/register/address"]);
+/* eslint-disable ts-eslint/consistent-type-definitions */
+
+type GlobalMeta = {
+	skipAuthHeaderAddition?: boolean;
+	skipSessionCheck?: boolean;
+	toast?: {
+		success: boolean;
+	};
+};
+
+declare module "@zayne-labs/callapi" {
+	interface Register {
+		meta: GlobalMeta;
+	}
+}
 
 const fetchClient = createFetchClient({
 	baseURL: "https://srm-api.onrender.com/api",
 
-	onRequest: (ctx) => {
-		const refreshToken = localStorage.getItem("refreshToken");
+	onRequest: (ctx) => includeAuthToRequest(ctx),
 
-		if (!refreshToken) {
-			const message = "Session is unavailable! Redirecting to login...";
+	onSuccess: [
+		(ctx: SuccessContext<{ message: string }>) => {
+			const shouldDisplayToast = !ctx.data.message || !ctx.options.meta?.toast?.success;
 
-			toast.error(message, { duration: 2000 });
+			if (shouldDisplayToast) return;
 
-			throw new Error(message);
-		}
-
-		const accessToken = localStorage.getItem("accessToken");
-
-		const skipAuthHeader =
-			routesExemptedFromAuthHeader.has(window.location.pathname) || ctx.options.meta?.skipAuthHeader;
-
-		if (skipAuthHeader) return;
-
-		ctx.options.auth = accessToken;
-	},
+			toast.success(ctx.data.message);
+		},
+	],
 });
 
 type ApiSuccessResponse<TData> = UnmaskType<{
@@ -36,27 +43,22 @@ type ApiSuccessResponse<TData> = UnmaskType<{
 }>;
 
 type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
-	error?: TErrorData;
+	errors?: Record<string, string> & TErrorData & { message?: string };
 	message: string;
 	status: "error";
 }>;
 
-type Params<TData, TError, TResultMode extends CallApiExtraOptions["resultMode"]> = Parameters<
-	typeof fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
->;
-
 const callBackendApi = <
 	TData = unknown,
 	TError = unknown,
-	TResultMode extends CallApiExtraOptions["resultMode"] = CallApiExtraOptions["resultMode"],
+	TResultMode extends
+		CallApiConfigWithRequiredURL["resultMode"] = CallApiConfigWithRequiredURL["resultMode"],
 >(
-	...args: Params<TData, TError, TResultMode>
+	...args: Parameters<
+		typeof fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
+	>
 ) => {
-	const callApiResult = fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>(
-		...args
-	);
-
-	return callApiResult;
+	return fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>(...args);
 };
 
 export { callBackendApi };

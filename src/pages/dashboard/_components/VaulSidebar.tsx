@@ -11,11 +11,6 @@ const sideBarLinksArray = [
 		link: "/dashboard",
 	},
 	{
-		icon: "streamline:user-add-plus",
-		label: "Register Students",
-		link: "/dashboard/register/student",
-	},
-	{
 		icon: "fluent:document-one-page-add-24-regular",
 		label: "Register Class",
 		link: "/dashboard/register/class",
@@ -25,6 +20,12 @@ const sideBarLinksArray = [
 		label: "Register Subjects",
 		link: "/dashboard/register/subject",
 	},
+	{
+		icon: "streamline:user-add-plus",
+		label: "Register Students",
+		link: "/dashboard/register/student",
+	},
+
 	{
 		icon: "streamline:interface-edit-view-eye-eyeball-open-view",
 		label: "View All Students",
@@ -38,7 +39,7 @@ const sideBarLinksArray = [
 	{
 		icon: "solar:upload-minimalistic-linear",
 		label: "Input Student Scores",
-		link: "/dashboard/students/add-scores",
+		link: "/dashboard/students/input-scores",
 	},
 	{
 		icon: "mage:logout",

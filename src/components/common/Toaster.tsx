@@ -10,10 +10,10 @@ function SonnerToaster(props: ToasterProps) {
 		<Sonner
 			theme={theme as ToasterProps["theme"]}
 			// eslint-disable-next-line tailwindcss/no-custom-classname
-			className="toaster group"
+			className="toaster group max-md:inset-x-0 max-md:flex max-md:w-full max-md:justify-center"
 			richColors={true}
 			position="bottom-right"
-			duration={3000}
+			duration={2000}
 			closeButton={true}
 			pauseWhenPageIsHidden={true}
 			toastOptions={{
@@ -22,7 +22,7 @@ function SonnerToaster(props: ToasterProps) {
 
 					title: "group-[.toaster]:text-base group-[.toaster]:font-bold",
 
-					toast: "group toast p-[20px] max-md:mx-auto max-md:group-[.toaster]:max-w-max group-[.toaster]:shadow-lg",
+					toast: "group toast p-5 max-md:p-4 mx-auto max-md:h-auto max-md:max-w-[284px] group-[.toaster]:shadow-lg",
 				},
 			}}
 			{...props}
