@@ -13,7 +13,7 @@ const Testimonials = () => {
 			>
 				<div className="grid w-full items-center justify-center">
 					<div className="mx-auto h-16 w-16 rounded-full bg-cosWhite">
-						<img src={TestImage1} alt="" className="h-full w-full object-cover rounded-full" />
+						<img src={TestImage1} alt="" className="h-full w-full rounded-full object-cover" />
 					</div>
 					<p className="mt-4 text-center text-cosWhite lg:text-[20px]">
 						I was pleasantly surprised by how easy it is to navigate this platform. The user
@@ -31,7 +31,7 @@ const Testimonials = () => {
 
 				<div className="w-full items-center justify-center">
 					<div className="mx-auto h-16 w-16 grid-cols-1 rounded-full bg-cosWhite">
-						<img src={TestImage2} alt="" className="h-full w-full object-cover rounded-full" />
+						<img src={TestImage2} alt="" className="h-full w-full rounded-full object-cover" />
 					</div>
 					<p className="mt-4 text-center text-cosWhite lg:text-[20px]">
 						This platform has simplified the process of accessing students results online. No more

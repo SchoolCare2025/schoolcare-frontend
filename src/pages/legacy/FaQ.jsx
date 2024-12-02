@@ -38,8 +38,8 @@ const FaQ = () => {
 					</div>
 				</summary>
 				<div className="text-secondary-500 pb-4">
-					schoolcare.com.ng allows students from registered schools to check their results online, both
-					termly results, annual results and entrance exam results with ease.
+					schoolcare.com.ng allows students from registered schools to check their results online,
+					both termly results, annual results and entrance exam results with ease.
 				</div>
 			</details>
 
@@ -73,7 +73,8 @@ const FaQ = () => {
 					</div>
 				</summary>
 				<div className="text-secondary-500 pb-4">
-				We have made the process very easy for you. Simply click on the Register School button to get started.
+					We have made the process very easy for you. Simply click on the Register School button to
+					get started.
 				</div>
 			</details>
 
@@ -107,10 +108,9 @@ const FaQ = () => {
 					</div>
 				</summary>
 				<div className="text-secondary-500 pb-4">
-				Registration and use of SchoolCare are completely FREE.
-				 However, to support additional services such as automatic result 
-				 computation, blog posts and promotions, 
-				and regular system maintenance, a fee is applied per student each term.
+					Registration and use of SchoolCare are completely FREE. However, to support additional
+					services such as automatic result computation, blog posts and promotions, and regular system
+					maintenance, a fee is applied per student each term.
 				</div>
 			</details>
 
@@ -144,9 +144,9 @@ const FaQ = () => {
 					</div>
 				</summary>
 				<div className="text-secondary-500 pb-4">
-				            Yes. 
-									
-							All we need is temporary permission to access your website, and we will make the necessary changes to integrate the Schoolcare system into it.	</div>
+					Yes. All we need is temporary permission to access your website, and we will make the
+					necessary changes to integrate the Schoolcare system into it.{" "}
+				</div>
 			</details>
 
 			<details className="group border-b" open>
@@ -179,9 +179,10 @@ const FaQ = () => {
 					</div>
 				</summary>
 				<div className="text-secondary-500 pb-4">
-				At SchoolCare, we use end-to-end encryption to ensure your data is safe. We also regularly update our backup system to prevent data loss.</div>
+					At SchoolCare, we use end-to-end encryption to ensure your data is safe. We also regularly
+					update our backup system to prevent data loss.
+				</div>
 			</details>
-
 
 			<details className="group border-b" open>
 				<summary
@@ -212,10 +213,11 @@ const FaQ = () => {
 						</svg>
 					</div>
 				</summary>
-				<div className="text-secondary-500 pb-4">It's simple!
-					Kindly fill the result checking form right in the home page and click check result button.  
-					Note: To be able to use schoolcare to access your result, your school must be a verified schoolcare user. 
-					 </div>
+				<div className="text-secondary-500 pb-4">
+					It's simple! Kindly fill the result checking form right in the home page and click check
+					result button. Note: To be able to use schoolcare to access your result, your school must be
+					a verified schoolcare user.
+				</div>
 			</details>
 		</div>
 	);

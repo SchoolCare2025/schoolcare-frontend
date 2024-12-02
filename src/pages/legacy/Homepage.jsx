@@ -16,8 +16,11 @@ const Homepage = () => {
 					<h2 className="text-center text-2xl font-bold lg:text-left lg:text-4xl lg:font-semibold">
 						Universal School Management System
 					</h2>
-					<p className="my-2 text-center text-base lg:text-left lg:text-2xl">Our Universal School Management System helps streamline administrative and academic processes by providing an all-in-one platform that enhances efficient management, reduces paperwork, and simplifies administrative processes for 
-						everyone involved—all within one universal system for FREE!
+					<p className="my-2 text-center text-base lg:text-left lg:text-2xl">
+						Our Universal School Management System helps streamline administrative and academic
+						processes by providing an all-in-one platform that enhances efficient management, reduces
+						paperwork, and simplifies administrative processes for everyone involved—all within one
+						universal system for FREE!
 					</p>
 				</div>
 

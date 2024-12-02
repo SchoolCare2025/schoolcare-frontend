@@ -9,19 +9,24 @@ const AboutUs = ({ className = "my-40" }) => {
 					md:items-center md:justify-center md:gap-9 lg:justify-center sxl:px-9"
 			>
 				<div className="w-[100%] md:mt-5 md:w-[50%] sxl:w-[50%]">
-					<p className="text-xl md:px-2 md:text-base lg:text-[18px] sxl:pr-24 leading-8">
-					Welcome to schoolcare.ng, your all-in-one Universal School Management System designed to streamline both administrative and academic processes. Our platform empowers schools to efficiently organize student databases, compute results in minutes, and monitor academic performance in real-time. We believe in showcasing student potential, enabling them to compete globally with their peers.
-
-                   schoolcare.ng enhances management efficiency, reduces paperwork, and simplifies administrative tasks for everyone involved—all at no cost. 
-
-                   We aim to help schools transition from manual methods of computing student results to an automated system can significantly enhance efficiency and accuracy. 
-
-                   By implementing automation, schools can streamline the process of tracking student performance in real-time, allowing educators to quickly identify areas where students may need additional support or resources.
-
-                   Moreover, this automation can facilitate a more comprehensive view of each student's progress, enabling personalized learning experiences. And with real-time data, teachers can adjust their teaching strategies to better meet the needs of their students.
-
-                  Additionally, by leveraging technology, students can be positioned on a global level. This means they can not only compete with peers locally but also connect with a broader network of learners worldwide. Such exposure can enhance their learning experience and prepare them for a globalized world.
-
+					<p className="text-xl leading-8 md:px-2 md:text-base lg:text-[18px] sxl:pr-24">
+						Welcome to schoolcare.ng, your all-in-one Universal School Management System designed to
+						streamline both administrative and academic processes. Our platform empowers schools to
+						efficiently organize student databases, compute results in minutes, and monitor academic
+						performance in real-time. We believe in showcasing student potential, enabling them to
+						compete globally with their peers. schoolcare.ng enhances management efficiency, reduces
+						paperwork, and simplifies administrative tasks for everyone involved—all at no cost. We
+						aim to help schools transition from manual methods of computing student results to an
+						automated system can significantly enhance efficiency and accuracy. By implementing
+						automation, schools can streamline the process of tracking student performance in
+						real-time, allowing educators to quickly identify areas where students may need
+						additional support or resources. Moreover, this automation can facilitate a more
+						comprehensive view of each student's progress, enabling personalized learning
+						experiences. And with real-time data, teachers can adjust their teaching strategies to
+						better meet the needs of their students. Additionally, by leveraging technology, students
+						can be positioned on a global level. This means they can not only compete with peers
+						locally but also connect with a broader network of learners worldwide. Such exposure can
+						enhance their learning experience and prepare them for a globalized world.
 					</p>
 				</div>
 

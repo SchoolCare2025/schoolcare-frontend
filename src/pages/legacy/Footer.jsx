@@ -9,7 +9,8 @@ const Footer = () => {
 
 				<div className="my-4">
 					<p>
-						Your universal school management system for stress-free operations and enhanced educational management.
+						Your universal school management system for stress-free operations and enhanced
+						educational management.
 					</p>
 				</div>
 				<p>Phone: 09038746894</p>
