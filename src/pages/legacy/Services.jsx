@@ -14,7 +14,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">Free School Management System</p>
 				</div>
 
 				<div
@@ -24,7 +24,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px]">Online Result Checker</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">School Promotional Services</p>
 				</div>
 
 				<div
@@ -44,7 +44,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">Income Generation Options</p>
 				</div>
 
 				<div
@@ -54,7 +54,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">Mobile App Development</p>
 				</div>
 
 				<div
@@ -64,7 +64,7 @@ const Services = () => {
 					<div className="flex h-12 w-12 items-center justify-center rounded-full bg-slitePlink">
 						<i className="ri-school-line text-[36px] md:text-[44px]"></i>
 					</div>
-					<p className="pl-2 text-[20px] md:text-[18px]">School Management System</p>
+					<p className="pl-2 text-[20px] md:text-[18px]">Brand Marketing</p>
 				</div>
 			</div>
 		</div>

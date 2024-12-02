@@ -14,12 +14,10 @@ const Homepage = () => {
 			<div className="lg:mr-10 lg:px-2">
 				<div className="mt-0 grid w-[100%] grid-cols-1 gap-4 text-cosWhite lg:ml-0 lg:mt-8 lg:max-w-2xl">
 					<h2 className="text-center text-2xl font-bold lg:text-left lg:text-4xl lg:font-semibold">
-						School Results and Checker
+						Universal School Management System
 					</h2>
-					<p className="my-2 text-center text-base lg:text-left lg:text-2xl">
-						Get access to all academic results with ease. Whether you're eagerly anticipating your
-						final exam results or need to track your performance throughout the semester, Myschool
-						offers a user-friendly interface that puts all your academic data at your fingertips.
+					<p className="my-2 text-center text-base lg:text-left lg:text-2xl">Our Universal School Management System helps streamline administrative and academic processes by providing an all-in-one platform that enhances efficient management, reduces paperwork, and simplifies administrative processes for 
+						everyone involved—all within one universal system for FREE!
 					</p>
 				</div>
 

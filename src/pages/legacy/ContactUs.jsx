@@ -1,4 +1,4 @@
-import AiImage from "../../../assets/images/AiImage.png";
+import AiImage from "../../assets/images/AiImage.png";
 
 const ContactUs = () => {
 	return (
@@ -10,7 +10,7 @@ const ContactUs = () => {
 					<div className="my-8 flex items-center justify-between rounded-lg border-2 bg-white p-3">
 						<div>
 							<p>You can email us here</p>
-							<p className="font-semibold">schoolregister@gmail.com</p>
+							<p className="font-semibold">schoolcare.office@gmail.com</p> 
 						</div>
 						<i className="ri-arrow-right-line"></i>
 					</div>
@@ -98,7 +98,7 @@ const ContactUs = () => {
 				<div className="my-8 flex items-center justify-between rounded-lg border-2 p-3 px-4">
 					<div>
 						<p>You can email us here</p>
-						<p className="font-semibold">schoolregister@gmail.com</p>
+						<p className="font-semibold">schoolcare.office@gmail.com</p>
 					</div>
 					<i className="ri-arrow-right-line"></i>
 				</div>
@@ -107,9 +107,9 @@ const ContactUs = () => {
 					<div>
 						<p>Give us a call on</p>
 
-						<p className="font-semibold"> +234 9038 7468 94 +234 7025 097 100</p>
+						<p className="font-semibold"> +234 9038 7468 94 </p> 
 					</div>
-					<i className="ri-arrow-right-line"></i>
+					<i className="ri-arrow-right-line"></i> 
 				</div>
 
 				<div className="my-8 flex items-center justify-between rounded-lg border-2 p-3 px-4">
@@ -131,5 +131,4 @@ const ContactUs = () => {
 		</div>
 	);
 };
-
 export default ContactUs;

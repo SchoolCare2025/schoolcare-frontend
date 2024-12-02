@@ -9,12 +9,11 @@ const Footer = () => {
 
 				<div className="my-4">
 					<p>
-						Get access to all academic results with ease. Whether you're eagerly anticipating your
-						final exam results or need to track your performance throughout the semester,
+						Your universal school management system for stress-free operations and enhanced educational management.
 					</p>
 				</div>
 				<p>Phone: 09038746894</p>
-				<p>Email:myskul.email@gmail.com</p>
+				<p>Email:schoolcare.office@gmail.com</p>
 			</div>
 
 			<div className="w-80">
@@ -59,5 +58,4 @@ const Footer = () => {
 		</div>
 	);
 };
-
 export default Footer;

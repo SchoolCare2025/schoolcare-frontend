@@ -1,5 +1,5 @@
-import Schul1 from "../../assets/images/School1.png";
-import Schul2 from "../../assets/images/School2.png";
+import TestImage1 from "../../assets/images/testimonial.png";
+import TestImage2 from "../../assets/images/testimonial.png";
 
 const Testimonials = () => {
 	return (
@@ -13,7 +13,7 @@ const Testimonials = () => {
 			>
 				<div className="grid w-full items-center justify-center">
 					<div className="mx-auto h-16 w-16 rounded-full bg-cosWhite">
-						<img src={Schul1} alt="" className="h-full w-full object-cover" />
+						<img src={TestImage1} alt="" className="h-full w-full object-cover rounded-full" />
 					</div>
 					<p className="mt-4 text-center text-cosWhite lg:text-[20px]">
 						I was pleasantly surprised by how easy it is to navigate this platform. The user
@@ -31,7 +31,7 @@ const Testimonials = () => {
 
 				<div className="w-full items-center justify-center">
 					<div className="mx-auto h-16 w-16 grid-cols-1 rounded-full bg-cosWhite">
-						<img src={Schul2} alt="" className="h-full w-full object-cover" />
+						<img src={TestImage2} alt="" className="h-full w-full object-cover rounded-full" />
 					</div>
 					<p className="mt-4 text-center text-cosWhite lg:text-[20px]">
 						This platform has simplified the process of accessing students results online. No more

@@ -11,27 +11,27 @@ const FeaturedSchools = () => {
 
 			<div className="mt-10 flex items-center justify-center sm:px-4">
 				<div className="max-w-lg">
-					<img className="w-40" src={School1} alt="" />
+					<img className="sm:w-18 lg:w-22" src={School1} alt="" />
 				</div>
 
 				<div className="max-w-lg">
-					<img className="w-40" src={School3} alt="" />
+					<img className="sm:w-18 lg:w-22" src={School3} alt="" />
 				</div>
 
 				<div className="max-w-lg">
-					<img className="w-40" src={School5} alt="" />
+					<img className="sm:w-18 lg:w-22" src={School5} alt="" />
 				</div>
 
 				<div className="max-w-lg">
-					<img className="w-40" src={School4} alt="" />
+					<img className="sm:w-18 lg:w-22" src={School4} alt="" />
 				</div>
 
 				<div className="max-w-lg">
-					<img className="w-40" src={School1} alt="" />
+					<img className="sm:w-18 lg:w-22" src={School1} alt="" />
 				</div>
 
 				<div className="max-w-md">
-					<img className="w-40" src={School2} alt="" />
+					<img className="sm:w-18 lg:w-22" src={School2} alt="" />
 				</div>
 			</div>
 		</div>

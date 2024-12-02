@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { twJoin } from "tailwind-merge";
-import Logo from "../../assets/images/myskulLogo.png";
+import Logo from "../../assets/images/logoTrans.png";
 
 const cnJoin = (...classNames) => twJoin(clsx(classNames));
 
@@ -21,7 +21,7 @@ const Navbar = () => {
 	return (
 		<nav className="flex items-center justify-between bg-cosWhite px-12 py-4">
 			<Link to="/" className="block w-[6%] sxl:w-[5%]">
-				<img src={Logo} alt="Logo" />
+				<img src={Logo} alt="Logo" className="w-[12vh]"/>
 			</Link>
 			<ul className="hidden text-base font-normal lg:flex lg:gap-12 lg:text-lg xl:gap-14 xl:text-xl">
 				<li className="hover:text-cosBlue">
