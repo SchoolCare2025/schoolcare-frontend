@@ -1,10 +1,12 @@
-import { type SuccessContext, createFetchClient } from "@zayne-labs/callapi";
-import type { CallApiConfigWithRequiredURL } from "@zayne-labs/callapi/withConfig";
+import {
+	type CallApiConfig,
+	type SuccessContext,
+	createFetchClient,
+	defineCallApiPlugin,
+} from "@zayne-labs/callapi";
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
 import { toast } from "sonner";
-import { includeAuthToRequest } from "./utils/includeAuthToRequest";
-
-/* eslint-disable ts-eslint/consistent-type-definitions */
+import { authHeaderInclusionPlugin } from "./utils/authHeaderInclusionPlugin";
 
 type GlobalMeta = {
 	skipAuthHeaderAddition?: boolean;
@@ -15,25 +17,31 @@ type GlobalMeta = {
 };
 
 declare module "@zayne-labs/callapi" {
+	// eslint-disable-next-line ts-eslint/consistent-type-definitions
 	interface Register {
 		meta: GlobalMeta;
 	}
 }
 
-const fetchClient = createFetchClient({
-	baseURL: "https://srm-api.onrender.com/api",
+const successToastPlugin = defineCallApiPlugin(() => ({
+	/* eslint-disable perfectionist/sort-objects */
+	id: "successToast",
+	name: "successToastPlugin",
 
-	onRequest: (ctx) => includeAuthToRequest(ctx),
-
-	onSuccess: [
-		(ctx: SuccessContext<{ message: string }>) => {
+	hooks: {
+		onSuccess: (ctx: SuccessContext<{ message: string }>) => {
 			const shouldDisplayToast = !ctx.data.message || !ctx.options.meta?.toast?.success;
 
 			if (shouldDisplayToast) return;
 
 			toast.success(ctx.data.message);
 		},
-	],
+	},
+}));
+
+const fetchClient = createFetchClient({
+	baseURL: "https://srm-api.onrender.com/api",
+	plugins: [authHeaderInclusionPlugin(), successToastPlugin()],
 });
 
 type ApiSuccessResponse<TData> = UnmaskType<{
@@ -51,8 +59,7 @@ type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
 const callBackendApi = <
 	TData = unknown,
 	TError = unknown,
-	TResultMode extends
-		CallApiConfigWithRequiredURL["resultMode"] = CallApiConfigWithRequiredURL["resultMode"],
+	TResultMode extends CallApiConfig["resultMode"] = CallApiConfig["resultMode"],
 >(
 	...args: Parameters<
 		typeof fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
