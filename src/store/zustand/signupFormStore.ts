@@ -1,5 +1,4 @@
 /* eslint-disable perfectionist/sort-object-types */
-import type { InputScoresResponse } from "@/lib/api/callBackendApi";
 import type { Prettify } from "@zayne-labs/toolkit/type-helpers";
 import { type StateCreator, create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -47,7 +46,7 @@ const initialRegisterFormState = {
 	logoPreview: "",
 } satisfies Omit<RegisterFormStore, "actions">;
 
-const registerStateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
+const stateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
 	...initialRegisterFormState,
 
 	actions: {
@@ -64,43 +63,9 @@ const registerStateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
 });
 
 export const useRegisterFormStore = create(
-	persist(registerStateObjectFn, {
+	persist(stateObjectFn, {
 		name: "registerFormStepData",
 		partialize: ({ formStepData }) => ({ formStepData }),
-		version: 3,
-	})
-);
-
-type InputScoresFormStore = {
-	responseData: InputScoresResponse;
-	actions: {
-		resetFormStore: () => void;
-	};
-};
-
-const initialInputScoreFormState = {
-	responseData: {
-		class_session_term: {
-			school_class: "",
-			session: "",
-			term: "",
-		},
-		students: [],
-	},
-} satisfies Omit<InputScoresFormStore, "actions">;
-
-const inputScoreStateObjectFn: StateCreator<InputScoresFormStore> = (set) => ({
-	...initialInputScoreFormState,
-
-	actions: {
-		resetFormStore: () => set(initialInputScoreFormState),
-	},
-});
-
-export const useInputScoreFormStore = create(
-	persist(inputScoreStateObjectFn, {
-		name: "inputScoreFormResponseData",
-		partialize: ({ responseData }) => ({ responseData }),
 		version: 3,
 	})
 );

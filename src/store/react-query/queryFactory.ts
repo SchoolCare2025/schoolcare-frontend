@@ -39,7 +39,7 @@ export const classesQuery = () => {
 				throwOnError: true,
 			});
 		},
-		queryKey: ["class-grades"],
+		queryKey: ["school-classes"],
 		staleTime: Infinity,
 	});
 };
@@ -60,7 +60,7 @@ export const allSubjectsQuery = () => {
 export const studentsByClassQuery = (studentClass: string) => {
 	return queryOptions({
 		queryFn: () => {
-			return callBackendApi<StudentsByClassOrID, unknown, "onlySuccess">(
+			return callBackendApi<{ students: StudentsByClassOrID[] }, unknown, "onlySuccess">(
 				"/school/students/class-students",
 				{
 					meta: {
@@ -98,7 +98,7 @@ export const studentsByIDQuery = (studentId: string) => {
 			});
 		},
 		queryKey: ["students", studentId],
-		staleTime: 2 * 60 * 1000,
+		staleTime: Infinity,
 	});
 };
 

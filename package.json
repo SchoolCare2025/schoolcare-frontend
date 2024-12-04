@@ -10,7 +10,7 @@
 		"check-types": "tsc --pretty -p tsconfig.json",
 		"dev": "vite",
 		"lint:check-types": "tsc --pretty -p tsconfig.json",
-		"lint:eslint": "eslint --cache --max-warnings 0 --report-unused-disable-directives",
+		"lint:eslint": "eslint . --cache --max-warnings 0 --report-unused-disable-directives",
 		"lint:format": "prettier --cache --write .",
 		"prepare": "husky",
 		"preview": "vite preview"

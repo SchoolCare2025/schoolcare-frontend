@@ -3,7 +3,7 @@ import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
 import { DropZone } from "@/components/ui/drop-zone";
 import { cnMerge } from "@/lib/utils/cn";
-import { type StepOneData, useRegisterFormStore } from "@/store/formStore";
+import { type StepOneData, useRegisterFormStore } from "@/store/zustand/signupFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleImagePreview } from "@zayne-labs/toolkit";
 import type { MyCustomCss } from "@zayne-labs/toolkit/react";

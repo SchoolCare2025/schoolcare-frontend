@@ -30,9 +30,9 @@ const successToastPlugin = defineCallApiPlugin(() => ({
 
 	hooks: {
 		onSuccess: (ctx: SuccessContext<{ message: string }>) => {
-			const shouldDisplayToast = !ctx.data.message || !ctx.options.meta?.toast?.success;
+			const shouldDisplayToast = Boolean(ctx.data.message) && ctx.options.meta?.toast?.success;
 
-			if (shouldDisplayToast) return;
+			if (!shouldDisplayToast) return;
 
 			toast.success(ctx.data.message);
 		},

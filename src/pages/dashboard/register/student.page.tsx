@@ -2,11 +2,11 @@ import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
-import { classesQuery } from "@/store/react-query/queryFactory";
+import { useQueryClientStore } from "@/store/react-query/queryClientStore";
+import { classesQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
 import Main from "../_components/Main";
 
@@ -43,6 +43,11 @@ function RegisterStudentPage() {
 				...restOfData,
 				name: `${surname} ${other_names}`,
 			},
+			meta: {
+				toast: {
+					success: true,
+				},
+			},
 			method: "POST",
 
 			onResponseError: (ctx) => {
@@ -51,8 +56,11 @@ function RegisterStudentPage() {
 				});
 			},
 
-			onSuccess: (ctx) => {
-				toast.success(ctx.data.message);
+			onSuccess: () => {
+				void useQueryClientStore.getState().queryClient.invalidateQueries({
+					queryKey: studentsByClassQuery(data.school_class).queryKey,
+				});
+
 				methods.reset();
 			},
 		});

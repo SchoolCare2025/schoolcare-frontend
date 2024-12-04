@@ -2,12 +2,13 @@ import { getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { classesQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
+import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import Main from "../_components/Main";
+import Main from "../../_components/Main";
 
 const ViewAllStudentsSchema = z.object({
 	class: z.string().min(1, "Class is required"),
@@ -15,7 +16,7 @@ const ViewAllStudentsSchema = z.object({
 
 type ViewAllStudentsFormData = z.infer<typeof ViewAllStudentsSchema>;
 
-function ViewAllStudentsPage() {
+export function ViewAllStudentsPage() {
 	const navigate = useNavigate();
 
 	const methods = useForm<ViewAllStudentsFormData>({
@@ -30,10 +31,11 @@ function ViewAllStudentsPage() {
 	const [ClassesList] = getElementList("base");
 
 	const onSubmit = async (data: ViewAllStudentsFormData) => {
+		useViewStudentFormStore.setState({ studentClass: data.class });
+
 		await useQueryClientStore.getState().queryClient.prefetchQuery(studentsByClassQuery(data.class));
 
-		// FIXME - Redirect to table
-		navigate("/dashboard");
+		void navigate("./table");
 	};
 
 	return (

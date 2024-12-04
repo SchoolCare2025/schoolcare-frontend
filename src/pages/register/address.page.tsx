@@ -3,7 +3,7 @@ import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { type LGA, type State, callNigeriaApi } from "@/lib/api/callNigeriaApi";
 import { cnMerge } from "@/lib/utils/cn";
-import { type StepTwoData, useRegisterFormStore } from "@/store/formStore";
+import { type StepTwoData, useRegisterFormStore } from "@/store/zustand/signupFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";

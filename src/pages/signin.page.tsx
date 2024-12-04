@@ -41,7 +41,7 @@ function SigninPage() {
 
 				toast.success(ctx.data.message, { duration: 1000 });
 
-				navigate("/dashboard");
+				void navigate("/dashboard");
 			},
 		});
 	};

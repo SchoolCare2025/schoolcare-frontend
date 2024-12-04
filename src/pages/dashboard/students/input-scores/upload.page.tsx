@@ -1,8 +1,8 @@
 import { DropZoneImagePreview, DropZoneInput, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import { useInputScoreFormStore } from "@/store/formStore";
 import { schoolSubjectsQuery, sessionQuery } from "@/store/react-query/queryFactory";
+import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -61,7 +61,7 @@ function UploadPage() {
 
 			onSuccess: () => {
 				resetFormStore();
-				navigate("/dashboard");
+				void navigate("/dashboard");
 			},
 		});
 	};

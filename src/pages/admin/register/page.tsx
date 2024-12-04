@@ -39,7 +39,7 @@ function AdminRegisterPage() {
 			},
 
 			onSuccess: () => {
-				navigate("/signin");
+				void navigate("/signin");
 			},
 		});
 	};

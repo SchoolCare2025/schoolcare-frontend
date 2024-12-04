@@ -1,11 +1,12 @@
 import { Form } from "@/components/ui";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { studentsByIDQuery } from "@/store/react-query/queryFactory";
+import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import Main from "../_components/Main";
+import Main from "../../_components/Main";
 
 const ViewSingleStudentsSchema = z.object({
 	reg_number: z.string().min(1, "Reg number is required"),
@@ -24,10 +25,12 @@ function ViewSingleStudent() {
 	});
 
 	const onSubmit = async (data: ViewSingleStudentsFormData) => {
+		useViewStudentFormStore.setState({ studentId: data.reg_number });
+
 		await useQueryClientStore.getState().queryClient.prefetchQuery(studentsByIDQuery(data.reg_number));
 
 		// FIXME - Redirect to table
-		navigate("/dashboard");
+		void navigate("./table");
 	};
 
 	return (
@@ -46,7 +49,6 @@ function ViewSingleStudent() {
 						<Form.Label className="font-medium">Reg. Number*</Form.Label>
 
 						<Form.Input
-							type="number"
 							placeholder="Enter student's reg number"
 							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
 								text-[14px] md:text-base"

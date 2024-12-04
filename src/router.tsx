@@ -71,11 +71,19 @@ const routes = createRoutesFromElements(
 
 				<Route
 					path="students/view-all"
-					Component={lazy(() => import("./pages/dashboard/students/view-all.page"))}
+					Component={lazy(() => import("./pages/dashboard/students/view-all/page"))}
+				/>
+				<Route
+					path="students/view-all/table"
+					Component={lazy(() => import("./pages/dashboard/students/view-all/table.page"))}
 				/>
 				<Route
 					path="students/view-single"
-					Component={lazy(() => import("./pages/dashboard/students/view-single.page"))}
+					Component={lazy(() => import("./pages/dashboard/students/view-single/page"))}
+				/>
+				<Route
+					path="students/view-single/table"
+					Component={lazy(() => import("./pages/dashboard/students/view-single/table.page"))}
 				/>
 				<Route
 					path="students/input-scores"

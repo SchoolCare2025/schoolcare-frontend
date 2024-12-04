@@ -1,5 +1,5 @@
 import { Table } from "@/components/ui";
-import { useInputScoreFormStore } from "@/store/formStore";
+import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
 import { defineEnum } from "@zayne-labs/toolkit/type-helpers";
 import { download, generateCsv, mkConfig } from "export-to-csv";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ function TablePage() {
 
 		download(csvConfig)(csv);
 
-		navigate("/dashboard/students/input-scores/upload");
+		void navigate("/dashboard/students/input-scores/upload");
 	};
 
 	return (
@@ -69,13 +69,11 @@ function TablePage() {
 									[&:not(:last-child)_td]:border-b-[hsl(0,0%,3%)] [&_td:not(:last-child)]:border-r
 									[&_td:not(:last-child)]:border-r-[hsl(0,0%,3%)]"
 							>
-								<Table.Cell className="h-[56px] px-7">{student.Name}</Table.Cell>
-								<Table.Cell className="h-[56px] px-7">{student["Reg. No"]}</Table.Cell>
-								<Table.Cell className="h-[56px] px-7">{student["First CA"]}</Table.Cell>
-								<Table.Cell className="h-[56px] px-7">{student["Second CA"]}</Table.Cell>
-								<Table.Cell className="h-[56px] px-7">{student.Exam}</Table.Cell>
-								<Table.Cell className="h-[56px] px-7">{student.Total}</Table.Cell>
-								<Table.Cell className="h-[56px] px-7">{student.Grade}</Table.Cell>
+								{columns.map((column) => (
+									<Table.Cell key={column} className="h-[56px] px-7">
+										{student[column]}
+									</Table.Cell>
+								))}
 							</Table.Row>
 						))}
 					</Table.Body>

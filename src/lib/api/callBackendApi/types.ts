@@ -22,7 +22,7 @@ export type AllSubjects = string[];
 export type StudentsByClassOrID = {
 	gender: string;
 	name: string;
-	school_class: string;
+	registration_number: string;
 };
 
 export type InputScoresResponse = {
