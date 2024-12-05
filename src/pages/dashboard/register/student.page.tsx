@@ -3,7 +3,10 @@ import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
-import { classesQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
+import {
+	allClassesInSchoolQuery,
+	allStudentsInSchoolQuery
+} from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -33,7 +36,7 @@ function RegisterStudentPage() {
 
 	const [ClassesList] = getElementList("base");
 
-	const classesQueryResult = useQuery(classesQuery());
+	const classesQueryResult = useQuery(allClassesInSchoolQuery());
 
 	const onSubmit = async (data: RegisterStudentFormData) => {
 		const { other_names, surname, ...restOfData } = data;
@@ -57,11 +60,11 @@ function RegisterStudentPage() {
 			},
 
 			onSuccess: () => {
-				void useQueryClientStore.getState().queryClient.invalidateQueries({
-					queryKey: studentsByClassQuery(data.school_class).queryKey,
-				});
-
 				methods.reset();
+
+				void useQueryClientStore
+					.getState()
+					.queryClient.invalidateQueries({ queryKey: allStudentsInSchoolQuery().queryKey });
 			},
 		});
 	};

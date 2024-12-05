@@ -1,4 +1,6 @@
+import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
+import { cnMerge } from "@/lib/utils/cn";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { studentsByIDQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
@@ -69,11 +71,19 @@ function ViewSingleStudent() {
 						</button>
 
 						<button
+							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 							type="submit"
-							className="max-w-fit rounded-[10px] bg-school-blue px-8 py-4 text-[18px] font-bold
-								text-white"
+							className={cnMerge(
+								`flex w-[150.5px] items-center justify-center rounded-[10px] bg-school-blue px-8
+								py-4 text-[18px] font-bold text-white`,
+								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+							)}
 						>
-							Continue
+							{methods.formState.isSubmitting ? (
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							) : (
+								"Continue"
+							)}
 						</button>
 					</div>
 				</Form.Root>

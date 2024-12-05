@@ -19,6 +19,10 @@ export type AllClasses = string[];
 
 export type AllSubjects = string[];
 
+export type AllSubjectsInSchool = Array<{ subject: string }>;
+
+export type AllStudentsInSchool = Array<{ gender: string; name: string; school_class: string }>;
+
 export type StudentsByClassOrID = {
 	gender: string;
 	name: string;

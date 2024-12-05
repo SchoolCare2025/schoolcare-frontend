@@ -1,27 +1,43 @@
 import { getElementList } from "@/components/common";
 import { BookIcon, SchoolIcon, StudentIcon } from "@/components/icons";
+import {
+	allClassesInSchoolQuery,
+	allStudentsInSchoolQuery,
+	allSubjectsInSchoolQuery,
+	sessionQuery,
+} from "@/store/react-query/queryFactory";
+import NumberFlow from "@number-flow/react";
+import { useQuery } from "@tanstack/react-query";
 import Main from "./_components/Main";
 
-const infoCardArray = [
-	{
-		description: "5,542",
-		icon: <StudentIcon />,
-		title: "Registered Students",
-	},
-	{
-		description: "45",
-		icon: <BookIcon />,
-		title: "Number of Subjects",
-	},
-	{
-		description: "63",
-		icon: <SchoolIcon />,
-		title: "Numbers of Classes",
-	},
-];
-
 function DashboardPage() {
+	const sessionQueryResult = useQuery(sessionQuery());
+
+	const allStudentsInSchoolQueryResult = useQuery(allStudentsInSchoolQuery());
+	const allSubjectsInSchoolQueryResult = useQuery(
+		allSubjectsInSchoolQuery(sessionQueryResult.data?.data?.school)
+	);
+	const allClassesInSchoolQueryResult = useQuery(allClassesInSchoolQuery());
+
 	const [InfoCardList] = getElementList();
+
+	const infoCardArray = [
+		{
+			description: allStudentsInSchoolQueryResult.data?.data?.length ?? 0,
+			icon: <StudentIcon />,
+			title: "Registered Students",
+		},
+		{
+			description: allSubjectsInSchoolQueryResult.data?.data?.length ?? 0,
+			icon: <BookIcon />,
+			title: "Number of Subjects",
+		},
+		{
+			description: allClassesInSchoolQueryResult.data?.data?.length ?? 0,
+			icon: <SchoolIcon />,
+			title: "Numbers of Classes",
+		},
+	];
 
 	return (
 		<Main className="w-full px-10 py-4">
@@ -43,7 +59,9 @@ function DashboardPage() {
 
 						<h3 className="mt-1 text-[12px] font-medium">{item.title}</h3>
 
-						<h4 className="text-[24px] font-bold">{item.description}</h4>
+						<h4 className="h-[36px] text-[24px] font-bold">
+							<NumberFlow value={item.description} />
+						</h4>
 
 						<div className="mt-3 h-4 w-full bg-school-blue" />
 					</article>

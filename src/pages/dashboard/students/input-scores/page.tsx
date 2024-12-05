@@ -1,7 +1,11 @@
 import { getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { type InputScoresResponse, callBackendApi } from "@/lib/api/callBackendApi";
-import { classesQuery, schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
+import {
+	allClassesInSchoolQuery,
+	schoolSessionQuery,
+	schoolTermQuery,
+} from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -32,7 +36,7 @@ function AddScoresPage() {
 
 	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
 	const schoolTermQueryResult = useQuery(schoolTermQuery());
-	const classesQueryResult = useQuery(classesQuery());
+	const classesQueryResult = useQuery(allClassesInSchoolQuery());
 
 	const [List] = getElementList("base");
 

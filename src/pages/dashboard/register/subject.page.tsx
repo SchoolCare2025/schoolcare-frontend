@@ -2,7 +2,8 @@ import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
-import { allSubjectsQuery } from "@/store/react-query/queryFactory";
+import { useQueryClientStore } from "@/store/react-query/queryClientStore";
+import { allSubjectsInSchoolQuery, allSubjectsQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -35,6 +36,14 @@ function RegisterSubjectPage() {
 			onResponseError: (ctx) => {
 				methods.setError("root.serverError", {
 					message: ctx.error.errorData.errors?.message,
+				});
+			},
+
+			onSuccess: () => {
+				methods.reset();
+
+				void useQueryClientStore.getState().queryClient.invalidateQueries({
+					queryKey: allSubjectsInSchoolQuery().queryKey,
 				});
 			},
 		});
@@ -97,11 +106,12 @@ function RegisterSubjectPage() {
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
 					<button
-						disabled={methods.formState.isSubmitting}
+						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						type="submit"
 						className={cnMerge(
 							`mt-5 flex h-[56px] w-full max-w-[150px] items-center justify-center self-end
-							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`
+							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`,
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>
 						{methods.formState.isSubmitting ? (

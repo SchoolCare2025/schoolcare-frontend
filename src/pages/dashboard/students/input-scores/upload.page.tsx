@@ -1,7 +1,7 @@
 import { DropZoneImagePreview, DropZoneInput, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import { schoolSubjectsQuery, sessionQuery } from "@/store/react-query/queryFactory";
+import { allSubjectsInSchoolQuery, sessionQuery } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -31,7 +31,7 @@ function UploadPage() {
 	const sessionQueryResult = useQuery(sessionQuery());
 
 	const schoolSubjectsQueryResult = useQuery(
-		schoolSubjectsQuery(sessionQueryResult.data?.data?.school ?? "")
+		allSubjectsInSchoolQuery(sessionQueryResult.data?.data?.school)
 	);
 
 	const [SubjectList] = getElementList("base");

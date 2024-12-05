@@ -11,6 +11,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.9.1
         version: 3.9.1(react-hook-form@7.53.2(react@19.0.0-rc-bf7e210c-20241017))
+      '@number-flow/react':
+        specifier: ^0.4.2
+        version: 0.4.2(react-dom@19.0.0-rc-bf7e210c-20241017(react@19.0.0-rc-bf7e210c-20241017))(react@19.0.0-rc-bf7e210c-20241017)
       '@radix-ui/react-focus-scope':
         specifier: ^1.1.0
         version: 1.1.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@19.0.0-rc-bf7e210c-20241017(react@19.0.0-rc-bf7e210c-20241017))(react@19.0.0-rc-bf7e210c-20241017)
@@ -21,8 +24,8 @@ importers:
         specifier: ^5.62.2
         version: 5.62.2(react@19.0.0-rc-bf7e210c-20241017)
       '@zayne-labs/callapi':
-        specifier: 1.0.0-rc.44
-        version: 1.0.0-rc.44
+        specifier: 1.0.0-rc.48
+        version: 1.0.0-rc.48
       '@zayne-labs/toolkit':
         specifier: 0.7.0
         version: 0.7.0(@types/react@18.3.12)(react@19.0.0-rc-bf7e210c-20241017)(zustand@5.0.1(@types/react@18.3.12)(react@19.0.0-rc-bf7e210c-20241017))
@@ -581,6 +584,12 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
+
+  '@number-flow/react@0.4.2':
+    resolution: {integrity: sha512-lCAkLuK/3+Nlhb/oy1tpRnadp1vvfc/cWTtWUL9hMksHsJOGh+1T5Y/dyeQhyCD0heaWTjNYWX2ndBKLJwuC0A==}
+    peerDependencies:
+      react: ^18 || ^19.0.0-rc-915b914b3a-20240515
+      react-dom: ^18
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -1202,8 +1211,8 @@ packages:
     peerDependencies:
       vite: ^4 || ^5 || ^6
 
-  '@zayne-labs/callapi@1.0.0-rc.44':
-    resolution: {integrity: sha512-Dy5PVb9PhFVyg6KI5I80kGKiwI5tHY/HbN/SLyOUpB3t8kvqQRpikPmKFx5znKOF2RgdLqUYY1cjTgW9nnyE/g==}
+  '@zayne-labs/callapi@1.0.0-rc.48':
+    resolution: {integrity: sha512-gdKQP4F09U2GWVSmSa/nvEzpin6D1e3EDViNdRVTbaS+upw6mq1qtcWnhAFnhnNyLGNPVxZPbWZjedZ41FgvJg==}
     engines: {node: '>=v18.17.0'}
 
   '@zayne-labs/eslint-config@0.2.12':
@@ -1759,6 +1768,9 @@ packages:
       jiti:
         optional: true
 
+  esm-env@1.2.1:
+    resolution: {integrity: sha512-U9JedYYjCnadUlXk7e1Kr+aENQhtUaoaV9+gZm1T8LC/YBAPJx3NSPIAurFOC0U5vrdSevnUJS2/wUVxGwPhng==}
+
   espree@10.3.0:
     resolution: {integrity: sha512-0QYC8b24HWY8zjRnDTL6RiHfDbAWn63qb4LMj1Z4b076A4une81+z03Kg7l7mn/48PUTqoLptSXez8oknU8Clg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -2186,6 +2198,9 @@ packages:
   npm-run-path@5.3.0:
     resolution: {integrity: sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
+  number-flow@0.4.1:
+    resolution: {integrity: sha512-d39o1tWL7mMMBLuOfHswtQ8r0fj9eUcatb4G1Spdv0ZO/I30kg9DBdSzSPjNG6hrj1slQ6KA3TQXk1RmOq4qOA==}
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -3456,6 +3471,13 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
+  '@number-flow/react@0.4.2(react-dom@19.0.0-rc-bf7e210c-20241017(react@19.0.0-rc-bf7e210c-20241017))(react@19.0.0-rc-bf7e210c-20241017)':
+    dependencies:
+      esm-env: 1.2.1
+      number-flow: 0.4.1
+      react: 19.0.0-rc-bf7e210c-20241017
+      react-dom: 19.0.0-rc-bf7e210c-20241017(react@19.0.0-rc-bf7e210c-20241017)
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -4019,7 +4041,7 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@zayne-labs/callapi@1.0.0-rc.44': {}
+  '@zayne-labs/callapi@1.0.0-rc.48': {}
 
   '@zayne-labs/eslint-config@0.2.12(@eslint-react/eslint-plugin@1.17.3(eslint@9.16.0(jiti@1.21.6))(typescript@5.7.2))(@tanstack/eslint-plugin-query@5.62.1(eslint@9.16.0(jiti@1.21.6))(typescript@5.7.2))(@typescript-eslint/parser@8.15.0(eslint@9.16.0(jiti@1.21.6))(typescript@5.7.2))(eslint-plugin-react-hooks@5.0.0(eslint@9.16.0(jiti@1.21.6)))(eslint-plugin-react-refresh@0.4.16(eslint@9.16.0(jiti@1.21.6)))(eslint-plugin-tailwindcss@3.17.5(tailwindcss@3.4.16))(eslint@9.16.0(jiti@1.21.6))(typescript@5.7.2)':
     dependencies:
@@ -4678,6 +4700,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  esm-env@1.2.1: {}
+
   espree@10.3.0:
     dependencies:
       acorn: 8.14.0
@@ -5075,6 +5099,10 @@ snapshots:
   npm-run-path@5.3.0:
     dependencies:
       path-key: 4.0.0
+
+  number-flow@0.4.1:
+    dependencies:
+      esm-env: 1.2.1
 
   object-assign@4.1.1: {}
 

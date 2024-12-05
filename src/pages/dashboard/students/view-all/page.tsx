@@ -1,7 +1,8 @@
-import { getElementList } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
+import { cnMerge } from "@/lib/utils/cn";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
-import { classesQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
+import { allClassesInSchoolQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -26,7 +27,7 @@ export function ViewAllStudentsPage() {
 		resolver: zodResolver(ViewAllStudentsSchema),
 	});
 
-	const classesQueryResult = useQuery(classesQuery());
+	const classesQueryResult = useQuery(allClassesInSchoolQuery());
 
 	const [ClassesList] = getElementList("base");
 
@@ -100,11 +101,19 @@ export function ViewAllStudentsPage() {
 						</button>
 
 						<button
+							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 							type="submit"
-							className="max-w-fit rounded-[10px] bg-school-blue px-8 py-4 text-[18px] font-bold
-								text-white"
+							className={cnMerge(
+								`flex w-[150.5px] items-center justify-center rounded-[10px] bg-school-blue px-8
+								py-4 text-[18px] font-bold text-white`,
+								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+							)}
 						>
-							Continue
+							{methods.formState.isSubmitting ? (
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							) : (
+								"Continue"
+							)}
 						</button>
 					</div>
 				</Form.Root>
