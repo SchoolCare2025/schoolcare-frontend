@@ -4,7 +4,9 @@ import { callBackendApi } from "../callBackendApi";
 import type { SessionData } from "../types";
 
 const checkUserSession = async () => {
-	const { data, error } = await callBackendApi<SessionData>("/check-user-session");
+	const { data, error } = await callBackendApi<SessionData>("/check-user-session", {
+		dedupeStrategy: "defer",
+	});
 
 	if (isHTTPError(error)) {
 		await refreshUserSession(error);
