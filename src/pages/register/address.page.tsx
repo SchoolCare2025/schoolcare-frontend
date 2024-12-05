@@ -1,11 +1,10 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import { type LGA, type State, callNigeriaApi } from "@/lib/api/callNigeriaApi";
+import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
 import { cnMerge } from "@/lib/utils/cn";
 import { type StepTwoData, useRegisterFormStore } from "@/store/zustand/signupFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -49,20 +48,9 @@ function AddressPage() {
 		});
 	};
 
-	const stateQueryResult = useQuery({
-		queryFn: () => callNigeriaApi<State[]>("/states"),
-		queryKey: ["states"],
-	});
-
 	const state = methods.watch("state");
 
-	const stateCode = stateQueryResult.data?.find((item) => item.name === state)?.state_code ?? "";
-
-	const LGAQueryResult = useQuery({
-		enabled: Boolean(stateCode),
-		queryFn: () => callNigeriaApi<LGA[]>("/:state/lgas", { params: { state: stateCode } }),
-		queryKey: ["lgas", stateCode],
-	});
+	const LGAResult = nigeriaStatesAndLGA.find((item) => item.state === state)?.lgas ?? [];
 
 	const [StateList] = getElementList("base");
 
@@ -155,15 +143,15 @@ function AddressPage() {
 										}}
 									>
 										<StateList
-											each={stateQueryResult.data ?? []}
+											each={nigeriaStatesAndLGA}
 											render={(item) => (
 												<Select.Item
-													key={item.name}
-													value={item.name}
+													key={item.state}
+													value={item.state}
 													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
 														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 												>
-													{item.name}
+													{item.state}
 												</Select.Item>
 											)}
 										/>
@@ -203,16 +191,16 @@ function AddressPage() {
 											}}
 										>
 											<StateList
-												each={LGAQueryResult.data ?? []}
+												each={LGAResult}
 												render={(item) => (
 													<Select.Item
-														key={item.name}
-														value={item.name}
+														key={item}
+														value={item}
 														className="h-12 bg-gray-200 font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
-														{item.name}
+														{item}
 													</Select.Item>
 												)}
 											/>
