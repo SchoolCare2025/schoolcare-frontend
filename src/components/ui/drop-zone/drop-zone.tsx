@@ -1,5 +1,4 @@
 import { toast } from "sonner";
-import { InputPrimitive } from "../form";
 import { type UseDropZoneProps, useDropZone } from "./useDropZone";
 
 function DropZone(props: UseDropZoneProps) {
@@ -11,7 +10,7 @@ function DropZone(props: UseDropZoneProps) {
 
 	return (
 		<div {...api.getRootProps()}>
-			<InputPrimitive {...api.getInputProps()} />
+			<input {...api.getInputProps()} />
 
 			{api.getChildren()}
 		</div>

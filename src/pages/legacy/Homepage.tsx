@@ -1,4 +1,20 @@
+/* eslint-disable tailwindcss/no-unnecessary-arbitrary-value */
+import { callBackendApi } from "@/lib/api/callBackendApi";
 import bgImage from "../../assets/images/collegeStd.jpg";
+
+const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+	event.preventDefault();
+
+	const formData = Object.fromEntries(new FormData(event.currentTarget));
+
+	await callBackendApi("/check-result", {
+		body: formData,
+		meta: {
+			skipAuthHeaderAddition: true,
+		},
+		method: "POST",
+	});
+};
 
 const Homepage = () => {
 	const backgroundImageStyle = {
@@ -8,11 +24,11 @@ const Homepage = () => {
 
 	return (
 		<div
-			className="w-full px-2 pb-[9rem] pt-[4rem] lg:grid lg:grid-cols-2 lg:gap-8 lg:px-14"
+			className="w-full px-2 pb-36 pt-16 lg:grid lg:grid-cols-2 lg:gap-8 lg:px-14"
 			style={backgroundImageStyle}
 		>
 			<div className="lg:mr-10 lg:px-2">
-				<div className="mt-0 grid w-[100%] grid-cols-1 gap-4 text-cosWhite lg:ml-0 lg:mt-8 lg:max-w-2xl">
+				<div className="mt-0 grid w-full grid-cols-1 gap-4 text-cosWhite lg:ml-0 lg:mt-8 lg:max-w-2xl">
 					<h2 className="text-center text-2xl font-bold lg:text-left lg:text-4xl lg:font-semibold">
 						Universal School Management System
 					</h2>
@@ -20,15 +36,19 @@ const Homepage = () => {
 						Our Universal School Management System helps streamline administrative and academic
 						processes by providing an all-in-one platform that enhances efficient management, reduces
 						paperwork, and simplifies administrative processes for everyone involved—all within one
-						universal system for FREE!
+						universal system for FREE!
 					</p>
 				</div>
 
 				<div className="flex items-center justify-center gap-4 pt-12 lg:flex lg:justify-start">
-					<button className="hidden rounded-lg bg-cosBlue px-3 py-2 text-xl text-textWhite lg:block">
+					<button
+						type="button"
+						className="hidden rounded-lg bg-cosBlue px-3 py-2 text-xl text-textWhite lg:block"
+					>
 						Get Started
 					</button>
 					<button
+						type="button"
 						className="rounded-lg border-2 border-cosBlue bg-cosBlue bg-none px-3 py-2 font-semibold
 							text-textWhite"
 					>
@@ -38,7 +58,7 @@ const Homepage = () => {
 			</div>
 
 			<form
-				action=""
+				onSubmit={(event) => void onSubmit(event)}
 				className="absolute mx-auto mt-6 w-full max-w-[376px] rounded-[12px] bg-cosWhite p-5 shadow-2xl
 					max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[2%] lg:top-[23%] lg:mx-10 lg:mt-20
 					lg:max-w-[405px] lg:scale-[1.12] lg:px-4 lg:pb-12 xl:right-[8%]"
@@ -51,6 +71,7 @@ const Homepage = () => {
 						<p className="mb-1 text-lg">School ID*</p>
 						<input
 							type="text"
+							name="school_ID"
 							placeholder="eg:12567"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
 						/>
@@ -59,6 +80,7 @@ const Homepage = () => {
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Reg Number</p>
 						<input
+							name="student_reg_number"
 							type="text"
 							placeholder="eg:20246..."
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
@@ -68,6 +90,7 @@ const Homepage = () => {
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Class Grade*</p>
 						<select
+							name="class_grade"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
 						>
 							<option value="" className="outline-none">
@@ -100,8 +123,8 @@ const Homepage = () => {
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Result Session*</p>
 						<select
+							name="session"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
-							placeholder="choose session"
 						>
 							<option value="">Choose Session</option>
 							<option value="2024/2025">2024/2025</option>
@@ -112,6 +135,7 @@ const Homepage = () => {
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Result Term</p>
 						<select
+							name="term"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
 						>
 							<option value="">Choose Term</option>
@@ -125,6 +149,7 @@ const Homepage = () => {
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Card Pin</p>
 						<input
+							name="scratch_card_code"
 							type="text"
 							placeholder="Enter card pin"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
@@ -134,6 +159,7 @@ const Homepage = () => {
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Card Serial No.</p>
 						<input
+							name="serial_number"
 							type="text"
 							placeholder="eg: 12348..."
 							className="w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
@@ -141,12 +167,15 @@ const Homepage = () => {
 					</div>
 				</div>
 
-				<button className="mt-4 rounded-lg bg-resultBtn px-2 py-2 text-sm font-semibold text-textWhite">
+				<button
+					type="submit"
+					className="mt-4 rounded-lg bg-resultBtn p-2 text-sm font-semibold text-textWhite"
+				>
 					Check Result
 				</button>
 			</form>
 
-			<div></div>
+			<div />
 		</div>
 	);
 };

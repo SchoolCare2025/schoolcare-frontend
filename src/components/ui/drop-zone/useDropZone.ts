@@ -1,9 +1,8 @@
 import { cnMerge } from "@/lib/utils/cn";
 import { type FileValidationOptions, handleFileValidation } from "@zayne-labs/toolkit";
-import { useCallbackRef, useToggle } from "@zayne-labs/toolkit/react";
+import { type InferProps, useCallbackRef, useToggle } from "@zayne-labs/toolkit/react";
 import { isFunction, isObject } from "@zayne-labs/toolkit/type-helpers";
 import { type ChangeEvent, type DragEvent, useRef, useState } from "react";
-import { toast } from "sonner";
 
 type RenderProps = {
 	acceptedFiles: File[];
@@ -11,9 +10,9 @@ type RenderProps = {
 	isDragging: boolean;
 };
 
-type InputProps = Omit<React.ComponentPropsWithRef<"input">, "children" | "onDrop"> & {
+type InputProps = Omit<InferProps<"input">, "children"> & {
 	children?: React.ReactNode | ((props: RenderProps) => React.ReactNode);
-	classNames?: { activeDragState?: string; base?: string; input?: string };
+	classNames?: { activeDrag?: string; base?: string; input?: string };
 };
 
 export type DropZoneProps = {
@@ -23,7 +22,7 @@ export type DropZoneProps = {
 
 	existingFiles?: File[];
 
-	onUpload: (details: {
+	onUpload?: (details: {
 		acceptedFiles: File[];
 		event: ChangeEvent<HTMLInputElement> | DragEvent<HTMLDivElement>;
 	}) => void;
@@ -44,7 +43,7 @@ export type DropZoneProps = {
 export type UseDropZoneProps = DropZoneProps & InputProps;
 
 const useDropZone = (props: UseDropZoneProps) => {
-	const inputRef = useRef<HTMLInputElement | null>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const {
 		accept,
@@ -58,7 +57,7 @@ const useDropZone = (props: UseDropZoneProps) => {
 		onUpload,
 		onUploadError,
 		onUploadSuccess,
-		ref,
+		ref = inputRef,
 		validationSettings,
 		validator,
 		...restOfInputProps
@@ -81,9 +80,7 @@ const useDropZone = (props: UseDropZoneProps) => {
 					: (event as ChangeEvent<HTMLInputElement>).target.files;
 
 			if (fileList === null) {
-				toast.error("Error", {
-					description: "No file selected",
-				});
+				console.warn("No file selected");
 
 				return;
 			}
@@ -110,7 +107,7 @@ const useDropZone = (props: UseDropZoneProps) => {
 
 			setAcceptedFiles(validFilesArray);
 
-			onUpload({ acceptedFiles: validFilesArray, event });
+			onUpload?.({ acceptedFiles: validFilesArray, event });
 		}
 	);
 
@@ -124,34 +121,28 @@ const useDropZone = (props: UseDropZoneProps) => {
 		toggleIsDragging(false);
 	};
 
-	const getRenderProps = () => ({ acceptedFiles, inputRef, isDragging }) satisfies RenderProps;
+	const getRenderProps = () =>
+		({
+			acceptedFiles,
+			inputRef: ref as React.RefObject<HTMLInputElement>,
+			isDragging,
+		}) satisfies RenderProps;
 
 	const getChildren = () => (isFunction(children) ? children(getRenderProps()) : children);
 
 	const getRootProps = () => ({
 		className: cnMerge(
-			"relative isolate flex w-fit flex-col",
+			"relative isolate flex w-full flex-col",
 			classNames?.base,
-			isDragging && ["opacity-60", classNames?.activeDragState]
+			isDragging && ["opacity-60", classNames?.activeDrag]
 		),
+		"data-drag-active": isDragging,
 		onDragLeave: handleDragLeave,
 		onDragOver: handleDragOver,
 		onDrop: handleFileUpload,
 	});
 
-	const refCallback: React.RefCallback<HTMLInputElement> = useCallbackRef((node) => {
-		inputRef.current = node;
-
-		if (!ref) return;
-
-		if (isFunction(ref)) {
-			return ref(node);
-		}
-
-		(ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
-	});
-
-	const getInputProps = (): InputProps => ({
+	const getInputProps = (): Omit<InputProps, "children"> => ({
 		accept: allowedFileTypes ? allowedFileTypes.join(", ") : accept,
 		className: cnMerge(
 			"absolute inset-0 z-[100] cursor-pointer opacity-0",
@@ -162,7 +153,7 @@ const useDropZone = (props: UseDropZoneProps) => {
 			handleFileUpload(event);
 			onChange?.(event);
 		},
-		ref: refCallback,
+		ref,
 		type: "file",
 		...restOfInputProps,
 	});
