@@ -1,27 +1,33 @@
 /* eslint-disable tailwindcss/no-unnecessary-arbitrary-value */
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import bgImage from "../../assets/images/collegeStd.jpg";
-
-const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-	event.preventDefault();
-
-	const formData = Object.fromEntries(new FormData(event.currentTarget));
-
-	await callBackendApi("/check-result", {
-		body: formData,
-		meta: {
-			skipAuthHeaderAddition: true,
-		},
-		method: "POST",
-	});
-};
+import { useStorageState } from "@zayne-labs/toolkit/react";
+import { useState } from "react";
 
 const Homepage = () => {
+	const [state, setState] = useState("scratch-card-result", null);
+
 	const backgroundImageStyle = {
 		backgroundImage: `linear-gradient(to right bottom, rgba(2, 141, 219, 0.9), rgba(2, 141, 219, 0.7)), url('${bgImage}')`,
 		backgroundSize: "cover",
 	};
 
+	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
+		const formObject = Object.fromEntries(new FormData(event.currentTarget));
+
+		await callBackendApi("/check-result", {
+			body: formObject,
+			meta: {
+				skipAuthHeaderAddition: true,
+			},
+			method: "POST",
+			onSuccess: (ctx) => {
+				se;
+			},
+		});
+	};
 	return (
 		<div
 			className="w-full px-2 pb-36 pt-16 lg:grid lg:grid-cols-2 lg:gap-8 lg:px-14"
@@ -89,26 +95,10 @@ const Homepage = () => {
 
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Class Grade*</p>
-						<select
-							name="class_grade"
+						<input
+							name="school_class"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
-						>
-							<option value="" className="outline-none">
-								Choose Class
-							</option>
-							<option value="Primary One">Primary One</option>
-							<option value="Primary One">Primary Two</option>
-							<option value="Primary One">Primary Three</option>
-							<option value="Primary One">Primary Four</option>
-							<option value="Primary One">Primary Five</option>
-							<option value="Primary One">Primary Six</option>
-							<option value="Primary One">JSS1</option>
-							<option value="Primary One">JSS2</option>
-							<option value="Primary One">JSS3</option>
-							<option value="Primary One">SS1</option>
-							<option value="Primary One">SS2</option>
-							<option value="Primary One">SS3</option>
-						</select>
+						/>
 					</div>
 
 					<div className="flex flex-col">
@@ -122,28 +112,18 @@ const Homepage = () => {
 
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Result Session*</p>
-						<select
+						<input
 							name="session"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
-						>
-							<option value="">Choose Session</option>
-							<option value="2024/2025">2024/2025</option>
-							<option value="2025/2026">2025/2026</option>
-						</select>
+						/>
 					</div>
 
 					<div className="flex flex-col">
 						<p className="mb-1 text-lg">Result Term</p>
-						<select
+						<input
 							name="term"
 							className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
-						>
-							<option value="">Choose Term</option>
-							<option value="First">First Term</option>
-							<option value="Second">Second Term</option>
-							<option value="Second">Third Term</option>
-							<option value="Second">Cumulative Result</option>
-						</select>
+						/>
 					</div>
 
 					<div className="flex flex-col">
