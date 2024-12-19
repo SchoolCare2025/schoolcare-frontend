@@ -45,3 +45,14 @@ export type SessionData = {
 	email: string;
 	school: string;
 };
+
+export type CheckResultResponse = {
+	class_session_term: number;
+	exam: number;
+	first_ca: number;
+	grade: string;
+	second_ca: number;
+	student: number;
+	subject: number;
+	total: number;
+};

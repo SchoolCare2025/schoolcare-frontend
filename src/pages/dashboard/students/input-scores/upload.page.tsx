@@ -1,6 +1,7 @@
-import { DropZoneImagePreview, DropZoneInput, getElementList } from "@/components/common";
+import { DropZoneImagePreview, DropZoneInput, IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
+import { cnMerge } from "@/lib/utils/cn";
 import { allSubjectsInSchoolQuery, sessionQuery } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -137,11 +138,19 @@ function UploadPage() {
 					</Form.Item>
 
 					<button
+						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						type="submit"
-						className="max-w-fit self-end rounded-[10px] bg-school-blue px-8 py-4 text-[18px]
-							font-bold text-white"
+						className={cnMerge(
+							`flex w-[120.5px] items-center justify-center self-end rounded-[10px] bg-school-blue
+							px-8 py-4 text-[18px] font-bold text-white`,
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+						)}
 					>
-						Submit
+						{methods.formState.isSubmitting ? (
+							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+						) : (
+							"Submit"
+						)}
 					</button>
 				</Form.Root>
 			</section>

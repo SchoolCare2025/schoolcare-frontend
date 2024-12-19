@@ -1,5 +1,6 @@
 import { getElementList } from "@/components/common";
 import { BookIcon, SchoolIcon, StudentIcon } from "@/components/icons";
+import { Card } from "@/components/ui";
 import {
 	allClassesInSchoolQuery,
 	allStudentsInSchoolQuery,
@@ -8,6 +9,7 @@ import {
 } from "@/store/react-query/queryFactory";
 import NumberFlow from "@number-flow/react";
 import { useQuery } from "@tanstack/react-query";
+import GenderRatioChart from "./_components/GenderRatioChart";
 import Main from "./_components/Main";
 
 function DashboardPage() {
@@ -40,33 +42,40 @@ function DashboardPage() {
 	];
 
 	return (
-		<Main className="w-full px-10 py-4">
+		<Main className="flex w-full flex-col gap-[22px] px-10 py-4">
 			<InfoCardList
 				as="section"
 				className="flex gap-10"
 				each={infoCardArray}
 				render={(item) => (
-					<article
-						key={item.title}
-						className="flex w-full flex-col items-center rounded-[30px] bg-white py-8"
-					>
-						<span
-							className="flex size-[70px] items-center justify-center rounded-full border-[3px]
-								border-school-blue"
-						>
-							{item.icon}
-						</span>
+					<Card.Root key={item.title} className="w-[calc(100%/3)] rounded-[30px] bg-white py-8">
+						<Card.Header className="flex flex-col items-center">
+							<span
+								className="flex size-[70px] items-center justify-center rounded-full border-[3px]
+									border-school-blue"
+							>
+								{item.icon}
+							</span>
 
-						<h3 className="mt-1 text-[12px] font-medium">{item.title}</h3>
+							<Card.Title className="mt-1 text-[12px] font-medium">{item.title}</Card.Title>
 
-						<h4 className="h-[36px] text-[24px] font-bold">
-							<NumberFlow value={item.description} />
-						</h4>
+							<Card.Description className="h-[36px] text-[24px] font-bold text-black">
+								<NumberFlow value={item.description} />
+							</Card.Description>
+						</Card.Header>
 
-						<div className="mt-3 h-4 w-full bg-school-blue" />
-					</article>
+						<Card.Footer className="mt-3 h-4 w-full bg-school-blue" />
+					</Card.Root>
 				)}
 			/>
+
+			<div className="flex">
+				<section />
+
+				<section className="ml-auto w-[calc(100%/3.3)]">
+					<GenderRatioChart />
+				</section>
+			</div>
 		</Main>
 	);
 }

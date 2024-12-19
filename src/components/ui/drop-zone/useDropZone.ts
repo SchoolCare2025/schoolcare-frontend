@@ -1,6 +1,7 @@
 import { cnMerge } from "@/lib/utils/cn";
-import { type FileValidationOptions, handleFileValidation } from "@zayne-labs/toolkit";
-import { type InferProps, useCallbackRef, useToggle } from "@zayne-labs/toolkit/react";
+import { type FileValidationOptions, handleFileValidation } from "@zayne-labs/toolkit/core";
+import { useCallbackRef, useToggle } from "@zayne-labs/toolkit/react";
+import type { InferProps } from "@zayne-labs/toolkit/react/utils";
 import { isFunction, isObject } from "@zayne-labs/toolkit/type-helpers";
 import { type ChangeEvent, type DragEvent, useRef, useState } from "react";
 

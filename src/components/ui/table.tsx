@@ -1,5 +1,5 @@
 import { cnMerge } from "@/lib/utils/cn";
-import type { InferProps } from "@zayne-labs/toolkit/react";
+import type { InferProps } from "@zayne-labs/toolkit/react/utils";
 
 function TableRoot(props: InferProps<"table">) {
 	const { className, ...restOfProps } = props;

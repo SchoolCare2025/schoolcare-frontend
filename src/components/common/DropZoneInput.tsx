@@ -1,5 +1,5 @@
 import { cnMerge } from "@/lib/utils/cn";
-import { toArray } from "@zayne-labs/toolkit";
+import { toArray } from "@zayne-labs/toolkit/core";
 import { isFile, isString } from "@zayne-labs/toolkit/type-helpers";
 import { DropZone, type DropZoneProps } from "../ui/drop-zone";
 import { getElementList } from "./For";

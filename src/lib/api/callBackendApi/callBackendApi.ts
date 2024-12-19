@@ -1,12 +1,7 @@
-import {
-	type CallApiConfig,
-	type SuccessContext,
-	createFetchClient,
-	defineCallApiPlugin,
-} from "@zayne-labs/callapi";
+import { type CallApiConfig, createFetchClient } from "@zayne-labs/callapi";
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
-import { toast } from "sonner";
-import { authHeaderInclusionPlugin } from "./utils/authHeaderInclusionPlugin";
+import { toastPlugin } from "./plugins";
+import { authHeaderInclusionPlugin } from "./plugins/authHeaderInclusionPlugin";
 
 type GlobalMeta = {
 	skipAuthHeaderAddition?: boolean;
@@ -23,25 +18,9 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const successToastPlugin = defineCallApiPlugin(() => ({
-	/* eslint-disable perfectionist/sort-objects */
-	id: "successToast",
-	name: "successToastPlugin",
-
-	hooks: {
-		onSuccess: (ctx: SuccessContext<{ message: string }>) => {
-			const shouldDisplayToast = Boolean(ctx.data.message) && ctx.options.meta?.toast?.success;
-
-			if (!shouldDisplayToast) return;
-
-			toast.success(ctx.data.message);
-		},
-	},
-}));
-
 const fetchClient = createFetchClient({
 	baseURL: "https://srm-api.onrender.com/api",
-	plugins: [authHeaderInclusionPlugin(), successToastPlugin()],
+	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 
 type ApiSuccessResponse<TData> = UnmaskType<{

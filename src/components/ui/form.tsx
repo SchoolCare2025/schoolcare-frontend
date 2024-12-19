@@ -1,16 +1,16 @@
 import { cnMerge } from "@/lib/utils/cn";
-import { toArray } from "@zayne-labs/toolkit";
-import { type PolymorphicProps, createCustomContext, useToggle } from "@zayne-labs/toolkit/react";
-import { getOtherChildren, getSlotElement } from "@zayne-labs/toolkit/react/utils";
+import { toArray } from "@zayne-labs/toolkit/core";
+import { createCustomContext, useToggle } from "@zayne-labs/toolkit/react";
+import { type PolymorphicProps, getOtherChildren, getSlotElement } from "@zayne-labs/toolkit/react/utils";
 import { Fragment as ReactFragment, useEffect, useId, useMemo, useRef } from "react";
 import {
 	type Control,
 	type ControllerFieldState,
-	Controller as ControllerPrimitive,
 	type ControllerProps,
 	type ControllerRenderProps,
 	type FieldPath,
 	type FormState,
+	Controller as HookFormController,
 	FormProvider as HookFormProvider,
 	type RegisterOptions,
 	type UseFormReturn,
@@ -536,4 +536,4 @@ export const TextArea = FormTextArea;
 
 export const Controller = FormController;
 
-export { Controller as ControllerPrimitive } from "react-hook-form";
+export const ControllerPrimitive = HookFormController;

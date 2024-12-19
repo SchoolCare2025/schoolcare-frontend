@@ -1,0 +1,356 @@
+import { cnMerge } from "@/lib/utils/cn";
+import type { InferProps } from "@zayne-labs/toolkit/react/utils";
+import { createContext, useContext, useId, useMemo } from "react";
+import * as RechartsPrimitive from "recharts";
+
+// Format: { THEME_NAME: CSS_SELECTOR }
+const THEMES = { dark: ".dark", light: "" } as const;
+
+export type ChartConfig = Record<
+	string,
+	{
+		icon?: React.ComponentType;
+		label?: React.ReactNode;
+	} & ({ color?: never; theme: Record<keyof typeof THEMES, string> } | { color?: string; theme?: never })
+>;
+
+type ChartContextProps = {
+	config: ChartConfig;
+};
+
+const ChartContext = createContext<ChartContextProps | null>(null);
+
+const useChart = () => {
+	const context = useContext(ChartContext);
+
+	if (!context) {
+		throw new Error("useChart must be used within a <ChartContainer />");
+	}
+
+	return context;
+};
+
+// Helper to extract item config from a payload.
+const getPayloadConfigFromPayload = (config: ChartConfig, payload: unknown, key: string) => {
+	if (typeof payload !== "object" || payload === null) {
+		return;
+	}
+
+	const payloadPayload =
+		"payload" in payload && typeof payload.payload === "object" && payload.payload !== null
+			? payload.payload
+			: null;
+
+	let configLabelKey: string = key;
+
+	if (key in payload && typeof payload[key as keyof typeof payload] === "string") {
+		configLabelKey = payload[key as keyof typeof payload] as string;
+	} else if (
+		payloadPayload &&
+		key in payloadPayload &&
+		typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
+	) {
+		configLabelKey = payloadPayload[key as keyof typeof payloadPayload] as string;
+	}
+
+	return configLabelKey in config ? config[configLabelKey] : config[key];
+};
+
+export function ChartContainer(
+	props: InferProps<"div"> & {
+		children: InferProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
+		config: ChartConfig;
+	}
+) {
+	const { children, className, config, id, ...restOfProps } = props;
+
+	const uniqueId = useId();
+	const chartId = `chart-${id ?? uniqueId.replaceAll(":", "")}`;
+
+	// eslint-disable-next-line react/no-unstable-context-value
+	const contextValue = { config };
+
+	return (
+		<ChartContext.Provider value={contextValue}>
+			<div
+				data-chart={chartId}
+				className={cnMerge(
+					`flex aspect-video justify-center text-xs
+					[&_.recharts-cartesian-axis-tick_text]:fill-shadcn-muted-foreground
+					[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-shadcn-border/50
+					[&_.recharts-curve.recharts-tooltip-cursor]:stroke-shadcn-border
+					[&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none
+					[&_.recharts-polar-grid_[stroke='#ccc']]:stroke-shadcn-border
+					[&_.recharts-radial-bar-background-sector]:fill-shadcn-muted
+					[&_.recharts-rectangle.recharts-tooltip-cursor]:fill-shadcn-muted
+					[&_.recharts-reference-line_[stroke='#ccc']]:stroke-shadcn-border
+					[&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none
+					[&_.recharts-surface]:outline-none`,
+					className
+				)}
+				{...restOfProps}
+			>
+				<ChartStyle id={chartId} config={config} />
+
+				<RechartsPrimitive.ResponsiveContainer>{children}</RechartsPrimitive.ResponsiveContainer>
+			</div>
+		</ChartContext.Provider>
+	);
+}
+
+export function ChartStyle(props: { config: ChartConfig; id: string }) {
+	const { config, id } = props;
+
+	const colorConfig = Object.entries(config).filter(([, _config]) => _config.theme ?? _config.color);
+
+	if (colorConfig.length === 0) {
+		return null;
+	}
+
+	const innerHtmlContent = Object.entries(THEMES)
+		.map(
+			([theme, prefix]) => `
+							${prefix} [data-chart=${id}] {
+							${colorConfig
+								.map(([key, itemConfig]) => {
+									const color =
+										itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ??
+										itemConfig.color;
+									return color ? `  --color-${key}: ${color};` : null;
+								})
+								.join("\n")}
+							}
+							`
+		)
+		.join("\n");
+
+	// eslint-disable-next-line react-dom/no-dangerously-set-innerhtml
+	return <style dangerouslySetInnerHTML={{ __html: innerHtmlContent }} />;
+}
+
+export const ChartTooltip = RechartsPrimitive.Tooltip;
+
+/* eslint-disable ts-eslint/no-unsafe-assignment */
+/* eslint-disable ts-eslint/no-unsafe-member-access */
+export function ChartTooltipContent(
+	props: InferProps<"div"> &
+		InferProps<typeof RechartsPrimitive.Tooltip> & {
+			hideIndicator?: boolean;
+			hideLabel?: boolean;
+			indicator?: "dashed" | "dot" | "line";
+			labelKey?: string;
+			nameKey?: string;
+		}
+) {
+	const {
+		active,
+		className,
+		color,
+		formatter,
+		hideIndicator = false,
+		hideLabel = false,
+		indicator = "dot",
+		label,
+		labelClassName,
+		labelFormatter,
+		labelKey,
+		nameKey,
+		payload,
+		ref,
+	} = props;
+
+	const { config } = useChart();
+
+	const tooltipLabel = useMemo(() => {
+		if (hideLabel || !payload?.length) {
+			return null;
+		}
+
+		const [item] = payload;
+		const key = `${labelKey ?? item?.dataKey ?? item?.name ?? "value"}`;
+		const itemConfig = getPayloadConfigFromPayload(config, item, key);
+		const value =
+			!labelKey && typeof label === "string" ? (config[label]?.label ?? label) : itemConfig?.label;
+
+		if (labelFormatter) {
+			return (
+				<div className={cnMerge("font-medium", labelClassName)}>{labelFormatter(value, payload)}</div>
+			);
+		}
+
+		if (!value) {
+			return null;
+		}
+
+		return <div className={cnMerge("font-medium", labelClassName)}>{value}</div>;
+	}, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);
+
+	if (!active || !payload?.length) {
+		return null;
+	}
+
+	const nestLabel = payload.length === 1 && indicator !== "dot";
+
+	return (
+		<div
+			ref={ref}
+			className={cnMerge(
+				`grid min-w-32 items-start gap-1.5 rounded-lg border border-shadcn-border/50
+				bg-shadcn-background px-2.5 py-1.5 text-xs shadow-xl`,
+				className
+			)}
+		>
+			{!nestLabel ? tooltipLabel : null}
+			<div className="grid gap-1.5">
+				{payload.map((item, index) => {
+					const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`;
+					const itemConfig = getPayloadConfigFromPayload(config, item, key);
+					const indicatorColor = color ?? item.payload.fill ?? item.color;
+
+					return (
+						<div
+							key={item.dataKey}
+							className={cnMerge(
+								`flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5
+								[&>svg]:text-shadcn-muted-foreground`,
+								indicator === "dot" && "items-center"
+							)}
+						>
+							{/* eslint-disable react/no-complex-conditional-rendering */}
+							{formatter && item.value !== undefined && item.name ? (
+								// eslint-disable-next-line ts-eslint/no-unsafe-argument
+								formatter(item.value, item.name, item, index, item.payload)
+							) : (
+								<>
+									{itemConfig?.icon ? (
+										<itemConfig.icon />
+									) : (
+										!hideIndicator && (
+											<div
+												className={cnMerge(
+													"shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]",
+													{
+														"h-2.5 w-2.5": indicator === "dot",
+														"my-0.5": nestLabel && indicator === "dashed",
+														"w-0 border-[1.5px] border-dashed bg-transparent":
+															indicator === "dashed",
+														"w-1": indicator === "line",
+													}
+												)}
+												style={
+													{
+														"--color-bg": indicatorColor,
+														"--color-border": indicatorColor,
+													} as React.CSSProperties
+												}
+											/>
+										)
+									)}
+									<div
+										className={cnMerge(
+											"flex flex-1 justify-between leading-none",
+											nestLabel ? "items-end" : "items-center"
+										)}
+									>
+										<div className="grid gap-1.5">
+											{nestLabel ? tooltipLabel : null}
+											<span className="text-shadcn-muted-foreground">
+												{itemConfig?.label ?? item.name}
+											</span>
+										</div>
+										{Boolean(item.value) && (
+											<span
+												className="font-mono font-medium tabular-nums text-shadcn-foreground"
+											>
+												{item.value?.toLocaleString()}
+											</span>
+										)}
+									</div>
+								</>
+							)}
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	);
+}
+
+export const ChartLegend = RechartsPrimitive.Legend;
+
+export function ChartLegendContent(
+	props: InferProps<"div"> &
+		Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+			classNames?: { base?: string; legendItem?: string; legendItemIcon?: string };
+			hideIcon?: boolean;
+			nameKey?: string;
+		}
+) {
+	const {
+		className,
+		classNames,
+		hideIcon = false,
+		nameKey,
+		payload,
+		ref,
+		verticalAlign = "bottom",
+	} = props;
+
+	const { config } = useChart();
+
+	if (!payload?.length) {
+		return null;
+	}
+
+	return (
+		<div
+			ref={ref}
+			className={cnMerge(
+				"flex items-center justify-center gap-4",
+				verticalAlign === "top" ? "pb-3" : "pt-3",
+				className,
+				classNames?.base
+			)}
+		>
+			{payload.map((item) => {
+				// eslint-disable-next-line ts-eslint/restrict-template-expressions
+				const key = `${nameKey ?? item.dataKey ?? "value"}`;
+				const itemConfig = getPayloadConfigFromPayload(config, item, key);
+
+				return (
+					<div
+						key={item.value}
+						className={cnMerge(
+							"flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-shadcn-muted-foreground",
+							classNames?.legendItem
+						)}
+					>
+						{itemConfig?.icon && !hideIcon ? (
+							<itemConfig.icon />
+						) : (
+							<div
+								className={cnMerge("size-2 shrink-0 rounded-[2px]", classNames?.legendItemIcon)}
+								style={{
+									backgroundColor: item.color,
+								}}
+							/>
+						)}
+						{itemConfig?.label}
+					</div>
+				);
+			})}
+		</div>
+	);
+}
+
+export const Container = ChartContainer;
+
+export const Style = ChartStyle;
+
+export const Tooltip = ChartTooltip;
+
+export const TooltipContent = ChartTooltipContent;
+
+export const Legend = ChartLegend;
+
+export const LegendContent = ChartLegendContent;

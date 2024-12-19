@@ -64,9 +64,7 @@ export const allSubjectsInSchoolQuery = (school = "") => {
 		enabled: Boolean(school),
 		queryFn: () => {
 			return callBackendApi<AllSubjectsInSchool, unknown, "onlySuccess">("/school/subjects", {
-				query: {
-					school,
-				},
+				query: { school },
 				resultMode: "onlySuccess",
 				throwOnError: true,
 			});
@@ -134,6 +132,21 @@ export const studentsByIDQuery = (studentId: string) => {
 			);
 		},
 		queryKey: ["students", "school", { id: studentId }],
+		staleTime: Infinity,
+	});
+};
+
+export const studentsGenderQuery = () => {
+	return queryOptions({
+		queryFn: () =>
+			callBackendApi<{ female: number; male: number }, unknown, "onlySuccess">(
+				"/school/students/students-by-gender",
+				{
+					resultMode: "onlySuccess",
+					throwOnError: true,
+				}
+			),
+		queryKey: ["students", "school", "gender-ratio"],
 		staleTime: Infinity,
 	});
 };
