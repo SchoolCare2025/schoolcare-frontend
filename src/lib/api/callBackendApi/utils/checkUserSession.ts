@@ -2,6 +2,7 @@ import { isHTTPError } from "@zayne-labs/callapi/utils";
 import { toast } from "sonner";
 import { callBackendApi } from "../callBackendApi";
 import type { SessionData } from "../types";
+import { hardNavigate } from "@/lib/utils/hardNavigate";
 
 const checkUserSession = async () => {
 	const { data, error } = await callBackendApi<SessionData>("/check-user-session", {
@@ -18,11 +19,7 @@ const checkUserSession = async () => {
 	}
 
 	if (error && error.name !== "AbortError") {
-		toast.error(
-			error.name === "TypeError"
-				? "No network connection"
-				: "Something went wrong, please try again later"
-		);
+		error.name === "TypeError" && toast.error("No network connection");
 
 		throw error.errorData;
 	}
@@ -30,13 +27,11 @@ const checkUserSession = async () => {
 	return data;
 };
 
-const navigate = (route: `/${string}`) => window.location.replace(route);
-
 const refreshUserSession = async (sessionError: unknown) => {
 	const refreshToken = localStorage.getItem("refreshToken");
 
 	if (sessionError && !refreshToken) {
-		navigate("/signin");
+		hardNavigate("/signin");
 
 		throw sessionError as Error;
 	}
@@ -50,9 +45,9 @@ const refreshUserSession = async (sessionError: unknown) => {
 	if (result.error || !result.data.data) {
 		const message = "Session expired! Redirecting to login...";
 
-		toast.error(message, { duration: 2000 });
+		toast.error(message);
 
-		navigate("/signin");
+		hardNavigate("/signin");
 
 		throw new Error(message);
 	}

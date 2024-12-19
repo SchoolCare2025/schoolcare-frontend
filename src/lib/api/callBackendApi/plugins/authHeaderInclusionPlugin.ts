@@ -1,3 +1,4 @@
+import { hardNavigate } from "@/lib/utils/hardNavigate";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { type RequestContext, defineCallApiPlugin } from "@zayne-labs/callapi";
 import { toast } from "sonner";
@@ -26,9 +27,11 @@ const authHeaderInclusionPlugin = defineCallApiPlugin(() => ({
 			const refreshToken = localStorage.getItem("refreshToken");
 
 			if (!refreshToken) {
-				const message = "Session is unavailable! Redirecting to login...";
+				const message = "Session is missing! Redirecting to login...";
 
-				toast.error(message, { duration: 2000 });
+				toast.error(message);
+
+				hardNavigate("/signin");
 
 				throw new Error(message);
 			}
