@@ -16,7 +16,8 @@ const ContactUs = () => {
 					</div>
 
 					<div
-						className="flex items-center justify-between rounded-lg border-2 bg-white p-3 md:w-[100%]"
+						className="flex items-center justify-between rounded-lg border-2 bg-white p-3
+							md:w-[100%]"
 					>
 						<div>
 							<p>Give us a call on</p>
