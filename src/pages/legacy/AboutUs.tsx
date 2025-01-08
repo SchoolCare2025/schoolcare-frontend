@@ -1,15 +1,29 @@
-import YoungLady from "../../assets/images/youngLady.jpg";
+/* eslint-disable tailwindcss/no-unnecessary-arbitrary-value */
+import YoungLady from "@/assets/images/youngLady.jpg";
+import { cnMerge } from "@/lib/utils/cn";
+import { Link } from "react-router-dom";
 
-const AboutUs = ({ className = "my-40" }) => {
+const AboutUs = ({
+	className = "my-40",
+	variant = "about",
+}: {
+	className?: string;
+	variant?: "about" | "home";
+}) => {
 	return (
-		<div className={`w-full overflow-hidden px-12 md:px-3 ${className}`}>
+		<div className={`w-full overflow-hidden px-5 md:px-3 ${className}`}>
 			<h2 className="mb-16 text-center text-4xl font-bold">About Us</h2>
 			<div
 				className="mx-4 flex flex-col-reverse items-center justify-between gap-24 md:flex-row
 					md:items-center md:justify-center md:gap-9 lg:justify-center sxl:px-9"
 			>
-				<div className="w-[100%] md:mt-5 md:w-[50%] sxl:w-[50%]">
-					<p className="text-xl leading-8 md:px-2 md:text-base lg:text-[18px] sxl:pr-24">
+				<div className="w-full md:mt-5 md:w-full sxl:w-full">
+					<p
+						className={cnMerge(
+							"text-xl leading-8 md:px-2 md:text-base lg:text-[18px] sxl:pr-24",
+							variant === "home" && "line-clamp-6"
+						)}
+					>
 						Welcome to schoolcare.ng, your all-in-one Universal School Management System designed to
 						streamline both administrative and academic processes. Our platform empowers schools to
 						efficiently organize student databases, compute results in minutes, and monitor academic
@@ -28,6 +42,12 @@ const AboutUs = ({ className = "my-40" }) => {
 						locally but also connect with a broader network of learners worldwide. Such exposure can
 						enhance their learning experience and prepare them for a globalized world.
 					</p>
+
+					{variant === "home" && (
+						<Link to="/AboutUs" className="text-school-blue">
+							Read more
+						</Link>
+					)}
 				</div>
 
 				<div

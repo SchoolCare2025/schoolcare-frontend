@@ -15,6 +15,7 @@ const toastPlugin = defineCallApiPlugin(() => ({
 			toast.success(ctx.data.message);
 		},
 	},
+	/* eslint-enable perfectionist/sort-objects */
 }));
 
 export { toastPlugin };

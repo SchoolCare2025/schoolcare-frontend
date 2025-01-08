@@ -105,7 +105,7 @@ export function DropZoneImagePreview(props: ImagePreviewProps) {
 						)}
 					>
 						<div className="flex min-h-[66px] min-w-0 items-center gap-4">
-							<Switch>
+							<Switch.Root>
 								<Switch.Match
 									when={(isFile(file) && file.type.startsWith("image")) || isString(file)}
 								>
@@ -133,7 +133,7 @@ export function DropZoneImagePreview(props: ImagePreviewProps) {
 										<IconBox icon="solar:file-outline" className="size-full" />
 									</span>
 								</Switch.Default>
-							</Switch>
+							</Switch.Root>
 
 							{isFile(file) && <p className="truncate">{file.name}</p>}
 						</div>

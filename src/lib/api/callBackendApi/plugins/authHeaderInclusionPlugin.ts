@@ -51,6 +51,7 @@ const authHeaderInclusionPlugin = defineCallApiPlugin(() => ({
 			ctx.options.auth = accessToken;
 		},
 	},
+	/* eslint-enable perfectionist/sort-objects */
 }));
 
 export { authHeaderInclusionPlugin };

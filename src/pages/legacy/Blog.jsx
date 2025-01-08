@@ -12,7 +12,7 @@ const Blogs = () => {
 				className="mt-12 flex flex-col items-center justify-center gap-12 px-12 md:grid md:grid-cols-2
 					lg:grid-cols-3 sxl:grid-cols-4"
 			>
-				<div className="h-full w-full">
+				<div className="h-full w-full" data-aos="fade-up">
 					<div>
 						<img className="h-full w-full" src={SchoolChild1} alt="" />
 					</div>
@@ -27,7 +27,7 @@ const Blogs = () => {
 					</a>
 				</div>
 
-				<div className="h-full w-full">
+				<div className="h-full w-full" data-aos="fade-up">
 					<div>
 						<img className="h-full w-full" src={SchoolChild2} alt="" />
 					</div>
@@ -42,7 +42,7 @@ const Blogs = () => {
 					</a>
 				</div>
 
-				<div className="h-full w-full">
+				<div className="h-full w-full" data-aos="fade-up">
 					<div>
 						<img className="h-full w-full" src={SchoolTenisGirl} alt="" />
 					</div>
@@ -57,7 +57,7 @@ const Blogs = () => {
 					</a>
 				</div>
 
-				<div className="h-full w-full">
+				<div className="h-full w-full" data-aos="fade-up">
 					<div className="">
 						<img className="h-full w-full" src={SchoolFootballPitch} alt="" />
 					</div>

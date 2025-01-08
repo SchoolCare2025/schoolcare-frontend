@@ -67,11 +67,10 @@ export function ChartContainer(
 	const uniqueId = useId();
 	const chartId = `chart-${id ?? uniqueId.replaceAll(":", "")}`;
 
-	// eslint-disable-next-line react/no-unstable-context-value
 	const contextValue = { config };
 
 	return (
-		<ChartContext.Provider value={contextValue}>
+		<ChartContext value={contextValue}>
 			<div
 				data-chart={chartId}
 				className={cnMerge(
@@ -94,7 +93,7 @@ export function ChartContainer(
 
 				<RechartsPrimitive.ResponsiveContainer>{children}</RechartsPrimitive.ResponsiveContainer>
 			</div>
-		</ChartContext.Provider>
+		</ChartContext>
 	);
 }
 
@@ -336,12 +335,15 @@ export function ChartLegendContent(
 							/>
 						)}
 						{itemConfig?.label}
+						{/* eslint-enable react/no-complex-conditional-rendering */}
 					</div>
 				);
 			})}
 		</div>
 	);
 }
+/* eslint-enable ts-eslint/no-unsafe-assignment */
+/* eslint-enable ts-eslint/no-unsafe-member-access */
 
 export const Container = ChartContainer;
 

@@ -57,7 +57,7 @@ export default function VaulSidebar() {
 		// NOTE - These classes allow the sidebar to scroll only within itself
 		<aside className="custom-scrollbar relative min-w-[300px] overflow-y-auto">
 			<Drawer.Root direction="left" modal={false} open={true} dismissible={false}>
-				{/* NOTE - Use this hack to prevent radix within vaul from trapping focus like a massive idiot🙂 */}
+				{/* NOTE - FocusScope component is a hack to prevent radix within vaul from trapping focus like a massive idiot🙂 */}
 				<FocusScope trapped={false} className="contents">
 					<Drawer.Content
 						// NOTE - These classes allow the sidebar to scroll only within itself
@@ -90,7 +90,7 @@ export default function VaulSidebar() {
 
 									<IconBox icon={item.icon} className="ml-5 size-5" />
 
-									<Show when={item.link !== null}>
+									<Show.Root when={item.link !== null}>
 										<Show.Content>
 											<Link to={item.link as string} className="font-medium">
 												{item.label}
@@ -106,7 +106,7 @@ export default function VaulSidebar() {
 												Log out
 											</button>
 										</Show.Fallback>
-									</Show>
+									</Show.Root>
 								</li>
 							)}
 						/>

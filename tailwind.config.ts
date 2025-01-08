@@ -4,7 +4,7 @@ import animationPlugin from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
 const config = {
-	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./node_modules/@zayne-labs/ui-react/**/*.js"],
 	plugins: [
 		animationPlugin,
 

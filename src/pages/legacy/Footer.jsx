@@ -1,8 +1,8 @@
 const Footer = () => {
 	return (
 		<div
-			className="max-w-auto flex w-full justify-between gap-8 bg-footerBg px-5 py-24 text-[14px]
-				sm:px-12 lg:text-[18px]"
+			className="max-w-auto flex w-full flex-col justify-between gap-8 bg-footerBg px-5 py-24
+				text-[14px] md:flex-row md:px-12 lg:text-[18px]"
 		>
 			<div className="w-80">
 				<h1 className="font-semibold text-black lg:text-[20px]">SchoolCare</h1>
@@ -40,7 +40,7 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<div className="w-[20rem] rounded lg:w-80">
+			<div>
 				<span className="font-semibold text-black lg:text-[20px]">Leave Us a Message</span>
 				<textarea
 					className="mx-auto my-3 w-full max-w-lg resize-none overflow-auto rounded-lg border

@@ -1,4 +1,4 @@
-import { type CallApiConfig, createFetchClient } from "@zayne-labs/callapi";
+import { type CallApiConfig, type CallApiParameters, createFetchClient } from "@zayne-labs/callapi";
 import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
 import { toastPlugin } from "./plugins";
 import { authHeaderInclusionPlugin } from "./plugins/authHeaderInclusionPlugin";
@@ -40,11 +40,9 @@ const callBackendApi = <
 	TError = unknown,
 	TResultMode extends CallApiConfig["resultMode"] = CallApiConfig["resultMode"],
 >(
-	...args: Parameters<
-		typeof fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
-	>
+	...args: CallApiParameters<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
 ) => {
-	return fetchClient<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>(...args);
+	return fetchClient(...args);
 };
 
 export { callBackendApi };

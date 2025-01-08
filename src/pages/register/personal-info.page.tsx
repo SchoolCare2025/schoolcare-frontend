@@ -75,7 +75,7 @@ function PersonalInfoPage() {
 												} as MyCustomCss
 											}
 										>
-											<button type="button" onClick={() => inputRef.current?.click()}>
+											<button type="button" onClick={() => inputRef.current.click()}>
 												<EditIcon
 													className={cnMerge(
 														"absolute bottom-2 right-3 size-[18px] md:size-[40px]",

@@ -1,8 +1,8 @@
+import { hardNavigate } from "@/lib/utils/hardNavigate";
 import { isHTTPError } from "@zayne-labs/callapi/utils";
 import { toast } from "sonner";
 import { callBackendApi } from "../callBackendApi";
 import type { SessionData } from "../types";
-import { hardNavigate } from "@/lib/utils/hardNavigate";
 
 const checkUserSession = async () => {
 	const { data, error } = await callBackendApi<SessionData>("/check-user-session", {
@@ -18,7 +18,11 @@ const checkUserSession = async () => {
 		});
 	}
 
-	if (error && error.name !== "AbortError") {
+	if (error && error.name === "AbortError") {
+		return data;
+	}
+
+	if (error) {
 		error.name === "TypeError" && toast.error("No network connection");
 
 		throw error.errorData;
