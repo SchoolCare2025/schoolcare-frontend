@@ -13,7 +13,7 @@ const Footer = () => {
 						educational management.
 					</p>
 				</div>
-				<p>Phone: 09038746894</p>
+				<p>Phone: 0903 8746 894 0814 7736 125</p>
 				<p>Email:schoolcare.office@gmail.com</p>
 			</div>
 

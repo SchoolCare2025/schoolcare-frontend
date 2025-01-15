@@ -22,7 +22,7 @@ const ContactUs = () => {
 						<div>
 							<p>Give us a call on</p>
 
-							<p className="font-semibold"> +234 9038 7468 94 +234 7025 097 100</p>
+							<p className="font-semibold"> +234 9038 7468 94</p>
 						</div>
 						<i className="ri-arrow-right-line"></i>
 					</div>
@@ -30,7 +30,7 @@ const ContactUs = () => {
 					<div className="my-8 flex items-center justify-between rounded-lg border-2 bg-white p-3">
 						<div>
 							<p>You can send us a direct whatsapp message</p>
-							<p className="font-semibold"> +234 9038 7468 94</p>
+							<p className="font-semibold">+234 8147 7361 25 +234 9038 7468 94</p>
 						</div>
 						<i className="ri-arrow-right-line"></i>
 					</div>
