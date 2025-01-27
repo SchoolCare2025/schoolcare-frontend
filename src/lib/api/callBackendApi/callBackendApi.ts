@@ -19,7 +19,7 @@ declare module "@zayne-labs/callapi" {
 }
 
 const fetchClient = createFetchClient({
-	baseURL: "https://srm-api.onrender.com/api",
+	baseURL: "https://api.schoolcare.com.ng/api",
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 
