@@ -1,7 +1,7 @@
 import { cnMerge } from "@/lib/utils/cn";
 import { toArray } from "@zayne-labs/toolkit/core";
 import { isFile, isString } from "@zayne-labs/toolkit/type-helpers";
-import { DropZone, type DropZoneProps } from "../ui/drop-zone";
+import { DropZone, type UseDropZoneProps } from "../ui/drop-zone";
 import { getElementList } from "./For";
 import { IconBox } from "./IconBox";
 import { Switch } from "./Switch";
@@ -18,7 +18,7 @@ export function DropZoneInput(props: DropZoneInputProps) {
 
 	const existingFiles = toArray(value).filter(Boolean);
 
-	const handleFileUpload: DropZoneProps["onUpload"] = ({ acceptedFiles }) => {
+	const handleFileUpload: UseDropZoneProps["onUpload"] = ({ acceptedFiles }) => {
 		const newFileState = [...existingFiles, ...acceptedFiles];
 
 		onChange(newFileState.at(-1) as File);

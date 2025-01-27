@@ -1,6 +1,6 @@
 import { hardNavigate } from "@/lib/utils/hardNavigate";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
-import { type RequestContext, defineCallApiPlugin } from "@zayne-labs/callapi";
+import { type RequestContext, definePlugin } from "@zayne-labs/callapi";
 import { toast } from "sonner";
 
 const routesExemptedFromAuthHeader = new Set([
@@ -11,7 +11,7 @@ const routesExemptedFromAuthHeader = new Set([
 	"/admin/register",
 ]);
 
-const authHeaderInclusionPlugin = defineCallApiPlugin(() => ({
+const authHeaderInclusionPlugin = definePlugin(() => ({
 	/* eslint-disable perfectionist/sort-objects */
 	id: "authHeader",
 	name: "authHeaderPlugin",
@@ -37,7 +37,7 @@ const authHeaderInclusionPlugin = defineCallApiPlugin(() => ({
 			}
 
 			if (
-				!ctx.request.fullURL?.endsWith("/check-user-session") &&
+				!ctx.options.fullURL?.endsWith("/check-user-session") &&
 				!ctx.options.meta?.skipSessionCheck
 			) {
 				// TODO - Figure out a way to make a callApi refetch just like react query

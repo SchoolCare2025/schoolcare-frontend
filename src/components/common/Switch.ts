@@ -1,1 +1,1 @@
-export * from "@zayne-labs/ui-react/switch";
+export * from "@zayne-labs/ui-react/common/switch";

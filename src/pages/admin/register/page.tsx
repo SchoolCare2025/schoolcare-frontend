@@ -9,8 +9,8 @@ import { z } from "zod";
 
 const AdminRegisterSchema = z.object({
 	email: z.string().email("Please enter a valid email!"),
-	name: z.string().min(1, "School name is required"),
 	password: z.string().min(1, "Password is required").min(8, "Password must be at least 8 characters"),
+	school: z.string().min(1, "School name is required"),
 });
 
 type AdminRegisterFormData = z.infer<typeof AdminRegisterSchema>;
@@ -21,8 +21,8 @@ function AdminRegisterPage() {
 	const methods = useForm<AdminRegisterFormData>({
 		defaultValues: {
 			email: "",
-			name: "",
 			password: "",
+			school: "",
 		},
 		resolver: zodResolver(AdminRegisterSchema),
 	});
@@ -56,7 +56,7 @@ function AdminRegisterPage() {
 					className="gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="name" className="w-full gap-4">
+					<Form.Item<typeof methods.control> name="school" className="w-full gap-4">
 						<Form.Label className="font-medium">School Name</Form.Label>
 
 						<Form.Input

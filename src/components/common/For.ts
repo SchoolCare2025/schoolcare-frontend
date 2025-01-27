@@ -1,1 +1,1 @@
-export * from "@zayne-labs/ui-react/for";
+export * from "@zayne-labs/ui-react/common/for";
