@@ -1,6 +1,6 @@
 import { cnMerge } from "@/lib/utils/cn";
 import type { InferProps } from "@zayne-labs/toolkit/react/utils";
-import { createContext, useContext, useId, useMemo } from "react";
+import { createContext, use, useId, useMemo } from "react";
 import * as RechartsPrimitive from "recharts";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
@@ -21,7 +21,7 @@ type ChartContextProps = {
 const ChartContext = createContext<ChartContextProps | null>(null);
 
 const useChart = () => {
-	const context = useContext(ChartContext);
+	const context = use(ChartContext);
 
 	if (!context) {
 		throw new Error("useChart must be used within a <ChartContainer />");

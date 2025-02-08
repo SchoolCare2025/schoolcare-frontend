@@ -19,7 +19,12 @@ const Navbar = () => {
 	}, [isNavOpen]);
 
 	return (
-		<nav className="flex items-center justify-between bg-cosWhite px-12 py-4">
+		<nav
+			className="flex items-center justify-between bg-cosWhite px-12 py-4"
+			onClick={(event) => {
+				event.target.matches("a") && toggleNavOpen();
+			}}
+		>
 			<Link to="/" className="block w-[6%] sxl:w-[5%]">
 				<img src={Logo} alt="Logo" className="w-[12vh]" />
 			</Link>
@@ -62,7 +67,7 @@ const Navbar = () => {
 			>
 				<ul className="pt-24 text-center text-2xl">
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<Link to="/Homepage">Home</Link>
+						<Link to="/">Home</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="/AboutUs">About Us</Link>

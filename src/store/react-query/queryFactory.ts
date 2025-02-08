@@ -5,7 +5,7 @@ import {
 	type AllSubjectsInSchool,
 	type ClassesData,
 	type StudentsByClassOrID,
-	callBackendApi,
+	callBackendApiForQuery,
 } from "@/lib/api/callBackendApi";
 import { checkUserSession } from "@/lib/api/callBackendApi/utils";
 import { queryOptions } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ export const sessionQuery = () => {
 	return queryOptions({
 		queryFn: () => checkUserSession(),
 		queryKey: ["session"],
-		refetchInterval: 9 * 60 * 1000,
+		refetchInterval: 9 * 60 * 1000, // 9 minutes
 		retry: false,
 		staleTime: Infinity,
 	});
@@ -22,12 +22,7 @@ export const sessionQuery = () => {
 
 export const allClassesQuery = () => {
 	return queryOptions({
-		queryFn: () => {
-			return callBackendApi<AllClasses, unknown, "onlySuccess">("/main-class", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
+		queryFn: () => callBackendApiForQuery<AllClasses>("/main-class"),
 		queryKey: ["classes-all"],
 		staleTime: Infinity,
 	});
@@ -35,12 +30,7 @@ export const allClassesQuery = () => {
 
 export const allClassesInSchoolQuery = () => {
 	return queryOptions({
-		queryFn: () => {
-			return callBackendApi<ClassesData[], unknown, "onlySuccess">("/school/classes", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
+		queryFn: () => callBackendApiForQuery<ClassesData[]>("/school/classes"),
 		queryKey: ["classes", "school"],
 		staleTime: Infinity,
 	});
@@ -48,12 +38,7 @@ export const allClassesInSchoolQuery = () => {
 
 export const allSubjectsQuery = () => {
 	return queryOptions({
-		queryFn: () => {
-			return callBackendApi<AllSubjects, unknown, "onlySuccess">("/main-subject", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
+		queryFn: () => callBackendApiForQuery<AllSubjects>("/main-subject"),
 		queryKey: ["subjects-all"],
 		staleTime: Infinity,
 	});
@@ -62,13 +47,8 @@ export const allSubjectsQuery = () => {
 export const allSubjectsInSchoolQuery = (school = "") => {
 	return queryOptions({
 		enabled: Boolean(school),
-		queryFn: () => {
-			return callBackendApi<AllSubjectsInSchool, unknown, "onlySuccess">("/school/subjects", {
-				query: { school },
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
+		queryFn: () =>
+			callBackendApiForQuery<AllSubjectsInSchool>("/school/subjects", { query: { school } }),
 		// eslint-disable-next-line tanstack-query/exhaustive-deps
 		queryKey: ["subjects", ...(school ? [{ school }] : [])],
 		staleTime: Infinity,
@@ -77,12 +57,7 @@ export const allSubjectsInSchoolQuery = (school = "") => {
 
 export const allStudentsInSchoolQuery = () => {
 	return queryOptions({
-		queryFn: () => {
-			return callBackendApi<AllStudentsInSchool, unknown, "onlySuccess">("/school/students", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
+		queryFn: () => callBackendApiForQuery<AllStudentsInSchool>("/school/students"),
 		queryKey: ["students", "school"],
 		staleTime: Infinity,
 	});
@@ -91,19 +66,11 @@ export const allStudentsInSchoolQuery = () => {
 export const studentsByClassQuery = (studentClass: string) => {
 	return queryOptions({
 		queryFn: () => {
-			return callBackendApi<{ students: StudentsByClassOrID[] }, unknown, "onlySuccess">(
+			return callBackendApiForQuery<{ students: StudentsByClassOrID[] }>(
 				"/school/students/class-students",
 				{
-					meta: {
-						toast: {
-							success: true,
-						},
-					},
-					query: {
-						class: studentClass,
-					},
-					resultMode: "onlySuccess",
-					throwOnError: true,
+					meta: { toast: { success: true } },
+					query: { class: studentClass },
 				}
 			);
 		},
@@ -115,21 +82,10 @@ export const studentsByClassQuery = (studentClass: string) => {
 export const studentsByIDQuery = (studentId: string) => {
 	return queryOptions({
 		queryFn: () => {
-			return callBackendApi<StudentsByClassOrID, unknown, "onlySuccess">(
-				"/school/students/students-by-reg-number",
-				{
-					meta: {
-						toast: {
-							success: true,
-						},
-					},
-					query: {
-						reg: studentId,
-					},
-					resultMode: "onlySuccess",
-					throwOnError: true,
-				}
-			);
+			return callBackendApiForQuery<StudentsByClassOrID>("/school/students/students-by-reg-number", {
+				meta: { toast: { success: true } },
+				query: { reg: studentId },
+			});
 		},
 		queryKey: ["students", "school", { id: studentId }],
 		staleTime: Infinity,
@@ -139,13 +95,7 @@ export const studentsByIDQuery = (studentId: string) => {
 export const studentsGenderQuery = () => {
 	return queryOptions({
 		queryFn: () =>
-			callBackendApi<{ female: number; male: number }, unknown, "onlySuccess">(
-				"/school/students/students-by-gender",
-				{
-					resultMode: "onlySuccess",
-					throwOnError: true,
-				}
-			),
+			callBackendApiForQuery<{ female: number; male: number }>("/school/students/students-by-gender"),
 		queryKey: ["students", "school", "gender-ratio"],
 		staleTime: Infinity,
 	});
@@ -153,12 +103,7 @@ export const studentsGenderQuery = () => {
 
 export const schoolSessionQuery = () => {
 	return queryOptions({
-		queryFn: () => {
-			return callBackendApi<string[], unknown, "onlySuccess">("/session", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
+		queryFn: () => callBackendApiForQuery<string[]>("/session"),
 		queryKey: ["school-session"],
 		staleTime: Infinity,
 	});
@@ -166,12 +111,7 @@ export const schoolSessionQuery = () => {
 
 export const schoolTermQuery = () => {
 	return queryOptions({
-		queryFn: () => {
-			return callBackendApi<string[], unknown, "onlySuccess">("/term", {
-				resultMode: "onlySuccess",
-				throwOnError: true,
-			});
-		},
+		queryFn: () => callBackendApiForQuery<string[]>("/term"),
 		queryKey: ["school-term"],
 		staleTime: Infinity,
 	});
