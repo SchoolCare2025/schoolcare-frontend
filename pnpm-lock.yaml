@@ -24,8 +24,8 @@ importers:
         specifier: ^5.66.0
         version: 5.66.0(react@19.0.0)
       '@zayne-labs/callapi':
-        specifier: 1.4.4
-        version: 1.4.4(@standard-schema/spec@1.0.0)
+        specifier: 1.5.1
+        version: 1.5.1(@standard-schema/spec@1.0.0)
       '@zayne-labs/toolkit':
         specifier: 0.8.34
         version: 0.8.34(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(zustand@5.0.3(@types/react@19.0.8)(react@19.0.0))
@@ -1346,8 +1346,8 @@ packages:
     peerDependencies:
       vite: ^4 || ^5 || ^6
 
-  '@zayne-labs/callapi@1.4.4':
-    resolution: {integrity: sha512-wPsLWx7q00EVZ2Yz+LK5/q8li8/XDFQb1pPEKRMoRjAw0btNWUcpv7g9L/FlBPj1287TLr041qLwmFClz2IB1w==}
+  '@zayne-labs/callapi@1.5.1':
+    resolution: {integrity: sha512-dKfA0d1UsJQqdWvqWLgX1r3GveQK9RA+YC+195s9Ys+I5OhdHk26iniEOuOL4VUhAyUrmU2mMSzxp/6P5GyzZA==}
     engines: {node: '>=v18.17.0'}
     peerDependencies:
       '@standard-schema/spec': ^1.0.0
@@ -4492,7 +4492,7 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@zayne-labs/callapi@1.4.4(@standard-schema/spec@1.0.0)':
+  '@zayne-labs/callapi@1.5.1(@standard-schema/spec@1.0.0)':
     dependencies:
       '@standard-schema/spec': 1.0.0
 
