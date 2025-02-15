@@ -46,7 +46,7 @@ export const callBackendApi = <
 };
 
 export const callBackendApiForQuery = <TData = unknown>(
-	...args: CallApiParameters<ApiSuccessResponse<TData>, unknown, "onlySuccessWithException" | undefined>
+	...args: CallApiParameters<ApiSuccessResponse<TData>, false | undefined>
 ) => {
 	const [initUrl, config] = args;
 
