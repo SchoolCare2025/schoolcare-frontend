@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lazy } from "react";
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router";
 import RootLayout from "./pages/layout";
 import { useQueryClientStore } from "./store/react-query/queryClientStore";
 import { sessionQuery } from "./store/react-query/queryFactory";
@@ -25,7 +25,7 @@ const LandingPage = lazy(() => import("./pages/legacy/LandingPage"));
 const MainLayout = lazy(() => import("./pages/legacy/MainLayout"));
 const WhoWeAre = lazy(() => import("./pages/legacy/WhoWeAre"));
 
-const sessionLoader = () => {
+const protectionLoader = () => {
 	void queryClient.prefetchQuery(sessionQuery());
 
 	return null;
@@ -33,26 +33,26 @@ const sessionLoader = () => {
 
 const routes = createRoutesFromElements(
 	<Route element={<RootLayout />}>
-		<Route path="/" element={<MainLayout />}>
-			<Route index={true} element={<LandingPage />} />
-			<Route path="WhoWeAre" element={<WhoWeAre />} />
-			<Route path="FaQ" element={<FaQ />} />
-			<Route path="ContactUs" element={<ContactUs />} />
-			<Route path="HowItWorks" element={<HowItWorks />} />
-			<Route path="AboutUs" element={<AboutUs />} />
+		<Route element={<MainLayout />}>
+			<Route path="/" element={<LandingPage />} />
+			<Route path="/who-we-are" element={<WhoWeAre />} />
+			<Route path="/faq" element={<FaQ />} />
+			<Route path="/contact-us" element={<ContactUs />} />
+			<Route path="/how-it-works" element={<HowItWorks />} />
+			<Route path="/about-us" element={<AboutUs />} />
 		</Route>
 
 		<Route path="/signin" Component={lazy(() => import("./pages/signin.page"))} />
 
-		<Route path="/register" Component={lazy(() => import("./pages/register/layout"))}>
+		<Route Component={lazy(() => import("./pages/register/layout"))}>
 			<Route
-				path="personal-info"
+				path="/register/personal-info"
 				Component={lazy(() => import("./pages/register/personal-info.page"))}
 			/>
-			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
+			<Route path="/register/address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 
-		<Route Component={lazy(() => import("./pages/protect.layout"))} loader={sessionLoader}>
+		<Route Component={lazy(() => import("./pages/protect.layout"))} loader={protectionLoader}>
 			<Route path="/dashboard" Component={lazy(() => import("./pages/dashboard/layout"))}>
 				<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
 
@@ -100,8 +100,8 @@ const routes = createRoutesFromElements(
 			</Route>
 		</Route>
 
-		<Route path="/admin" Component={lazy(() => import("./pages/admin/layout"))}>
-			<Route path="register" Component={lazy(() => import("./pages/admin/register/page"))} />
+		<Route Component={lazy(() => import("./pages/admin/layout"))}>
+			<Route path="/admin/register" Component={lazy(() => import("./pages/admin/register/page"))} />
 		</Route>
 	</Route>
 );

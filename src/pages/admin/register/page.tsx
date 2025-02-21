@@ -4,7 +4,7 @@ import { callBackendApi } from "@/lib/api/callBackendApi";
 import Main from "@/pages/_components/Main";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 
 const AdminRegisterSchema = z.object({

@@ -14,7 +14,7 @@ export type StepTwoData = {
 	address: string;
 	state: string;
 	local_govt: string;
-	postal_code: number | null;
+	postal_code: string;
 };
 
 export type RegisterFormStore = {
@@ -39,7 +39,7 @@ const initialRegisterFormState = {
 		logo: null,
 		name: "",
 		nationality: "",
-		postal_code: null,
+		postal_code: "",
 		state: "",
 	},
 

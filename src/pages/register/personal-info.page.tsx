@@ -3,18 +3,21 @@ import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
 import { DropZone } from "@/components/ui/drop-zone";
 import { cnMerge } from "@/lib/utils/cn";
-import { type StepOneData, useRegisterFormStore } from "@/store/zustand/signupFormStore";
+import { useRegisterFormStore } from "@/store/zustand/signupFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleImagePreview } from "@zayne-labs/toolkit/core";
 import type { MyCustomCss } from "@zayne-labs/toolkit/react/utils";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 import Main from "../_components/Main";
 
 const PersonalInfoSchema = z.object({
 	email: z.string().email("Please enter a valid email!"),
-	logo: z.custom<File>((file) => file instanceof File).optional(),
+	logo: z
+		.custom<File>((file) => file instanceof File)
+		.nullable()
+		.optional(),
 	name: z.string().min(1, "Name is required").max(50, "Name is too long"),
 });
 
@@ -25,18 +28,18 @@ function PersonalInfoPage() {
 		logoPreview,
 	} = useRegisterFormStore((state) => state);
 
-	const methods = useForm<StepOneData>({
+	const methods = useForm({
 		defaultValues: formStepData,
 		resolver: zodResolver(PersonalInfoSchema),
 	});
 
 	const navigate = useNavigate();
 
-	const onSubmit = (data: StepOneData) => {
+	const onSubmit = methods.handleSubmit((data) => {
 		updateFormData(data);
 
 		void navigate("/register/address");
-	};
+	});
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -49,7 +52,7 @@ function PersonalInfoPage() {
 				<Form.Root
 					methods={methods}
 					className="mt-3 gap-8 md:gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Item<typeof methods.control> name="logo">
 						<Form.Controller

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import bgImage from "../../assets/images/collegeStd.jpg";
 import ScratchCardForm from "./ScratchCardForm";
 
@@ -30,14 +31,14 @@ const Homepage = () => {
 						type="button"
 						className="hidden rounded-lg bg-cosBlue px-3 py-2 text-xl text-textWhite lg:block"
 					>
-						Get Started
+						<NavLink to="/signin">Get Started</NavLink>
 					</button>
 					<button
 						type="button"
 						className="rounded-lg border-2 border-cosBlue bg-cosBlue bg-none px-3 py-2 font-semibold
 							text-textWhite"
 					>
-						Register School
+						<NavLink to="/register/personal-info">Register School</NavLink>
 					</button>
 				</div>
 			</div>

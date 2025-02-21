@@ -3,10 +3,10 @@ import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
 import { cnMerge } from "@/lib/utils/cn";
-import { type StepTwoData, useRegisterFormStore } from "@/store/zustand/signupFormStore";
+import { useRegisterFormStore } from "@/store/zustand/signupFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 import Main from "../_components/Main";
 
@@ -34,7 +34,7 @@ function AddressPage() {
 
 	const navigate = useNavigate();
 
-	const onSubmit = async (stepTwoData: StepTwoData) => {
+	const onSubmit = methods.handleSubmit(async (stepTwoData) => {
 		updateFormData(stepTwoData);
 
 		await callBackendApi("/school/register", {
@@ -46,7 +46,7 @@ function AddressPage() {
 				void navigate("/");
 			},
 		});
-	};
+	});
 
 	const state = methods.watch("state");
 
@@ -65,7 +65,7 @@ function AddressPage() {
 				<Form.Root
 					methods={methods}
 					className="mt-3 gap-8 md:gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Item<typeof methods.control> name="nationality" className="gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">

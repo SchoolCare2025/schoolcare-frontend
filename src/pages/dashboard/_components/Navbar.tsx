@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 
 function Navbar() {
 	return (
@@ -17,10 +17,10 @@ function DesktopNavigation() {
 		<article className="ml-[100px] flex w-full items-center justify-between">
 			<nav className="flex min-w-fit gap-9 font-medium">
 				<NavLink to="/">Home</NavLink>
-				<NavLink to="/AboutUs">About us</NavLink>
-				<NavLink to="/HowItWorks">How it works</NavLink>
-				<NavLink to="/FaQ">FaQs</NavLink>
-				<NavLink to="/ContactUs">Contact us</NavLink>
+				<NavLink to="/about-us">About us</NavLink>
+				<NavLink to="/how-it-works">How it works</NavLink>
+				<NavLink to="/faq">FaQs</NavLink>
+				<NavLink to="/contact-us">Contact us</NavLink>
 			</nav>
 
 			<div className="flex items-center gap-5">

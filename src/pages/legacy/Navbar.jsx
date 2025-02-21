@@ -1,7 +1,7 @@
 import { useToggle } from "@zayne-labs/toolkit/react";
 import clsx from "clsx";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Logo from "../../assets/images/logoTrans.png";
 
@@ -33,16 +33,16 @@ const Navbar = () => {
 					<Link to="/">Home</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<Link to="/AboutUs">About Us</Link>
+					<Link to="/about-us">About Us</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<Link to="/HowItWorks">How it Works</Link>
+					<Link to="/how-it-works">How it Works</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<Link to="/FaQ">FAQs</Link>
+					<Link to="/faq">FAQs</Link>
 				</li>
 				<li className="hover:text-cosBlue">
-					<Link to="/ContactUs">Contact Us</Link>
+					<Link to="/contact-us">Contact Us</Link>
 				</li>
 			</ul>
 			<button className="hidden rounded-lg bg-cosBlue p-2 px-3 text-xl text-textWhite lg:block">
@@ -70,13 +70,13 @@ const Navbar = () => {
 						<Link to="/">Home</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<Link to="/AboutUs">About Us</Link>
+						<Link to="/about-us">About Us</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="HowItWorks">How it Works</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<Link to="/FaQ">FAQs</Link>
+						<Link to="/faq">FAQs</Link>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="ContactUs">Contact Us</Link>

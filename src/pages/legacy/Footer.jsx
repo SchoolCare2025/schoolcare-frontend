@@ -24,16 +24,16 @@ const Footer = () => {
 						<a href="/" className="hover:text-cosBlue">
 							<li>Home</li>
 						</a>
-						<a href="/AboutUs" className="hover:text-cosBlue">
+						<a href="/about-us" className="hover:text-cosBlue">
 							<li>About Us</li>
 						</a>
-						<a href="/HowItWorks" className="hover:text-cosBlue">
+						<a href="/how-it-works" className="hover:text-cosBlue">
 							<li>How it Works</li>
 						</a>
-						<a href="/FaQ" className="hover:text-cosBlue">
+						<a href="/faq" className="hover:text-cosBlue">
 							<li>FAQs</li>
 						</a>
-						<a href="/ContactUs" className="hover:text-cosBlue">
+						<a href="/contact-us" className="hover:text-cosBlue">
 							<li>Contact Us</li>
 						</a>
 					</ul>

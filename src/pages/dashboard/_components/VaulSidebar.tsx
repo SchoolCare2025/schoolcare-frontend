@@ -1,7 +1,7 @@
 import { IconBox, Show, getElementList } from "@/components/common";
 import { RouteIndicator } from "@/components/icons";
 import { FocusScope } from "@radix-ui/react-focus-scope";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 import { Drawer } from "vaul";
 
 const sideBarLinksArray = [

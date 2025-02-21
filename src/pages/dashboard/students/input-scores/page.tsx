@@ -11,7 +11,7 @@ import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { z } from "zod";
 import Main from "../../_components/Main";
 

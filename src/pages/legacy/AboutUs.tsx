@@ -1,7 +1,7 @@
 /* eslint-disable tailwindcss/no-unnecessary-arbitrary-value */
 import YoungLady from "@/assets/images/youngLady.jpg";
 import { cnMerge } from "@/lib/utils/cn";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const AboutUs = ({
 	className = "my-40",
@@ -44,7 +44,7 @@ const AboutUs = ({
 					</p>
 
 					{variant === "home" && (
-						<Link to="/AboutUs" className="text-school-blue">
+						<Link to="/about-us" className="text-school-blue">
 							Read more
 						</Link>
 					)}

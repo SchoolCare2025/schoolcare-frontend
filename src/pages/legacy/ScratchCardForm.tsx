@@ -1,6 +1,6 @@
 import { type CheckResultResponse, callBackendApi } from "@/lib/api/callBackendApi";
 import { useStorageState } from "@zayne-labs/toolkit/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function ScratchCardForm() {
 	const navigate = useNavigate();
