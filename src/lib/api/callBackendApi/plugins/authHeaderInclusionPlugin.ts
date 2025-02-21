@@ -40,7 +40,6 @@ const authHeaderInclusionPlugin = definePlugin(() => ({
 				!ctx.options.fullURL?.endsWith("/check-user-session") &&
 				!ctx.options.meta?.skipSessionCheck
 			) {
-				// TODO - Figure out a way to make a callApi refetch just like react query
 				await useQueryClientStore.getState().queryClient.refetchQueries({
 					queryKey: ["session"],
 				});

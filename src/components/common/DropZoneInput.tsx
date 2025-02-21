@@ -34,7 +34,6 @@ export function DropZoneInput(props: DropZoneInputProps) {
 			allowedFileTypes={["text/csv"]}
 			validationSettings={{ maxFileSize: 6 }}
 		>
-			;
 			<span
 				className="block shrink-0 md:size-10"
 				aria-flowto={String.raw`<div
