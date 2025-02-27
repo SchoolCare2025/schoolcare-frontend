@@ -10,14 +10,6 @@ const cnJoin = (...classNames) => twJoin(clsx(classNames));
 const Navbar = () => {
 	const [isNavOpen, toggleNavOpen] = useToggle(false);
 
-	useEffect(() => {
-		if (isNavOpen) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "auto";
-		}
-	}, [isNavOpen]);
-
 	return (
 		<nav
 			className="flex items-center justify-between bg-cosWhite px-12 py-4"

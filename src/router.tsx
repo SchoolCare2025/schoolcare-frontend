@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { hardNavigate } from "@zayne-labs/toolkit/core";
 import { lazy } from "react";
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router";
 import RootLayout from "./pages/layout";
@@ -44,12 +45,19 @@ const routes = createRoutesFromElements(
 
 		<Route path="/signin" Component={lazy(() => import("./pages/signin.page"))} />
 
-		<Route Component={lazy(() => import("./pages/register/layout"))}>
+		<Route path="/register" Component={lazy(() => import("./pages/register/layout"))}>
 			<Route
-				path="/register/personal-info"
+				index={true}
+				loader={() => {
+					hardNavigate("/register/personal-info");
+					return null;
+				}}
+			/>
+			<Route
+				path="personal-info"
 				Component={lazy(() => import("./pages/register/personal-info.page"))}
 			/>
-			<Route path="/register/address" Component={lazy(() => import("./pages/register/address.page"))} />
+			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 
 		<Route Component={lazy(() => import("./pages/protect.layout"))} loader={protectionLoader}>

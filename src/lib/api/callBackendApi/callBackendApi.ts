@@ -7,7 +7,8 @@ type GlobalMeta = {
 	skipAuthHeaderAddition?: boolean;
 	skipSessionCheck?: boolean;
 	toast?: {
-		success: boolean;
+		error?: boolean;
+		success?: boolean;
 	};
 };
 
@@ -23,13 +24,13 @@ const fetchClient = createFetchClient({
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 
-type ApiSuccessResponse<TData> = UnmaskType<{
+export type ApiSuccessResponse<TData = unknown> = UnmaskType<{
 	data: TData | null;
 	message: string;
 	status: "success";
 }>;
 
-type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
+export type ApiErrorResponse<TErrorData = unknown> = UnmaskType<{
 	errors?: Record<string, string> & TErrorData & { message?: string };
 	message: string;
 	status: "error";
@@ -42,7 +43,18 @@ export const callBackendApi = <
 >(
 	...args: CallApiParameters<ApiSuccessResponse<TData>, ApiErrorResponse<TError>, TResultMode>
 ) => {
-	return fetchClient(...args);
+	const [initUrl, config] = args;
+
+	return fetchClient(initUrl, {
+		...config,
+		meta: {
+			...config?.meta,
+			toast: {
+				error: true,
+				...config?.meta?.toast,
+			},
+		},
+	});
 };
 
 export const callBackendApiForQuery = <TData = unknown>(

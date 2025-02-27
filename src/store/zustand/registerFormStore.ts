@@ -65,7 +65,7 @@ const stateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
 export const useRegisterFormStore = create(
 	persist(stateObjectFn, {
 		name: "registerFormStepData",
-		partialize: ({ formStepData }) => ({ formStepData }),
+		partialize: ({ formStepData }) => ({ formStepData: { ...formStepData, logo: null } }),
 		version: 3,
 	})
 );

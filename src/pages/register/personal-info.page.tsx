@@ -3,7 +3,7 @@ import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
 import { DropZone } from "@/components/ui/drop-zone";
 import { cnMerge } from "@/lib/utils/cn";
-import { useRegisterFormStore } from "@/store/zustand/signupFormStore";
+import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleImagePreview } from "@zayne-labs/toolkit/core";
 import type { MyCustomCss } from "@zayne-labs/toolkit/react/utils";
@@ -30,6 +30,7 @@ function PersonalInfoPage() {
 
 	const methods = useForm({
 		defaultValues: formStepData,
+		mode: "onChange",
 		resolver: zodResolver(PersonalInfoSchema),
 	});
 

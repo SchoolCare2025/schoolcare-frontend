@@ -3,7 +3,7 @@ import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
 import { cnMerge } from "@/lib/utils/cn";
-import { useRegisterFormStore } from "@/store/zustand/signupFormStore";
+import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -29,6 +29,7 @@ function AddressPage() {
 
 	const methods = useForm({
 		defaultValues: formStepData,
+		mode: "onChange",
 		resolver: zodResolver(AddressSchema),
 	});
 
@@ -39,6 +40,9 @@ function AddressPage() {
 
 		await callBackendApi("/school/register", {
 			body: { ...formStepData, ...stepTwoData },
+			meta: {
+				toast: { success: true },
+			},
 			method: "POST",
 
 			onSuccess: () => {
