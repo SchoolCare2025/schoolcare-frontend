@@ -19,7 +19,7 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const fetchClient = createFetchClient({
+const sharedFetchClient = createFetchClient({
 	baseURL: "https://api.schoolcare.com.ng/api",
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
@@ -45,7 +45,7 @@ export const callBackendApi = <
 ) => {
 	const [initUrl, config] = args;
 
-	return fetchClient(initUrl, {
+	return sharedFetchClient(initUrl, {
 		...config,
 		meta: {
 			...config?.meta,
@@ -62,7 +62,7 @@ export const callBackendApiForQuery = <TData = unknown>(
 ) => {
 	const [initUrl, config] = args;
 
-	return fetchClient(initUrl, {
+	return sharedFetchClient(initUrl, {
 		resultMode: "onlySuccessWithException",
 		throwOnError: true,
 		...config,
