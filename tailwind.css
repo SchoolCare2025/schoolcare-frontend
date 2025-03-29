@@ -1,16 +1,133 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+@source "./node_modules/@zayne-labs/ui-react/dist/esm/**/*.js";
+
+@theme {
+	/* Breakpoints */
+	--breakpoint-*: initial;
+	--breakpoint-sm: 480px;
+	--breakpoint-md: 800px;
+	--breakpoint-lg: 1000px;
+	--breakpoint-xl: 1280px;
+
+	/* Fonts */
+	--font-montserrat: "Montserrat", sans-serif;
+	--font-inter: "Inter", sans-serif;
+
+	/* App Colors */
+	--color-school-blue: hsl(202, 98%, 43%);
+	--color-school-gray: hsl(313, 0%, 42%);
+
+	/* Shadcn  Colors */
+	--color-shadcn-background: hsl(0 0% 100%);
+	--color-shadcn-foreground: hsl(222.2 84% 4.9%);
+	--color-shadcn-muted: hsl(210 40% 96.1%);
+	--color-shadcn-muted-foreground: hsl(215.4 16.3% 46.9%);
+	--color-shadcn-popover: hsl(0 0% 100%);
+	--color-shadcn-popover-foreground: hsl(222.2 84% 4.9%);
+	--color-shadcn-card: hsl(0 0% 100%);
+	--color-shadcn-card-foreground: hsl(222.2 84% 4.9%);
+	--color-shadcn-border: hsl(214.3 31.8% 91.4%);
+	--color-shadcn-input: hsl(214.3 31.8% 91.4%);
+	--color-shadcn-primary: hsl(222.2 47.4% 11.2%);
+	--color-shadcn-primary-foreground: hsl(210 40% 98%);
+	--color-shadcn-secondary: hsl(210 40% 96.1%);
+	--color-shadcn-secondary-foreground: hsl(222.2 47.4% 11.2%);
+	--color-shadcn-accent: hsl(210 40% 96.1%);
+	--color-shadcn-accent-foreground: hsl(222.2 47.4% 11.2%);
+	--color-shadcn-destructive: hsl(0 84.2% 60.2%);
+	--color-shadcn-destructive-foreground: hsl(210 40% 98%);
+	--color-shadcn-ring: hsl(222.2 84% 4.9%);
+
+	/* Animations */
+	--animate-accordion-down: accordion-down 0.2s ease-out;
+	--animate-accordion-up: accordion-up 0.2s ease-out;
+	--animate-collapsible-down: collapsible-down 0.2s ease-in-out;
+	--animate-collapsible-up: collapsible-up 0.2s ease-in-out;
+	--animate-shake: shake 0.2s ease-in-out 0s 3;
+
+	/* Keyframes */
+	@keyframes accordion-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--radix-accordion-content-height);
+		}
+	}
+
+	@keyframes accordion-up {
+		from {
+			height: var(--radix-accordion-content-height);
+		}
+		to {
+			height: 0;
+		}
+	}
+
+	@keyframes collapsible-down {
+		from {
+			height: 0;
+		}
+		to {
+			height: var(--radix-collapsible-content-height);
+		}
+	}
+
+	@keyframes collapsible-up {
+		from {
+			height: var(--radix-collapsible-content-height);
+		}
+		to {
+			height: 0;
+		}
+	}
+
+	@keyframes shake {
+		0%,
+		100% {
+			transform: translateX(0rem);
+		}
+		25% {
+			transform: translateX(0.6rem);
+		}
+		75% {
+			transform: translateX(-0.6rem);
+		}
+	}
+}
+
+/* ------------------*/
+/* Legacy App Colors */
+/*-------------------*/
+@theme {
+	--color-bgColor: #04427b;
+	--color-bgTestimonials: #04427b;
+	--color-bgTestimonials-65: rgba(4, 58, 123, 0.65);
+	--color-borderBottom1: #ffc3f2;
+	--color-borderBottom2: #9cdbff;
+	--color-borderBottom3: #e9acff;
+	--color-borderBottom4: #ff6d6d;
+	--color-cosBlue: #028ddb;
+	--color-cosBorder: #ffccf4;
+	--color-cosInputText: #b2aeae;
+	--color-cosWhite: #f8f8f8;
+	--color-footerBg: #e8e8e8;
+	--color-greenColor: #008000;
+	--color-hoverBtn-75: rgba(2, 141, 219, 1);
+	--color-inputColors: #f0f0f0;
+	--color-optionsColor: #6c6b6c;
+	--color-resultBtn: #ff59bd;
+	--color-slitePlink: #e0f4ff;
+	--color-starColor: #ff9900;
+	--color-testiFont: #212121;
+	--color-textWhite: #ffffff;
+}
 
 /* ------------------*/
 /* Custom Properties */
 /*-------------------*/
 @layer base {
-	:root {
-		--color-blue: hsl(202, 98%, 43%);
-		--color-gray: hsl(313, 0%, 42%);
-	}
-
 	:root {
 		--chart-1: 202 98% 43%;
 		--chart-2: 0 100% 71%;
@@ -65,20 +182,47 @@
 		outline: transparent;
 	}
 
+	button:not(:disabled) {
+		cursor: pointer;
+	}
+
 	body {
 		line-height: 1.5;
-		font-family: theme("fontFamily.montserrat");
+		font-family: var(--font-montserrat);
 	}
 }
 
-@layer components {
-	.input {
-		@apply mb-1.5 w-full max-w-40 rounded-xl border-2 border-cosBorder px-4 py-3 placeholder-cosInputText transition-all duration-300 focus:outline-none;
+@utility input {
+	@apply border-cosBorder placeholder-cosInputText mb-1.5 w-full max-w-40 rounded-xl border-2 px-4 py-3 transition-all duration-300 focus:outline-hidden;
+}
+
+@utility options {
+	@apply text-optionsColor;
+}
+
+@utility formInputs {
+	@apply bg-inputColors placeholder-cosInputText w-full px-4 py-4 outline-hidden transition-all duration-300;
+}
+
+@utility custom-scrollbar {
+	&::-webkit-scrollbar {
+		width: 10px;
 	}
-	.options {
-		@apply text-optionsColor;
+
+	&::-webkit-scrollbar-track {
+		background-color: hsl(0, 0%, 76%);
+		border-radius: 10px 10px 0 0;
 	}
-	.formInputs {
-		@apply w-full bg-inputColors px-4 py-4 placeholder-cosInputText outline-none transition-all duration-300;
+
+	&::-webkit-scrollbar-thumb {
+		background-color: hsl(0, 0%, 39%);
+		border: 1px solid hsl(0, 0%, 76%);
+		border-radius: 10px;
+	}
+}
+
+@utility scrollbar-hidden {
+	&::-webkit-scrollbar {
+		display: none;
 	}
 }

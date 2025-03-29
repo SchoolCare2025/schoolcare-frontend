@@ -61,8 +61,8 @@ export default function VaulSidebar() {
 				<FocusScope trapped={false} className="contents">
 					<Drawer.Content
 						// NOTE - These classes allow the sidebar to scroll only within itself
-						className="absolute min-h-full bg-white pb-10 pl-8 outline-none
-							data-[vaul-drawer]:[animation-duration:1300ms]"
+						className="absolute min-h-full bg-white pb-10 pl-8 outline-hidden
+							data-vaul-drawer:[animation-duration:1300ms]"
 					>
 						<header className="flex gap-3">
 							<span className="block size-[70px] shrink-0 rounded-full bg-[hsl(0,0%,85%)]" />

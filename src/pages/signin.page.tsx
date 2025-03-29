@@ -59,7 +59,7 @@ function SigninPage() {
 					className="gap-[56px] text-[14px] md:text-base"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="email" className="gap-4">
+					<Form.Field<typeof methods.control> name="email" className="gap-4">
 						<Form.Label className="font-medium">School email address*</Form.Label>
 
 						<Form.Input
@@ -70,9 +70,9 @@ function SigninPage() {
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="password" className="gap-4">
+					<Form.Field<typeof methods.control> name="password" className="gap-4">
 						<Form.Label className="font-medium">School Password*</Form.Label>
 
 						<Form.Input
@@ -82,7 +82,7 @@ function SigninPage() {
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<div className="flex justify-between gap-3">
 						<div className="flex items-center gap-1 md:gap-3">

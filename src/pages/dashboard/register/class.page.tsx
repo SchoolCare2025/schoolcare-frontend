@@ -70,16 +70,16 @@ function RegisterClassPage() {
 					className="gap-8"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="school_class" className="gap-4">
+					<Form.Field<typeof methods.control> name="school_class" className="gap-4">
 						<Form.Label className="font-medium">Class Name</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-											text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+											base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+											rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
@@ -111,13 +111,13 @@ function RegisterClassPage() {
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="grade" className="gap-4">
+					<Form.Field<typeof methods.control> name="grade" className="gap-4">
 						<Form.Label className="font-medium">Class Grade</Form.Label>
 
 						<Form.InputGroup
-							className="h-[75px] w-full gap-4 rounded-[20px] border-2 border-school-gray bg-white
+							className="border-school-gray h-[75px] w-full gap-4 rounded-[20px] border-2 bg-white
 								px-8 text-[14px] md:text-base"
 						>
 							<Form.InputLeftItem className="shrink-0">{watchedSchoolClass}</Form.InputLeftItem>
@@ -134,7 +134,7 @@ function RegisterClassPage() {
 						</Form.InputGroup>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
@@ -142,8 +142,8 @@ function RegisterClassPage() {
 						disabled={methods.formState.isSubmitting}
 						type="submit"
 						className={cnMerge(
-							`mt-12 flex h-[56px] w-full max-w-[150px] items-center justify-center self-end
-							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`
+							`bg-school-blue mt-12 flex h-[56px] w-full max-w-[150px] items-center justify-center
+							self-end rounded-[10px] text-[18px] font-bold text-white`
 						)}
 					>
 						{methods.formState.isSubmitting ? (

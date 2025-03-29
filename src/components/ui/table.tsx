@@ -28,7 +28,7 @@ function TableFooter(props: InferProps<HTMLTableSectionElement>) {
 
 	return (
 		<tfoot
-			className={cnMerge("border-t bg-shadcn-muted/50 font-medium [&>tr]:last:border-b-0", className)}
+			className={cnMerge("border-t bg-shadcn-muted/50 font-medium last:[&>tr]:border-b-0", className)}
 			{...restOfProps}
 		/>
 	);

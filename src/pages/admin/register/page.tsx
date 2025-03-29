@@ -56,49 +56,49 @@ function AdminRegisterPage() {
 					className="gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="school" className="w-full gap-4">
+					<Form.Field<typeof methods.control> name="school" className="w-full gap-4">
 						<Form.Label className="font-medium">School Name</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school name"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
 								text-[14px] md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
-					<Form.Item<typeof methods.control> name="email" className="w-full gap-4">
+					</Form.Field>
+					<Form.Field<typeof methods.control> name="email" className="w-full gap-4">
 						<Form.Label className="font-medium">Email</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school email"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
 								text-[14px] md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
-					<Form.Item<typeof methods.control> name="password" className="w-full gap-4">
+					</Form.Field>
+					<Form.Field<typeof methods.control> name="password" className="w-full gap-4">
 						<Form.Label className="font-medium">Password</Form.Label>
 
 						<Form.Input
 							type="password"
 							placeholder="Enter password"
 							classNames={{
-								inputGroup: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+								inputGroup: `border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
 								text-[14px] md:text-base`,
 							}}
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
 					<button
 						disabled={methods.formState.isSubmitting}
 						type="submit"
-						className="grid w-[150px] place-content-center self-end rounded-[10px] bg-school-blue
+						className="bg-school-blue grid w-[150px] place-content-center self-end rounded-[10px]
 							px-8 py-4 text-[18px] font-bold text-white"
 					>
 						{methods.formState.isSubmitting ? (

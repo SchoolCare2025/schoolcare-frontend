@@ -30,9 +30,8 @@ function ScratchCardForm() {
 	return (
 		<form
 			onSubmit={(event) => void onSubmit(event)}
-			// eslint-disable-next-line tailwindcss/no-unnecessary-arbitrary-value
-			className="absolute mx-auto mt-6 w-full max-w-[376px] rounded-[12px] bg-cosWhite p-5 shadow-2xl
-				max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[2%] lg:top-[23%] lg:mx-10 lg:mt-20
+			className="bg-cosWhite absolute mx-auto mt-6 w-full max-w-[376px] rounded-[12px] p-5 shadow-2xl
+				max-lg:left-[50%] max-lg:translate-x-[-50%] lg:top-[23%] lg:right-[2%] lg:mx-10 lg:mt-20
 				lg:max-w-[405px] lg:scale-[1.12] lg:px-4 lg:pb-12 xl:right-[8%]"
 		>
 			<p className="mb-4 text-center text-[18px] font-semibold">
@@ -45,7 +44,7 @@ function ScratchCardForm() {
 						type="text"
 						name="school_ID"
 						placeholder="eg:12567"
-						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 
@@ -55,7 +54,7 @@ function ScratchCardForm() {
 						name="student_reg_number"
 						type="text"
 						placeholder="eg:20246..."
-						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 
@@ -63,7 +62,7 @@ function ScratchCardForm() {
 					<p className="mb-1 text-lg">Class Grade*</p>
 					<input
 						name="school_class"
-						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 
@@ -72,7 +71,7 @@ function ScratchCardForm() {
 					<input
 						type="text"
 						placeholder="eg: JSS1 A"
-						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 
@@ -80,7 +79,7 @@ function ScratchCardForm() {
 					<p className="mb-1 text-lg">Result Session*</p>
 					<input
 						name="session"
-						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 
@@ -88,7 +87,7 @@ function ScratchCardForm() {
 					<p className="mb-1 text-lg">Result Term</p>
 					<input
 						name="term"
-						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 
@@ -98,7 +97,7 @@ function ScratchCardForm() {
 						name="scratch_card_code"
 						type="text"
 						placeholder="Enter card pin"
-						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 
@@ -108,14 +107,14 @@ function ScratchCardForm() {
 						name="serial_number"
 						type="text"
 						placeholder="eg: 12348..."
-						className="w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-none"
+						className="border-cosBorder w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</div>
 			</div>
 
 			<button
 				type="submit"
-				className="mt-4 rounded-lg bg-resultBtn p-2 text-sm font-semibold text-textWhite"
+				className="bg-resultBtn text-textWhite mt-4 rounded-lg p-2 text-sm font-semibold"
 			>
 				Check Result
 			</button>

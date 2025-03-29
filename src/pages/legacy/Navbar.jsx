@@ -12,12 +12,12 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className="flex items-center justify-between bg-cosWhite px-12 py-4"
+			className="bg-cosWhite flex items-center justify-between px-12 py-4"
 			onClick={(event) => {
 				event.target.matches("a") && toggleNavOpen();
 			}}
 		>
-			<Link to="/" className="block w-[6%] sxl:w-[5%]">
+			<Link to="/" className="sxl:w-[5%] block w-[6%]">
 				<img src={Logo} alt="Logo" className="w-[12vh]" />
 			</Link>
 			<ul className="hidden text-base font-normal lg:flex lg:gap-12 lg:text-lg xl:gap-14 xl:text-xl">
@@ -37,11 +37,11 @@ const Navbar = () => {
 					<Link to="/contact-us">Contact Us</Link>
 				</li>
 			</ul>
-			<button className="hidden rounded-lg bg-cosBlue p-2 px-3 text-xl text-textWhite lg:block">
+			<button className="bg-cosBlue text-textWhite hidden rounded-lg p-2 px-3 text-xl lg:block">
 				<Link to="/register/personal-info">Register School</Link>
 			</button>
 
-			<div onClick={toggleNavOpen} className="relative z-[200] block text-5xl lg:hidden">
+			<div onClick={toggleNavOpen} className="relative z-200 block text-5xl lg:hidden">
 				{isNavOpen ? (
 					<i className="ri-close-line text-4xl font-bold"></i>
 				) : (
@@ -51,30 +51,35 @@ const Navbar = () => {
 
 			<div
 				className={cnJoin(
-					`fixed inset-[0_0_0_auto] z-[150] flex w-full flex-col items-center justify-center
-					bg-cosWhite text-black transition-transform duration-500 ease-in-out lg:hidden`,
+					`bg-cosWhite fixed inset-[0_0_0_auto] z-150 flex w-full flex-col items-center justify-center
+					text-black transition-transform duration-500 ease-in-out lg:hidden`,
 
 					isNavOpen ? "translate-x-0" : "-translate-x-full"
 				)}
 			>
 				<ul className="pt-24 text-center text-2xl">
-					<li className="mx-4 mb-5 hover:text-cosBlue">
+					<li className="hover:text-cosBlue mx-4 mb-5">
 						<Link to="/">Home</Link>
 					</li>
-					<li className="mx-4 mb-5 hover:text-cosBlue">
+					<li className="hover:text-cosBlue mx-4 mb-5">
 						<Link to="/about-us">About Us</Link>
 					</li>
-					<li className="mx-4 mb-5 hover:text-cosBlue">
+					<li className="hover:text-cosBlue mx-4 mb-5">
 						<Link to="HowItWorks">How it Works</Link>
 					</li>
-					<li className="mx-4 mb-5 hover:text-cosBlue">
+					<li className="hover:text-cosBlue mx-4 mb-5">
 						<Link to="/faq">FAQs</Link>
 					</li>
-					<li className="mx-4 mb-5 hover:text-cosBlue">
+					<li className="hover:text-cosBlue mx-4 mb-5">
 						<Link to="ContactUs">Contact Us</Link>
 					</li>
 				</ul>
-				<button className="rounded-lg bg-cosBlue px-3 py-2 text-xl text-textWhite">Get Started</button>
+
+				<button>
+					<Link to="/signin" className="bg-cosBlue text-textWhite block rounded-lg px-3 py-2 text-xl">
+						Get Started
+					</Link>
+				</button>
 			</div>
 		</nav>
 	);

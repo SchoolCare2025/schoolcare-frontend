@@ -71,17 +71,17 @@ function AddressPage() {
 					className="mt-3 gap-8 md:gap-[56px]"
 					onSubmit={(event) => void onSubmit(event)}
 				>
-					<Form.Item<typeof methods.control> name="nationality" className="gap-4">
+					<Form.Field<typeof methods.control> name="nationality" className="gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">
 							School nationality
 						</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
+											base: `border-school-gray h-[60px] rounded-[10px] border-2 px-8
 											text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -108,31 +108,31 @@ function AddressPage() {
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="address" className="gap-4">
+					<Form.Field<typeof methods.control> name="address" className="gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">
 							School Address
 						</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school address"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
+							className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="state" className="w-full gap-4">
+					<Form.Field<typeof methods.control> name="state" className="w-full gap-4">
 						<Form.Label className="font-medium">State</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
+											base: `border-school-gray h-[60px] rounded-[10px] border-2 px-8
 											text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -165,13 +165,13 @@ function AddressPage() {
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<div className="flex justify-between gap-10 md:gap-[75px]">
-						<Form.Item<typeof methods.control> name="local_govt" className="w-full gap-4">
+						<Form.Field<typeof methods.control> name="local_govt" className="w-full gap-4">
 							<Form.Label className="font-medium">LGA</Form.Label>
 
-							<Form.Controller
+							<Form.FieldController
 								render={({ field }) => (
 									<Select.Root
 										name={field.name}
@@ -180,7 +180,7 @@ function AddressPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
+												base: `border-school-gray h-[60px] rounded-[10px] border-2 px-8
 												text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -214,20 +214,20 @@ function AddressPage() {
 							/>
 
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />
-						</Form.Item>
+						</Form.Field>
 
-						<Form.Item<typeof methods.control> name="postal_code" className="w-full gap-4">
+						<Form.Field<typeof methods.control> name="postal_code" className="w-full gap-4">
 							<Form.Label className="font-semibold">School postal code</Form.Label>
 
 							<Form.Input
 								type="number"
 								placeholder="Enter school postal code"
-								className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
+								className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
 									md:h-[75px] md:rounded-[20px] md:text-base"
 							/>
 
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />
-						</Form.Item>
+						</Form.Field>
 					</div>
 
 					<div className="mt-5 flex gap-4 self-end">
@@ -246,8 +246,8 @@ function AddressPage() {
 							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 							type="submit"
 							className={cnMerge(
-								`flex min-w-[77px] max-w-fit items-center justify-center gap-3 rounded-[4px]
-								bg-school-blue px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
+								`bg-school-blue flex max-w-fit min-w-[77px] items-center justify-center gap-3
+								rounded-[4px] px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
 								md:px-5 md:py-2 md:text-[18px]`,
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}

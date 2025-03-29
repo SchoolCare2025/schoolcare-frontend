@@ -79,16 +79,16 @@ function UploadPage() {
 					className="gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="subject" className="w-full gap-4">
+					<Form.Field<typeof methods.control> name="subject" className="w-full gap-4">
 						<Form.Label className="font-medium">Subject</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-											text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+											base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+											rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
@@ -117,12 +117,12 @@ function UploadPage() {
 								</Select.Root>
 							)}
 						/>
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="file" className="w-full gap-4">
+					<Form.Field<typeof methods.control> name="file" className="w-full gap-4">
 						<Form.Label className="font-medium">Upload CSV Result file</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<>
 									<DropZoneInput value={field.value} onChange={field.onChange} />
@@ -135,13 +135,13 @@ function UploadPage() {
 								</>
 							)}
 						/>
-					</Form.Item>
+					</Form.Field>
 
 					<button
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						type="submit"
 						className={cnMerge(
-							`flex w-[120.5px] items-center justify-center self-end rounded-[10px] bg-school-blue
+							`bg-school-blue flex w-[120.5px] items-center justify-center self-end rounded-[10px]
 							px-8 py-4 text-[18px] font-bold text-white`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}

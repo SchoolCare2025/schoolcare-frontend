@@ -47,25 +47,25 @@ function ViewSingleStudent() {
 					className="gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="reg_number" className="w-full gap-4">
+					<Form.Field<typeof methods.control> name="reg_number" className="w-full gap-4">
 						<Form.Label className="font-medium">Reg. Number*</Form.Label>
 
 						<Form.Input
 							placeholder="Enter student's reg number"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
 								text-[14px] md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
 					<div className="flex gap-6 self-end">
 						<button
 							type="reset"
-							className="max-w-fit rounded-[10px] border border-school-blue bg-white px-8 py-4
-								text-[18px] font-bold text-school-blue"
+							className="border-school-blue text-school-blue max-w-fit rounded-[10px] border
+								bg-white px-8 py-4 text-[18px] font-bold"
 						>
 							Cancel
 						</button>
@@ -74,7 +74,7 @@ function ViewSingleStudent() {
 							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 							type="submit"
 							className={cnMerge(
-								`flex w-[150.5px] items-center justify-center rounded-[10px] bg-school-blue px-8
+								`bg-school-blue flex w-[150.5px] items-center justify-center rounded-[10px] px-8
 								py-4 text-[18px] font-bold text-white`,
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}

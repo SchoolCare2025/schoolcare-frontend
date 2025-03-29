@@ -55,8 +55,8 @@ function PersonalInfoPage() {
 					className="mt-3 gap-8 md:gap-[56px]"
 					onSubmit={(event) => void onSubmit(event)}
 				>
-					<Form.Item<typeof methods.control> name="logo">
-						<Form.Controller
+					<Form.Field<typeof methods.control> name="logo">
+						<Form.FieldController
 							render={({ field }) => (
 								<DropZone
 									classNames={{ input: "hidden" }}
@@ -82,7 +82,7 @@ function PersonalInfoPage() {
 											<button type="button" onClick={() => inputRef.current?.click()}>
 												<EditIcon
 													className={cnMerge(
-														"absolute bottom-2 right-3 size-[18px] md:size-[40px]",
+														"absolute right-3 bottom-2 size-[18px] md:size-[40px]",
 														logoPreview && "[&_path]:stroke-school-blue"
 													)}
 												/>
@@ -92,41 +92,41 @@ function PersonalInfoPage() {
 								</DropZone>
 							)}
 						/>
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="name" className="gap-4">
+					<Form.Field<typeof methods.control> name="name" className="gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">
 							Name of School
 						</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school name"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
+							className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="email" className="gap-4">
+					<Form.Field<typeof methods.control> name="email" className="gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">School Email</Form.Label>
 
 						<Form.Input
 							type="email"
 							placeholder="Enter school email"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
+							className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<button
 						disabled={!methods.formState.isValid || methods.formState.isSubmitting}
 						type="submit"
 						className={cnMerge(
-							`flex min-w-[77px] max-w-fit items-center justify-center gap-3 self-end rounded-[4px]
-							bg-school-blue px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
+							`bg-school-blue flex max-w-fit min-w-[77px] items-center justify-center gap-3 self-end
+							rounded-[4px] px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
 							md:px-5 md:py-2 md:text-[18px]`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}

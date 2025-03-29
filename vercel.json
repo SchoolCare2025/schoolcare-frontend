@@ -1,1 +1,10 @@
-{ "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }] }
+{
+	"trailingSlash": false,
+
+	"rewrites": [
+		{
+			"source": "/(.*)",
+			"destination": "/"
+		}
+	]
+}

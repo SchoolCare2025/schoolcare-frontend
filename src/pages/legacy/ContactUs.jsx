@@ -57,7 +57,7 @@ const ContactUs = () => {
 					<input
 						type="text"
 						placeholder="Enter your name"
-						className="w-[100%] rounded-lg border-2 p-3 outline-none"
+						className="w-[100%] rounded-lg border-2 p-3 outline-hidden"
 					/>
 					<div className="my-3 gap-4 sm:flex">
 						<div>
@@ -65,7 +65,7 @@ const ContactUs = () => {
 							<input
 								type="text"
 								placeholder="Enter your Email"
-								className="rounded-lg border-2 p-2 outline-none sm:w-[100%]"
+								className="rounded-lg border-2 p-2 outline-hidden sm:w-[100%]"
 							/>
 						</div>
 
@@ -74,7 +74,7 @@ const ContactUs = () => {
 							<input
 								type="text"
 								placeholder="Enter your Phone"
-								className="rounded-lg border-2 p-2 outline-none sm:w-[100%]"
+								className="rounded-lg border-2 p-2 outline-hidden sm:w-[100%]"
 							/>
 						</div>
 					</div>
@@ -82,14 +82,14 @@ const ContactUs = () => {
 					<input
 						type="text"
 						placeholder="Enter your subject"
-						className="w-[100%] rounded-lg border-2 p-3 outline-none"
+						className="w-[100%] rounded-lg border-2 p-3 outline-hidden"
 					/>
 
 					<h1 className="mt-4 font-semibold">Message*</h1>
 					<input
 						type="text"
 						placeholder="Enter your message"
-						className="w-[100%] rounded-lg border-2 pb-20 pl-3 outline-none"
+						className="w-[100%] rounded-lg border-2 pb-20 pl-3 outline-hidden"
 					/>
 					<button className="my-3 mt-10 rounded-lg bg-cosBlue p-2 text-cosWhite">Send Message</button>
 				</div>

@@ -44,7 +44,7 @@ const Footer = () => {
 				<span className="font-semibold text-black lg:text-[20px]">Leave Us a Message</span>
 				<textarea
 					className="mx-auto my-3 w-full max-w-lg resize-none overflow-auto rounded-lg border
-						border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-cosBlue"
+						border-gray-300 p-2 focus:outline-hidden focus:ring-2 focus:ring-cosBlue"
 					name=""
 					id=""
 					rows="4"

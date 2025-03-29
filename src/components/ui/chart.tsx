@@ -67,6 +67,7 @@ export function ChartContainer(
 	const uniqueId = useId();
 	const chartId = `chart-${id ?? uniqueId.replaceAll(":", "")}`;
 
+	// eslint-disable-next-line react/no-unstable-context-value
 	const contextValue = { config };
 
 	return (
@@ -74,17 +75,16 @@ export function ChartContainer(
 			<div
 				data-chart={chartId}
 				className={cnMerge(
-					`flex aspect-video justify-center text-xs
-					[&_.recharts-cartesian-axis-tick_text]:fill-shadcn-muted-foreground
+					`[&_.recharts-cartesian-axis-tick_text]:fill-shadcn-muted-foreground
 					[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-shadcn-border/50
 					[&_.recharts-curve.recharts-tooltip-cursor]:stroke-shadcn-border
-					[&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none
 					[&_.recharts-polar-grid_[stroke='#ccc']]:stroke-shadcn-border
 					[&_.recharts-radial-bar-background-sector]:fill-shadcn-muted
 					[&_.recharts-rectangle.recharts-tooltip-cursor]:fill-shadcn-muted
-					[&_.recharts-reference-line_[stroke='#ccc']]:stroke-shadcn-border
-					[&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none
-					[&_.recharts-surface]:outline-none`,
+					[&_.recharts-reference-line_[stroke='#ccc']]:stroke-shadcn-border flex aspect-video
+					justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent
+					[&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden
+					[&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden`,
 					className
 				)}
 				{...restOfProps}
@@ -100,7 +100,7 @@ export function ChartContainer(
 export function ChartStyle(props: { config: ChartConfig; id: string }) {
 	const { config, id } = props;
 
-	const colorConfig = Object.entries(config).filter(([, _config]) => _config.theme ?? _config.color);
+	const colorConfig = Object.entries(config).filter(([, $config]) => $config.theme ?? $config.color);
 
 	if (colorConfig.length === 0) {
 		return null;
@@ -194,8 +194,8 @@ export function ChartTooltipContent(
 		<div
 			ref={ref}
 			className={cnMerge(
-				`grid min-w-32 items-start gap-1.5 rounded-lg border border-shadcn-border/50
-				bg-shadcn-background px-2.5 py-1.5 text-xs shadow-xl`,
+				`border-shadcn-border/50 bg-shadcn-background grid min-w-32 items-start gap-1.5 rounded-lg
+				border px-2.5 py-1.5 text-xs shadow-xl`,
 				className
 			)}
 		>
@@ -210,8 +210,8 @@ export function ChartTooltipContent(
 						<div
 							key={item.dataKey}
 							className={cnMerge(
-								`flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5
-								[&>svg]:text-shadcn-muted-foreground`,
+								`[&>svg]:text-shadcn-muted-foreground flex w-full flex-wrap items-stretch gap-2
+								[&>svg]:size-2.5`,
 								indicator === "dot" && "items-center"
 							)}
 						>
@@ -227,7 +227,7 @@ export function ChartTooltipContent(
 										!hideIndicator && (
 											<div
 												className={cnMerge(
-													"shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]",
+													"shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
 													{
 														"h-2.5 w-2.5": indicator === "dot",
 														"my-0.5": nestLabel && indicator === "dashed",
@@ -259,7 +259,7 @@ export function ChartTooltipContent(
 										</div>
 										{Boolean(item.value) && (
 											<span
-												className="font-mono font-medium tabular-nums text-shadcn-foreground"
+												className="text-shadcn-foreground font-mono font-medium tabular-nums"
 											>
 												{item.value?.toLocaleString()}
 											</span>
@@ -320,7 +320,7 @@ export function ChartLegendContent(
 					<div
 						key={item.value}
 						className={cnMerge(
-							"flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-shadcn-muted-foreground",
+							"[&>svg]:text-shadcn-muted-foreground flex items-center gap-1.5 [&>svg]:size-3",
 							classNames?.legendItem
 						)}
 					>

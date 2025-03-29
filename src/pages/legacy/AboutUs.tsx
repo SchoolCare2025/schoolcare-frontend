@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/no-unnecessary-arbitrary-value */
 import YoungLady from "@/assets/images/youngLady.jpg";
 import { cnMerge } from "@/lib/utils/cn";
 import { Link } from "react-router";
@@ -14,13 +13,13 @@ const AboutUs = ({
 		<div className={`w-full overflow-hidden px-5 md:px-3 ${className}`}>
 			<h2 className="mb-16 text-center text-4xl font-bold">About Us</h2>
 			<div
-				className="mx-4 flex flex-col-reverse items-center justify-between gap-24 md:flex-row
-					md:items-center md:justify-center md:gap-9 lg:justify-center sxl:px-9"
+				className="sxl:px-9 mx-4 flex flex-col-reverse items-center justify-between gap-24 md:flex-row
+					md:items-center md:justify-center md:gap-9 lg:justify-center"
 			>
-				<div className="w-full md:mt-5 md:w-full sxl:w-full">
+				<div className="sxl:w-full w-full md:mt-5 md:w-full">
 					<p
 						className={cnMerge(
-							"text-xl leading-8 md:px-2 md:text-base lg:text-[18px] sxl:pr-24",
+							"sxl:pr-24 text-xl leading-8 md:px-2 md:text-base lg:text-[18px]",
 							variant === "home" && "line-clamp-6"
 						)}
 					>
@@ -51,25 +50,25 @@ const AboutUs = ({
 				</div>
 
 				<div
-					className="relative w-full rounded-lg md:w-[50%] lg:items-center lg:justify-center
-						sxl:w-[50%]"
+					className="sxl:w-[50%] relative w-full rounded-lg md:w-[50%] lg:items-center
+						lg:justify-center"
 				>
 					<div
-						className="absolute left-[-10%] top-10 flex h-10 w-44 items-center justify-center
-							rounded-xl bg-cosWhite py-4 pl-10 pr-6 text-center text-[10px] font-semibold
-							text-resultBtn shadow-xl max-md:px-0 md:right-96 md:top-32"
+						className="bg-cosWhite text-resultBtn absolute top-10 left-[-10%] flex h-10 w-44
+							items-center justify-center rounded-xl py-4 pr-6 pl-10 text-center text-[10px]
+							font-semibold shadow-xl max-md:px-0 md:top-32 md:right-96"
 					>
 						<p>Get access to academic results</p>
 					</div>
 
-					<div className="md:w-[105%] sxl:w-full">
+					<div className="sxl:w-full md:w-[105%]">
 						<img src={YoungLady} alt="" className="h-auto w-full min-w-[300px] rounded-2xl" />
 					</div>
 
 					<div
-						className="absolute right-[-10%] top-32 flex h-10 w-36 items-center justify-center
-							rounded-xl bg-cosWhite px-1 py-4 text-center text-xs font-semibold text-cosBlue
-							shadow-xl md:top-48 md:px-3 lg:top-72 sxl:top-80"
+						className="bg-cosWhite text-cosBlue sxl:top-80 absolute top-32 right-[-10%] flex h-10
+							w-36 items-center justify-center rounded-xl px-1 py-4 text-center text-xs
+							font-semibold shadow-xl md:top-48 md:px-3 lg:top-72"
 					>
 						<p>Track your performance</p>
 					</div>

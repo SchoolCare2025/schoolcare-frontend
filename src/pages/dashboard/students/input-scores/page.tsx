@@ -68,10 +68,10 @@ function AddScoresPage() {
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<div className="flex gap-[70px]">
-						<Form.Item<typeof methods.control> name="session" className="w-full gap-4">
+						<Form.Field<typeof methods.control> name="session" className="w-full gap-4">
 							<Form.Label className="font-medium">Session</Form.Label>
 
-							<Form.Controller
+							<Form.FieldController
 								render={({ field }) => (
 									<Select.Root
 										name={field.name}
@@ -80,8 +80,8 @@ function AddScoresPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white
-												px-8 text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
@@ -111,12 +111,12 @@ function AddScoresPage() {
 									</Select.Root>
 								)}
 							/>
-						</Form.Item>
+						</Form.Field>
 
-						<Form.Item<typeof methods.control> name="term" className="w-full gap-4">
+						<Form.Field<typeof methods.control> name="term" className="w-full gap-4">
 							<Form.Label className="font-medium">Term</Form.Label>
 
-							<Form.Controller
+							<Form.FieldController
 								render={({ field }) => (
 									<Select.Root
 										name={field.name}
@@ -125,8 +125,8 @@ function AddScoresPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white
-												px-8 text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
@@ -156,19 +156,19 @@ function AddScoresPage() {
 									</Select.Root>
 								)}
 							/>
-						</Form.Item>
+						</Form.Field>
 					</div>
 
-					<Form.Item<typeof methods.control> name="school_class" className="w-full gap-4">
+					<Form.Field<typeof methods.control> name="school_class" className="w-full gap-4">
 						<Form.Label className="font-medium">Choose class</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-											text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+											base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+											rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
@@ -197,13 +197,13 @@ function AddScoresPage() {
 								</Select.Root>
 							)}
 						/>
-					</Form.Item>
+					</Form.Field>
 
 					<div className="flex gap-6 self-end">
 						<button
 							type="reset"
-							className="max-w-fit rounded-[10px] border border-school-blue bg-white px-8 py-4
-								text-[18px] font-bold text-school-blue"
+							className="border-school-blue text-school-blue max-w-fit rounded-[10px] border
+								bg-white px-8 py-4 text-[18px] font-bold"
 						>
 							Cancel
 						</button>
@@ -212,7 +212,7 @@ function AddScoresPage() {
 							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 							type="submit"
 							className={cnMerge(
-								`flex w-[150.5px] items-center justify-center rounded-[10px] bg-school-blue px-8
+								`bg-school-blue flex w-[150.5px] items-center justify-center rounded-[10px] px-8
 								py-4 text-[18px] font-bold text-white`,
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}

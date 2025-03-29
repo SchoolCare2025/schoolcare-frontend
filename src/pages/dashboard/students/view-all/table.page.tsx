@@ -29,8 +29,8 @@ function TablePage() {
 								<Table.Head
 									key={column}
 									className={cnMerge(
-										`border-b border-b-[hsl(0,0%,3%)] px-7 py-4 [&:not(:last-child)]:border-r
-										[&:not(:last-child)]:border-r-[hsl(0,0%,3%)]`,
+										`border-b border-b-[hsl(0,0%,3%)] px-7 py-4 not-last:border-r
+										not-last:border-r-[hsl(0,0%,3%)]`,
 										tableData?.length === 0 && "border-b-0"
 									)}
 								>

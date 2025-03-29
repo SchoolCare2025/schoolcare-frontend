@@ -61,16 +61,16 @@ function RegisterSubjectPage() {
 					className="gap-8"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="subject" className="gap-4">
+					<Form.Field<typeof methods.control> name="subject" className="gap-4">
 						<Form.Label className="font-medium">Select Subject</Form.Label>
 
-						<Form.Controller
+						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-											text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+											base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+											rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
@@ -101,7 +101,7 @@ function RegisterSubjectPage() {
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
@@ -109,8 +109,8 @@ function RegisterSubjectPage() {
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						type="submit"
 						className={cnMerge(
-							`mt-5 flex h-[56px] w-full max-w-[150px] items-center justify-center self-end
-							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`,
+							`bg-school-blue mt-5 flex h-[56px] w-full max-w-[150px] items-center justify-center
+							self-end rounded-[10px] text-[18px] font-bold text-white`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>

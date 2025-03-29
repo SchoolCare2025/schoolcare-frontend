@@ -78,35 +78,35 @@ function RegisterStudentPage() {
 					className="gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Item<typeof methods.control> name="surname" className="gap-4">
+					<Form.Field<typeof methods.control> name="surname" className="gap-4">
 						<Form.Label className="font-medium">Surname*</Form.Label>
 
 						<Form.Input
 							placeholder="Enter student's surname"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
 								text-[14px] md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
-					<Form.Item<typeof methods.control> name="other_names" className="gap-4">
+					<Form.Field<typeof methods.control> name="other_names" className="gap-4">
 						<Form.Label className="font-medium">Other Names*</Form.Label>
 
 						<Form.Input
 							placeholder="Enter student's other names"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
+							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
 								text-[14px] md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
-					</Form.Item>
+					</Form.Field>
 
 					<div className="flex gap-[70px]">
-						<Form.Item<typeof methods.control> name="gender" className="w-full gap-4">
+						<Form.Field<typeof methods.control> name="gender" className="w-full gap-4">
 							<Form.Label className="font-medium">Gender</Form.Label>
 
-							<Form.Controller
+							<Form.FieldController
 								render={({ field }) => (
 									<Select.Root
 										name={field.name}
@@ -115,8 +115,8 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white
-												px-8 text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
@@ -149,12 +149,12 @@ function RegisterStudentPage() {
 							/>
 
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />
-						</Form.Item>
+						</Form.Field>
 
-						<Form.Item<typeof methods.control> name="school_class" className="w-full gap-4">
+						<Form.Field<typeof methods.control> name="school_class" className="w-full gap-4">
 							<Form.Label className="font-medium">Class</Form.Label>
 
-							<Form.Controller
+							<Form.FieldController
 								render={({ field }) => (
 									<Select.Root
 										name={field.name}
@@ -163,8 +163,8 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white
-												px-8 text-[14px] data-[placeholder]:text-school-gray md:text-base`,
+												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
+												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
@@ -197,15 +197,15 @@ function RegisterStudentPage() {
 							/>
 
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />
-						</Form.Item>
+						</Form.Field>
 					</div>
 
 					<button
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						type="submit"
 						className={cnMerge(
-							`flex h-[56px] w-full max-w-[150px] items-center justify-center self-center
-							rounded-[10px] bg-school-blue text-[18px] font-bold text-white`,
+							`bg-school-blue flex h-[56px] w-full max-w-[150px] items-center justify-center
+							self-center rounded-[10px] text-[18px] font-bold text-white`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>

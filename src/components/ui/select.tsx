@@ -16,7 +16,7 @@ function SelectTrigger(
 			className={cnMerge(
 				`flex h-10 w-full items-center justify-between whitespace-nowrap rounded-md border
 				border-shadcn-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-shadcn-background
-				focus:outline-none focus:ring-1 focus:ring-shadcn-ring disabled:cursor-not-allowed
+				focus:outline-hidden focus:ring-1 focus:ring-shadcn-ring disabled:cursor-not-allowed
 				disabled:opacity-50 [&>span]:line-clamp-1`,
 				[classNames?.base, className]
 			)}
@@ -91,7 +91,7 @@ function SelectContent(
 					className={cnMerge(
 						"flex flex-col p-1",
 						position === "popper" &&
-							"h-[--radix-select-trigger-height] w-full min-w-[--radix-select-trigger-width]",
+							"h-(--radix-select-trigger-height) w-full min-w-(--radix-select-trigger-width)",
 						classNames?.viewport
 					)}
 				>
@@ -122,8 +122,8 @@ function SelectItem(props: InferProps<typeof SelectPrimitive.Item> & { withIndic
 		<SelectPrimitive.Item
 			className={cnMerge(
 				`relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-[25px] pr-2
-				text-[13px] outline-none focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
-				data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+				text-[13px] outline-hidden focus:bg-shadcn-accent focus:text-shadcn-accent-foreground
+				data-disabled:pointer-events-none data-disabled:opacity-50`,
 				className
 			)}
 			{...restOfProps}
