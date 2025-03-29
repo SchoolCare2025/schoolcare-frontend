@@ -53,8 +53,8 @@ function TablePage() {
 							{columns.map((column) => (
 								<Table.Head
 									key={column}
-									className="border-b border-b-[hsl(0,0%,3%)] px-7 py-4
-										not-last:border-r not-last:border-r-[hsl(0,0%,3%)]"
+									className="border-b border-b-[hsl(0,0%,3%)] px-7 py-4 not-last:border-r
+										not-last:border-r-[hsl(0,0%,3%)]"
 								>
 									{column}
 								</Table.Head>
@@ -65,9 +65,9 @@ function TablePage() {
 						{tableData.map((student) => (
 							<Table.Row
 								key={student["Reg. No"]}
-								className="[&:not(:last-child)_td]:border-b
-									[&:not(:last-child)_td]:border-b-[hsl(0,0%,3%)] [&_td:not(:last-child)]:border-r
-									[&_td:not(:last-child)]:border-r-[hsl(0,0%,3%)]"
+								className="[&_td:not(:last-child)]:border-r
+									[&_td:not(:last-child)]:border-r-[hsl(0,0%,3%)] [&:not(:last-child)_td]:border-b
+									[&:not(:last-child)_td]:border-b-[hsl(0,0%,3%)]"
 							>
 								{columns.map((column) => (
 									<Table.Cell key={column} className="h-[56px] px-7">
@@ -83,15 +83,15 @@ function TablePage() {
 			<section className="mt-auto flex gap-6 self-end">
 				<button
 					type="reset"
-					className="max-w-fit rounded-[10px] border border-school-blue bg-white px-8 py-4 text-[18px]
-						font-bold text-school-blue"
+					className="border-school-blue text-school-blue max-w-fit rounded-[10px] border bg-white px-8
+						py-4 text-[18px] font-bold"
 				>
 					Cancel
 				</button>
 
 				<button
 					type="button"
-					className="max-w-fit rounded-[10px] bg-school-blue px-8 py-4 text-[18px] font-bold
+					className="bg-school-blue max-w-fit rounded-[10px] px-8 py-4 text-[18px] font-bold
 						text-white"
 					onClick={handleCSVDownload}
 				>

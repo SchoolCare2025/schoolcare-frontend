@@ -4,11 +4,11 @@ const WhoWeAre = () => {
 	return (
 		<div>
 			<div className="grid text-center sm:gap-6 sm:px-10 md:my-6 md:flex">
-				<div className="md:w-[50%] md:object-cover sxl:order-2">
+				<div className="sxl:order-2 md:w-[50%] md:object-cover">
 					<img src={Coworkers} alt="" className="rounded-xl" />
 				</div>
 
-				<div className="md:w-[50%] md:text-start sxl:order-1 sxl:text-start sxl:text-[24px]">
+				<div className="sxl:order-1 sxl:text-start sxl:text-[24px] md:w-[50%] md:text-start">
 					<p>
 						The MYSKUL.COM.NG team is a dynamic assembly of technology experts and enthusiasts,
 						unified by their passion for innovation and problem-solving. Comprising individuals with
@@ -22,7 +22,7 @@ const WhoWeAre = () => {
 				</div>
 			</div>
 
-			<div className="md:px-10 sxl:text-[24px]">
+			<div className="sxl:text-[24px] md:px-10">
 				The MYSKUL.COM.NG team is a dynamic assembly of technology experts and enthusiasts, unified by
 				their passion for innovation and problem-solving. Comprising individuals with diverse skills
 				and backgrounds, this team collaborates synergistically to address real-world challenges
@@ -39,7 +39,7 @@ const WhoWeAre = () => {
 					md:px-12"
 			>
 				<div
-					className="rounded-xl bg-cosWhite text-center sm:px-6 sm:py-12 md:h-72 md:py-7 lg:w-[100%]"
+					className="bg-cosWhite rounded-xl text-center sm:px-6 sm:py-12 md:h-72 md:py-7 lg:w-[100%]"
 				>
 					<div>
 						<i className="ri-lightbulb-flash-line text-cosBlue sm:text-[56px] md:text-[44px]"></i>
@@ -53,8 +53,8 @@ const WhoWeAre = () => {
 
 				<div>
 					<div
-						className="rounded-xl bg-cosWhite text-center sm:px-6 sm:py-7 md:flex md:h-48
-							md:items-center md:px-4 lg:w-[100%] sxl:w-[90%]"
+						className="bg-cosWhite sxl:w-[90%] rounded-xl text-center sm:px-6 sm:py-7 md:flex md:h-48
+							md:items-center md:px-4 lg:w-[100%]"
 					>
 						<div className="mr-3">
 							<i className="ri-verified-badge-line text-cosBlue sm:text-[56px] md:text-[44px]"></i>
@@ -69,9 +69,9 @@ const WhoWeAre = () => {
 					</div>
 
 					<div
-						className="rounded-xl bg-cosWhite text-center sm:mt-12 sm:px-6 sm:py-7 md:col-start-2
-							md:mt-6 md:flex md:h-48 md:grid-rows-1 md:items-center md:px-4 lg:w-[100%]
-							sxl:w-[90%]"
+						className="bg-cosWhite sxl:w-[90%] rounded-xl text-center sm:mt-12 sm:px-6 sm:py-7
+							md:col-start-2 md:mt-6 md:flex md:h-48 md:grid-rows-1 md:items-center md:px-4
+							lg:w-[100%]"
 					>
 						<div className="mr-3">
 							<i className="ri-team-line text-cosBlue sm:text-[56px] md:text-[44px]"></i>

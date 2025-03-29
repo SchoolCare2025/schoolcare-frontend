@@ -29,8 +29,8 @@ function TablePage() {
 							{columns.map((column) => (
 								<Table.Head
 									key={column}
-									className="border-b border-b-[hsl(0,0%,3%)] px-7 py-4
-										not-last:border-r not-last:border-r-[hsl(0,0%,3%)]"
+									className="border-b border-b-[hsl(0,0%,3%)] px-7 py-4 not-last:border-r
+										not-last:border-r-[hsl(0,0%,3%)]"
 								>
 									{column}
 								</Table.Head>
@@ -41,9 +41,9 @@ function TablePage() {
 						{tableData.map((student) => (
 							<Table.Row
 								key={student.Name}
-								className="[&:not(:last-child)_td]:border-b
-									[&:not(:last-child)_td]:border-b-[hsl(0,0%,3%)] [&_td:not(:last-child)]:border-r
-									[&_td:not(:last-child)]:border-r-[hsl(0,0%,3%)]"
+								className="[&_td:not(:last-child)]:border-r
+									[&_td:not(:last-child)]:border-r-[hsl(0,0%,3%)] [&:not(:last-child)_td]:border-b
+									[&:not(:last-child)_td]:border-b-[hsl(0,0%,3%)]"
 							>
 								{columns.map((column) => (
 									<Table.Cell key={column} className="h-[56px] px-7">

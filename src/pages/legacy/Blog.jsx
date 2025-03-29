@@ -9,8 +9,8 @@ const Blogs = () => {
 			<h1 className="text-center text-4xl font-bold">Latest From Our Blog</h1>
 
 			<div
-				className="mt-12 flex flex-col items-center justify-center gap-12 px-12 md:grid md:grid-cols-2
-					lg:grid-cols-3 sxl:grid-cols-4"
+				className="sxl:grid-cols-4 mt-12 flex flex-col items-center justify-center gap-12 px-12 md:grid
+					md:grid-cols-2 lg:grid-cols-3"
 			>
 				<div className="h-full w-full" data-aos="fade-up">
 					<div>

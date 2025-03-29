@@ -28,7 +28,7 @@ function TableFooter(props: InferProps<HTMLTableSectionElement>) {
 
 	return (
 		<tfoot
-			className={cnMerge("border-t bg-shadcn-muted/50 font-medium last:[&>tr]:border-b-0", className)}
+			className={cnMerge("bg-shadcn-muted/50 border-t font-medium last:[&>tr]:border-b-0", className)}
 			{...restOfProps}
 		/>
 	);
@@ -40,7 +40,7 @@ function TableRow(props: InferProps<HTMLTableRowElement>) {
 	return (
 		<tr
 			className={cnMerge(
-				"border-b transition-colors hover:bg-shadcn-muted/50 data-[state=selected]:bg-shadcn-muted",
+				"hover:bg-shadcn-muted/50 data-[state=selected]:bg-shadcn-muted border-b transition-colors",
 				className
 			)}
 			{...restOfProps}
@@ -54,7 +54,7 @@ function TableHead(props: InferProps<HTMLTableCellElement>) {
 	return (
 		<th
 			className={cnMerge(
-				`h-10 px-2 text-left align-middle font-medium text-shadcn-muted-foreground
+				`text-shadcn-muted-foreground h-10 px-2 text-left align-middle font-medium
 				[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]`,
 				className
 			)}
@@ -82,7 +82,7 @@ function TableCaption(props: InferProps<HTMLTableCaptionElement>) {
 
 	return (
 		<caption
-			className={cnMerge("mt-4 text-sm text-shadcn-muted-foreground", className)}
+			className={cnMerge("text-shadcn-muted-foreground mt-4 text-sm", className)}
 			{...restOfProps}
 		/>
 	);

@@ -1,22 +1,22 @@
 const HowItWorks = () => {
 	return (
 		<div
-			className="mb-36 mt-12 grid gap-10 px-14 md:grid-cols-2 md:items-center md:justify-center
-				sxl:px-28"
+			className="sxl:px-28 mt-12 mb-36 grid gap-10 px-14 md:grid-cols-2 md:items-center
+				md:justify-center"
 		>
-			<div className="self-stretch rounded-lg bg-footerBg px-10 py-10">
-				<div className="grid h-8 w-8 items-center justify-center rounded-full bg-cosBlue text-white">
+			<div className="bg-footerBg self-stretch rounded-lg px-10 py-10">
+				<div className="bg-cosBlue grid h-8 w-8 items-center justify-center rounded-full text-white">
 					1
 				</div>
 
 				<div className="flex items-center justify-center gap-3">
-					<i className="ri-login-circle-line text-[40px] text-cosBlue"></i>
+					<i className="ri-login-circle-line text-cosBlue text-[40px]"></i>
 
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Sign Up</h1>
 						<p className="text-[18px]">
 							To begin using our system, please{" "}
-							<a href="" className="hover: font-semibold text-cosBlue">
+							<a href="" className="hover: text-cosBlue font-semibold">
 								Click Here
 							</a>{" "}
 							and sign up with your school name and email and have access to your school admin
@@ -26,13 +26,13 @@ const HowItWorks = () => {
 				</div>
 			</div>
 
-			<div className="rounded-lg bg-footerBg px-10 py-10 md:relative md:top-[40px]">
-				<div className="grid h-8 w-8 items-center justify-center rounded-full bg-cosBlue text-white">
+			<div className="bg-footerBg rounded-lg px-10 py-10 md:relative md:top-[40px]">
+				<div className="bg-cosBlue grid h-8 w-8 items-center justify-center rounded-full text-white">
 					2
 				</div>
 
 				<div className="flex items-center justify-center gap-3">
-					<i className="ri-function-add-line text-[40px] text-cosBlue"></i>
+					<i className="ri-function-add-line text-cosBlue text-[40px]"></i>
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Add Admin/Editor(s)</h1>
 						<p className="text-[18px]">
@@ -43,13 +43,13 @@ const HowItWorks = () => {
 				</div>
 			</div>
 
-			<div className="rounded-lg bg-footerBg px-10 py-10">
-				<div className="grid h-8 w-8 items-center justify-center rounded-full bg-cosBlue text-white">
+			<div className="bg-footerBg rounded-lg px-10 py-10">
+				<div className="bg-cosBlue grid h-8 w-8 items-center justify-center rounded-full text-white">
 					3
 				</div>
 
 				<div className="flex items-center justify-center gap-3">
-					<i className="ri-user-add-line text-[35px] text-cosBlue"></i>
+					<i className="ri-user-add-line text-cosBlue text-[35px]"></i>
 
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Register Student(s)</h1>
@@ -63,13 +63,13 @@ const HowItWorks = () => {
 				</div>
 			</div>
 
-			<div className="rounded-lg bg-footerBg px-10 py-10">
-				<div className="grid h-8 w-8 items-center justify-center rounded-full bg-cosBlue text-white">
+			<div className="bg-footerBg rounded-lg px-10 py-10">
+				<div className="bg-cosBlue grid h-8 w-8 items-center justify-center rounded-full text-white">
 					4
 				</div>
 
 				<div className="flex items-center justify-center gap-3">
-					<i className="ri-keyboard-box-line text-[35px] text-cosBlue"></i>
+					<i className="ri-keyboard-box-line text-cosBlue text-[35px]"></i>
 
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Add all the school subjects.</h1>
@@ -80,13 +80,13 @@ const HowItWorks = () => {
 				</div>
 			</div>
 
-			<div className="rounded-lg bg-footerBg px-10 py-4">
-				<div className="grid h-8 w-8 items-center justify-center rounded-full bg-cosBlue text-white">
+			<div className="bg-footerBg rounded-lg px-10 py-4">
+				<div className="bg-cosBlue grid h-8 w-8 items-center justify-center rounded-full text-white">
 					5
 				</div>
 
 				<div className="flex items-center justify-center gap-3">
-					<i className="ri-checkbox-circle-line text-[35px] text-cosBlue"></i>
+					<i className="ri-checkbox-circle-line text-cosBlue text-[35px]"></i>
 
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Input student CA and Exam scores.</h1>
@@ -98,13 +98,13 @@ const HowItWorks = () => {
 				</div>
 			</div>
 
-			<div className="rounded-lg bg-footerBg px-10 py-10">
-				<div className="grid h-8 w-8 items-center justify-center rounded-full bg-cosBlue text-white">
+			<div className="bg-footerBg rounded-lg px-10 py-10">
+				<div className="bg-cosBlue grid h-8 w-8 items-center justify-center rounded-full text-white">
 					6
 				</div>
 
 				<div className="flex items-center justify-center gap-3">
-					<i className="ri-id-card-line text-[35px] text-cosBlue"></i>
+					<i className="ri-id-card-line text-cosBlue text-[35px]"></i>
 
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Submit Scores</h1>
@@ -118,13 +118,13 @@ const HowItWorks = () => {
 				</div>
 			</div>
 
-			<div className="rounded-lg bg-footerBg px-10 py-10">
-				<div className="grid h-8 w-8 items-center justify-center rounded-full bg-cosBlue text-white">
+			<div className="bg-footerBg rounded-lg px-10 py-10">
+				<div className="bg-cosBlue grid h-8 w-8 items-center justify-center rounded-full text-white">
 					6
 				</div>
 
 				<div className="flex items-center justify-center gap-3">
-					<i className="ri-id-card-line text-[35px] text-cosBlue"></i>
+					<i className="ri-id-card-line text-cosBlue text-[35px]"></i>
 
 					<div className="grid gap-2">
 						<h1 className="text-[21px] font-semibold">Distribute Scratch Cards to Students.</h1>

@@ -51,8 +51,8 @@ function DashboardPage() {
 					<Card.Root key={item.title} className="w-[calc(100%/3)] rounded-[30px] bg-white py-8">
 						<Card.Header className="flex flex-col items-center">
 							<span
-								className="flex size-[70px] items-center justify-center rounded-full border-[3px]
-									border-school-blue"
+								className="border-school-blue flex size-[70px] items-center justify-center
+									rounded-full border-[3px]"
 							>
 								{item.icon}
 							</span>
@@ -64,7 +64,7 @@ function DashboardPage() {
 							</Card.Description>
 						</Card.Header>
 
-						<Card.Footer className="mt-3 h-4 w-full bg-school-blue" />
+						<Card.Footer className="bg-school-blue mt-3 h-4 w-full" />
 					</Card.Root>
 				)}
 			/>

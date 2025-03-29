@@ -4,8 +4,8 @@ function Navbar() {
 	return (
 		<header
 			id="NavBar"
-			className="sticky inset-[0_0_auto_0] z-100 flex w-full items-center justify-between bg-white
-				px-9 py-5 md:py-9"
+			className="sticky inset-[0_0_auto_0] z-100 flex w-full items-center justify-between bg-white px-9
+				py-5 md:py-9"
 		>
 			<DesktopNavigation />
 		</header>

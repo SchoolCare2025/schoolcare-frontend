@@ -4,7 +4,7 @@ function Main(props: React.ComponentPropsWithoutRef<"main">) {
 	const { children, className, ...restOfProps } = props;
 
 	return (
-		<main className={cnMerge("grow px-10 pb-6 pt-4", className)} {...restOfProps}>
+		<main className={cnMerge("grow px-10 pt-4 pb-6", className)} {...restOfProps}>
 			{children}
 		</main>
 	);
