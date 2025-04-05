@@ -8,6 +8,7 @@ type GlobalMeta = {
 	skipSessionCheck?: boolean;
 	toast?: {
 		error?: boolean;
+		skipAbortErrorToast?: boolean;
 		success?: boolean;
 	};
 };
@@ -19,8 +20,12 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const sharedFetchClient = createFetchClient({
-	baseURL: "https://api.schoolcare.com.ng/api",
+// const BACKEND_URL = "https://api.schoolcare.com.ng";
+
+const API_BASE_URL = "api";
+
+export const sharedFetchClient = createFetchClient({
+	baseURL: `/${API_BASE_URL}`,
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 
@@ -51,6 +56,7 @@ export const callBackendApi = <
 			...config?.meta,
 			toast: {
 				error: true,
+				skipAbortErrorToast: true,
 				...config?.meta?.toast,
 			},
 		},

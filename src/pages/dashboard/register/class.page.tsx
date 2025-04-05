@@ -138,9 +138,8 @@ function RegisterClassPage() {
 
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
-					<button
+					<Form.Submit
 						disabled={methods.formState.isSubmitting}
-						type="submit"
 						className={cnMerge(
 							`bg-school-blue mt-12 flex h-[56px] w-full max-w-[150px] items-center justify-center
 							self-end rounded-[10px] text-[18px] font-bold text-white`
@@ -151,7 +150,7 @@ function RegisterClassPage() {
 						) : (
 							"Register"
 						)}
-					</button>
+					</Form.Submit>
 				</Form.Root>
 			</section>
 		</Main>

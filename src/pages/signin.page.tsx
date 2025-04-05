@@ -5,7 +5,6 @@ import { cnMerge } from "@/lib/utils/cn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
-import { toast } from "sonner";
 import { z } from "zod";
 
 const SignInSchema = z.object({
@@ -29,17 +28,20 @@ function SigninPage() {
 	const onSubmit = async (data: SignupFormValues) => {
 		await callBackendApi<LoginData>("/login", {
 			body: data,
-			method: "POST",
 
-			onError: (ctx) => void toast.error(ctx.error.message),
+			meta: {
+				toast: {
+					success: true,
+				},
+			},
+
+			method: "POST",
 
 			onSuccess: (ctx) => {
 				if (!ctx.data.data) return;
 
 				localStorage.setItem("accessToken", ctx.data.data.access);
 				localStorage.setItem("refreshToken", ctx.data.data.refresh);
-
-				toast.success(ctx.data.message, { duration: 1000 });
 
 				void navigate("/dashboard");
 			},
@@ -96,9 +98,8 @@ function SigninPage() {
 						</Link>
 					</div>
 
-					<button
+					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
-						type="submit"
 						className={cnMerge(
 							`bg-school-blue mt-3 flex h-12 w-full max-w-[200px] items-center justify-center gap-4
 							self-center rounded-[60px] text-[18px] font-bold text-white md:h-[65px]
@@ -116,7 +117,7 @@ function SigninPage() {
 								</span>
 							</>
 						)}
-					</button>
+					</Form.Submit>
 				</Form.Root>
 			</section>
 		</main>

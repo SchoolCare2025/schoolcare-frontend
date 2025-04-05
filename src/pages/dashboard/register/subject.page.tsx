@@ -87,6 +87,7 @@ function RegisterSubjectPage() {
 											each={subjectQueryResult.data?.data ?? []}
 											render={(item) => (
 												<Select.Item
+													key={item}
 													value={item}
 													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
 														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
@@ -105,9 +106,8 @@ function RegisterSubjectPage() {
 
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
-					<button
+					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
-						type="submit"
 						className={cnMerge(
 							`bg-school-blue mt-5 flex h-[56px] w-full max-w-[150px] items-center justify-center
 							self-end rounded-[10px] text-[18px] font-bold text-white`,
@@ -119,7 +119,7 @@ function RegisterSubjectPage() {
 						) : (
 							"Register"
 						)}
-					</button>
+					</Form.Submit>
 				</Form.Root>
 			</section>
 		</Main>

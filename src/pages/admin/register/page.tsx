@@ -95,9 +95,8 @@ function AdminRegisterPage() {
 
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
-					<button
+					<Form.Submit
 						disabled={methods.formState.isSubmitting}
-						type="submit"
 						className="bg-school-blue grid w-[150px] place-content-center self-end rounded-[10px]
 							px-8 py-4 text-[18px] font-bold text-white"
 					>
@@ -106,7 +105,7 @@ function AdminRegisterPage() {
 						) : (
 							"Register"
 						)}
-					</button>
+					</Form.Submit>
 				</Form.Root>
 			</section>
 		</Main>

@@ -121,9 +121,8 @@ function PersonalInfoPage() {
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 
-					<button
+					<Form.Submit
 						disabled={!methods.formState.isValid || methods.formState.isSubmitting}
-						type="submit"
 						className={cnMerge(
 							`bg-school-blue flex max-w-fit min-w-[77px] items-center justify-center gap-3 self-end
 							rounded-[4px] px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
@@ -133,7 +132,7 @@ function PersonalInfoPage() {
 					>
 						Next
 						<IconBox icon="material-symbols:arrow-forward-ios-rounded" />
-					</button>
+					</Form.Submit>
 				</Form.Root>
 			</section>
 		</Main>

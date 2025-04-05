@@ -137,9 +137,8 @@ function UploadPage() {
 						/>
 					</Form.Field>
 
-					<button
+					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
-						type="submit"
 						className={cnMerge(
 							`bg-school-blue flex w-[120.5px] items-center justify-center self-end rounded-[10px]
 							px-8 py-4 text-[18px] font-bold text-white`,
@@ -151,7 +150,7 @@ function UploadPage() {
 						) : (
 							"Submit"
 						)}
-					</button>
+					</Form.Submit>
 				</Form.Root>
 			</section>
 		</Main>

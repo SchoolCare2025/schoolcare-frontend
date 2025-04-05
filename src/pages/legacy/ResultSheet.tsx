@@ -12,16 +12,6 @@
 // function ResultSheet() {
 // 	const [result] = useStorageState<CheckResultResponse | null>("scratch-card-result");
 
-// 	const tableData = result?.data?.students.map<StudentData>((student) => ({
-// 		[columns[0]]: student.name,
-// 		[columns[1]]: student.registration_number,
-// 		[columns[2]]: "-",
-// 		[columns[3]]: "-",
-// 		[columns[4]]: "-",
-// 		[columns[5]]: "-",
-// 		[columns[6]]: "-",
-// 	})) ?? [];
-
 // 	return (
 // 		<Main className="flex flex-col bg-white pt-12">
 // 			<section>
@@ -46,9 +36,9 @@
 // 						{tableData.map((student) => (
 // 							<Table.Row
 // 								key={student.Name}
-// 								className="[&:not(:last-child)_td]:border-b
-// 									[&:not(:last-child)_td]:border-b-[hsl(0,0%,3%)] [&_td:not(:last-child)]:border-r
-// 									[&_td:not(:last-child)]:border-r-[hsl(0,0%,3%)]"
+// 								className="[&_td:not(:last-child)]:border-r
+// 									[&_td:not(:last-child)]:border-r-[hsl(0,0%,3%)] [&:not(:last-child)_td]:border-b
+// 									[&:not(:last-child)_td]:border-b-[hsl(0,0%,3%)]"
 // 							>
 // 								{columns.map((column) => (
 // 									<Table.Cell key={column} className="h-[56px] px-7">

@@ -77,6 +77,7 @@ export function ViewAllStudentsPage() {
 											each={classesQueryResult.data?.data ?? []}
 											render={(item) => (
 												<Select.Item
+													key={`${item.school_class} ${item.grade}`}
 													value={`${item.school_class} ${item.grade}`}
 													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
 														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"

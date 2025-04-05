@@ -21,6 +21,8 @@ const toastPlugin = definePlugin(() => ({
 		},
 
 		onError: (ctx: ErrorContext<ApiErrorResponse>) => {
+			if (ctx.options.meta?.toast?.skipAbortErrorToast && ctx.error.name === "AbortError") return;
+
 			const errorMessage = isHTTPError(ctx.error)
 				? (ctx.error.errorData.errors?.message ?? ctx.error.message)
 				: ctx.error.message;

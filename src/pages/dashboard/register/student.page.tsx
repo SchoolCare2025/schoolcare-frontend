@@ -200,9 +200,8 @@ function RegisterStudentPage() {
 						</Form.Field>
 					</div>
 
-					<button
+					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
-						type="submit"
 						className={cnMerge(
 							`bg-school-blue flex h-[56px] w-full max-w-[150px] items-center justify-center
 							self-center rounded-[10px] text-[18px] font-bold text-white`,
@@ -214,7 +213,7 @@ function RegisterStudentPage() {
 						) : (
 							"Register"
 						)}
-					</button>
+					</Form.Submit>
 				</Form.Root>
 			</section>
 		</Main>

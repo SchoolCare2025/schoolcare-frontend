@@ -70,9 +70,8 @@ function ViewSingleStudent() {
 							Cancel
 						</button>
 
-						<button
+						<Form.Submit
 							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
-							type="submit"
 							className={cnMerge(
 								`bg-school-blue flex w-[150.5px] items-center justify-center rounded-[10px] px-8
 								py-4 text-[18px] font-bold text-white`,
@@ -84,7 +83,7 @@ function ViewSingleStudent() {
 							) : (
 								"Continue"
 							)}
-						</button>
+						</Form.Submit>
 					</div>
 				</Form.Root>
 			</section>

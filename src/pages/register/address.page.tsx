@@ -242,9 +242,8 @@ function AddressPage() {
 							Back
 						</button>
 
-						<button
+						<Form.Submit
 							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
-							type="submit"
 							className={cnMerge(
 								`bg-school-blue flex max-w-fit min-w-[77px] items-center justify-center gap-3
 								rounded-[4px] px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
@@ -257,7 +256,7 @@ function AddressPage() {
 							) : (
 								"Submit"
 							)}
-						</button>
+						</Form.Submit>
 					</div>
 				</Form.Root>
 			</section>
