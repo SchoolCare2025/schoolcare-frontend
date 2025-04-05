@@ -3,12 +3,12 @@
 
 	"rewrites": [
 		{
-			"source": "/(.*)",
-			"destination": "/"
-		},
-		{
 			"source": "/api/:path*",
 			"destination": "https://api.schoolcare.com.ng/api/:path*"
+		},
+		{
+			"source": "/(.*)",
+			"destination": "/"
 		}
 	]
 }

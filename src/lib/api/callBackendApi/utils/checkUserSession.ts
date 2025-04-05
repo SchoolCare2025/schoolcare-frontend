@@ -17,7 +17,7 @@ const checkUserSession = async () => {
 		throw error.errorData;
 	}
 
-	await refreshUserSession(error);
+	await refreshUserSession();
 
 	return callBackendApiForQuery<SessionData>("/check-user-session");
 };
