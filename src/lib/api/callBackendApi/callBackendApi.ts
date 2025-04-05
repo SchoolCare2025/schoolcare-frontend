@@ -20,12 +20,12 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-// const BACKEND_URL = "https://api.schoolcare.com.ng";
+const BACKEND_URL = "https://api.schoolcare.com.ng";
 
 const API_BASE_URL = "api";
 
 export const sharedFetchClient = createFetchClient({
-	baseURL: `/${API_BASE_URL}`,
+	baseURL: `${BACKEND_URL}/${API_BASE_URL}`,
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 
