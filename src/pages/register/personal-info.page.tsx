@@ -5,10 +5,11 @@ import { DropZone } from "@/components/ui/drop-zone";
 import { cnMerge } from "@/lib/utils/cn";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { handleImagePreview } from "@zayne-labs/toolkit/core";
-import type { MyCustomCss } from "@zayne-labs/toolkit/react/utils";
+import { handleImagePreview } from "@zayne-labs/toolkit-core";
+import type { MyCustomCss } from "@zayne-labs/toolkit-react/utils";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { z } from "zod";
 import Main from "../_components/Main";
 
@@ -59,17 +60,22 @@ function PersonalInfoPage() {
 						<Form.FieldController
 							render={({ field }) => (
 								<DropZone
-									classNames={{ input: "hidden" }}
+									onUploadError={(ctx) => toast.error("Error", { description: ctx.message })}
+									onUploadSuccess={(ctx) =>
+										toast.success("Success", { description: ctx.message })
+									}
+									allowedFileTypes={["image/png", "image/jpeg", "image/jpg"]}
+									classNames={{ base: "w-fit", input: "hidden" }}
 									onUpload={({ acceptedFiles }) => {
 										field.onChange(acceptedFiles[0]);
 
-										handleImagePreview({
+										void handleImagePreview({
 											file: acceptedFiles[0],
 											onSuccess: (ctx) => updateLogoPreview(ctx.result),
 										});
 									}}
 								>
-									{({ inputRef }) => (
+									{(ctx) => (
 										<span
 											className="relative mt-4 block size-[110px] rounded-full bg-gray-200
 												bg-cover md:mt-8 md:size-[200px]"
@@ -79,7 +85,7 @@ function PersonalInfoPage() {
 												} as MyCustomCss
 											}
 										>
-											<button type="button" onClick={() => inputRef.current?.click()}>
+											<button type="button" onClick={ctx.openFilePicker}>
 												<EditIcon
 													className={cnMerge(
 														"absolute right-3 bottom-2 size-[18px] md:size-[40px]",

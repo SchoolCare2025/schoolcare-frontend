@@ -1,5 +1,5 @@
 import { cnMerge } from "@/lib/utils/cn";
-import type { InferProps } from "@zayne-labs/toolkit/react/utils";
+import type { InferProps } from "@zayne-labs/toolkit-react/utils";
 import { createContext, use, useId, useMemo } from "react";
 import * as RechartsPrimitive from "recharts";
 

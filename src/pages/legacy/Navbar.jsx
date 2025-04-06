@@ -1,4 +1,4 @@
-import { useToggle } from "@zayne-labs/toolkit/react";
+import { useToggle } from "@zayne-labs/toolkit-react";
 import clsx from "clsx";
 import { useEffect } from "react";
 import { Link } from "react-router";

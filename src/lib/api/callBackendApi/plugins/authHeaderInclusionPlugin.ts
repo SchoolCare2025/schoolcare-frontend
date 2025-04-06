@@ -1,5 +1,5 @@
 import { type ResponseErrorContext, definePlugin } from "@zayne-labs/callapi";
-import { hardNavigate } from "@zayne-labs/toolkit/core";
+import { hardNavigate } from "@zayne-labs/toolkit-core";
 import type { ApiErrorResponse } from "../callBackendApi";
 import { refreshUserSession } from "../utils/refreshUserSession";
 

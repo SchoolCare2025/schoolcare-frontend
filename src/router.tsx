@@ -1,11 +1,16 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { hardNavigate } from "@zayne-labs/toolkit/core";
 import { lazy } from "react";
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router";
+import {
+	Navigate,
+	Route,
+	RouterProvider,
+	createBrowserRouter,
+	createRoutesFromElements,
+} from "react-router";
 import RootLayout from "./pages/layout";
+import { protectionLoader } from "./pages/layout.protect";
 import { useQueryClientStore } from "./store/react-query/queryClientStore";
-import { sessionQuery } from "./store/react-query/queryFactory";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -26,12 +31,6 @@ const LandingPage = lazy(() => import("./pages/legacy/LandingPage"));
 const MainLayout = lazy(() => import("./pages/legacy/MainLayout"));
 const WhoWeAre = lazy(() => import("./pages/legacy/WhoWeAre"));
 
-const protectionLoader = () => {
-	void queryClient.prefetchQuery(sessionQuery());
-
-	return null;
-};
-
 const routes = createRoutesFromElements(
 	<Route element={<RootLayout />}>
 		<Route element={<MainLayout />}>
@@ -46,17 +45,13 @@ const routes = createRoutesFromElements(
 		<Route path="/signin" Component={lazy(() => import("./pages/signin.page"))} />
 
 		<Route path="/register" Component={lazy(() => import("./pages/register/layout"))}>
-			<Route
-				index={true}
-				loader={() => {
-					hardNavigate("/register/personal-info");
-					return null;
-				}}
-			/>
+			<Route index={true} element={<Navigate to="/register/personal-info" />} />
+
 			<Route
 				path="personal-info"
 				Component={lazy(() => import("./pages/register/personal-info.page"))}
 			/>
+
 			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 

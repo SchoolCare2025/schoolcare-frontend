@@ -1,5 +1,5 @@
 import { type CallApiParameters, type ResultModeUnion, createFetchClient } from "@zayne-labs/callapi";
-import type { UnmaskType } from "@zayne-labs/toolkit/type-helpers";
+import type { UnmaskType } from "@zayne-labs/toolkit-type-helpers";
 import { toastPlugin } from "./plugins";
 import { authHeaderInclusionPlugin } from "./plugins/authHeaderInclusionPlugin";
 
@@ -20,12 +20,12 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const BACKEND_URL = "https://api.schoolcare.com.ng";
+// const BACKEND_URL = "https://api.schoolcare.com.ng"; // FIXME -  Add this back once CORS is fixed
 
 const API_BASE_URL = "api";
 
 export const sharedFetchClient = createFetchClient({
-	baseURL: `${BACKEND_URL}/${API_BASE_URL}`,
+	baseURL: `/${API_BASE_URL}`,
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 

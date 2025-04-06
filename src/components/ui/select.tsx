@@ -1,7 +1,7 @@
 import { IconBox } from "@/components/common";
 import { cnMerge } from "@/lib/utils/cn";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import type { InferProps } from "@zayne-labs/toolkit/react/utils";
+import type { InferProps } from "@zayne-labs/toolkit-react/utils";
 
 function SelectTrigger(
 	props: InferProps<typeof SelectPrimitive.Trigger> & {

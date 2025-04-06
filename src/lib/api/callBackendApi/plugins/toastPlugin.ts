@@ -1,6 +1,6 @@
 import { type ErrorContext, type SuccessContext, definePlugin } from "@zayne-labs/callapi";
 import { isHTTPError } from "@zayne-labs/callapi/utils";
-import { isString } from "@zayne-labs/toolkit/type-helpers";
+import { isString } from "@zayne-labs/toolkit-type-helpers";
 import { toast } from "sonner";
 import type { ApiErrorResponse, ApiSuccessResponse } from "../callBackendApi";
 

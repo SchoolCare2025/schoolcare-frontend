@@ -1,6 +1,6 @@
 import { Table } from "@/components/ui";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
-import { defineEnum } from "@zayne-labs/toolkit/type-helpers";
+import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
 import { download, generateCsv, mkConfig } from "export-to-csv";
 import { Navigate, useNavigate } from "react-router";
 import { toast } from "sonner";

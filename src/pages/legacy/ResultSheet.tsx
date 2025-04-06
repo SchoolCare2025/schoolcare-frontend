@@ -1,8 +1,8 @@
 // import { Table } from "@/components/ui";
 // import type { CheckResultResponse } from "@/lib/api/callBackendApi";
 // import { cnMerge } from "@/lib/utils/cn";
-// import { useStorageState } from "@zayne-labs/toolkit/react";
-// import { defineEnum } from "@zayne-labs/toolkit/type-helpers";
+// import { useStorageState } from "@zayne-labs/toolkit-react";
+// import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
 // import Main from "../_components/Main";
 
 // const columns = defineEnum(["Name", "Reg. No", "First CA", "Second CA", "Exam", "Total", "Grade"]);

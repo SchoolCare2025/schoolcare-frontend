@@ -1,4 +1,4 @@
-import { hardNavigate } from "@zayne-labs/toolkit/core";
+import { hardNavigate } from "@zayne-labs/toolkit-core";
 import { toast } from "sonner";
 import { callBackendApi } from "../callBackendApi";
 

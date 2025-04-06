@@ -3,7 +3,7 @@ import { cnMerge } from "@/lib/utils/cn";
 import { studentsByClassQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { useQuery } from "@tanstack/react-query";
-import { defineEnum } from "@zayne-labs/toolkit/type-helpers";
+import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
 import Main from "../../_components/Main";
 
 const columns = defineEnum(["Name", "Gender", "Reg. No"]);

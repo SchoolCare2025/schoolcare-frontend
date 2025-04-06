@@ -1,6 +1,7 @@
 import { cnMerge } from "@/lib/utils/cn";
-import { toArray } from "@zayne-labs/toolkit/core";
-import { isFile, isString } from "@zayne-labs/toolkit/type-helpers";
+import { toArray } from "@zayne-labs/toolkit-core";
+import { isFile, isString } from "@zayne-labs/toolkit-type-helpers";
+import { toast } from "sonner";
 import { DropZone, type UseDropZoneProps } from "../ui/drop-zone";
 import { getElementList } from "./For";
 import { IconBox } from "./IconBox";
@@ -27,12 +28,14 @@ export function DropZoneInput(props: DropZoneInputProps) {
 	return (
 		<DropZone
 			onUpload={handleFileUpload}
+			onUploadError={(ctx) => toast.error("Error", { description: ctx.message })}
+			onUploadSuccess={(ctx) => toast.success("Success", { description: ctx.message })}
 			classNames={{
 				base: `w-full items-center gap-2 rounded-[8px] border-[3px] border-dashed border-gray-600 px-4
 				py-[60px]`,
 			}}
 			allowedFileTypes={["text/csv"]}
-			validationSettings={{ maxFileSize: 6 }}
+			maxFileSize={6}
 		>
 			<span
 				className="block shrink-0 md:size-10"
