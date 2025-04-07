@@ -1,18 +1,18 @@
-import { useTheme } from "next-themes";
+import { useThemeStore } from "@/store/zustand/themeStore";
 import { Toaster as Sonner } from "sonner";
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 
 function SonnerToaster(props: ToasterProps) {
-	const { theme = "dark" } = useTheme();
+	const { theme = "dark" } = useThemeStore((state) => state);
 
 	return (
 		<Sonner
-			theme={theme as ToasterProps["theme"]}
-			className="toaster group max-md:inset-x-0 max-md:flex max-md:w-full max-md:justify-center"
+			theme={theme}
+			className="toaster group"
 			richColors={true}
 			position="bottom-right"
-			duration={2000}
+			duration={3000}
 			closeButton={true}
 			toastOptions={{
 				classNames: {
@@ -20,7 +20,7 @@ function SonnerToaster(props: ToasterProps) {
 
 					title: "group-[.toaster]:text-base group-[.toaster]:font-bold",
 
-					toast: "group toast p-5 max-md:p-4 mx-auto max-md:h-auto max-md:max-w-[284px] group-[.toaster]:shadow-lg",
+					toast: "group toast p-5 mx-auto max-md:max-w-fit max-w-[284px]",
 				},
 			}}
 			{...props}

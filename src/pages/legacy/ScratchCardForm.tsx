@@ -1,7 +1,9 @@
-import { IconBox } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { type CheckResultResponse, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnMerge } from "@/lib/utils/cn";
+import { schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
 import { useStorageState } from "@zayne-labs/toolkit-react";
 import { Form } from "@zayne-labs/ui-react/form";
 import { useForm } from "react-hook-form";
@@ -9,7 +11,7 @@ import { useNavigate } from "react-router";
 import { z } from "zod";
 
 const ScratchCardFormSchema = z.object({
-	grade_level: z.string().min(1, "Grade level is required"),
+	class_grade: z.string().min(1, "Grade level is required"),
 	school_class: z.string().min(1, "Class is required"),
 	school_ID: z.string().min(1, "School ID is required"),
 	scratch_card_code: z.string().min(1, "Scratch card code is required"),
@@ -20,13 +22,18 @@ const ScratchCardFormSchema = z.object({
 });
 
 function ScratchCardForm() {
-	const navigate = useNavigate();
-
 	const { 1: setStorageState } = useStorageState<CheckResultResponse | null>("scratch-card-result", null);
+
+	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
+	const schoolTermQueryResult = useQuery(schoolTermQuery());
+
+	const [For] = getElementList("base");
 
 	const methods = useForm({
 		resolver: zodResolver(ScratchCardFormSchema),
 	});
+
+	const navigate = useNavigate();
 
 	const onSubmit = methods.handleSubmit(async (data) => {
 		await callBackendApi<CheckResultResponse>("/check-result", {
@@ -74,32 +81,61 @@ function ScratchCardForm() {
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="school_class" className="flex flex-col">
-					<Form.Label className="mb-1 text-lg">Class Grade*</Form.Label>
+					<Form.Label className="mb-1 text-lg">School Class*</Form.Label>
 					<Form.Input
+						placeholder="eg: JSS1"
 						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 
-				<Form.Field<typeof methods.control> name="grade_level" className="flex flex-col">
-					<Form.Label className="mb-1 text-lg">Grade Level*</Form.Label>
+				<Form.Field<typeof methods.control> name="class_grade" className="flex flex-col">
+					<Form.Label className="mb-1 text-lg">Grade*</Form.Label>
 					<Form.Input
-						placeholder="eg: JSS1 A"
+						placeholder="eg: A"
 						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="session" className="flex flex-col">
 					<Form.Label className="mb-1 text-lg">Result Session*</Form.Label>
-					<Form.Input
+					<Form.Select
+						defaultValue=""
 						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
-					/>
+					>
+						<option value="" disabled={true} hidden={true}>
+							Select a session
+						</option>
+
+						<For
+							each={schoolSessionQueryResult.data?.data ?? []}
+							render={(item) => (
+								<option key={item} value={item}>
+									{item}
+								</option>
+							)}
+						/>
+					</Form.Select>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="term" className="flex flex-col">
 					<Form.Label className="mb-1 text-lg">Result Term</Form.Label>
-					<Form.Input
+					<Form.Select
+						defaultValue=""
 						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
-					/>
+					>
+						<option value="" disabled={true} hidden={true}>
+							Select a term
+						</option>
+
+						<For
+							each={schoolTermQueryResult.data?.data ?? []}
+							render={(item) => (
+								<option key={item} value={item}>
+									{item}
+								</option>
+							)}
+						/>
+					</Form.Select>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="scratch_card_code" className="flex flex-col">
@@ -119,19 +155,24 @@ function ScratchCardForm() {
 				</Form.Field>
 			</div>
 
-			<Form.Submit
-				disabled={methods.formState.isSubmitting || !methods.formState.isValid}
-				className={cnMerge(
-					"bg-resultBtn text-textWhite mt-4 w-fit rounded-lg p-2 text-sm font-semibold",
-					!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+			<Form.SubscribeToFormState
+				render={({ isSubmitting, isValid }) => (
+					<Form.Submit
+						disabled={isSubmitting || !isValid}
+						className={cnMerge(
+							`bg-resultBtn text-textWhite mt-4 flex h-10 w-[min(120px,100%)] items-center
+							justify-center rounded-lg p-2 text-sm font-semibold`,
+							!isValid && "cursor-not-allowed bg-gray-400"
+						)}
+					>
+						{isSubmitting ? (
+							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+						) : (
+							"Check Result"
+						)}
+					</Form.Submit>
 				)}
-			>
-				{methods.formState.isSubmitting ? (
-					<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-				) : (
-					"Check Result"
-				)}
-			</Form.Submit>
+			/>
 		</Form.Root>
 	);
 }

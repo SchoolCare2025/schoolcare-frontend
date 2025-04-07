@@ -42,6 +42,8 @@ const routes = createRoutesFromElements(
 			<Route path="/about-us" element={<AboutUs />} />
 		</Route>
 
+		<Route path="/result-sheet" Component={lazy(() => import("./pages/result-sheet.page"))} />
+
 		<Route path="/signin" Component={lazy(() => import("./pages/signin.page"))} />
 
 		<Route path="/register" Component={lazy(() => import("./pages/register/layout"))}>

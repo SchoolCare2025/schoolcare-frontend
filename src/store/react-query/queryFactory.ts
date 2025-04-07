@@ -103,7 +103,8 @@ export const studentsGenderQuery = () => {
 
 export const schoolSessionQuery = () => {
 	return queryOptions({
-		queryFn: () => callBackendApiForQuery<string[]>("/session"),
+		queryFn: () =>
+			callBackendApiForQuery<string[]>("/session", { meta: { skipAuthHeaderAddition: true } }),
 		queryKey: ["school-session"],
 		staleTime: Infinity,
 	});
@@ -111,7 +112,7 @@ export const schoolSessionQuery = () => {
 
 export const schoolTermQuery = () => {
 	return queryOptions({
-		queryFn: () => callBackendApiForQuery<string[]>("/term"),
+		queryFn: () => callBackendApiForQuery<string[]>("/term", { meta: { skipAuthHeaderAddition: true } }),
 		queryKey: ["school-term"],
 		staleTime: Infinity,
 	});

@@ -47,12 +47,17 @@ export type SessionData = {
 };
 
 export type CheckResultResponse = {
-	class_session_term: number;
-	exam: number;
-	first_ca: number;
-	grade: string;
-	second_ca: number;
-	student: number;
-	subject: number;
-	total: number;
+	results: Array<{
+		class_session_term: number;
+		exam: number;
+		first_ca: number;
+		grade: string;
+		second_ca: number;
+		student: number;
+		subject: number;
+		total: number;
+	}>;
+	student: string;
+	student_reg_number: string;
+	use_count: number;
 };
