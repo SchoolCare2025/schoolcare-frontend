@@ -8,7 +8,7 @@ import Main from "../../_components/Main";
 const columns = defineEnum(["Name", "Gender", "Reg. No"]);
 
 function TablePage() {
-	const { studentId } = useViewStudentFormStore((state) => state);
+	const studentId = useViewStudentFormStore((state) => state.studentId);
 
 	const studentsQueryResult = useQuery(studentsByIDQuery(studentId));
 

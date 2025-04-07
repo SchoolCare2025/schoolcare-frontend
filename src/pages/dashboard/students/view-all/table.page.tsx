@@ -9,7 +9,7 @@ import Main from "../../_components/Main";
 const columns = defineEnum(["Name", "Gender", "Reg. No"]);
 
 function TablePage() {
-	const { studentClass } = useViewStudentFormStore((state) => state);
+	const studentClass = useViewStudentFormStore((state) => state.studentClass);
 
 	const studentsQueryResult = useQuery(studentsByClassQuery(studentClass));
 
