@@ -44,11 +44,11 @@ const Footer = () => {
 				<span className="font-semibold text-black lg:text-[20px]">Leave Us a Message</span>
 				<textarea
 					className="focus:ring-cosBlue mx-auto my-3 w-full max-w-lg resize-none overflow-auto
-						rounded-lg border border-gray-300 p-2 focus:ring-2 focus:outline-hidden"
+						rounded-lg border border-gray-300 bg-white p-2 focus:ring-2 focus:outline-hidden"
 					name=""
 					id=""
 					rows="4"
-				></textarea>
+				/>
 				<button
 					className="bg-cosBlue text-cosWhite hover:bg-greenColor transform rounded-md px-4 py-0.5
 						font-bold transition duration-300 ease-in-out"
