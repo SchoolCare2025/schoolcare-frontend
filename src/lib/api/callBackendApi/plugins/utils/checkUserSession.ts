@@ -1,6 +1,6 @@
 import { isHTTPError } from "@zayne-labs/callapi/utils";
-import { callBackendApi, callBackendApiForQuery } from "../callBackendApi";
-import type { SessionData } from "../types";
+import { callBackendApi, callBackendApiForQuery } from "../../callBackendApi";
+import type { SessionData } from "../../types";
 import { refreshUserSession } from "./refreshUserSession";
 
 const checkUserSession = async () => {

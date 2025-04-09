@@ -7,7 +7,7 @@ import {
 	type StudentsByClassOrID,
 	callBackendApiForQuery,
 } from "@/lib/api/callBackendApi";
-import { checkUserSession } from "@/lib/api/callBackendApi/utils";
+import { checkUserSession } from "@/lib/api/callBackendApi/plugins/utils";
 import { queryOptions } from "@tanstack/react-query";
 
 export const sessionQuery = () => {

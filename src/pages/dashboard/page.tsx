@@ -15,10 +15,12 @@ import Main from "./_components/Main";
 function DashboardPage() {
 	const sessionQueryResult = useQuery(sessionQuery());
 
-	const allStudentsInSchoolQueryResult = useQuery(allStudentsInSchoolQuery());
 	const allSubjectsInSchoolQueryResult = useQuery(
 		allSubjectsInSchoolQuery(sessionQueryResult.data?.data?.school)
 	);
+
+	const allStudentsInSchoolQueryResult = useQuery(allStudentsInSchoolQuery());
+
 	const allClassesInSchoolQueryResult = useQuery(allClassesInSchoolQuery());
 
 	const [InfoCardList] = getElementList();

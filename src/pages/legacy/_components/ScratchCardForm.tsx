@@ -99,7 +99,6 @@ function ScratchCardForm() {
 				<Form.Field<typeof methods.control> name="session" className="flex flex-col">
 					<Form.Label className="mb-1 text-lg">Result Session*</Form.Label>
 					<Form.Select
-						defaultValue=""
 						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					>
 						<option value="" disabled={true} hidden={true}>
@@ -120,7 +119,6 @@ function ScratchCardForm() {
 				<Form.Field<typeof methods.control> name="term" className="flex flex-col">
 					<Form.Label className="mb-1 text-lg">Result Term</Form.Label>
 					<Form.Select
-						defaultValue=""
 						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
 					>
 						<option value="" disabled={true} hidden={true}>

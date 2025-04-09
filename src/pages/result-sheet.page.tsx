@@ -24,6 +24,8 @@ function ResultSheetPage() {
 			<header className="mx-auto flex w-full max-w-7xl flex-col gap-3 text-center">
 				<h1 className="text-3xl font-bold">Student Result Sheet</h1>
 
+				<p className="text-lg text-gray-600">{data?.student && `Name: ${data.student}`}</p>
+
 				<p className="text-lg text-gray-600">
 					{data?.student_reg_number && `Registration Number: ${data.student_reg_number}`}
 				</p>

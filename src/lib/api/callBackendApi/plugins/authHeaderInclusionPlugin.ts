@@ -1,7 +1,7 @@
 import { type ResponseErrorContext, definePlugin } from "@zayne-labs/callapi";
 import { hardNavigate } from "@zayne-labs/toolkit-core";
 import type { ApiErrorResponse } from "../callBackendApi";
-import { refreshUserSession } from "../utils/refreshUserSession";
+import { refreshUserSession } from "./utils/refreshUserSession";
 
 const routesExemptedFromAuthHeader = new Set([
 	"/signin",
@@ -31,7 +31,7 @@ const authHeaderInclusionPlugin = definePlugin(() => ({
 			if (!refreshToken) {
 				const message = "Session is missing! Redirecting to login...";
 
-				setTimeout(() => hardNavigate("/signin"), 2500);
+				setTimeout(() => hardNavigate("/signin"), 2100);
 
 				throw new Error(message);
 			}

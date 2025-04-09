@@ -8,7 +8,7 @@ type GlobalMeta = {
 	skipSessionCheck?: boolean;
 	toast?: {
 		error?: boolean;
-		skipAbortErrorToast?: boolean;
+		errorsToSkip?: string[];
 		success?: boolean;
 	};
 };
@@ -20,12 +20,12 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const BACKEND_URL = "https://api.schoolcare.com.ng"; // FIXME -  Add this back once CORS is fixed
+// const BACKEND_URL = "https://api.schoolcare.com.ng"; // FIXME -  Add this back once CORS is fixed
 
 const API_BASE_URL = "api";
 
 export const sharedFetchClient = createFetchClient({
-	baseURL: `${BACKEND_URL}/${API_BASE_URL}`,
+	baseURL: `/${API_BASE_URL}`,
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 
@@ -56,7 +56,7 @@ export const callBackendApi = <
 			...config?.meta,
 			toast: {
 				error: true,
-				skipAbortErrorToast: true,
+				errorsToSkip: ["AbortError"],
 				...config?.meta?.toast,
 			},
 		},

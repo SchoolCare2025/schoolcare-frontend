@@ -5,11 +5,11 @@ import { Pie, PieChart } from "recharts";
 
 const chartConfig = {
 	female: {
-		color: "hsl(var(--chart-2))",
+		color: "var(--chart-2)",
 		label: "Female",
 	},
 	male: {
-		color: "hsl(var(--chart-1))",
+		color: "var(--chart-1)",
 		label: "Male",
 	},
 	ratio: {
@@ -59,10 +59,7 @@ function GenderRatioChart() {
 						<Chart.Legend
 							content={
 								<Chart.LegendContent
-									classNames={{
-										base: "pt-0",
-										legendItemIcon: "size-[10px] rounded-full",
-									}}
+									classNames={{ base: "pt-0", legendItemIcon: "size-[10px] rounded-full" }}
 								/>
 							}
 						/>

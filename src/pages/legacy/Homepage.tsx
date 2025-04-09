@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import bgImage from "../../assets/images/collegeStd.jpg";
-import ScratchCardForm from "./ScratchCardForm";
+import ScratchCardForm from "./_components/ScratchCardForm";
 
 const Homepage = () => {
 	const backgroundImageStyle = {
