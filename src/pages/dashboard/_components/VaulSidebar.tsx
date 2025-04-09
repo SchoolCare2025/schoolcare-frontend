@@ -99,11 +99,11 @@ export default function VaulSidebar() {
 										/>
 									</Link>
 
-									<Show.OtherWise>
+									<Show.Otherwise>
 										<button type="button" className="font-medium">
 											Log out
 										</button>
-									</Show.OtherWise>
+									</Show.Otherwise>
 								</Show.Root>
 							</li>
 						)}
