@@ -20,12 +20,12 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-// const BACKEND_URL = "https://api.schoolcare.com.ng"; // FIXME -  Add this back once CORS is fixed
+const BACKEND_URL = "https://api.schoolcare.com.ng"; // FIXME -  Add this back once CORS is fixed
 
 const API_BASE_URL = "api";
 
 export const sharedFetchClient = createFetchClient({
-	baseURL: `/${API_BASE_URL}`,
+	baseURL: `${BACKEND_URL}/${API_BASE_URL}`,
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 });
 
