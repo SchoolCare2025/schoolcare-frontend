@@ -23,12 +23,12 @@ const queryClient = new QueryClient({
 useQueryClientStore.setState({ queryClient });
 
 // Legacy
+const MainLayout = lazy(() => import("./pages/legacy/MainLayout"));
 const AboutUs = lazy(() => import("./pages/legacy/AboutUs"));
 const ContactUs = lazy(() => import("./pages/legacy/ContactUs"));
 const FaQ = lazy(() => import("./pages/legacy/FaQ"));
 const HowItWorks = lazy(() => import("./pages/legacy/HowItWorks"));
 const LandingPage = lazy(() => import("./pages/legacy/LandingPage"));
-const MainLayout = lazy(() => import("./pages/legacy/MainLayout"));
 const WhoWeAre = lazy(() => import("./pages/legacy/WhoWeAre"));
 
 const routes = createRoutesFromElements(
@@ -41,6 +41,8 @@ const routes = createRoutesFromElements(
 			<Route path="/how-it-works" element={<HowItWorks />} />
 			<Route path="/about-us" element={<AboutUs />} />
 		</Route>
+
+		<Route path="/test" Component={lazy(() => import("./pages/page.test"))} />
 
 		<Route path="/result-sheet" Component={lazy(() => import("./pages/result-sheet.page"))} />
 
@@ -117,6 +119,7 @@ export function Router() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<RouterProvider router={browserRouter} />
+
 			<ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
 		</QueryClientProvider>
 	);

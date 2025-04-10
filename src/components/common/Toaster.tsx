@@ -28,4 +28,4 @@ function SonnerToaster(props: ToasterProps) {
 	);
 }
 
-export default SonnerToaster;
+export { SonnerToaster };

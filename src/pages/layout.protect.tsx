@@ -1,3 +1,4 @@
+import { AuthLoadingSpinner } from "@/components/common";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { sessionQuery } from "@/store/react-query/queryFactory";
 import { useQuery } from "@tanstack/react-query";
@@ -17,8 +18,7 @@ function ProtectionLayout() {
 		return <Outlet />;
 	}
 
-	// TODO - Add auth loading screen
-	return null;
+	return <AuthLoadingSpinner />;
 }
 
 export default ProtectionLayout;

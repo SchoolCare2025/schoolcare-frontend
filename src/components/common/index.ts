@@ -3,4 +3,5 @@ export * from "./For";
 export { IconBox } from "./IconBox";
 export * from "./Show";
 export * from "./Switch";
-export { default as SonnerToaster } from "./Toaster";
+export { SonnerToaster } from "./Toaster";
+export * from "./LoadingSpinner";
