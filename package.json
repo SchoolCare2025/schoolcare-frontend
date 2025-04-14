@@ -8,7 +8,7 @@
 	"scripts": {
 		"build": "vite build",
 		"check-types": "tsc --pretty -p tsconfig.json",
-		"dev": "vite --port 5174",
+		"dev": "vite",
 		"lint:check-types": "tsc --pretty -p tsconfig.json",
 		"lint:eslint": "eslint . --max-warnings 0",
 		"lint:format": "prettier --write .",

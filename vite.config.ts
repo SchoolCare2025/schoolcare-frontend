@@ -8,11 +8,11 @@ import viteTsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
 	plugins: [viteTsconfigPaths(), react(), tailwindcss()],
 	server: {
-		proxy: {
-			"/api": {
-				changeOrigin: true,
-				target: "https://api.schoolcare.com.ng",
-			},
-		},
+		// proxy: {
+		// 	"/api": {
+		// 		changeOrigin: true,
+		// 		target: "https://api.schoolcare.com.ng",
+		// 	},
+		// },
 	},
 });
