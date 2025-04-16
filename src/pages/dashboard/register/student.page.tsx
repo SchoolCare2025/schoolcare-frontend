@@ -1,7 +1,7 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import { cnMerge } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allClassesInSchoolQuery, allStudentsInSchoolQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,7 +27,7 @@ function RegisterStudentPage() {
 			school_class: "",
 			surname: "",
 		},
-		mode: "onTouched",
+		mode: "onChange",
 		resolver: zodResolver(RegisterStudentSchema),
 	});
 
@@ -43,11 +43,7 @@ function RegisterStudentPage() {
 				...restOfData,
 				name: `${surname} ${other_names}`,
 			},
-			meta: {
-				toast: {
-					success: true,
-				},
-			},
+			meta: { toast: { success: true } },
 			method: "POST",
 
 			onResponseError: (ctx) => {
@@ -85,7 +81,7 @@ function RegisterStudentPage() {
 							placeholder="Enter student's surname"
 							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
 								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
-								md:px-8 md:text-base md:text-[14px]"
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -98,7 +94,7 @@ function RegisterStudentPage() {
 							placeholder="Enter student's other names"
 							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
 								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
-								md:px-8 md:text-base md:text-[14px]"
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -211,14 +207,19 @@ function RegisterStudentPage() {
 						className={cnMerge(
 							`bg-school-blue mt-12 flex h-9 w-fit items-center justify-center self-end
 							rounded-[10px] px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
-							md:text-[18px]`
+							md:text-[18px]`,
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
+							methods.formState.isSubmitting && "grid"
 						)}
 					>
-						{methods.formState.isSubmitting ? (
-							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-						) : (
-							"Register"
+						{methods.formState.isSubmitting && (
+							<span className="flex justify-center [grid-area:1/1]">
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							</span>
 						)}
+						<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+							Register
+						</p>
 					</Form.Submit>
 				</Form.Root>
 			</section>

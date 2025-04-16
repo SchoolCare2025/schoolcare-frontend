@@ -1,7 +1,7 @@
-import { IconBox, getElementList } from "@/components/common";
-import { Form, Select } from "@/components/ui";
+import { IconBox, Show, getElementList } from "@/components/common";
+import { Command, Form, Popover } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
-import { cnMerge } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allSubjectsInSchoolQuery, allSubjectsQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,7 @@ function RegisterSubjectPage() {
 		defaultValues: {
 			subject: "",
 		},
+		mode: "onChange",
 		resolver: zodResolver(RegisterSubjectSchema),
 	});
 
@@ -31,6 +32,7 @@ function RegisterSubjectPage() {
 	const onSubmit = async (data: RegisterSubjectFormData) => {
 		await callBackendApi("/school/subjects", {
 			body: data,
+			meta: { toast: { success: true } },
 			method: "POST",
 
 			onResponseError: (ctx) => {
@@ -66,40 +68,63 @@ function RegisterSubjectPage() {
 
 						<Form.FieldController
 							render={({ field }) => (
-								<Select.Root name={field.name} onValueChange={field.onChange}>
-									<Select.Trigger
-										classNames={{
-											base: `border-school-gray data-placeholder:text-school-gray h-[48px]
-											rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
-											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
-											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
-										}}
+								<Popover.Root>
+									<Popover.Trigger
+										className={cnJoin(
+											`border-school-gray data-placeholder:text-school-gray flex h-[48px]
+											items-center justify-between rounded-[8px] border-2 bg-white px-4
+											text-[12px] md:h-[75px] md:rounded-[20px] md:px-8 md:text-base
+											md:text-[14px]`,
+											!(field.value as boolean) && "text-shadcn-muted-foreground"
+										)}
 									>
-										<Select.Value placeholder="Choose Subject" />
-									</Select.Trigger>
-
-									<Select.Content
-										classNames={{
-											base: "bg-white/90 p-0 backdrop-blur-lg",
-											viewport: "gap-1",
-										}}
-									>
-										<SubjectList
-											each={subjectQueryResult.data?.data ?? []}
-											render={(item) => (
-												<Select.Item
-													key={item}
-													value={item}
-													className="h-12 bg-gray-200 text-[12px] font-medium text-black
-														focus:bg-gray-300 focus:text-black
-														data-[state=checked]:bg-gray-300 md:text-base"
-												>
-													{item}
-												</Select.Item>
+										<Show.Root when={field.value} fallback="Select subject">
+											{subjectQueryResult.data?.data?.find(
+												(subject) => subject === field.value
 											)}
+										</Show.Root>
+
+										<IconBox
+											icon="lucide:chevrons-up-down"
+											className="text-school-gray size-5 md:size-6"
 										/>
-									</Select.Content>
-								</Select.Root>
+									</Popover.Trigger>
+
+									<Popover.Content className="bg-white/90 p-0 backdrop-blur-lg">
+										<Command.Root>
+											<Command.Input placeholder="Choose subject" className="h-9" />
+
+											<Command.List>
+												<Command.Empty>No subject found.</Command.Empty>
+
+												<Command.Group>
+													<SubjectList
+														each={subjectQueryResult.data?.data ?? []}
+														render={(item) => (
+															<Command.Item
+																key={item}
+																value={item}
+																onSelect={() => field.onChange(item)}
+																className="h-12 bg-gray-200 text-[12px] font-medium
+																	text-black focus:bg-gray-300 focus:text-black
+																	data-[selected=true]:bg-gray-300 md:text-base"
+															>
+																<p>{item}</p>
+																<IconBox
+																	icon="lucide:check"
+																	className={cnJoin(
+																		"ml-auto size-[14px]",
+																		item === field.value ? "opacity-100" : "opacity-0"
+																	)}
+																/>
+															</Command.Item>
+														)}
+													/>
+												</Command.Group>
+											</Command.List>
+										</Command.Root>
+									</Popover.Content>
+								</Popover.Root>
 							)}
 						/>
 
@@ -114,14 +139,18 @@ function RegisterSubjectPage() {
 							`bg-school-blue mt-12 flex h-9 w-fit items-center justify-center self-end
 							rounded-[10px] px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
 							md:text-[18px]`,
-							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
+							methods.formState.isSubmitting && "grid"
 						)}
 					>
-						{methods.formState.isSubmitting ? (
-							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-						) : (
-							"Register"
+						{methods.formState.isSubmitting && (
+							<span className="flex justify-center [grid-area:1/1]">
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							</span>
 						)}
+						<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+							Register
+						</p>
 					</Form.Submit>
 				</Form.Root>
 			</section>

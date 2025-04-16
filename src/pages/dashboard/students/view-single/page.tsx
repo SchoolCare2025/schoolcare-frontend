@@ -56,7 +56,7 @@ function ViewSingleStudent() {
 							placeholder="Enter student's reg number"
 							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
 								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
-								md:px-8 md:text-base md:text-[14px]"
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
@@ -79,8 +79,8 @@ function ViewSingleStudent() {
 							className={cnMerge(
 								`bg-school-blue flex h-9 w-fit items-center justify-center self-end rounded-[10px]
 								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,
-								methods.formState.isSubmitting && "grid",
-								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+								!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
+								methods.formState.isSubmitting && "grid"
 							)}
 						>
 							{methods.formState.isSubmitting && (
