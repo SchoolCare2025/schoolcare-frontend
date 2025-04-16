@@ -9,7 +9,7 @@ import {
 	createRoutesFromElements,
 } from "react-router";
 import RootLayout from "./pages/layout";
-import { protectionLoader } from "./pages/layout.protect";
+import { protectionLoader } from "./store/react-query/loaders";
 import { useQueryClientStore } from "./store/react-query/queryClientStore";
 
 const queryClient = new QueryClient({
@@ -31,6 +31,12 @@ const HowItWorks = lazy(() => import("./pages/legacy/HowItWorks"));
 const LandingPage = lazy(() => import("./pages/legacy/LandingPage"));
 const WhoWeAre = lazy(() => import("./pages/legacy/WhoWeAre"));
 
+/* Layouts */
+const ProtectionLayout = lazy(() => import("./pages/layout.protect"));
+const RegisterLayout = lazy(() => import("./pages/register/layout"));
+const DashboardLayout = lazy(() => import("./pages/dashboard/layout"));
+const AdminLayout = lazy(() => import("./pages/admin/layout"));
+
 const routes = createRoutesFromElements(
 	<Route element={<RootLayout />}>
 		<Route element={<MainLayout />}>
@@ -42,13 +48,14 @@ const routes = createRoutesFromElements(
 			<Route path="/about-us" element={<AboutUs />} />
 		</Route>
 
+		{/* eslint-disable react/no-nested-lazy-component-declarations */}
 		<Route path="/test" Component={lazy(() => import("./pages/page.test"))} />
 
 		<Route path="/result-sheet" Component={lazy(() => import("./pages/result-sheet.page"))} />
 
 		<Route path="/signin" Component={lazy(() => import("./pages/signin.page"))} />
 
-		<Route path="/register" Component={lazy(() => import("./pages/register/layout"))}>
+		<Route path="/register" Component={RegisterLayout}>
 			<Route index={true} element={<Navigate to="/register/personal-info" />} />
 
 			<Route
@@ -59,8 +66,12 @@ const routes = createRoutesFromElements(
 			<Route path="address" Component={lazy(() => import("./pages/register/address.page"))} />
 		</Route>
 
-		<Route Component={lazy(() => import("./pages/layout.protect"))} loader={protectionLoader}>
-			<Route path="/dashboard" Component={lazy(() => import("./pages/dashboard/layout"))}>
+		<Route Component={AdminLayout}>
+			<Route path="/admin/register" Component={lazy(() => import("./pages/admin/register/page"))} />
+		</Route>
+
+		<Route Component={ProtectionLayout} loader={protectionLoader}>
+			<Route path="/dashboard" Component={DashboardLayout}>
 				<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
 
 				<Route
@@ -107,9 +118,7 @@ const routes = createRoutesFromElements(
 			</Route>
 		</Route>
 
-		<Route Component={lazy(() => import("./pages/admin/layout"))}>
-			<Route path="/admin/register" Component={lazy(() => import("./pages/admin/register/page"))} />
-		</Route>
+		{/* eslint-enable react/no-nested-lazy-component-declarations */}
 	</Route>
 );
 

@@ -28,53 +28,61 @@ function DashboardPage() {
 	const infoCardArray = [
 		{
 			description: allStudentsInSchoolQueryResult.data?.data?.length ?? 0,
-			icon: <StudentIcon />,
+			icon: <StudentIcon className="max-md:size-3" />,
 			title: "Registered Students",
 		},
 		{
 			description: allSubjectsInSchoolQueryResult.data?.data?.length ?? 0,
-			icon: <BookIcon />,
+			icon: <BookIcon className="max-md:size-3" />,
 			title: "Number of Subjects",
 		},
 		{
 			description: allClassesInSchoolQueryResult.data?.data?.length ?? 0,
-			icon: <SchoolIcon />,
+			icon: <SchoolIcon className="max-md:size-3" />,
 			title: "Numbers of Classes",
 		},
 	];
 
 	return (
-		<Main className="flex w-full flex-col gap-[22px] px-10 py-4">
+		<Main className="flex w-full flex-col gap-9 py-4 md:gap-5.5">
 			<InfoCardList
 				as="section"
-				className="flex gap-10"
+				className="flex gap-5 md:gap-10"
 				each={infoCardArray}
 				render={(item) => (
-					<Card.Root key={item.title} className="w-[calc(100%/3)] rounded-[30px] bg-white py-8">
+					<Card.Root
+						key={item.title}
+						className="border-school-gray-lighter w-[calc(100%/3)] rounded-[8px] border-2 bg-white
+							py-[20px_9px] md:rounded-[30px] md:py-[30px_32px]"
+					>
 						<Card.Header className="flex flex-col items-center">
 							<span
-								className="border-school-blue flex size-[70px] items-center justify-center
-									rounded-full border-[3px]"
+								className="border-school-blue flex size-6 items-center justify-center rounded-full
+									border-[3px] md:size-[70px]"
 							>
 								{item.icon}
 							</span>
 
-							<Card.Title className="mt-1 text-[12px] font-medium">{item.title}</Card.Title>
+							<hr className="bg-school-blue mt-2 h-2 w-full md:hidden" />
 
-							<Card.Description className="h-[36px] text-[24px] font-bold text-black">
+							<Card.Title className="mt-1.5 text-[6px] font-medium md:mt-3.5 md:text-[12px]">
+								{item.title}
+							</Card.Title>
+
+							<Card.Description className="text-[10px] font-bold text-black md:mt-1 md:text-[24px]">
 								<NumberFlow value={item.description} />
 							</Card.Description>
 						</Card.Header>
 
-						<Card.Footer className="bg-school-blue mt-3 h-4 w-full" />
+						<hr className="bg-school-blue mt-3 h-4 w-full max-md:hidden" />
 					</Card.Root>
 				)}
 			/>
 
-			<div className="flex">
+			<div className="flex flex-col md:flex-row">
 				<section />
 
-				<section className="ml-auto w-[calc(100%/3.3)]">
+				<section className="md:ml-auto md:w-[calc(100%/3.3)]">
 					<GenderRatioChart />
 				</section>
 			</div>

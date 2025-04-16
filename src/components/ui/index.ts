@@ -3,5 +3,7 @@ export * as Select from "./select";
 export * as Table from "./table";
 export * as Chart from "./chart";
 export * as Drawer from "./drawer";
+export * as Dialog from "./dialog";
+export * as Command from "./command";
 export { Card } from "./card";
 export { DropZone } from "./drop-zone";

@@ -1,6 +1,5 @@
 import { useToggle } from "@zayne-labs/toolkit-react";
 import clsx from "clsx";
-import { useEffect } from "react";
 import { Link } from "react-router";
 import { twJoin } from "tailwind-merge";
 import Logo from "../../assets/images/logoTrans.png";

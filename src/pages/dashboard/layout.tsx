@@ -1,18 +1,17 @@
 import { Outlet } from "react-router";
 import Navbar from "./_components/Navbar";
-import VaulSidebar from "./_components/VaulSidebar";
+import { Sidebar } from "./_components/Sidebar";
 
 function DashBoardLayout() {
 	return (
-		<>
-			<Navbar />
+		<div className="flex grow bg-[hsl(0,0%,85%)]">
+			<Sidebar className="max-md:hidden" />
 
-			<div className="flex grow bg-[hsl(0,0%,85%)]">
-				<VaulSidebar />
-
+			<div className="flex w-full grow flex-col">
+				<Navbar />
 				<Outlet />
 			</div>
-		</>
+		</div>
 	);
 }
 

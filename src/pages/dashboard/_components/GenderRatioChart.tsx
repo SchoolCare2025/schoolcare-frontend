@@ -34,14 +34,17 @@ function GenderRatioChart() {
 	];
 
 	return (
-		<Card.Root className="flex size-full flex-col items-center rounded-[30px] bg-white py-9">
+		<Card.Root
+			className="border-school-gray-lighter flex size-full flex-col items-center rounded-[24px] border-2
+				bg-white py-[36px_18px]"
+		>
 			<Card.Header>
 				<Card.Title>Gender Composition</Card.Title>
 			</Card.Header>
 
-			<Card.Content className="flex size-full justify-center">
-				<Chart.Container config={chartConfig} className="h-[245px] w-full max-w-[215px]">
-					<PieChart>
+			<Card.Content className="-mt-3 flex size-full justify-center">
+				<Chart.Container config={chartConfig} className="min-h-[280px] w-full max-w-[215px]">
+					<PieChart className="flex gap-59">
 						<Chart.Tooltip cursor={false} content={<Chart.TooltipContent hideLabel={true} />} />
 
 						{Boolean(studentsGenderQueryResult.data?.data) && (
@@ -59,7 +62,25 @@ function GenderRatioChart() {
 						<Chart.Legend
 							content={
 								<Chart.LegendContent
-									classNames={{ base: "pt-0", legendItemIcon: "size-[10px] rounded-full" }}
+									className="pt-0"
+									renderItem={(ctx) => (
+										<section key={ctx.index} className="flex flex-col items-center gap-3">
+											<div className="flex items-center gap-4">
+												<span
+													className="size-3.5 rounded-full"
+													style={{ backgroundColor: ctx.itemConfig?.color }}
+												/>
+
+												<span className="text-[18px] font-semibold">
+													{ctx.payloadItem.payload?.value}%
+												</span>
+											</div>
+
+											<p className="text-school-gray text-[12px] font-medium">
+												{ctx.itemConfig?.label}
+											</p>
+										</section>
+									)}
 								/>
 							}
 						/>

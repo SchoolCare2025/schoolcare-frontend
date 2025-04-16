@@ -1,3 +1,4 @@
+import { isHTTPError } from "@zayne-labs/callapi/utils";
 import { hardNavigate } from "@zayne-labs/toolkit-core";
 import { toast } from "sonner";
 import { callBackendApi } from "../../callBackendApi";
@@ -26,7 +27,7 @@ const refreshUserSession = async () => {
 		method: "POST",
 	});
 
-	if (result.error) {
+	if (isHTTPError(result.error)) {
 		const message = "Session invalid or expired! Redirecting to login...";
 
 		toast.error(message);
@@ -36,7 +37,7 @@ const refreshUserSession = async () => {
 		throw new Error(message);
 	}
 
-	result.data.data && localStorage.setItem("accessToken", result.data.data.access);
+	result.data?.data && localStorage.setItem("accessToken", result.data.data.access);
 };
 
 export { refreshUserSession };

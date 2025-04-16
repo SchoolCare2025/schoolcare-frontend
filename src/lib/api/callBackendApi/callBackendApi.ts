@@ -1,4 +1,9 @@
-import { type CallApiParameters, type ResultModeUnion, createFetchClient } from "@zayne-labs/callapi";
+import {
+	type CallApiParameters,
+	type CallApiResultErrorVariant,
+	type ResultModeUnion,
+	createFetchClient,
+} from "@zayne-labs/callapi";
 import type { UnmaskType } from "@zayne-labs/toolkit-type-helpers";
 import { toastPlugin } from "./plugins";
 import { authHeaderInclusionPlugin } from "./plugins/authHeaderInclusionPlugin";
@@ -8,7 +13,9 @@ type GlobalMeta = {
 	skipSessionCheck?: boolean;
 	toast?: {
 		error?: boolean;
-		errorsToSkip?: string[];
+		errorMessageField?: string;
+		errorsToSkip?: Array<CallApiResultErrorVariant<unknown>["error"]["name"]>;
+		errorsToSkipCondition?: (error: CallApiResultErrorVariant<ApiErrorResponse>["error"]) => boolean;
 		success?: boolean;
 	};
 };
@@ -20,14 +27,35 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const BACKEND_URL = "https://api.schoolcare.com.ng"; // FIXME -  Add this back once CORS is fixed
+const BACKEND_URL = "https://api.schoolcare.com.ng";
 
 const API_BASE_URL = "api";
 
-export const sharedFetchClient = createFetchClient({
+export const sharedFetchClient = createFetchClient((ctx) => ({
 	baseURL: `${BACKEND_URL}/${API_BASE_URL}`,
+
+	mergeMainOptionsManuallyFromBase: true,
+
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
-});
+
+	...ctx.options,
+
+	meta: {
+		...ctx.options.meta,
+		toast: {
+			error: true,
+			errorsToSkip: ["AbortError"],
+			errorsToSkipCondition: (error) => {
+				const isAuthTokenRelatedError =
+					("code" in error && error.code === "token_not_valid") ||
+					("detail" in error && error.detail === "Authentication credentials were not provided.");
+
+				return isAuthTokenRelatedError;
+			},
+			...ctx.options.meta?.toast,
+		},
+	},
+}));
 
 export type ApiSuccessResponse<TData = unknown> = UnmaskType<{
 	data: TData | null;
@@ -50,17 +78,7 @@ export const callBackendApi = <
 ) => {
 	const [initUrl, config] = args;
 
-	return sharedFetchClient(initUrl, {
-		...config,
-		meta: {
-			...config?.meta,
-			toast: {
-				error: true,
-				errorsToSkip: ["AbortError"],
-				...config?.meta?.toast,
-			},
-		},
-	});
+	return sharedFetchClient(initUrl, config);
 };
 
 export const callBackendApiForQuery = <TData = unknown>(

@@ -10,7 +10,7 @@ const columns = defineEnum(["Name", "Gender", "Reg. No"]);
 function TablePage() {
 	const studentId = useViewStudentFormStore((state) => state.studentId);
 
-	const studentsQueryResult = useQuery(studentsByIDQuery(studentId));
+	const studentsQueryResult = useQuery(studentsByIDQuery({ studentId }));
 
 	const tableData = [
 		{

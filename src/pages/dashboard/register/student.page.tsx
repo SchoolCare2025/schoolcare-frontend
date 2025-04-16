@@ -69,42 +69,44 @@ function RegisterStudentPage() {
 	return (
 		<Main className="flex flex-col gap-8">
 			<header>
-				<h1 className="text-[30px] font-bold">Register Student</h1>
+				<h1 className="text-[24px] font-bold md:text-[30px]">Register Student</h1>
 			</header>
 
 			<section>
 				<Form.Root
 					methods={methods}
-					className="gap-[56px]"
+					className="gap-6 md:gap-8"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<Form.Field<typeof methods.control> name="surname" className="gap-4">
-						<Form.Label className="font-medium">Surname*</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">Surname*</Form.Label>
 
 						<Form.Input
 							placeholder="Enter student's surname"
-							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
-								text-[14px] md:text-base"
+							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
+								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base md:text-[14px]"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Field>
 
 					<Form.Field<typeof methods.control> name="other_names" className="gap-4">
-						<Form.Label className="font-medium">Other Names*</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">Other Names*</Form.Label>
 
 						<Form.Input
 							placeholder="Enter student's other names"
-							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
-								text-[14px] md:text-base"
+							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
+								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base md:text-[14px]"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Field>
 
-					<div className="flex gap-[70px]">
-						<Form.Field<typeof methods.control> name="gender" className="w-full gap-4">
-							<Form.Label className="font-medium">Gender</Form.Label>
+					<div className="flex gap-6 md:gap-[70px]">
+						<Form.Field<typeof methods.control> name="gender" className="w-full min-w-0 gap-4">
+							<Form.Label className="text-[14px] font-medium md:text-base">Gender</Form.Label>
 
 							<Form.FieldController
 								render={({ field }) => (
@@ -115,9 +117,10 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
-												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
-												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+												base: `border-school-gray data-placeholder:text-school-gray h-[48px]
+												rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
 											<Select.Value placeholder="Choose student's gender" />
@@ -131,15 +134,17 @@ function RegisterStudentPage() {
 										>
 											<Select.Item
 												value="Male"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+												className="h-12 bg-gray-200 text-[12px] font-medium text-black
+													focus:bg-gray-300 focus:text-black data-[state=checked]:bg-gray-300
+													md:text-base"
 											>
 												Male
 											</Select.Item>
 											<Select.Item
 												value="Female"
-												className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+												className="h-12 bg-gray-200 text-[12px] font-medium text-black
+													focus:bg-gray-300 focus:text-black data-[state=checked]:bg-gray-300
+													md:text-base"
 											>
 												Female
 											</Select.Item>
@@ -151,8 +156,8 @@ function RegisterStudentPage() {
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />
 						</Form.Field>
 
-						<Form.Field<typeof methods.control> name="school_class" className="w-full gap-4">
-							<Form.Label className="font-medium">Class</Form.Label>
+						<Form.Field<typeof methods.control> name="school_class" className="w-full min-w-0 gap-4">
+							<Form.Label className="text-[14px] font-medium md:text-base">Class</Form.Label>
 
 							<Form.FieldController
 								render={({ field }) => (
@@ -163,9 +168,10 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
-												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
-												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+												base: `border-school-gray data-placeholder:text-school-gray h-[48px]
+												rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
 											<Select.Value placeholder="Choose student's class" />
@@ -183,7 +189,7 @@ function RegisterStudentPage() {
 													<Select.Item
 														key={`${item.school_class} ${item.grade}`}
 														value={`${item.school_class} ${item.grade}`}
-														className="h-12 bg-gray-200 font-medium text-black
+														className="h-12 bg-gray-200 text-[12px] font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
@@ -203,9 +209,9 @@ function RegisterStudentPage() {
 					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						className={cnMerge(
-							`bg-school-blue flex h-[56px] w-full max-w-[150px] items-center justify-center
-							self-center rounded-[10px] text-[18px] font-bold text-white`,
-							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+							`bg-school-blue mt-12 flex h-9 w-fit items-center justify-center self-end
+							rounded-[10px] px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
+							md:text-[18px]`
 						)}
 					>
 						{methods.formState.isSubmitting ? (

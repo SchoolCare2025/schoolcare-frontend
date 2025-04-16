@@ -1,7 +1,7 @@
 import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { type InputScoresResponse, callBackendApi } from "@/lib/api/callBackendApi";
-import { cnMerge } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import {
 	allClassesInSchoolQuery,
 	schoolSessionQuery,
@@ -58,18 +58,18 @@ function AddScoresPage() {
 	return (
 		<Main className="flex flex-col gap-8">
 			<header>
-				<h1 className="text-[30px] font-bold">Input Student Scores</h1>
+				<h1 className="text-[24px] font-bold md:text-[30px]">Input Student Scores</h1>
 			</header>
 
 			<section>
 				<Form.Root
 					methods={methods}
-					className="gap-[56px]"
+					className="gap-10 md:gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<div className="flex gap-[70px]">
-						<Form.Field<typeof methods.control> name="session" className="w-full gap-4">
-							<Form.Label className="font-medium">Session</Form.Label>
+					<div className="flex gap-6 md:gap-[70px]">
+						<Form.Field<typeof methods.control> name="session" className="w-full min-w-0 gap-4">
+							<Form.Label className="text-[14px] font-medium md:text-base">Session</Form.Label>
 
 							<Form.FieldController
 								render={({ field }) => (
@@ -80,9 +80,10 @@ function AddScoresPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
-												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
-												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+												base: `border-school-gray data-placeholder:text-school-gray h-[48px]
+												rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
 											<Select.Value placeholder="Choose session" />
@@ -98,8 +99,9 @@ function AddScoresPage() {
 												each={schoolSessionQueryResult.data?.data ?? []}
 												render={(item) => (
 													<Select.Item
+														key={item}
 														value={item}
-														className="h-12 bg-gray-200 font-medium text-black
+														className="h-12 bg-gray-200 text-[12px] font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
@@ -113,7 +115,7 @@ function AddScoresPage() {
 							/>
 						</Form.Field>
 
-						<Form.Field<typeof methods.control> name="term" className="w-full gap-4">
+						<Form.Field<typeof methods.control> name="term" className="w-full min-w-0 gap-4">
 							<Form.Label className="font-medium">Term</Form.Label>
 
 							<Form.FieldController
@@ -125,9 +127,10 @@ function AddScoresPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `border-school-gray data-placeholder:text-school-gray h-[75px]
-												rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
-												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+												base: `border-school-gray data-placeholder:text-school-gray h-[48px]
+												rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
 											<Select.Value placeholder="Choose term" />
@@ -143,8 +146,9 @@ function AddScoresPage() {
 												each={schoolTermQueryResult.data?.data ?? []}
 												render={(item) => (
 													<Select.Item
+														key={item}
 														value={item}
-														className="h-12 bg-gray-200 font-medium text-black
+														className="h-12 bg-gray-200 text-[12px] font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
@@ -167,9 +171,10 @@ function AddScoresPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `border-school-gray data-placeholder:text-school-gray h-[75px]
-											rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
-											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+											base: `border-school-gray data-placeholder:text-school-gray h-[48px]
+											rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
 										<Select.Value placeholder="Choose student's class" />
@@ -185,9 +190,11 @@ function AddScoresPage() {
 											each={classesQueryResult.data?.data ?? []}
 											render={(item) => (
 												<Select.Item
+													key={`${item.school_class} ${item.grade}`}
 													value={`${item.school_class} ${item.grade}`}
-													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+													className="h-12 bg-gray-200 text-[12px] font-medium text-black
+														focus:bg-gray-300 focus:text-black
+														data-[state=checked]:bg-gray-300 md:text-base"
 												>
 													{`${item.school_class} ${item.grade}`}
 												</Select.Item>
@@ -202,25 +209,30 @@ function AddScoresPage() {
 					<div className="flex gap-6 self-end">
 						<button
 							type="reset"
-							className="border-school-blue text-school-blue max-w-fit rounded-[10px] border
-								bg-white px-8 py-4 text-[18px] font-bold"
+							className="border-school-blue text-school-blue flex h-9 w-fit items-center
+								justify-center self-end rounded-[10px] border bg-white px-5 text-[14px]
+								font-semibold md:h-[56px] md:px-8 md:text-[18px]"
 						>
 							Cancel
 						</button>
 
 						<Form.Submit
-							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
+							disabled={methods.formState.isSubmitting}
 							className={cnMerge(
-								`bg-school-blue flex w-[150.5px] items-center justify-center rounded-[10px] px-8
-								py-4 text-[18px] font-bold text-white`,
+								`bg-school-blue flex h-9 w-fit items-center justify-center self-end rounded-[10px]
+								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,
+								methods.formState.isSubmitting && "grid",
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}
 						>
-							{methods.formState.isSubmitting ? (
-								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-							) : (
-								"Continue"
+							{methods.formState.isSubmitting && (
+								<span className="flex justify-center [grid-area:1/1]">
+									<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+								</span>
 							)}
+							<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+								Continue
+							</p>
 						</Form.Submit>
 					</div>
 				</Form.Root>

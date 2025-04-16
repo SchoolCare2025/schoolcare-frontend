@@ -59,28 +59,29 @@ function RegisterClassPage() {
 	const watchedSchoolClass = methods.watch("school_class");
 
 	return (
-		<Main className="flex flex-col gap-8">
+		<Main className="flex flex-col gap-6 md:gap-8">
 			<header>
-				<h1 className="text-[30px] font-bold">Register Class</h1>
+				<h1 className="text-[24px] font-bold md:text-[30px]">Register Class</h1>
 			</header>
 
 			<section>
 				<Form.Root
 					methods={methods}
-					className="gap-8"
+					className="gap-6 md:gap-8"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Field<typeof methods.control> name="school_class" className="gap-4">
-						<Form.Label className="font-medium">Class Name</Form.Label>
+					<Form.Field<typeof methods.control> name="school_class" className="gap-3 md:gap-4">
+						<Form.Label className="text-[14px] font-medium md:text-base">Class Name</Form.Label>
 
 						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `border-school-gray data-placeholder:text-school-gray h-[75px]
-											rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
-											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+											base: `border-school-gray data-placeholder:text-school-gray h-[48px]
+											rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
 										<Select.Value placeholder="Choose class" />
@@ -98,8 +99,9 @@ function RegisterClassPage() {
 												<Select.Item
 													key={item}
 													value={item}
-													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+													className="h-12 bg-gray-200 text-[12px] font-medium text-black
+														focus:bg-gray-300 focus:text-black
+														data-[state=checked]:bg-gray-300 md:text-base"
 												>
 													{item}
 												</Select.Item>
@@ -113,12 +115,13 @@ function RegisterClassPage() {
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 
-					<Form.Field<typeof methods.control> name="grade" className="gap-4">
-						<Form.Label className="font-medium">Class Grade</Form.Label>
+					<Form.Field<typeof methods.control> name="grade" className="gap-3 md:gap-4">
+						<Form.Label className="text-[14px] font-medium md:text-base">Class Grade</Form.Label>
 
 						<Form.InputGroup
-							className="border-school-gray h-[75px] w-full gap-4 rounded-[20px] border-2 bg-white
-								px-8 text-[14px] md:text-base"
+							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
+								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base md:text-[14px]"
 						>
 							<Form.InputLeftItem className="shrink-0">{watchedSchoolClass}</Form.InputLeftItem>
 
@@ -141,8 +144,10 @@ function RegisterClassPage() {
 					<Form.Submit
 						disabled={methods.formState.isSubmitting}
 						className={cnMerge(
-							`bg-school-blue mt-12 flex h-[56px] w-full max-w-[150px] items-center justify-center
-							self-end rounded-[10px] text-[18px] font-bold text-white`
+							`bg-school-blue mt-12 flex h-9 w-fit items-center justify-center self-end
+							rounded-[10px] px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
+							md:text-[18px]`,
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>
 						{methods.formState.isSubmitting ? (

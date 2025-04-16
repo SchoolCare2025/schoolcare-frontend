@@ -2,6 +2,7 @@ import { cnMerge } from "@/lib/utils/cn";
 import type { InferProps } from "@zayne-labs/toolkit-react/utils";
 import { createContext, use, useId, useMemo } from "react";
 import * as RechartsPrimitive from "recharts";
+import type { Payload } from "recharts/types/component/DefaultLegendContent";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { dark: ".dark", light: "" } as const;
@@ -280,9 +281,19 @@ export const ChartLegend = RechartsPrimitive.Legend;
 export function ChartLegendContent(
 	props: InferProps<"div"> &
 		Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-			classNames?: { base?: string; legendItem?: string; legendItemIcon?: string };
+			classNames?: {
+				base?: string;
+				legendItem?: string;
+				legendItemIcon?: string;
+				legendItemLabel?: string;
+			};
 			hideIcon?: boolean;
 			nameKey?: string;
+			renderItem?: (context: {
+				index: number;
+				itemConfig: ReturnType<typeof getPayloadConfigFromPayload>;
+				payloadItem: Payload;
+			}) => React.ReactNode;
 		}
 ) {
 	const {
@@ -292,6 +303,7 @@ export function ChartLegendContent(
 		nameKey,
 		payload,
 		ref,
+		renderItem,
 		verticalAlign = "bottom",
 	} = props;
 
@@ -311,14 +323,23 @@ export function ChartLegendContent(
 				classNames?.base
 			)}
 		>
-			{payload.map((item) => {
+			{payload.map((item, index) => {
 				// eslint-disable-next-line ts-eslint/restrict-template-expressions
 				const key = `${nameKey ?? item.dataKey ?? "value"}`;
 				const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
+				if (renderItem) {
+					return renderItem({
+						index,
+						itemConfig,
+						payloadItem: item,
+					});
+				}
+
 				return (
 					<div
-						key={item.value}
+						// eslint-disable-next-line react/no-array-index-key
+						key={index}
 						className={cnMerge(
 							"[&>svg]:text-shadcn-muted-foreground flex items-center gap-1.5 [&>svg]:size-3",
 							classNames?.legendItem
@@ -327,21 +348,20 @@ export function ChartLegendContent(
 						{itemConfig?.icon && !hideIcon ? (
 							<itemConfig.icon />
 						) : (
-							<div
+							<span
 								className={cnMerge("size-2 shrink-0 rounded-[2px]", classNames?.legendItemIcon)}
-								style={{
-									backgroundColor: item.color,
-								}}
+								style={{ backgroundColor: item.color }}
 							/>
 						)}
-						{itemConfig?.label}
-						{/* eslint-enable react/no-complex-conditional-rendering */}
+
+						<span className={classNames?.legendItemLabel}>{itemConfig?.label}</span>
 					</div>
 				);
 			})}
 		</div>
 	);
 }
+/* eslint-enable react/no-complex-conditional-rendering */
 /* eslint-enable ts-eslint/no-unsafe-assignment */
 /* eslint-enable ts-eslint/no-unsafe-member-access */
 

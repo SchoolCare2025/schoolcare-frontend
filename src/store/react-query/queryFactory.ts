@@ -9,6 +9,7 @@ import {
 } from "@/lib/api/callBackendApi";
 import { checkUserSession } from "@/lib/api/callBackendApi/plugins/utils";
 import { queryOptions } from "@tanstack/react-query";
+import type { CallApiExtraOptions } from "@zayne-labs/callapi";
 
 export const sessionQuery = () => {
 	return queryOptions({
@@ -79,14 +80,20 @@ export const studentsByClassQuery = (studentClass: string) => {
 	});
 };
 
-export const studentsByIDQuery = (studentId: string) => {
+export const studentsByIDQuery = (
+	options: Pick<CallApiExtraOptions, "onSuccess"> & { studentId: string }
+) => {
+	const { onSuccess, studentId } = options;
+
 	return queryOptions({
 		queryFn: () => {
 			return callBackendApiForQuery<StudentsByClassOrID>("/school/students/students-by-reg-number", {
-				meta: { toast: { success: true } },
+				meta: { toast: { errorMessageField: "reg", success: true } },
+				onSuccess,
 				query: { reg: studentId },
 			});
 		},
+		// eslint-disable-next-line tanstack-query/exhaustive-deps
 		queryKey: ["students", "school", { id: studentId }],
 		staleTime: Infinity,
 	});

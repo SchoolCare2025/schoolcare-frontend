@@ -9,17 +9,19 @@
 	/* Breakpoints */
 	--breakpoint-*: initial;
 	--breakpoint-sm: 480px;
-	--breakpoint-md: 800px;
+	--breakpoint-md: 768px;
 	--breakpoint-lg: 1000px;
 	--breakpoint-xl: 1280px;
 
 	/* Fonts */
 	--font-montserrat: "Montserrat", sans-serif;
-	--font-inter: "Inter", sans-serif;
+	--font-outfit: "Outfit", sans-serif;
 
 	/* App Colors */
-	--color-school-blue: hsl(202, 98%, 43%);
+	--color-school-blue: hsl(209, 97%, 50%);
 	--color-school-gray: hsl(313, 0%, 42%);
+	--color-school-gray-lighter: hsl(0, 0%, 76%);
+	--color-school-dark-blue: hsl(201, 100%, 4%);
 
 	/* Animations */
 	--animate-accordion-down: accordion-down 0.2s ease-out;
@@ -210,7 +212,12 @@
 
 	body {
 		line-height: 1.5;
-		font-family: var(--font-montserrat);
+		font-family: var(--font-outfit);
+	}
+
+	body {
+		overflow-y: var(--overflow-y, auto);
+		padding-right: var(--scrollbar-padding, 0);
 	}
 }
 

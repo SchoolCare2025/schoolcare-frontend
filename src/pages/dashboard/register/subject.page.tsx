@@ -52,26 +52,27 @@ function RegisterSubjectPage() {
 	return (
 		<Main className="flex flex-col gap-8">
 			<header>
-				<h1 className="text-[30px] font-bold">Register Subjects</h1>
+				<h1 className="text-[24px] font-bold md:text-[30px]">Register Subjects</h1>
 			</header>
 
 			<section>
 				<Form.Root
 					methods={methods}
-					className="gap-8"
+					className="gap-6 md:gap-8"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<Form.Field<typeof methods.control> name="subject" className="gap-4">
-						<Form.Label className="font-medium">Select Subject</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">Select Subject</Form.Label>
 
 						<Form.FieldController
 							render={({ field }) => (
 								<Select.Root name={field.name} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `border-school-gray data-placeholder:text-school-gray h-[75px]
-											rounded-[20px] border-2 bg-white px-8 text-[14px] md:text-base`,
-											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+											base: `border-school-gray data-placeholder:text-school-gray h-[48px]
+											rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
 										<Select.Value placeholder="Choose Subject" />
@@ -89,8 +90,9 @@ function RegisterSubjectPage() {
 												<Select.Item
 													key={item}
 													value={item}
-													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+													className="h-12 bg-gray-200 text-[12px] font-medium text-black
+														focus:bg-gray-300 focus:text-black
+														data-[state=checked]:bg-gray-300 md:text-base"
 												>
 													{item}
 												</Select.Item>
@@ -107,10 +109,11 @@ function RegisterSubjectPage() {
 					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
 
 					<Form.Submit
-						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
+						disabled={methods.formState.isSubmitting}
 						className={cnMerge(
-							`bg-school-blue mt-5 flex h-[56px] w-full max-w-[150px] items-center justify-center
-							self-end rounded-[10px] text-[18px] font-bold text-white`,
+							`bg-school-blue mt-12 flex h-9 w-fit items-center justify-center self-end
+							rounded-[10px] px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
+							md:text-[18px]`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>

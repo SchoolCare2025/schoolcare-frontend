@@ -14,10 +14,18 @@ const toastPlugin = definePlugin(() => ({
 		onError: (ctx: ErrorContext<ApiErrorResponse>) => {
 			const toastMeta = ctx.options.meta?.toast;
 
-			if (!toastMeta?.error || toastMeta.errorsToSkip?.includes(ctx.error.name)) return;
+			const shouldSkipError =
+				!toastMeta?.error ||
+				// eslint-disable-next-line ts-eslint/prefer-nullish-coalescing
+				toastMeta.errorsToSkip?.includes(ctx.error.name) ||
+				toastMeta.errorsToSkipCondition?.(ctx.error);
+
+			if (shouldSkipError) return;
+
+			const errorMessageField = ctx.options.meta?.toast?.errorMessageField ?? "message";
 
 			const errorMessage = isHTTPError(ctx.error)
-				? (ctx.error.errorData.errors?.message ?? ctx.error.message)
+				? (ctx.error.errorData.errors?.[errorMessageField] ?? ctx.error.message)
 				: ctx.error.message;
 
 			errorMessage && toast.error(errorMessage);

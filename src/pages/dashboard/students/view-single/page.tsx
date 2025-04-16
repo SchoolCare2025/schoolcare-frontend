@@ -1,6 +1,6 @@
 import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
-import { cnMerge } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { studentsByIDQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
@@ -26,34 +26,37 @@ function ViewSingleStudent() {
 		resolver: zodResolver(ViewSingleStudentsSchema),
 	});
 
-	const onSubmit = async (data: ViewSingleStudentsFormData) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		useViewStudentFormStore.setState({ studentId: data.reg_number });
 
-		await useQueryClientStore.getState().queryClient.prefetchQuery(studentsByIDQuery(data.reg_number));
-
-		// FIXME - Redirect to table
-		void navigate("./table");
-	};
+		await useQueryClientStore.getState().queryClient.prefetchQuery(
+			studentsByIDQuery({
+				onSuccess: () => void navigate("./table"),
+				studentId: data.reg_number,
+			})
+		);
+	});
 
 	return (
 		<Main className="flex flex-col gap-8">
 			<header>
-				<h1 className="text-[30px] font-bold">View Student</h1>
+				<h1 className="text-[24px] font-bold md:text-[30px]">View Student</h1>
 			</header>
 
 			<section>
 				<Form.Root
 					methods={methods}
-					className="gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					className="gap-10 md:gap-[56px]"
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Field<typeof methods.control> name="reg_number" className="w-full gap-4">
-						<Form.Label className="font-medium">Reg. Number*</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">Reg. Number*</Form.Label>
 
 						<Form.Input
 							placeholder="Enter student's reg number"
-							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
-								text-[14px] md:text-base"
+							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
+								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base md:text-[14px]"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
@@ -64,25 +67,30 @@ function ViewSingleStudent() {
 					<div className="flex gap-6 self-end">
 						<button
 							type="reset"
-							className="border-school-blue text-school-blue max-w-fit rounded-[10px] border
-								bg-white px-8 py-4 text-[18px] font-bold"
+							className="border-school-blue text-school-blue flex h-9 w-fit items-center
+								justify-center self-end rounded-[10px] border bg-white px-5 text-[14px]
+								font-semibold md:h-[56px] md:px-8 md:text-[18px]"
 						>
 							Cancel
 						</button>
 
 						<Form.Submit
-							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
+							disabled={methods.formState.isSubmitting}
 							className={cnMerge(
-								`bg-school-blue flex w-[150.5px] items-center justify-center rounded-[10px] px-8
-								py-4 text-[18px] font-bold text-white`,
+								`bg-school-blue flex h-9 w-fit items-center justify-center self-end rounded-[10px]
+								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,
+								methods.formState.isSubmitting && "grid",
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}
 						>
-							{methods.formState.isSubmitting ? (
-								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-							) : (
-								"Continue"
+							{methods.formState.isSubmitting && (
+								<span className="flex justify-center [grid-area:1/1]">
+									<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+								</span>
 							)}
+							<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+								Continue
+							</p>
 						</Form.Submit>
 					</div>
 				</Form.Root>
