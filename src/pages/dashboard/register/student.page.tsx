@@ -79,9 +79,9 @@ function RegisterStudentPage() {
 
 						<Form.Input
 							placeholder="Enter student's surname"
-							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
-								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
-								md:px-8 md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -92,9 +92,9 @@ function RegisterStudentPage() {
 
 						<Form.Input
 							placeholder="Enter student's other names"
-							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
-								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
-								md:px-8 md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -113,8 +113,8 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `border-school-gray data-placeholder:text-school-gray h-[48px]
-												rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
+												text-[12px] data-placeholder:text-school-gray md:h-[75px]
 												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -164,8 +164,8 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `border-school-gray data-placeholder:text-school-gray h-[48px]
-												rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
+												text-[12px] data-placeholder:text-school-gray md:h-[75px]
 												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -205,8 +205,8 @@ function RegisterStudentPage() {
 					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						className={cnMerge(
-							`bg-school-blue mt-12 flex h-9 w-fit items-center justify-center self-end
-							rounded-[10px] px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
+							`mt-12 flex h-9 w-fit items-center justify-center self-end rounded-[10px]
+							bg-school-blue px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
 							md:text-[18px]`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
 							methods.formState.isSubmitting && "grid"

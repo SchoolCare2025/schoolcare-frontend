@@ -11,7 +11,7 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className="bg-cosWhite flex items-center justify-between px-12 py-4"
+			className="flex items-center justify-between bg-cosWhite px-12 py-4"
 			onClick={(event) => {
 				event.target.matches("a") && toggleNavOpen();
 			}}
@@ -36,7 +36,7 @@ const Navbar = () => {
 					<Link to="/contact-us">Contact Us</Link>
 				</li>
 			</ul>
-			<button className="bg-cosBlue text-textWhite hidden rounded-lg p-2 px-3 text-xl lg:block">
+			<button className="hidden rounded-lg bg-cosBlue p-2 px-3 text-xl text-textWhite lg:block">
 				<Link to="/register/personal-info">Register School</Link>
 			</button>
 
@@ -50,32 +50,32 @@ const Navbar = () => {
 
 			<div
 				className={cnJoin(
-					`bg-cosWhite fixed inset-[0_0_0_auto] z-150 flex w-full flex-col items-center justify-center
+					`fixed inset-[0_0_0_auto] z-150 flex w-full flex-col items-center justify-center bg-cosWhite
 					text-black transition-transform duration-500 ease-in-out lg:hidden`,
 
 					isNavOpen ? "translate-x-0" : "-translate-x-full"
 				)}
 			>
 				<ul className="pt-24 text-center text-2xl">
-					<li className="hover:text-cosBlue mx-4 mb-5">
+					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="/">Home</Link>
 					</li>
-					<li className="hover:text-cosBlue mx-4 mb-5">
+					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="/about-us">About Us</Link>
 					</li>
-					<li className="hover:text-cosBlue mx-4 mb-5">
+					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="HowItWorks">How it Works</Link>
 					</li>
-					<li className="hover:text-cosBlue mx-4 mb-5">
+					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="/faq">FAQs</Link>
 					</li>
-					<li className="hover:text-cosBlue mx-4 mb-5">
+					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<Link to="ContactUs">Contact Us</Link>
 					</li>
 				</ul>
 
 				<button>
-					<Link to="/signin" className="bg-cosBlue text-textWhite block rounded-lg px-3 py-2 text-xl">
+					<Link to="/signin" className="block rounded-lg bg-cosBlue px-3 py-2 text-xl text-textWhite">
 						Get Started
 					</Link>
 				</button>

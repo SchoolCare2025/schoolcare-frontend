@@ -55,11 +55,11 @@ function DrawerContent(
 			<DrawerOverlay />
 
 			<DrawerPrimitive.Content
-				className={cnMerge("bg-shadcn-background z-50 flex flex-col", className)}
+				className={cnMerge("z-50 flex flex-col bg-shadcn-background", className)}
 				{...restOfProps}
 			>
 				{withHandle && (
-					<span className="bg-shadcn-muted mx-auto mt-4 block h-2 w-[100px] rounded-full" />
+					<span className="mx-auto mt-4 block h-2 w-[100px] rounded-full bg-shadcn-muted" />
 				)}
 
 				{children}
@@ -98,7 +98,7 @@ const DrawerDescription = (props: InferProps<typeof DrawerPrimitive.Description>
 
 	return (
 		<DrawerPrimitive.Description
-			className={cnMerge("text-shadcn-muted-foreground text-sm", className)}
+			className={cnMerge("text-sm text-shadcn-muted-foreground", className)}
 			{...restOfProps}
 		/>
 	);

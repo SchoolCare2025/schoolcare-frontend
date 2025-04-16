@@ -47,8 +47,8 @@ export const sharedFetchClient = createFetchClient((ctx) => ({
 			errorsToSkip: ["AbortError"],
 			errorsToSkipCondition: (error) => {
 				const isAuthTokenRelatedError =
-					("code" in error && error.code === "token_not_valid") ||
-					("detail" in error && error.detail === "Authentication credentials were not provided.");
+					("code" in error && error.code === "token_not_valid")
+					|| ("detail" in error && error.detail === "Authentication credentials were not provided.");
 
 				return isAuthTokenRelatedError;
 			},

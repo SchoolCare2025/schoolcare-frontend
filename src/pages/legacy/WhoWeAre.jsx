@@ -39,7 +39,7 @@ const WhoWeAre = () => {
 					md:px-12"
 			>
 				<div
-					className="bg-cosWhite rounded-xl text-center sm:px-6 sm:py-12 md:h-72 md:py-7 lg:w-[100%]"
+					className="rounded-xl bg-cosWhite text-center sm:px-6 sm:py-12 md:h-72 md:py-7 lg:w-[100%]"
 				>
 					<div>
 						<i className="ri-lightbulb-flash-line text-cosBlue sm:text-[56px] md:text-[44px]"></i>
@@ -53,7 +53,7 @@ const WhoWeAre = () => {
 
 				<div>
 					<div
-						className="bg-cosWhite sxl:w-[90%] rounded-xl text-center sm:px-6 sm:py-7 md:flex md:h-48
+						className="sxl:w-[90%] rounded-xl bg-cosWhite text-center sm:px-6 sm:py-7 md:flex md:h-48
 							md:items-center md:px-4 lg:w-[100%]"
 					>
 						<div className="mr-3">
@@ -69,7 +69,7 @@ const WhoWeAre = () => {
 					</div>
 
 					<div
-						className="bg-cosWhite sxl:w-[90%] rounded-xl text-center sm:mt-12 sm:px-6 sm:py-7
+						className="sxl:w-[90%] rounded-xl bg-cosWhite text-center sm:mt-12 sm:px-6 sm:py-7
 							md:col-start-2 md:mt-6 md:flex md:h-48 md:grid-rows-1 md:items-center md:px-4
 							lg:w-[100%]"
 					>

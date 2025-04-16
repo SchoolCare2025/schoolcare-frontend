@@ -55,7 +55,7 @@ function ScratchCardForm() {
 		<Form.Root
 			methods={methods}
 			onSubmit={(event) => void onSubmit(event)}
-			className="bg-cosWhite absolute mx-auto mt-6 w-full max-w-[376px] rounded-[12px] p-5 shadow-2xl
+			className="absolute mx-auto mt-6 w-full max-w-[376px] rounded-[12px] bg-cosWhite p-5 shadow-2xl
 				max-lg:left-[50%] max-lg:translate-x-[-50%] lg:top-[23%] lg:right-[2%] lg:mx-10 lg:mt-20
 				lg:max-w-[405px] lg:scale-[1.12] lg:px-4 lg:pb-12 xl:right-[8%]"
 		>
@@ -68,7 +68,7 @@ function ScratchCardForm() {
 					<Form.Label className="mb-1 text-lg">School ID*</Form.Label>
 					<Form.Input
 						placeholder="eg:12567"
-						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 
@@ -76,7 +76,7 @@ function ScratchCardForm() {
 					<Form.Label className="mb-1 text-lg">Reg Number</Form.Label>
 					<Form.Input
 						placeholder="eg:20246..."
-						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 
@@ -84,7 +84,7 @@ function ScratchCardForm() {
 					<Form.Label className="mb-1 text-lg">School Class*</Form.Label>
 					<Form.Input
 						placeholder="eg: JSS1"
-						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 
@@ -92,14 +92,14 @@ function ScratchCardForm() {
 					<Form.Label className="mb-1 text-lg">Grade*</Form.Label>
 					<Form.Input
 						placeholder="eg: A"
-						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="session" className="flex flex-col">
 					<Form.Label className="mb-1 text-lg">Result Session*</Form.Label>
 					<Form.Select
-						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					>
 						<option value="" disabled={true} hidden={true}>
 							Select a session
@@ -119,7 +119,7 @@ function ScratchCardForm() {
 				<Form.Field<typeof methods.control> name="term" className="flex flex-col">
 					<Form.Label className="mb-1 text-lg">Result Term</Form.Label>
 					<Form.Select
-						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					>
 						<option value="" disabled={true} hidden={true}>
 							Select a term
@@ -140,7 +140,7 @@ function ScratchCardForm() {
 					<Form.Label className="mb-1 text-lg">Card Pin</Form.Label>
 					<Form.Input
 						placeholder="Enter card pin"
-						className="border-cosBorder mb-4 w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="mb-4 w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 
@@ -148,7 +148,7 @@ function ScratchCardForm() {
 					<Form.Label className="mb-1 text-lg">Card Serial No.</Form.Label>
 					<Form.Input
 						placeholder="eg: 12348..."
-						className="border-cosBorder w-full rounded-lg border-2 p-2 text-sm outline-hidden"
+						className="w-full rounded-lg border-2 border-cosBorder p-2 text-sm outline-hidden"
 					/>
 				</Form.Field>
 			</div>
@@ -158,8 +158,8 @@ function ScratchCardForm() {
 					<Form.Submit
 						disabled={isSubmitting || !isValid}
 						className={cnMerge(
-							`bg-resultBtn text-textWhite mt-4 flex h-10 w-[min(120px,100%)] items-center
-							justify-center rounded-lg p-2 text-sm font-semibold`,
+							`mt-4 flex h-10 w-[min(120px,100%)] items-center justify-center rounded-lg
+							bg-resultBtn p-2 text-sm font-semibold text-textWhite`,
 							!isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>

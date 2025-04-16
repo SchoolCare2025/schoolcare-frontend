@@ -12,8 +12,8 @@ function CommandRoot(props: InferProps<typeof CommandPrimitive>) {
 		<CommandPrimitive
 			ref={ref}
 			className={cnMerge(
-				`bg-shadcn-popover text-shadcn-popover-foreground flex h-full w-full flex-col overflow-hidden
-				rounded-md`,
+				`flex h-full w-full flex-col overflow-hidden rounded-md bg-shadcn-popover
+				text-shadcn-popover-foreground`,
 				className
 			)}
 			{...restOfProps}
@@ -28,8 +28,8 @@ function CommandDialog(props: DialogProps) {
 		<DialogPrimitive.Root {...restOfProps}>
 			<DialogPrimitive.Content className="overflow-hidden p-0">
 				<CommandRoot
-					className="[&_[cmdk-group-heading]]:text-shadcn-muted-foreground
-						[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2
+					className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium
+						[&_[cmdk-group-heading]]:text-shadcn-muted-foreground [&_[cmdk-group]]:px-2
 						[&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5
 						[&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2
 						[&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
@@ -50,8 +50,8 @@ function CommandInput(props: InferProps<typeof CommandPrimitive.Input>) {
 
 			<CommandPrimitive.Input
 				className={cnMerge(
-					`placeholder:text-shadcn-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3
-					text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50`,
+					`flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none
+					placeholder:text-shadcn-muted-foreground disabled:cursor-not-allowed disabled:opacity-50`,
 					className
 				)}
 				{...restOfProps}
@@ -89,9 +89,9 @@ function CommandGroup(props: InferProps<typeof CommandPrimitive.Group>) {
 	return (
 		<CommandPrimitive.Group
 			className={cnMerge(
-				`text-shadcn-foreground [&_[cmdk-group-heading]]:text-shadcn-muted-foreground overflow-hidden
-				p-1 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5
-				[&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium`,
+				`overflow-hidden p-1 text-shadcn-foreground [&_[cmdk-group-heading]]:px-2
+				[&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs
+				[&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-shadcn-muted-foreground`,
 				className
 			)}
 			{...restOfProps}
@@ -116,9 +116,9 @@ function CommandItem(props: InferProps<typeof CommandPrimitive.Item>) {
 	return (
 		<CommandPrimitive.Item
 			className={cnMerge(
-				`data-[selected=true]:bg-shadcn-accent data-[selected=true]:text-shadcn-accent-foreground
-				relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none
+				`relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none
 				select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50
+				data-[selected=true]:bg-shadcn-accent data-[selected=true]:text-shadcn-accent-foreground
 				[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`,
 				className
 			)}
@@ -132,7 +132,7 @@ function CommandShortcut(props: InferProps<"span">) {
 
 	return (
 		<span
-			className={cnMerge("text-shadcn-muted-foreground ml-auto text-xs tracking-widest", className)}
+			className={cnMerge("ml-auto text-xs tracking-widest text-shadcn-muted-foreground", className)}
 			{...restOfProps}
 		/>
 	);

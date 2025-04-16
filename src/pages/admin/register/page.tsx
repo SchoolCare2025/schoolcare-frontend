@@ -61,7 +61,7 @@ function AdminRegisterPage() {
 
 						<Form.Input
 							placeholder="Enter school name"
-							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
+							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
 								text-[14px] md:text-base"
 						/>
 
@@ -72,7 +72,7 @@ function AdminRegisterPage() {
 
 						<Form.Input
 							placeholder="Enter school email"
-							className="border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
+							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
 								text-[14px] md:text-base"
 						/>
 
@@ -85,7 +85,7 @@ function AdminRegisterPage() {
 							type="password"
 							placeholder="Enter password"
 							classNames={{
-								inputGroup: `border-school-gray h-[75px] rounded-[20px] border-2 bg-white px-8
+								inputGroup: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
 								text-[14px] md:text-base`,
 							}}
 						/>
@@ -97,7 +97,7 @@ function AdminRegisterPage() {
 
 					<Form.Submit
 						disabled={methods.formState.isSubmitting}
-						className="bg-school-blue grid w-[150px] place-content-center self-end rounded-[10px]
+						className="grid w-[150px] place-content-center self-end rounded-[10px] bg-school-blue
 							px-8 py-4 text-[18px] font-bold text-white"
 					>
 						{methods.formState.isSubmitting ? (

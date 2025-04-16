@@ -222,7 +222,7 @@
 }
 
 @utility input {
-	@apply border-cosBorder placeholder-cosInputText mb-1.5 w-full max-w-40 rounded-xl border-2 px-4 py-3 transition-all duration-300 focus:outline-hidden;
+	@apply mb-1.5 w-full max-w-40 rounded-xl border-2 border-cosBorder px-4 py-3 placeholder-cosInputText transition-all duration-300 focus:outline-hidden;
 }
 
 @utility options {
@@ -230,7 +230,7 @@
 }
 
 @utility formInputs {
-	@apply bg-inputColors placeholder-cosInputText w-full px-4 py-4 outline-hidden transition-all duration-300;
+	@apply w-full bg-inputColors px-4 py-4 placeholder-cosInputText outline-hidden transition-all duration-300;
 }
 
 @utility custom-scrollbar {

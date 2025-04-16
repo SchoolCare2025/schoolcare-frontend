@@ -81,7 +81,7 @@ function AddressPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `border-school-gray h-[60px] rounded-[10px] border-2 px-8
+											base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
 											text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -117,7 +117,7 @@ function AddressPage() {
 
 						<Form.Input
 							placeholder="Enter school address"
-							className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
+							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
@@ -132,7 +132,7 @@ function AddressPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `border-school-gray h-[60px] rounded-[10px] border-2 px-8
+											base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
 											text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
 											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -180,7 +180,7 @@ function AddressPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `border-school-gray h-[60px] rounded-[10px] border-2 px-8
+												base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
 												text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
 												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -222,7 +222,7 @@ function AddressPage() {
 							<Form.Input
 								type="number"
 								placeholder="Enter school postal code"
-								className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
+								className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
 									md:h-[75px] md:rounded-[20px] md:text-base"
 							/>
 
@@ -245,8 +245,8 @@ function AddressPage() {
 						<Form.Submit
 							disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 							className={cnMerge(
-								`bg-school-blue flex max-w-fit min-w-[77px] items-center justify-center gap-3
-								rounded-[4px] px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
+								`flex max-w-fit min-w-[77px] items-center justify-center gap-3 rounded-[4px]
+								bg-school-blue px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
 								md:px-5 md:py-2 md:text-[18px]`,
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}

@@ -56,6 +56,7 @@
 		"@types/react-dom": "^19.1.2",
 		"@vitejs/plugin-react-swc": "^3.9.0",
 		"@zayne-labs/eslint-config": "^0.8.1",
+		"@zayne-labs/prettier-config": "^0.8.1",
 		"@zayne-labs/tsconfig": "^0.8.1",
 		"eslint": "^9.24.0",
 		"eslint-plugin-react-hooks": "^5.2.0",

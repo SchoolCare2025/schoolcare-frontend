@@ -21,8 +21,8 @@ const authHeaderInclusionPlugin = definePlugin(() => ({
 
 		onRequest: (ctx) => {
 			const shouldSkipAuthHeaderAddition =
-				routesExemptedFromAuthHeader.has(window.location.pathname) ||
-				ctx.options.meta?.skipAuthHeaderAddition;
+				routesExemptedFromAuthHeader.has(window.location.pathname)
+				|| ctx.options.meta?.skipAuthHeaderAddition;
 
 			if (shouldSkipAuthHeaderAddition) return;
 
@@ -54,14 +54,14 @@ const authHeaderInclusionPlugin = definePlugin(() => ({
 		// == Method 2: Only call refreshUserSession on auth token related errors, and remake the request
 		onResponseError: async (ctx: ResponseErrorContext<ApiErrorResponse>) => {
 			const isAuthTokenRelatedError =
-				("code" in ctx.error.errorData && ctx.error.errorData.code === "token_not_valid") ||
-				("detail" in ctx.error.errorData &&
-					ctx.error.errorData.detail === "Authentication credentials were not provided.");
+				("code" in ctx.error.errorData && ctx.error.errorData.code === "token_not_valid")
+				|| ("detail" in ctx.error.errorData
+					&& ctx.error.errorData.detail === "Authentication credentials were not provided.");
 
 			if (
-				ctx.response.status === 401 &&
-				isAuthTokenRelatedError &&
-				!ctx.options.fullURL?.endsWith("/check-user-session")
+				ctx.response.status === 401
+				&& isAuthTokenRelatedError
+				&& !ctx.options.fullURL?.endsWith("/check-user-session")
 			) {
 				await refreshUserSession();
 

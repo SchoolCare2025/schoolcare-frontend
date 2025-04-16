@@ -1,7 +1,7 @@
 const Footer = () => {
 	return (
 		<div
-			className="max-w-auto bg-footerBg flex w-full flex-col justify-between gap-8 px-5 py-24
+			className="max-w-auto flex w-full flex-col justify-between gap-8 bg-footerBg px-5 py-24
 				text-[14px] md:flex-row md:px-12 lg:text-[18px]"
 		>
 			<div className="w-80">
@@ -43,15 +43,15 @@ const Footer = () => {
 			<div>
 				<span className="font-semibold text-black lg:text-[20px]">Leave Us a Message</span>
 				<textarea
-					className="focus:ring-cosBlue mx-auto my-3 w-full max-w-lg resize-none overflow-auto
-						rounded-lg border border-gray-300 bg-white p-2 focus:ring-2 focus:outline-hidden"
+					className="mx-auto my-3 w-full max-w-lg resize-none overflow-auto rounded-lg border
+						border-gray-300 bg-white p-2 focus:ring-2 focus:ring-cosBlue focus:outline-hidden"
 					name=""
 					id=""
 					rows="4"
 				/>
 				<button
-					className="bg-cosBlue text-cosWhite hover:bg-greenColor transform rounded-md px-4 py-0.5
-						font-bold transition duration-300 ease-in-out"
+					className="transform rounded-md bg-cosBlue px-4 py-0.5 font-bold text-cosWhite transition
+						duration-300 ease-in-out hover:bg-greenColor"
 				>
 					Send
 				</button>

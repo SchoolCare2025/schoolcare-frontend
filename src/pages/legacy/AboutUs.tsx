@@ -54,9 +54,9 @@ const AboutUs = ({
 						lg:justify-center"
 				>
 					<div
-						className="bg-cosWhite text-resultBtn absolute top-10 left-[-10%] flex h-10 w-44
-							items-center justify-center rounded-xl py-4 pr-6 pl-10 text-center text-[10px]
-							font-semibold shadow-xl max-md:px-0 md:top-32 md:right-96"
+						className="absolute top-10 left-[-10%] flex h-10 w-44 items-center justify-center
+							rounded-xl bg-cosWhite py-4 pr-6 pl-10 text-center text-[10px] font-semibold
+							text-resultBtn shadow-xl max-md:px-0 md:top-32 md:right-96"
 					>
 						<p>Get access to academic results</p>
 					</div>
@@ -66,9 +66,9 @@ const AboutUs = ({
 					</div>
 
 					<div
-						className="bg-cosWhite text-cosBlue sxl:top-80 absolute top-32 right-[-10%] flex h-10
-							w-36 items-center justify-center rounded-xl px-1 py-4 text-center text-xs
-							font-semibold shadow-xl md:top-48 md:px-3 lg:top-72"
+						className="sxl:top-80 absolute top-32 right-[-10%] flex h-10 w-36 items-center
+							justify-center rounded-xl bg-cosWhite px-1 py-4 text-center text-xs font-semibold
+							text-cosBlue shadow-xl md:top-48 md:px-3 lg:top-72"
 					>
 						<p>Track your performance</p>
 					</div>

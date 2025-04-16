@@ -83,15 +83,15 @@ function TablePage() {
 			<section className="mt-auto flex gap-6 self-end">
 				<button
 					type="reset"
-					className="border-school-blue text-school-blue max-w-fit rounded-[10px] border bg-white px-8
-						py-4 text-[18px] font-bold"
+					className="max-w-fit rounded-[10px] border border-school-blue bg-white px-8 py-4 text-[18px]
+						font-bold text-school-blue"
 				>
 					Cancel
 				</button>
 
 				<button
 					type="button"
-					className="bg-school-blue max-w-fit rounded-[10px] px-8 py-4 text-[18px] font-bold
+					className="max-w-fit rounded-[10px] bg-school-blue px-8 py-4 text-[18px] font-bold
 						text-white"
 					onClick={handleCSVDownload}
 				>

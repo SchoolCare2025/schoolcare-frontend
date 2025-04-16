@@ -22,7 +22,7 @@ function Navbar() {
 		<header
 			id="NavBar"
 			className={cnJoin(
-				`bg-school-dark-blue flex h-[70px] flex-col px-5 max-md:sticky max-md:inset-[0_0_auto_0]
+				`flex h-[70px] flex-col bg-school-dark-blue px-5 max-md:sticky max-md:inset-[0_0_auto_0]
 				max-md:z-100 max-md:justify-center md:h-[140px] md:bg-white md:px-9`,
 				isNavShow && "w-svw pr-[calc(--spacing(5)_+_var(--scrollbar-padding))]"
 			)}
@@ -85,7 +85,7 @@ function MobileNavigation(props: MobileNavProps) {
 	return (
 		<section
 			className={cnMerge(
-				"bg-school-dark-blue fixed inset-[0_0_0_auto] mt-[70px] overflow-x-hidden pt-1 text-white",
+				"fixed inset-[0_0_0_auto] mt-[70px] overflow-x-hidden bg-school-dark-blue pt-1 text-white",
 				isNavShow ? "w-svw [transition:width_350ms_ease]" : "w-0 [transition:width_500ms_ease]",
 				className
 			)}
@@ -103,7 +103,7 @@ function MobileNavigation(props: MobileNavProps) {
 					<Show.Root key={linkItem.label} when={linkItem.link !== null}>
 						<NavLink
 							data-active={pathname === linkItem.link}
-							className="data-[active=true]:bg-school-blue flex h-[42px] items-center gap-3"
+							className="flex h-[42px] items-center gap-3 data-[active=true]:bg-school-blue"
 							to={linkItem.link as string}
 						>
 							<IconBox icon={linkItem.icon} className="ml-[18px] size-4" />

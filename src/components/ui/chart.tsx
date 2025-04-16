@@ -47,9 +47,9 @@ const getPayloadConfigFromPayload = (config: ChartConfig, payload: unknown, key:
 	if (key in payload && typeof payload[key as keyof typeof payload] === "string") {
 		configLabelKey = payload[key as keyof typeof payload] as string;
 	} else if (
-		payloadPayload &&
-		key in payloadPayload &&
-		typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
+		payloadPayload
+		&& key in payloadPayload
+		&& typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
 	) {
 		configLabelKey = payloadPayload[key as keyof typeof payloadPayload] as string;
 	}
@@ -76,16 +76,17 @@ export function ChartContainer(
 			<div
 				data-chart={chartId}
 				className={cnMerge(
-					`[&_.recharts-cartesian-axis-tick_text]:fill-shadcn-muted-foreground
+					`flex aspect-video justify-center text-xs
+					[&_.recharts-cartesian-axis-tick_text]:fill-shadcn-muted-foreground
 					[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-shadcn-border/50
 					[&_.recharts-curve.recharts-tooltip-cursor]:stroke-shadcn-border
+					[&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-hidden
 					[&_.recharts-polar-grid_[stroke='#ccc']]:stroke-shadcn-border
 					[&_.recharts-radial-bar-background-sector]:fill-shadcn-muted
 					[&_.recharts-rectangle.recharts-tooltip-cursor]:fill-shadcn-muted
-					[&_.recharts-reference-line_[stroke='#ccc']]:stroke-shadcn-border flex aspect-video
-					justify-center text-xs [&_.recharts-dot[stroke='#fff']]:stroke-transparent
-					[&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden
-					[&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-surface]:outline-hidden`,
+					[&_.recharts-reference-line_[stroke='#ccc']]:stroke-shadcn-border
+					[&_.recharts-sector]:outline-hidden [&_.recharts-sector[stroke='#fff']]:stroke-transparent
+					[&_.recharts-surface]:outline-hidden`,
 					className
 				)}
 				{...restOfProps}
@@ -114,8 +115,8 @@ export function ChartStyle(props: { config: ChartConfig; id: string }) {
 							${colorConfig
 								.map(([key, itemConfig]) => {
 									const color =
-										itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ??
-										itemConfig.color;
+										itemConfig.theme?.[theme as keyof typeof itemConfig.theme]
+										?? itemConfig.color;
 									return color ? `  --color-${key}: ${color};` : null;
 								})
 								.join("\n")}
@@ -133,8 +134,8 @@ export const ChartTooltip = RechartsPrimitive.Tooltip;
 /* eslint-disable ts-eslint/no-unsafe-assignment */
 /* eslint-disable ts-eslint/no-unsafe-member-access */
 export function ChartTooltipContent(
-	props: InferProps<"div"> &
-		InferProps<typeof RechartsPrimitive.Tooltip> & {
+	props: InferProps<"div">
+		& InferProps<typeof RechartsPrimitive.Tooltip> & {
 			hideIndicator?: boolean;
 			hideLabel?: boolean;
 			indicator?: "dashed" | "dot" | "line";
@@ -195,8 +196,8 @@ export function ChartTooltipContent(
 		<div
 			ref={ref}
 			className={cnMerge(
-				`border-shadcn-border/50 bg-shadcn-background grid min-w-32 items-start gap-1.5 rounded-lg
-				border px-2.5 py-1.5 text-xs shadow-xl`,
+				`grid min-w-32 items-start gap-1.5 rounded-lg border border-shadcn-border/50
+				bg-shadcn-background px-2.5 py-1.5 text-xs shadow-xl`,
 				className
 			)}
 		>
@@ -211,8 +212,8 @@ export function ChartTooltipContent(
 						<div
 							key={item.dataKey}
 							className={cnMerge(
-								`[&>svg]:text-shadcn-muted-foreground flex w-full flex-wrap items-stretch gap-2
-								[&>svg]:size-2.5`,
+								`flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5
+								[&>svg]:text-shadcn-muted-foreground`,
 								indicator === "dot" && "items-center"
 							)}
 						>
@@ -260,7 +261,7 @@ export function ChartTooltipContent(
 										</div>
 										{Boolean(item.value) && (
 											<span
-												className="text-shadcn-foreground font-mono font-medium tabular-nums"
+												className="font-mono font-medium text-shadcn-foreground tabular-nums"
 											>
 												{item.value?.toLocaleString()}
 											</span>
@@ -279,8 +280,8 @@ export function ChartTooltipContent(
 export const ChartLegend = RechartsPrimitive.Legend;
 
 export function ChartLegendContent(
-	props: InferProps<"div"> &
-		Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+	props: InferProps<"div">
+		& Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
 			classNames?: {
 				base?: string;
 				legendItem?: string;
@@ -341,7 +342,7 @@ export function ChartLegendContent(
 						// eslint-disable-next-line react/no-array-index-key
 						key={index}
 						className={cnMerge(
-							"[&>svg]:text-shadcn-muted-foreground flex items-center gap-1.5 [&>svg]:size-3",
+							"flex items-center gap-1.5 [&>svg]:size-3 [&>svg]:text-shadcn-muted-foreground",
 							classNames?.legendItem
 						)}
 					>

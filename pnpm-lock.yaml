@@ -123,6 +123,9 @@ importers:
       '@zayne-labs/eslint-config':
         specifier: ^0.8.1
         version: 0.8.1(@eslint-react/eslint-plugin@1.48.2(eslint@9.24.0(jiti@2.4.2))(ts-api-utils@2.1.0(typescript@5.8.3))(typescript@5.8.3))(@tanstack/eslint-plugin-query@5.73.3(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3))(eslint-plugin-react-hooks@5.2.0(eslint@9.24.0(jiti@2.4.2)))(eslint-plugin-react-refresh@0.4.19(eslint@9.24.0(jiti@2.4.2)))(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
+      '@zayne-labs/prettier-config':
+        specifier: ^0.8.1
+        version: 0.8.1
       '@zayne-labs/tsconfig':
         specifier: ^0.8.1
         version: 0.8.1
@@ -1864,6 +1867,10 @@ packages:
         optional: true
       vue-eslint-parser:
         optional: true
+
+  '@zayne-labs/prettier-config@0.8.1':
+    resolution: {integrity: sha512-DQJcuq+VrDH6PrAEBYSj0WogKLo7x7+rj/tg9O6zqrIEqcZ6llaXiIFDDrDfEHKcuEdxWM+aSP7bsYxX8G2PQw==}
+    engines: {node: '>=18.x'}
 
   '@zayne-labs/toolkit-core@0.9.8':
     resolution: {integrity: sha512-9mYDxKabwVth1dHfqVZYTQI6DcdWYIRR1Vr/VArAx8nFjqj6IS+nbCaueytYqXEplwcr78Dv5WR1oYPSPhSidw==}
@@ -5332,6 +5339,10 @@ snapshots:
       - eslint-plugin-import
       - supports-color
       - typescript
+
+  '@zayne-labs/prettier-config@0.8.1':
+    dependencies:
+      '@zayne-labs/toolkit-type-helpers': 0.9.8
 
   '@zayne-labs/toolkit-core@0.9.8':
     dependencies:

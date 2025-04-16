@@ -17,7 +17,7 @@ function Sidebar(props: { className?: string }) {
 			<aside
 				className={cnMerge(
 					// NOTE - These classes allow the sidebar to scroll only within itself
-					"custom-scrollbar sticky inset-y-0 h-svh min-w-[300px] overflow-y-auto bg-white",
+					"sticky inset-y-0 h-svh custom-scrollbar min-w-[300px] overflow-y-auto bg-white",
 					className
 				)}
 			>
@@ -42,8 +42,8 @@ function Sidebar(props: { className?: string }) {
 							<Show.Root key={item.label} when={item.link !== null}>
 								<NavLink
 									data-active={item.link === pathname}
-									className="data-[active=true]:bg-school-blue flex h-[42px] items-center gap-3
-										rounded-r-[10px]"
+									className="flex h-[42px] items-center gap-3 rounded-r-[10px]
+										data-[active=true]:bg-school-blue"
 									to={item.link as string}
 								>
 									<IconBox icon={item.icon} className="ml-6 size-5" />

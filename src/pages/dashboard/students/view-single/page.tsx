@@ -54,9 +54,9 @@ function ViewSingleStudent() {
 
 						<Form.Input
 							placeholder="Enter student's reg number"
-							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
-								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
-								md:px-8 md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
@@ -67,9 +67,9 @@ function ViewSingleStudent() {
 					<div className="flex gap-6 self-end">
 						<button
 							type="reset"
-							className="border-school-blue text-school-blue flex h-9 w-fit items-center
-								justify-center self-end rounded-[10px] border bg-white px-5 text-[14px]
-								font-semibold md:h-[56px] md:px-8 md:text-[18px]"
+							className="flex h-9 w-fit items-center justify-center self-end rounded-[10px] border
+								border-school-blue bg-white px-5 text-[14px] font-semibold text-school-blue
+								md:h-[56px] md:px-8 md:text-[18px]"
 						>
 							Cancel
 						</button>
@@ -77,7 +77,7 @@ function ViewSingleStudent() {
 						<Form.Submit
 							disabled={methods.formState.isSubmitting}
 							className={cnMerge(
-								`bg-school-blue flex h-9 w-fit items-center justify-center self-end rounded-[10px]
+								`flex h-9 w-fit items-center justify-center self-end rounded-[10px] bg-school-blue
 								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
 								methods.formState.isSubmitting && "grid"

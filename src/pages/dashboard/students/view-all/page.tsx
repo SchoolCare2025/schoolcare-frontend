@@ -59,8 +59,8 @@ export function ViewAllStudentsPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `border-school-gray data-placeholder:text-school-gray h-[48px]
-											rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px]
+											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
+											text-[12px] data-placeholder:text-school-gray md:h-[75px]
 											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -97,9 +97,9 @@ export function ViewAllStudentsPage() {
 					<div className="flex gap-6 self-end">
 						<button
 							type="reset"
-							className="border-school-blue text-school-blue flex h-9 w-fit items-center
-								justify-center self-end rounded-[10px] border bg-white px-5 text-[14px]
-								font-semibold md:h-[56px] md:px-8 md:text-[18px]"
+							className="flex h-9 w-fit items-center justify-center self-end rounded-[10px] border
+								border-school-blue bg-white px-5 text-[14px] font-semibold text-school-blue
+								md:h-[56px] md:px-8 md:text-[18px]"
 						>
 							Cancel
 						</button>
@@ -107,7 +107,7 @@ export function ViewAllStudentsPage() {
 						<Form.Submit
 							disabled={methods.formState.isSubmitting}
 							className={cnMerge(
-								`bg-school-blue flex h-9 w-fit items-center justify-center self-end rounded-[10px]
+								`flex h-9 w-fit items-center justify-center self-end rounded-[10px] bg-school-blue
 								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,
 								methods.formState.isSubmitting && "grid",
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"

@@ -35,7 +35,7 @@ function GenderRatioChart() {
 
 	return (
 		<Card.Root
-			className="border-school-gray-lighter flex size-full flex-col items-center rounded-[24px] border-2
+			className="flex size-full flex-col items-center rounded-[24px] border-2 border-school-gray-lighter
 				bg-white py-[36px_18px]"
 		>
 			<Card.Header>
@@ -76,7 +76,7 @@ function GenderRatioChart() {
 												</span>
 											</div>
 
-											<p className="text-school-gray text-[12px] font-medium">
+											<p className="text-[12px] font-medium text-school-gray">
 												{ctx.itemConfig?.label}
 											</p>
 										</section>

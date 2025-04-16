@@ -75,10 +75,10 @@ function RegisterClassPage() {
 								<Popover.Root>
 									<Popover.Trigger
 										className={cnJoin(
-											`border-school-gray data-placeholder:text-school-gray flex h-[48px]
-											items-center justify-between rounded-[8px] border-2 bg-white px-4
-											text-[12px] md:h-[75px] md:rounded-[20px] md:px-8 md:text-base
-											md:text-[14px]`,
+											`flex h-[48px] items-center justify-between rounded-[8px] border-2
+											border-school-gray bg-white px-4 text-[12px]
+											data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+											md:text-base md:text-[14px]`,
 											!(field.value as boolean) && "text-shadcn-muted-foreground"
 										)}
 									>
@@ -90,7 +90,7 @@ function RegisterClassPage() {
 
 										<IconBox
 											icon="lucide:chevrons-up-down"
-											className="text-school-gray size-5 md:size-6"
+											className="size-5 text-school-gray md:size-6"
 										/>
 									</Popover.Trigger>
 
@@ -139,9 +139,9 @@ function RegisterClassPage() {
 						<Form.Label className="text-[14px] font-medium md:text-base">Class Grade</Form.Label>
 
 						<Form.InputGroup
-							className="border-school-gray data-placeholder:text-school-gray h-[48px] gap-3.5
-								rounded-[8px] border-2 bg-white px-4 text-[12px] md:h-[75px] md:rounded-[20px]
-								md:px-8 md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						>
 							<Form.InputLeftItem className="shrink-0">{watchedSchoolClass}</Form.InputLeftItem>
 
@@ -164,8 +164,8 @@ function RegisterClassPage() {
 					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						className={cnMerge(
-							`bg-school-blue mt-12 flex h-9 w-fit items-center justify-center self-end
-							rounded-[10px] px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
+							`mt-12 flex h-9 w-fit items-center justify-center self-end rounded-[10px]
+							bg-school-blue px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
 							md:text-[18px]`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
 							methods.formState.isSubmitting && "grid"

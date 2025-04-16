@@ -67,7 +67,7 @@ function SigninPage() {
 						<Form.Input
 							type="email"
 							placeholder="Enter school email"
-							className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
+							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
@@ -79,7 +79,7 @@ function SigninPage() {
 
 						<Form.Input
 							placeholder="Enter school password"
-							className="border-school-gray h-[60px] rounded-[10px] border-2 px-8 text-[14px]
+							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
 								md:h-[75px] md:rounded-[20px] md:text-base"
 						/>
 
@@ -92,7 +92,7 @@ function SigninPage() {
 							<label className="text-[13px] font-medium md:text-base">Keep me signed in</label>
 						</div>
 
-						<Link to="#" className="text-school-blue text-[13px] md:text-base">
+						<Link to="#" className="text-[13px] text-school-blue md:text-base">
 							{" "}
 							Forgotten Password
 						</Link>
@@ -101,8 +101,8 @@ function SigninPage() {
 					<Form.Submit
 						disabled={methods.formState.isSubmitting || !methods.formState.isValid}
 						className={cnMerge(
-							`bg-school-blue mt-3 flex h-12 w-full max-w-[200px] items-center justify-center gap-4
-							self-center rounded-[60px] text-[18px] font-bold text-white md:h-[65px]
+							`mt-3 flex h-12 w-full max-w-[200px] items-center justify-center gap-4 self-center
+							rounded-[60px] bg-school-blue text-[18px] font-bold text-white md:h-[65px]
 							md:max-w-[300px] md:text-[22px]`,
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}

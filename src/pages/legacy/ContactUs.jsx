@@ -91,7 +91,7 @@ const ContactUs = () => {
 						placeholder="Enter your message"
 						className="w-[100%] rounded-lg border-2 pb-20 pl-3 outline-hidden"
 					/>
-					<button className="bg-cosBlue text-cosWhite my-3 mt-10 rounded-lg p-2">Send Message</button>
+					<button className="my-3 mt-10 rounded-lg bg-cosBlue p-2 text-cosWhite">Send Message</button>
 				</div>
 			</div>
 

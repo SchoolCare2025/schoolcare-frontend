@@ -15,10 +15,9 @@ const toastPlugin = definePlugin(() => ({
 			const toastMeta = ctx.options.meta?.toast;
 
 			const shouldSkipError =
-				!toastMeta?.error ||
-				// eslint-disable-next-line ts-eslint/prefer-nullish-coalescing
-				toastMeta.errorsToSkip?.includes(ctx.error.name) ||
-				toastMeta.errorsToSkipCondition?.(ctx.error);
+				!toastMeta?.error
+				|| toastMeta.errorsToSkip?.includes(ctx.error.name) // eslint-disable-next-line ts-eslint/prefer-nullish-coalescing
+				|| toastMeta.errorsToSkipCondition?.(ctx.error);
 
 			if (shouldSkipError) return;
 
