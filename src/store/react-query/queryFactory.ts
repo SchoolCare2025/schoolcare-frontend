@@ -108,18 +108,25 @@ export const studentsGenderQuery = () => {
 	});
 };
 
-export const schoolSessionQuery = () => {
+export const schoolSessionQuery = (options?: { meta?: CallApiExtraOptions["meta"] }) => {
+	const { meta } = options ?? {};
+
 	return queryOptions({
 		queryFn: () =>
-			callBackendApiForQuery<string[]>("/session", { meta: { skipAuthHeaderAddition: true } }),
+			callBackendApiForQuery<string[]>("/session", { meta: { skipAuthHeaderAddition: true, ...meta } }),
+		// eslint-disable-next-line tanstack-query/exhaustive-deps
 		queryKey: ["school-session"],
 		staleTime: Infinity,
 	});
 };
 
-export const schoolTermQuery = () => {
+export const schoolTermQuery = (options?: { meta?: CallApiExtraOptions["meta"] }) => {
+	const { meta } = options ?? {};
+
 	return queryOptions({
-		queryFn: () => callBackendApiForQuery<string[]>("/term", { meta: { skipAuthHeaderAddition: true } }),
+		queryFn: () =>
+			callBackendApiForQuery<string[]>("/term", { meta: { skipAuthHeaderAddition: true, ...meta } }),
+		// eslint-disable-next-line tanstack-query/exhaustive-deps
 		queryKey: ["school-term"],
 		staleTime: Infinity,
 	});

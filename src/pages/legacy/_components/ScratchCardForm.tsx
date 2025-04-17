@@ -24,8 +24,8 @@ const ScratchCardFormSchema = z.object({
 function ScratchCardForm() {
 	const { 1: setStorageState } = useStorageState<CheckResultResponse | null>("scratch-card-result", null);
 
-	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
-	const schoolTermQueryResult = useQuery(schoolTermQuery());
+	const schoolSessionQueryResult = useQuery(schoolSessionQuery({ meta: { toast: { error: false } } }));
+	const schoolTermQueryResult = useQuery(schoolTermQuery({ meta: { toast: { error: false } } }));
 
 	const [For] = getElementList("base");
 
