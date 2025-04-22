@@ -2,7 +2,7 @@ import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
-import { cnMerge } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -68,10 +68,10 @@ function AddressPage() {
 			<section>
 				<Form.Root
 					methods={methods}
-					className="mt-3 gap-8 md:gap-[56px]"
+					className="mt-3 gap-10 md:gap-[56px]"
 					onSubmit={(event) => void onSubmit(event)}
 				>
-					<Form.Field<typeof methods.control> name="nationality" className="gap-4">
+					<Form.Field<typeof methods.control> name="nationality" className="gap-3 md:gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">
 							School nationality
 						</Form.Label>
@@ -81,9 +81,10 @@ function AddressPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
-											text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
-											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
+											text-[12px] data-placeholder:text-school-gray md:h-[75px]
+											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
 										<Select.Value placeholder="Choose school nationality" />
@@ -97,8 +98,9 @@ function AddressPage() {
 									>
 										<Select.Item
 											value="Nigeria"
-											className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+											className="h-12 bg-gray-200 text-[12px] font-medium text-black
+												focus:bg-gray-300 focus:text-black data-[state=checked]:bg-gray-300
+												md:text-base"
 										>
 											Nigeria
 										</Select.Item>
@@ -117,8 +119,9 @@ function AddressPage() {
 
 						<Form.Input
 							placeholder="Enter school address"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
-								md:h-[75px] md:rounded-[20px] md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -132,9 +135,10 @@ function AddressPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
-											text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
-											icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
+											text-[12px] data-placeholder:text-school-gray md:h-[75px]
+											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
 									>
 										<Select.Value placeholder="Choose state" />
@@ -152,8 +156,9 @@ function AddressPage() {
 												<Select.Item
 													key={item.state}
 													value={item.state}
-													className="h-12 bg-gray-200 font-medium text-black focus:bg-gray-300
-														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
+													className="h-12 bg-gray-200 text-[12px] font-medium text-black
+														focus:bg-gray-300 focus:text-black
+														data-[state=checked]:bg-gray-300 md:text-base"
 												>
 													{item.state}
 												</Select.Item>
@@ -168,8 +173,8 @@ function AddressPage() {
 					</Form.Field>
 
 					<div className="flex justify-between gap-10 md:gap-[75px]">
-						<Form.Field<typeof methods.control> name="local_govt" className="w-full gap-4">
-							<Form.Label className="font-medium">LGA</Form.Label>
+						<Form.Field<typeof methods.control> name="local_govt" className="w-full gap-3 md:gap-4">
+							<Form.Label className="text-[14px] font-medium md:text-base">LGA</Form.Label>
 
 							<Form.FieldController
 								render={({ field }) => (
@@ -180,9 +185,10 @@ function AddressPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[60px] rounded-[10px] border-2 border-school-gray px-8
-												text-[14px] md:h-[75px] md:rounded-[20px] md:text-base`,
-												icon: "text-gray-700 group-data-[state=open]:rotate-180 md:size-6",
+												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
+												text-[12px] data-placeholder:text-school-gray md:h-[75px]
+												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
+												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
 										>
 											<Select.Value placeholder="Choose LGA" />
@@ -200,7 +206,7 @@ function AddressPage() {
 													<Select.Item
 														key={item}
 														value={item}
-														className="h-12 bg-gray-200 font-medium text-black
+														className="h-12 bg-gray-200 text-[12px] font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
@@ -216,14 +222,17 @@ function AddressPage() {
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />
 						</Form.Field>
 
-						<Form.Field<typeof methods.control> name="postal_code" className="w-full gap-4">
-							<Form.Label className="font-semibold">School postal code</Form.Label>
+						<Form.Field<typeof methods.control> name="postal_code" className="w-full gap-3 md:gap-4">
+							<Form.Label className="text-[14px] font-semibold md:text-base">
+								School postal code
+							</Form.Label>
 
 							<Form.Input
 								type="number"
 								placeholder="Enter school postal code"
-								className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
-									md:h-[75px] md:rounded-[20px] md:text-base"
+								className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+									text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+									md:px-8 md:text-base"
 							/>
 
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -251,11 +260,14 @@ function AddressPage() {
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}
 						>
-							{methods.formState.isSubmitting ? (
-								<IconBox icon="svg-spinners:6-dots-rotate" className="size-5" />
-							) : (
-								"Submit"
+							{methods.formState.isSubmitting && (
+								<span className="flex justify-center [grid-area:1/1]">
+									<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+								</span>
 							)}
+							<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+								Submit
+							</p>
 						</Form.Submit>
 					</div>
 				</Form.Root>

@@ -100,28 +100,30 @@ function PersonalInfoPage() {
 						/>
 					</Form.Field>
 
-					<Form.Field<typeof methods.control> name="name" className="gap-4">
+					<Form.Field<typeof methods.control> name="name" className="gap-3 md:gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">
 							Name of School
 						</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school name"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
-								md:h-[75px] md:rounded-[20px] md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 
-					<Form.Field<typeof methods.control> name="email" className="gap-4">
+					<Form.Field<typeof methods.control> name="email" className="gap-3 md:gap-4">
 						<Form.Label className="text-[14px] font-semibold md:text-base">School Email</Form.Label>
 
 						<Form.Input
 							type="email"
 							placeholder="Enter school email"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
-								md:h-[75px] md:rounded-[20px] md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />

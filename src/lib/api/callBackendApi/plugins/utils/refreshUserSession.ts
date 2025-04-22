@@ -11,7 +11,7 @@ const refreshUserSession = async () => {
 
 		toast.error(message);
 
-		setTimeout(() => hardNavigate("/signin"), 2100);
+		setTimeout(() => hardNavigate("/signin"), 1500);
 
 		throw new Error(message);
 	}
@@ -32,7 +32,7 @@ const refreshUserSession = async () => {
 
 		toast.error(message);
 
-		setTimeout(() => hardNavigate("/signin"), 2100);
+		setTimeout(() => hardNavigate("/signin"), 1500);
 
 		throw new Error(message);
 	}

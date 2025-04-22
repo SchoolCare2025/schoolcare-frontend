@@ -6,7 +6,7 @@ import { Drawer as DrawerPrimitive } from "vaul";
 function DrawerRoot(props: InferProps<typeof DrawerPrimitive.Root> & { trapFocus?: boolean }) {
 	const { children, shouldScaleBackground = true, trapFocus = true, ...restOfProps } = props;
 
-	/* NOTE - This is a hack to prevent radix within vaul from trapping focus like a massive idiot🙂 */
+	// NOTE - This is a hack to prevent radix within vaul from trapping focus like a massive idiot🙂
 
 	useLayoutEffect(() => {
 		if (trapFocus) return;
@@ -20,9 +20,7 @@ function DrawerRoot(props: InferProps<typeof DrawerPrimitive.Root> & { trapFocus
 			signal: controller.signal,
 		});
 
-		return () => {
-			controller.abort();
-		};
+		return () => controller.abort();
 	}, [trapFocus]);
 
 	return (

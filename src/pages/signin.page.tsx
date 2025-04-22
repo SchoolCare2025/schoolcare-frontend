@@ -58,29 +58,35 @@ function SigninPage() {
 			<section>
 				<Form.Root
 					methods={methods}
-					className="gap-[56px] text-[14px] md:text-base"
+					className="gap-10 md:gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
-					<Form.Field<typeof methods.control> name="email" className="gap-4">
-						<Form.Label className="font-medium">School email address*</Form.Label>
+					<Form.Field<typeof methods.control> name="email" className="gap-3 md:gap-4">
+						<Form.Label className="text-[14px] font-medium md:text-base">
+							School email address*
+						</Form.Label>
 
 						<Form.Input
 							type="email"
 							placeholder="Enter school email"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
-								md:h-[75px] md:rounded-[20px] md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 
 					<Form.Field<typeof methods.control> name="password" className="gap-4">
-						<Form.Label className="font-medium">School Password*</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">
+							School Password*
+						</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school password"
-							className="h-[60px] rounded-[10px] border-2 border-school-gray px-8 text-[14px]
-								md:h-[75px] md:rounded-[20px] md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />

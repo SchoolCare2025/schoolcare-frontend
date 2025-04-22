@@ -65,11 +65,11 @@ function DashboardPage() {
 
 							<hr className="mt-2 h-2 w-full bg-school-blue md:hidden" />
 
-							<Card.Title className="mt-1.5 text-[6px] font-medium md:mt-3.5 md:text-[12px]">
+							<Card.Title className="mt-1.5 text-[9px] font-medium md:mt-3.5 md:text-[12px]">
 								{item.title}
 							</Card.Title>
 
-							<Card.Description className="text-[10px] font-bold text-black md:mt-1 md:text-[24px]">
+							<Card.Description className="text-[12px] font-bold text-black md:mt-1 md:text-[24px]">
 								<NumberFlow value={item.description} />
 							</Card.Description>
 						</Card.Header>
