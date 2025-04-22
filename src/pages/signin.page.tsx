@@ -1,7 +1,7 @@
 import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { type LoginData, callBackendApi } from "@/lib/api/callBackendApi";
-import { cnMerge } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
@@ -93,14 +93,15 @@ function SigninPage() {
 					</Form.Field>
 
 					<div className="flex justify-between gap-3">
-						<div className="flex items-center gap-1 md:gap-3">
-							<input type="checkbox" className="size-4 md:size-[20px]" />
-							<label className="text-[13px] font-medium md:text-base">Keep me signed in</label>
-						</div>
+						<Form.Field name="remember" className="flex items-center gap-1 md:gap-3">
+							<Form.Label className="text-[13px] font-medium md:text-base">
+								Keep me signed in
+							</Form.Label>
+							<Form.InputPrimitive type="checkbox" className="size-4 md:size-[20px]" />
+						</Form.Field>
 
 						<Link to="#" className="text-[13px] text-school-blue md:text-base">
-							{" "}
-							Forgotten Password
+							Forgotten Password?
 						</Link>
 					</div>
 
@@ -113,16 +114,17 @@ function SigninPage() {
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>
-						{methods.formState.isSubmitting ? (
-							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6 md:size-8" />
-						) : (
-							<>
-								Login
-								<span className="inline-block size-6">
-									<IconBox icon="material-symbols:arrow-outward-rounded" className="size-full" />
-								</span>
-							</>
+						{methods.formState.isSubmitting && (
+							<span className="flex justify-center [grid-area:1/1]">
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							</span>
 						)}
+						<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+							Login
+							<span className="inline-block size-6">
+								<IconBox icon="material-symbols:arrow-outward-rounded" className="size-full" />
+							</span>
+						</p>
 					</Form.Submit>
 				</Form.Root>
 			</section>

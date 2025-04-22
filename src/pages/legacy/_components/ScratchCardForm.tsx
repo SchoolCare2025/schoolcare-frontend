@@ -1,6 +1,6 @@
 import { IconBox, getElementList } from "@/components/common";
 import { type CheckResultResponse, callBackendApi } from "@/lib/api/callBackendApi";
-import { cnMerge } from "@/lib/utils/cn";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -163,11 +163,12 @@ function ScratchCardForm() {
 							!isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>
-						{isSubmitting ? (
-							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-						) : (
-							"Check Result"
+						{isSubmitting && (
+							<span className="flex justify-center [grid-area:1/1]">
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							</span>
 						)}
+						<p className={cnJoin(isSubmitting && "invisible [grid-area:1/1]")}>Check Result</p>
 					</Form.Submit>
 				)}
 			/>
