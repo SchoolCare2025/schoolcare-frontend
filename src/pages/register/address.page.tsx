@@ -128,7 +128,7 @@ function AddressPage() {
 					</Form.Field>
 
 					<Form.Field<typeof methods.control> name="state" className="w-full gap-4">
-						<Form.Label className="font-medium">State</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">State</Form.Label>
 
 						<Form.FieldController
 							render={({ field }) => (
@@ -223,7 +223,7 @@ function AddressPage() {
 						</Form.Field>
 
 						<Form.Field<typeof methods.control> name="postal_code" className="w-full gap-3 md:gap-4">
-							<Form.Label className="text-[14px] font-semibold md:text-base">
+							<Form.Label className="text-[14px] font-medium md:text-base">
 								School postal code
 							</Form.Label>
 
@@ -257,6 +257,7 @@ function AddressPage() {
 								`flex max-w-fit min-w-[77px] items-center justify-center gap-3 rounded-[4px]
 								bg-school-blue px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
 								md:px-5 md:py-2 md:text-[18px]`,
+								methods.formState.isSubmitting && "grid",
 								!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 							)}
 						>

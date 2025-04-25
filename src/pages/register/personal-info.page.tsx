@@ -1,32 +1,24 @@
-import { IconBox } from "@/components/common";
+import { DropZoneInput, IconBox } from "@/components/common";
 import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
-import { DropZone } from "@/components/ui/drop-zone";
 import { cnMerge } from "@/lib/utils/cn";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { handleImagePreview } from "@zayne-labs/toolkit-core";
-import type { MyCustomCss } from "@zayne-labs/toolkit-react/utils";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
 import { z } from "zod";
 import Main from "../_components/Main";
 
 const PersonalInfoSchema = z.object({
 	email: z.string().email("Please enter a valid email!"),
-	logo: z
-		.custom<File>((file) => file instanceof File)
-		.nullable()
-		.optional(),
+	logo: z.instanceof(File).nullable().optional(),
 	name: z.string().min(1, "Name is required").max(50, "Name is too long"),
 });
 
 function PersonalInfoPage() {
 	const {
-		actions: { updateFormData, updateLogoPreview },
+		actions: { updateFormData },
 		formStepData,
-		logoPreview,
 	} = useRegisterFormStore((state) => state);
 
 	const methods = useForm({
@@ -59,51 +51,39 @@ function PersonalInfoPage() {
 					<Form.Field<typeof methods.control> name="logo">
 						<Form.FieldController
 							render={({ field }) => (
-								<DropZone
-									onUploadError={(ctx) => toast.error("Error", { description: ctx.message })}
-									onUploadSuccess={(ctx) =>
-										toast.success("Success", { description: ctx.message })
-									}
+								<DropZoneInput
+									onChange={field.onChange}
 									allowedFileTypes={["image/png", "image/jpeg", "image/jpg"]}
 									classNames={{ base: "w-fit", input: "hidden" }}
-									onUpload={({ acceptedFiles }) => {
-										field.onChange(acceptedFiles[0]);
-
-										void handleImagePreview({
-											file: acceptedFiles[0],
-											onSuccess: (ctx) => updateLogoPreview(ctx.result),
-										});
-									}}
 								>
 									{(ctx) => (
 										<span
 											className="relative mt-4 block size-[110px] rounded-full bg-gray-200
 												bg-cover md:mt-8 md:size-[200px]"
-											style={
-												{
-													backgroundImage: logoPreview ? `url(${logoPreview})` : "",
-												} as MyCustomCss
-											}
+											style={{
+												backgroundImage: ctx.dropZoneState.filesWithPreview[0]?.preview
+													? `url(${ctx.dropZoneState.filesWithPreview[0]?.preview})`
+													: "",
+											}}
 										>
-											<button type="button" onClick={ctx.openFilePicker}>
+											<button type="button" onClick={ctx.dropZoneActions.openFilePicker}>
 												<EditIcon
 													className={cnMerge(
 														"absolute right-3 bottom-2 size-[18px] md:size-[40px]",
-														logoPreview && "[&_path]:stroke-school-blue"
+														ctx.dropZoneState.filesWithPreview[0]?.preview
+															&& "[&_path]:stroke-school-blue"
 													)}
 												/>
 											</button>
 										</span>
 									)}
-								</DropZone>
+								</DropZoneInput>
 							)}
 						/>
 					</Form.Field>
 
 					<Form.Field<typeof methods.control> name="name" className="gap-3 md:gap-4">
-						<Form.Label className="text-[14px] font-semibold md:text-base">
-							Name of School
-						</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">Name of School</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school name"
@@ -116,7 +96,7 @@ function PersonalInfoPage() {
 					</Form.Field>
 
 					<Form.Field<typeof methods.control> name="email" className="gap-3 md:gap-4">
-						<Form.Label className="text-[14px] font-semibold md:text-base">School Email</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">School Email</Form.Label>
 
 						<Form.Input
 							type="email"

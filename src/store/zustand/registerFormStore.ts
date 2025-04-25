@@ -18,14 +18,10 @@ export type StepTwoData = {
 };
 
 export type RegisterFormStore = {
-	logoPreview: string;
-
 	formStepData: Prettify<StepOneData & StepTwoData>;
 
 	actions: {
 		resetFormStore: () => void;
-
-		updateLogoPreview: (logoPreview: string) => void;
 
 		updateFormData: (updatedFormData: Partial<RegisterFormStore["formStepData"]>) => void;
 	};
@@ -42,8 +38,6 @@ const initialRegisterFormState = {
 		postal_code: "",
 		state: "",
 	},
-
-	logoPreview: "",
 } satisfies Omit<RegisterFormStore, "actions">;
 
 const stateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
@@ -57,8 +51,6 @@ const stateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
 
 			set({ formStepData: { ...formStepData, ...updatedFormData } });
 		},
-
-		updateLogoPreview: (logoPreview) => set({ logoPreview }),
 	} satisfies RegisterFormStore["actions"],
 });
 

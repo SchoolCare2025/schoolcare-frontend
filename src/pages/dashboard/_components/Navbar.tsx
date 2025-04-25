@@ -13,7 +13,7 @@ function Navbar() {
 	const handleToggleNavShow = () => {
 		const newIsNavShow = !isNavShow;
 
-		lockScroll({ isActive: newIsNavShow });
+		lockScroll({ lock: newIsNavShow });
 
 		toggleNavShow(newIsNavShow);
 	};
@@ -22,9 +22,10 @@ function Navbar() {
 		<header
 			id="NavBar"
 			className={cnJoin(
-				`flex h-[70px] flex-col bg-school-dark-blue px-5 max-md:sticky max-md:inset-[0_0_auto_0]
-				max-md:z-100 max-md:justify-center md:h-[140px] md:bg-white md:px-9`,
-				isNavShow && "w-svw pr-[calc(--spacing(5)_+_var(--scrollbar-padding))]"
+				`flex h-[70px] flex-col bg-school-dark-blue px-(--padding-value) [--padding-value:--spacing(5)]
+				max-md:sticky max-md:inset-[0_0_auto_0] max-md:z-100 max-md:justify-center md:h-[140px]
+				md:bg-white md:px-9`,
+				isNavShow && "w-svw pr-[calc(var(--padding-value)+var(--scrollbar-padding))]"
 			)}
 		>
 			<DesktopNavContent className="max-md:hidden" />
@@ -86,7 +87,7 @@ function MobileNavigation(props: MobileNavProps) {
 		<section
 			className={cnMerge(
 				"fixed inset-[0_0_0_auto] mt-[70px] overflow-x-hidden bg-school-dark-blue pt-1 text-white",
-				isNavShow ? "w-svw [transition:width_350ms_ease]" : "w-0 [transition:width_500ms_ease]",
+				isNavShow ? "w-svw [transition:width_400ms_ease]" : "w-0 [transition:width_200ms_ease]",
 				className
 			)}
 			onClick={(event) => {

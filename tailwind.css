@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@source "./node_modules/@zayne-labs/ui-react/dist/esm/**/*.js";
+@import "@zayne-labs/ui-react/css/preset.css";
 
 /* ------------------*/
 /* Main Theme        */
@@ -216,8 +216,10 @@
 	}
 
 	body {
-		overflow-y: var(--overflow-y, auto);
-		padding-right: var(--scrollbar-padding, 0);
+		--scrollbar-padding: 0px;
+		--overflow-y: auto;
+		overflow-y: var(--overflow-y);
+		padding-right: var(--scrollbar-padding);
 	}
 }
 

@@ -11,7 +11,7 @@ const Navbar = () => {
 	const handleToggleNavShow = () => {
 		const newIsNavShow = !isNavShow;
 
-		lockScroll({ isActive: newIsNavShow });
+		lockScroll({ lock: newIsNavShow });
 
 		toggleNavShow(newIsNavShow);
 	};
