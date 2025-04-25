@@ -1,5 +1,5 @@
 import { DropZoneInput, DropZoneInputImagePreview, IconBox, getElementList } from "@/components/common";
-import { DropZone, Form, Select } from "@/components/ui";
+import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { allSubjectsInSchoolQuery, sessionQuery } from "@/store/react-query/queryFactory";
@@ -149,13 +149,11 @@ function UploadPage() {
 												file
 											</p>
 
-											<DropZone.ImagePreview>
-												<DropZoneInputImagePreview
-													classNames={{ listItem: "px-3 md:px-6" }}
-													filesWithPreview={dropZoneState.filesWithPreview}
-													removeFile={dropZoneActions.removeFile}
-												/>
-											</DropZone.ImagePreview>
+											<DropZoneInputImagePreview
+												classNames={{ listItem: "px-3 md:px-6" }}
+												filesWithPreview={dropZoneState.filesWithPreview}
+												removeFile={dropZoneActions.removeFile}
+											/>
 										</>
 									)}
 								</DropZoneInput>
