@@ -22,7 +22,7 @@ const ScratchCardFormSchema = z.object({
 });
 
 function ScratchCardForm() {
-	const { 1: setStorageState } = useStorageState<CheckResultResponse | null>("scratch-card-result", null);
+	const { 1: storageActions } = useStorageState<CheckResultResponse | null>("scratch-card-result", null);
 
 	const schoolSessionQueryResult = useQuery(schoolSessionQuery({ meta: { toast: { error: false } } }));
 	const schoolTermQueryResult = useQuery(schoolTermQuery({ meta: { toast: { error: false } } }));
@@ -44,7 +44,7 @@ function ScratchCardForm() {
 			method: "POST",
 
 			onSuccess: (ctx) => {
-				setStorageState(ctx.data.data);
+				storageActions.setState(ctx.data.data);
 
 				void navigate("/result-sheet");
 			},

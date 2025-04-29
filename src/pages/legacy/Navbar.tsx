@@ -23,8 +23,8 @@ const Navbar = () => {
 				(event.target as HTMLElement).matches("a") && handleToggleNavShow();
 			}}
 		>
-			<NavLink to="/" className="sxl:w-[5%] block w-[6%]">
-				<img src={Logo} alt="Logo" className="w-[12vh]" />
+			<NavLink to="/" className="block">
+				<img src={Logo} alt="Logo" className="w-[80px]" />
 			</NavLink>
 
 			<ul className="hidden text-base font-normal lg:flex lg:gap-12 lg:text-lg xl:gap-14 xl:text-xl">

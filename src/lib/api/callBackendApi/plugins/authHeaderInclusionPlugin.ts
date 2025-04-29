@@ -12,6 +12,7 @@ const routesExemptedFromAuthHeader = new Set([
 ]);
 
 export type AuthHeaderInclusionPluginMeta = {
+	authTokenToAdd?: "accessToken" | "refreshToken";
 	skipAuthHeaderAddition?: boolean;
 	skipSessionCheck?: boolean;
 };
@@ -53,7 +54,22 @@ export const authHeaderInclusionPlugin = definePlugin(() => ({
 
 			const accessToken = localStorage.getItem("accessToken");
 
-			ctx.options.auth = accessToken;
+			const authTokenToAdd: AuthHeaderInclusionPluginMeta["authTokenToAdd"] =
+				ctx.options.meta?.authTokenToAdd ?? "accessToken";
+
+			switch (authTokenToAdd) {
+				case "accessToken": {
+					ctx.options.auth = accessToken;
+					break;
+				}
+				case "refreshToken": {
+					ctx.options.auth = refreshToken;
+					break;
+				}
+				default: {
+					throw new Error("Invalid option provided for `authTokenToAdd`");
+				}
+			}
 		},
 
 		// == Method 2: Only call refreshUserSession on auth token related errors, and remake the request

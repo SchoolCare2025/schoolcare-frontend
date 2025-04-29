@@ -1,7 +1,9 @@
-import { IconBox, Show, getElementList } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { Drawer } from "@/components/ui";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
-import { NavLink, useLocation } from "react-router";
+import { isFunction, isString } from "@zayne-labs/toolkit-type-helpers";
+import { Fragment } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { dashboardLinkItems } from "./constants";
 
 const [SideBarLinkList] = getElementList();
@@ -10,6 +12,8 @@ function Sidebar(props: { className?: string }) {
 	const { className } = props;
 
 	const pathname = useLocation().pathname;
+
+	const navigate = useNavigate();
 
 	return (
 		// NOTE - Using the trapFocus prop as a hack to prevent radix within vaul from trapping focus like a massive idiot🙂
@@ -39,24 +43,30 @@ function Sidebar(props: { className?: string }) {
 						each={dashboardLinkItems}
 						className="flex flex-col gap-6 bg-inherit font-medium"
 						render={(item) => (
-							<Show.Root key={item.label} when={item.link !== null}>
-								<NavLink
-									data-active={item.link === pathname}
-									className="flex h-[42px] items-center gap-3 rounded-r-[10px]
-										data-[active=true]:bg-school-blue"
-									to={item.link as string}
-								>
-									<IconBox icon={item.icon} className="ml-6 size-5" />
-									{item.label}
-								</NavLink>
+							<Fragment key={item.label}>
+								{isString(item.link) && (
+									<NavLink
+										data-active={item.link === pathname}
+										className="flex h-[42px] items-center gap-3 rounded-r-[10px]
+											data-[active=true]:bg-school-blue"
+										to={item.link}
+									>
+										<IconBox icon={item.icon} className="ml-6 size-5" />
+										{item.label}
+									</NavLink>
+								)}
 
-								<Show.Otherwise>
-									<button type="button" className="flex h-[42px] items-center gap-3">
+								{isFunction(item.link) && (
+									<button
+										type="button"
+										className="flex h-[42px] items-center gap-3"
+										onClick={item.link(navigate)}
+									>
 										<IconBox icon={item.icon} className="ml-6 size-5" />
 										{item.label}
 									</button>
-								</Show.Otherwise>
-							</Show.Root>
+								)}
+							</Fragment>
 						)}
 					/>
 				</Drawer.Content>

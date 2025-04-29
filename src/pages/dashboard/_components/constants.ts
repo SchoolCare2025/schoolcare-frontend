@@ -1,3 +1,6 @@
+import { callBackendApi } from "@/lib/api/callBackendApi";
+import type { AnyFunction } from "@zayne-labs/toolkit-type-helpers";
+
 export const dashboardLinkItems = [
 	{
 		icon: "mynaui:grid",
@@ -38,6 +41,21 @@ export const dashboardLinkItems = [
 	{
 		icon: "mage:logout",
 		label: "Log out",
-		link: null,
+		link: (navigate: AnyFunction) => {
+			return () => {
+				void callBackendApi("/logout", {
+					meta: {
+						toast: { success: true },
+					},
+					method: "POST",
+
+					onSuccess: () => {
+						navigate("/");
+						localStorage.removeItem("accessToken");
+						localStorage.removeItem("refreshToken");
+					},
+				});
+			};
+		},
 	},
 ];

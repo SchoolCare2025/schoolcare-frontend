@@ -1,10 +1,12 @@
-import { IconBox, Show, getElementList } from "@/components/common";
+import { IconBox, getElementList } from "@/components/common";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { sessionQuery } from "@/store/react-query/queryFactory";
 import { useQuery } from "@tanstack/react-query";
 import { lockScroll } from "@zayne-labs/toolkit-core";
 import { useToggle } from "@zayne-labs/toolkit-react";
-import { NavLink, useLocation } from "react-router";
+import { isFunction, isString } from "@zayne-labs/toolkit-type-helpers";
+import { Fragment } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { dashboardLinkItems } from "./constants";
 
 function Navbar() {
@@ -83,6 +85,8 @@ function MobileNavigation(props: MobileNavProps) {
 
 	const pathname = useLocation().pathname;
 
+	const navigate = useNavigate();
+
 	return (
 		<section
 			className={cnMerge(
@@ -100,26 +104,30 @@ function MobileNavigation(props: MobileNavProps) {
 				as="nav"
 				className="flex flex-col gap-5 px-5 text-nowrap"
 				each={dashboardLinkItems}
-				render={(linkItem) => (
-					<Show.Root key={linkItem.label} when={linkItem.link !== null}>
-						<NavLink
-							data-active={pathname === linkItem.link}
-							className="flex h-[42px] items-center gap-3 data-[active=true]:bg-school-blue"
-							to={linkItem.link as string}
-						>
-							<IconBox icon={linkItem.icon} className="ml-[18px] size-4" />
+				render={(item) => (
+					<Fragment key={item.label}>
+						{isString(item.link) && (
+							<NavLink
+								data-active={item.link === pathname}
+								className="flex h-[42px] items-center gap-3 rounded-r-[10px]"
+								to={item.link}
+							>
+								<IconBox icon={item.icon} className="ml-6 size-5" />
+								{item.label}
+							</NavLink>
+						)}
 
-							{linkItem.label}
-						</NavLink>
-
-						<Show.Otherwise>
-							<button type="button" className="flex h-[42px] items-center gap-3">
-								<IconBox icon={linkItem.icon} className="ml-[18px] size-4" />
-
-								{linkItem.label}
+						{isFunction(item.link) && (
+							<button
+								type="button"
+								className="flex h-[42px] items-center gap-3"
+								onClick={item.link(navigate)}
+							>
+								<IconBox icon={item.icon} className="ml-6 size-5" />
+								{item.label}
 							</button>
-						</Show.Otherwise>
-					</Show.Root>
+						)}
+					</Fragment>
 				)}
 			/>
 		</section>

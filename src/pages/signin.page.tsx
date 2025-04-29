@@ -2,7 +2,10 @@ import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { type LoginData, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { sessionQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { omitKeys } from "@zayne-labs/toolkit-core";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { z } from "zod";
@@ -25,6 +28,8 @@ function SigninPage() {
 
 	const navigate = useNavigate();
 
+	const queryClient = useQueryClient();
+
 	const onSubmit = async (data: SignupFormValues) => {
 		await callBackendApi<LoginData>("/login", {
 			body: data,
@@ -42,6 +47,11 @@ function SigninPage() {
 
 				localStorage.setItem("accessToken", ctx.data.data.access);
 				localStorage.setItem("refreshToken", ctx.data.data.refresh);
+
+				queryClient.setQueryData(sessionQuery().queryKey, {
+					...ctx.data,
+					data: omitKeys(ctx.data.data, ["access", "refresh"]),
+				});
 
 				void navigate("/dashboard");
 			},
@@ -111,6 +121,7 @@ function SigninPage() {
 							`mt-3 flex h-12 w-full max-w-[200px] items-center justify-center gap-4 self-center
 							rounded-[60px] bg-school-blue text-[18px] font-bold text-white md:h-[65px]
 							md:max-w-[300px] md:text-[22px]`,
+							methods.formState.isSubmitting && "grid",
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>
