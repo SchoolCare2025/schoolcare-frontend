@@ -11,7 +11,12 @@ const routesExemptedFromAuthHeader = new Set([
 	"/admin/register",
 ]);
 
-const authHeaderInclusionPlugin = definePlugin(() => ({
+export type AuthHeaderInclusionPluginMeta = {
+	skipAuthHeaderAddition?: boolean;
+	skipSessionCheck?: boolean;
+};
+
+export const authHeaderInclusionPlugin = definePlugin(() => ({
 	/* eslint-disable perfectionist/sort-objects */
 	id: "authHeader",
 	name: "authHeaderPlugin",
@@ -72,5 +77,3 @@ const authHeaderInclusionPlugin = definePlugin(() => ({
 		},
 	},
 }));
-
-export { authHeaderInclusionPlugin };

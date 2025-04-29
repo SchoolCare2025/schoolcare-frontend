@@ -1,2 +1,2 @@
-export { authHeaderInclusionPlugin } from "./authHeaderInclusionPlugin";
-export { toastPlugin } from "./toastPlugin";
+export * from "./authHeaderInclusionPlugin";
+export * from "./toastPlugin";

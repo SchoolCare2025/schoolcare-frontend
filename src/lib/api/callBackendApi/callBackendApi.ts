@@ -1,24 +1,13 @@
-import {
-	type CallApiParameters,
-	type CallApiResultErrorVariant,
-	type ResultModeUnion,
-	createFetchClient,
-} from "@zayne-labs/callapi";
+import { type CallApiParameters, type ResultModeUnion, createFetchClient } from "@zayne-labs/callapi";
 import type { UnmaskType } from "@zayne-labs/toolkit-type-helpers";
-import { toastPlugin } from "./plugins";
-import { authHeaderInclusionPlugin } from "./plugins/authHeaderInclusionPlugin";
+import {
+	type AuthHeaderInclusionPluginMeta,
+	type ToastPluginMeta,
+	authHeaderInclusionPlugin,
+	toastPlugin,
+} from "./plugins";
 
-type GlobalMeta = {
-	skipAuthHeaderAddition?: boolean;
-	skipSessionCheck?: boolean;
-	toast?: {
-		error?: boolean;
-		errorMessageField?: string;
-		errorsToSkip?: Array<CallApiResultErrorVariant<unknown>["error"]["name"]>;
-		errorsToSkipCondition?: (error: CallApiResultErrorVariant<ApiErrorResponse>["error"]) => boolean;
-		success?: boolean;
-	};
-};
+type GlobalMeta = AuthHeaderInclusionPluginMeta & ToastPluginMeta;
 
 declare module "@zayne-labs/callapi" {
 	// eslint-disable-next-line ts-eslint/consistent-type-definitions

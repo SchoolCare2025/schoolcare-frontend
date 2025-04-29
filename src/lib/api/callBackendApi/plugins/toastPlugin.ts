@@ -1,9 +1,24 @@
-import { type ErrorContext, type SuccessContext, definePlugin } from "@zayne-labs/callapi";
+import {
+	type CallApiResultErrorVariant,
+	type ErrorContext,
+	type SuccessContext,
+	definePlugin,
+} from "@zayne-labs/callapi";
 import { isHTTPError } from "@zayne-labs/callapi/utils";
 import { toast } from "sonner";
 import type { ApiErrorResponse, ApiSuccessResponse } from "../callBackendApi";
 
-const toastPlugin = definePlugin(() => ({
+export type ToastPluginMeta = {
+	toast?: {
+		error?: boolean;
+		errorMessageField?: string;
+		errorsToSkip?: Array<CallApiResultErrorVariant<unknown>["error"]["name"]>;
+		errorsToSkipCondition?: (error: CallApiResultErrorVariant<ApiErrorResponse>["error"]) => boolean;
+		success?: boolean;
+	};
+};
+
+export const toastPlugin = definePlugin(() => ({
 	/* eslint-disable perfectionist/sort-objects */
 	id: "toast",
 	name: "toastPlugin",
@@ -41,5 +56,3 @@ const toastPlugin = definePlugin(() => ({
 		},
 	},
 }));
-
-export { toastPlugin };
