@@ -23,9 +23,9 @@ const API_BASE_URL = "api";
 export const sharedFetchClient = createFetchClient((ctx) => ({
 	baseURL: `${BACKEND_URL}/${API_BASE_URL}`,
 
-	mergeMainOptionsManuallyFromBase: true,
-
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
+
+	skipAutoMergeFor: "options",
 
 	...ctx.options,
 

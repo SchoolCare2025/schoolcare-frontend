@@ -1,4 +1,6 @@
 import { callBackendApi } from "@/lib/api/callBackendApi";
+import { useQueryClientStore } from "@/store/react-query/queryClientStore";
+import { sessionQuery } from "@/store/react-query/queryFactory";
 import type { AnyFunction } from "@zayne-labs/toolkit-type-helpers";
 
 export const dashboardLinkItems = [
@@ -50,9 +52,14 @@ export const dashboardLinkItems = [
 					method: "POST",
 
 					onSuccess: () => {
-						navigate("/");
+						useQueryClientStore
+							.getState()
+							.queryClient.removeQueries({ queryKey: sessionQuery().queryKey });
+
 						localStorage.removeItem("accessToken");
 						localStorage.removeItem("refreshToken");
+
+						navigate("/");
 					},
 				});
 			};
