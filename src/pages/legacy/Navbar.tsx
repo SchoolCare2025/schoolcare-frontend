@@ -17,12 +17,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<nav
-			className="relative flex items-center justify-between bg-cosWhite px-12 py-4"
-			onClick={(event) => {
-				(event.target as HTMLElement).matches("a") && handleToggleNavShow();
-			}}
-		>
+		<nav className="relative flex items-center justify-between bg-cosWhite px-12 py-4">
 			<NavLink to="/" className="block">
 				<img src={Logo} alt="Logo" className="w-[80px]" />
 			</NavLink>
@@ -64,7 +59,14 @@ const Navbar = () => {
 					isNavShow ? "translate-x-0" : "-translate-x-full"
 				)}
 			>
-				<ul className="pt-24 text-center text-2xl">
+				<ul
+					className="pt-24 text-center text-2xl"
+					onClick={(event) => {
+						if (!(event.target as Element).matches("a")) return;
+
+						handleToggleNavShow();
+					}}
+				>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<NavLink to="/">Home</NavLink>
 					</li>

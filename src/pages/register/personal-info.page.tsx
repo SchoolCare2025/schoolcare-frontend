@@ -19,6 +19,7 @@ function PersonalInfoPage() {
 	const {
 		actions: { updateFormData },
 		formStepData,
+		logoPreview,
 	} = useRegisterFormStore((state) => state);
 
 	const methods = useForm({
@@ -55,23 +56,26 @@ function PersonalInfoPage() {
 									onChange={field.onChange}
 									allowedFileTypes={["image/png", "image/jpeg", "image/jpg"]}
 									classNames={{ base: "w-fit", input: "hidden" }}
+									onFilesChange={(ctx) => {
+										const preview = ctx.filesWithPreview[0]?.preview;
+										if (!preview) return;
+
+										useRegisterFormStore.setState({ logoPreview: preview });
+									}}
 								>
 									{(ctx) => (
 										<span
 											className="relative mt-4 block size-[110px] rounded-full bg-gray-200
 												bg-cover md:mt-8 md:size-[200px]"
 											style={{
-												backgroundImage: ctx.dropZoneState.filesWithPreview[0]?.preview
-													? `url(${ctx.dropZoneState.filesWithPreview[0]?.preview})`
-													: "",
+												backgroundImage: logoPreview ? `url(${logoPreview})` : "",
 											}}
 										>
 											<button type="button" onClick={ctx.dropZoneActions.openFilePicker}>
 												<EditIcon
 													className={cnMerge(
 														"absolute right-3 bottom-2 size-[18px] md:size-[40px]",
-														ctx.dropZoneState.filesWithPreview[0]?.preview
-															&& "[&_path]:stroke-school-blue"
+														logoPreview && "[&_path]:stroke-school-blue"
 													)}
 												/>
 											</button>

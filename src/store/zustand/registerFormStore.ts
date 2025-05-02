@@ -20,6 +20,8 @@ export type StepTwoData = {
 export type RegisterFormStore = {
 	formStepData: Prettify<StepOneData & StepTwoData>;
 
+	logoPreview: string | null;
+
 	actions: {
 		resetFormStore: () => void;
 
@@ -38,6 +40,7 @@ const initialRegisterFormState = {
 		postal_code: "",
 		state: "",
 	},
+	logoPreview: null,
 } satisfies Omit<RegisterFormStore, "actions">;
 
 const stateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
