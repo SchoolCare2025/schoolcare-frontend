@@ -41,7 +41,7 @@ function Sidebar(props: { className?: string }) {
 				>
 					<SideBarLinkList
 						each={dashboardLinkItems}
-						className="flex flex-col gap-6 bg-inherit font-medium"
+						className="flex flex-col gap-6 bg-inherit pb-15 font-medium"
 						render={(item) => (
 							<Fragment key={item.label}>
 								{isString(item.link) && (

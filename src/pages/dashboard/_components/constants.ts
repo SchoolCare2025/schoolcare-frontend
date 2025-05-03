@@ -46,9 +46,10 @@ export const dashboardLinkItems = [
 		link: (navigate: AnyFunction) => {
 			return () => {
 				void callBackendApi("/logout", {
-					meta: {
-						toast: { success: true },
+					body: {
+						refresh: localStorage.getItem("refreshToken"),
 					},
+					meta: { toast: { success: true } },
 					method: "POST",
 
 					onSuccess: () => {

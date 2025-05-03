@@ -1,12 +1,14 @@
-import { IconBox, getElementList } from "@/components/common";
-import { Form, Select } from "@/components/ui";
+import { IconBox, Show, getElementList } from "@/components/common";
+import { Command, Form, Popover, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { isFile } from "@zayne-labs/toolkit-type-helpers";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { z } from "zod";
 import Main from "../_components/Main";
 
@@ -38,8 +40,21 @@ function AddressPage() {
 	const onSubmit = methods.handleSubmit(async (stepTwoData) => {
 		updateFormData(stepTwoData);
 
+		const requestBody = { ...formStepData, ...stepTwoData };
+
+		if (!isFile(requestBody.logo)) {
+			toast.error("Logo is missing! Please return to the previous step and upload a logo");
+			return;
+		}
+
+		const formData = new FormData();
+
+		for (const [key, value] of Object.entries(requestBody)) {
+			formData.set(key, value);
+		}
+
 		await callBackendApi("/school/register", {
-			body: { ...formStepData, ...stepTwoData },
+			body: formData,
 			meta: {
 				toast: { success: true },
 			},
@@ -132,40 +147,63 @@ function AddressPage() {
 
 						<Form.FieldController
 							render={({ field }) => (
-								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
-									<Select.Trigger
-										classNames={{
-											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-											text-[12px] data-placeholder:text-school-gray md:h-[75px]
-											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
-											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
-										}}
+								<Popover.Root>
+									<Popover.Trigger
+										className={cnJoin(
+											`flex h-[48px] items-center justify-between rounded-[8px] border-2
+											border-school-gray bg-white px-4 text-[12px]
+											data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+											md:text-base md:text-[14px]`,
+											!(field.value as boolean) && "text-shadcn-muted-foreground"
+										)}
 									>
-										<Select.Value placeholder="Choose state" />
-									</Select.Trigger>
+										<Show.Root when={field.value} fallback="Select State">
+											{nigeriaStatesAndLGA.find((item) => item.state === field.value)?.state}
+										</Show.Root>
 
-									<Select.Content
-										classNames={{
-											base: "bg-white/90 p-0 backdrop-blur-lg",
-											viewport: "gap-1",
-										}}
-									>
-										<StateList
-											each={nigeriaStatesAndLGA}
-											render={(item) => (
-												<Select.Item
-													key={item.state}
-													value={item.state}
-													className="h-12 bg-gray-200 text-[12px] font-medium text-black
-														focus:bg-gray-300 focus:text-black
-														data-[state=checked]:bg-gray-300 md:text-base"
-												>
-													{item.state}
-												</Select.Item>
-											)}
+										<IconBox
+											icon="lucide:chevrons-up-down"
+											className="size-5 text-school-gray md:size-6"
 										/>
-									</Select.Content>
-								</Select.Root>
+									</Popover.Trigger>
+
+									<Popover.Content className="bg-white/90 p-0 backdrop-blur-lg max-md:w-60">
+										<Command.Root>
+											<Command.Input placeholder="Choose State" className="h-9" />
+
+											<Command.List>
+												<Command.Empty>No State found.</Command.Empty>
+
+												<Command.Group>
+													<StateList
+														each={nigeriaStatesAndLGA}
+														render={(item) => (
+															<Command.Item
+																key={item.state}
+																value={item.state}
+																onSelect={() => field.onChange(item.state)}
+																className="h-12 bg-gray-200 text-[12px] font-medium
+																	text-black focus:bg-gray-300 focus:text-black
+																	data-[selected=true]:bg-gray-300 md:text-base"
+															>
+																<p>{item.state}</p>
+																<IconBox
+																	icon="lucide:check"
+																	className={cnJoin(
+																		"ml-auto size-[14px]",
+																		item.state === field.value
+																			? "opacity-100"
+																			: "opacity-0"
+																	)}
+																/>
+															</Command.Item>
+														)}
+													/>
+												</Command.Group>
+											</Command.List>
+										</Command.Root>
+									</Popover.Content>
+								</Popover.Root>
 							)}
 						/>
 
@@ -178,44 +216,61 @@ function AddressPage() {
 
 							<Form.FieldController
 								render={({ field }) => (
-									<Select.Root
-										name={field.name}
-										value={field.value}
-										onValueChange={field.onChange}
-									>
-										<Select.Trigger
-											classNames={{
-												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-												text-[12px] data-placeholder:text-school-gray md:h-[75px]
-												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
-												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
-											}}
+									<Popover.Root>
+										<Popover.Trigger
+											className={cnJoin(
+												`flex h-[48px] items-center justify-between rounded-[8px] border-2
+												border-school-gray bg-white px-4 text-[12px]
+												data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+												md:text-base md:text-[14px]`,
+												!(field.value as boolean) && "text-shadcn-muted-foreground"
+											)}
 										>
-											<Select.Value placeholder="Choose LGA" />
-										</Select.Trigger>
+											<Show.Root when={field.value} fallback="Select LGA">
+												{LGAResult.find((LGA) => LGA === field.value)}
+											</Show.Root>
 
-										<Select.Content
-											classNames={{
-												base: "bg-white/90 p-0 backdrop-blur-lg",
-												viewport: "gap-1",
-											}}
-										>
-											<StateList
-												each={LGAResult}
-												render={(item) => (
-													<Select.Item
-														key={item}
-														value={item}
-														className="h-12 bg-gray-200 text-[12px] font-medium text-black
-															focus:bg-gray-300 focus:text-black
-															data-[state=checked]:bg-gray-300 md:text-base"
-													>
-														{item}
-													</Select.Item>
-												)}
+											<IconBox
+												icon="lucide:chevrons-up-down"
+												className="size-5 text-school-gray md:size-6"
 											/>
-										</Select.Content>
-									</Select.Root>
+										</Popover.Trigger>
+
+										<Popover.Content className="bg-white/90 p-0 backdrop-blur-lg max-md:w-60">
+											<Command.Root>
+												<Command.Input placeholder="Choose LGA" className="h-9" />
+
+												<Command.List>
+													<Command.Empty>No LGA found.</Command.Empty>
+
+													<Command.Group>
+														<StateList
+															each={LGAResult}
+															render={(item) => (
+																<Command.Item
+																	key={item}
+																	value={item}
+																	onSelect={() => field.onChange(item)}
+																	className="h-12 bg-gray-200 text-[12px] font-medium
+																		text-black focus:bg-gray-300 focus:text-black
+																		data-[selected=true]:bg-gray-300 md:text-base"
+																>
+																	<p>{item}</p>
+																	<IconBox
+																		icon="lucide:check"
+																		className={cnJoin(
+																			"ml-auto size-[14px]",
+																			item === field.value ? "opacity-100" : "opacity-0"
+																		)}
+																	/>
+																</Command.Item>
+															)}
+														/>
+													</Command.Group>
+												</Command.List>
+											</Command.Root>
+										</Popover.Content>
+									</Popover.Root>
 								)}
 							/>
 

@@ -12,7 +12,7 @@ function CommandRoot(props: InferProps<typeof CommandPrimitive>) {
 		<CommandPrimitive
 			ref={ref}
 			className={cnMerge(
-				`flex h-full w-full flex-col overflow-hidden rounded-md bg-shadcn-popover
+				`flex size-full flex-col overflow-hidden rounded-md bg-shadcn-popover
 				text-shadcn-popover-foreground`,
 				className
 			)}
@@ -91,7 +91,8 @@ function CommandGroup(props: InferProps<typeof CommandPrimitive.Group>) {
 			className={cnMerge(
 				`overflow-hidden p-1 text-shadcn-foreground [&_[cmdk-group-heading]]:px-2
 				[&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs
-				[&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-shadcn-muted-foreground`,
+				[&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-shadcn-muted-foreground
+				[&_[cmdk-group-items]]:flex [&_[cmdk-group-items]]:flex-col [&_[cmdk-group-items]]:gap-1`,
 				className
 			)}
 			{...restOfProps}

@@ -10,9 +10,9 @@ import { z } from "zod";
 import Main from "../_components/Main";
 
 const PersonalInfoSchema = z.object({
-	email: z.string().email("Please enter a valid email!"),
-	logo: z.instanceof(File).nullable().optional(),
-	name: z.string().min(1, "Name is required").max(50, "Name is too long"),
+	email: z.string().email({ message: "Please enter a valid email!" }),
+	logo: z.instanceof(File, { message: "Please upload a logo!" }),
+	name: z.string().min(1, { message: "Name is required" }).max(50, { message: "Name is too long" }),
 });
 
 function PersonalInfoPage() {
@@ -84,6 +84,8 @@ function PersonalInfoPage() {
 								</DropZoneInput>
 							)}
 						/>
+
+						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 
 					<Form.Field<typeof methods.control> name="name" className="gap-3 md:gap-4">
@@ -114,12 +116,11 @@ function PersonalInfoPage() {
 					</Form.Field>
 
 					<Form.Submit
-						disabled={!methods.formState.isValid || methods.formState.isSubmitting}
+						disabled={methods.formState.isSubmitting}
 						className={cnMerge(
 							`flex max-w-fit min-w-[77px] items-center justify-center gap-3 self-end rounded-[4px]
 							bg-school-blue px-3 py-[6px] text-[14px] font-semibold text-white md:rounded-[8px]
-							md:px-5 md:py-2 md:text-[18px]`,
-							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
+							md:px-5 md:py-2 md:text-[18px]`
 						)}
 					>
 						Next

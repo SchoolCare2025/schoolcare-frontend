@@ -1,6 +1,7 @@
 import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import Main from "@/pages/_components/Main";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -47,46 +48,49 @@ function AdminRegisterPage() {
 	return (
 		<Main className="flex flex-col gap-8">
 			<header>
-				<h1 className="text-[30px] font-bold">Admin Register</h1>
+				<h1 className="text-[24px] font-bold md:text-[30px]">Admin Register</h1>
 			</header>
 
 			<section>
 				<Form.Root
 					methods={methods}
-					className="gap-[56px]"
+					className="gap-10 md:gap-[56px]"
 					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
 				>
 					<Form.Field<typeof methods.control> name="school" className="w-full gap-4">
-						<Form.Label className="font-medium">School Name</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">School Name</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school name"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-								text-[14px] md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 					<Form.Field<typeof methods.control> name="email" className="w-full gap-4">
-						<Form.Label className="font-medium">Email</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">Email</Form.Label>
 
 						<Form.Input
 							placeholder="Enter school email"
-							className="h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-								text-[14px] md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
+								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
+								md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 					<Form.Field<typeof methods.control> name="password" className="w-full gap-4">
-						<Form.Label className="font-medium">Password</Form.Label>
+						<Form.Label className="text-[14px] font-medium md:text-base">Password</Form.Label>
 
 						<Form.Input
 							type="password"
 							placeholder="Enter password"
 							classNames={{
-								inputGroup: `h-[75px] rounded-[20px] border-2 border-school-gray bg-white px-8
-								text-[14px] md:text-base`,
+								inputGroup: `h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base`,
 							}}
 						/>
 
@@ -97,14 +101,22 @@ function AdminRegisterPage() {
 
 					<Form.Submit
 						disabled={methods.formState.isSubmitting}
-						className="grid w-[150px] place-content-center self-end rounded-[10px] bg-school-blue
-							px-8 py-4 text-[18px] font-bold text-white"
-					>
-						{methods.formState.isSubmitting ? (
-							<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-						) : (
-							"Register"
+						className={cnMerge(
+							`mt-12 flex h-9 w-fit items-center justify-center self-end rounded-[10px]
+							bg-school-blue px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
+							md:text-[18px]`,
+							!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
+							methods.formState.isSubmitting && "grid"
 						)}
+					>
+						{methods.formState.isSubmitting && (
+							<span className="flex justify-center [grid-area:1/1]">
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							</span>
+						)}
+						<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+							Register
+						</p>
 					</Form.Submit>
 				</Form.Root>
 			</section>

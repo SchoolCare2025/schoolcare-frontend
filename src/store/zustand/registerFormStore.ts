@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 
 export type StepOneData = {
 	email: string;
-	logo?: File | null;
+	logo: File;
 	name: string;
 };
 
@@ -34,12 +34,11 @@ const initialRegisterFormState = {
 		address: "",
 		email: "",
 		local_govt: "",
-		logo: null,
 		name: "",
 		nationality: "",
 		postal_code: "",
 		state: "",
-	},
+	} satisfies Omit<RegisterFormStore["formStepData"], "logo"> as RegisterFormStore["formStepData"],
 	logoPreview: null,
 } satisfies Omit<RegisterFormStore, "actions">;
 
@@ -60,7 +59,9 @@ const stateObjectFn: StateCreator<RegisterFormStore> = (set, get) => ({
 export const useRegisterFormStore = create(
 	persist(stateObjectFn, {
 		name: "registerFormStepData",
-		partialize: ({ formStepData }) => ({ formStepData: { ...formStepData, logo: null } }),
+		partialize: ({ formStepData: { logo: _ignoredLogo, ...restOfFormStepData } }) => ({
+			formStepData: restOfFormStepData,
+		}),
 		version: 3,
 	})
 );

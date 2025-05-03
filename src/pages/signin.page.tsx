@@ -93,17 +93,20 @@ function SigninPage() {
 						</Form.Label>
 
 						<Form.Input
+							type="password"
 							placeholder="Enter school password"
-							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
-								md:text-base"
+							classNames={{
+								inputGroup: `h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base`,
+							}}
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 
 					<div className="flex justify-between gap-3">
-						<Form.Field name="remember" className="flex items-center gap-1 md:gap-3">
+						<Form.Field name="remember" className="flex-row-reverse items-center gap-1 md:gap-3">
 							<Form.Label className="text-[13px] font-medium md:text-base">
 								Keep me signed in
 							</Form.Label>
