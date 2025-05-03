@@ -13,11 +13,12 @@ function TablePage() {
 
 	const studentsQueryResult = useQuery(studentsByClassQuery(studentClass));
 
-	const tableData = studentsQueryResult.data?.data?.students.map((student) => ({
-		[columns[0]]: student.name,
-		[columns[1]]: student.gender,
-		[columns[2]]: student.registration_number,
-	}));
+	const tableData =
+		studentsQueryResult.data?.data?.students.map((student) => ({
+			[columns[0]]: student.name,
+			[columns[1]]: student.gender,
+			[columns[2]]: student.registration_number,
+		})) ?? [];
 
 	return (
 		<Main className="flex flex-col bg-white pt-12">
@@ -31,7 +32,7 @@ function TablePage() {
 									className={cnMerge(
 										`border-b border-b-[hsl(0,0%,3%)] px-7 py-4 not-last:border-r
 										not-last:border-r-[hsl(0,0%,3%)]`,
-										tableData?.length === 0 && "border-b-0"
+										tableData.length === 0 && "border-b-0"
 									)}
 								>
 									{column}
@@ -40,7 +41,7 @@ function TablePage() {
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
-						{tableData?.map((student) => (
+						{tableData.map((student) => (
 							<Table.Row
 								key={student.Name}
 								className="[&_td:not(:last-child)]:border-r

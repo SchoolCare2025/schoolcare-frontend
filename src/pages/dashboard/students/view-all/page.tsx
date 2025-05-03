@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { z } from "zod";
 import Main from "../../_components/Main";
 
@@ -34,7 +35,18 @@ export function ViewAllStudentsPage() {
 	const onSubmit = methods.handleSubmit(async (data) => {
 		useViewStudentFormStore.setState({ studentClass: data.class });
 
-		await useQueryClientStore.getState().queryClient.prefetchQuery(studentsByClassQuery(data.class));
+		const queryData = await useQueryClientStore
+			.getState()
+			.queryClient.fetchQuery(studentsByClassQuery(data.class));
+
+		if (queryData.data?.students.length === 0) {
+			toast.error(`No students found in ${data.class}. Please register students first.`, {
+				duration: 5000,
+			});
+			return;
+		}
+
+		toast.success(queryData.message);
 
 		void navigate("./table");
 	});
@@ -105,7 +117,7 @@ export function ViewAllStudentsPage() {
 						</button>
 
 						<Form.Submit
-							disabled={methods.formState.isSubmitting}
+							// disabled={methods.formState.isSubmitting}
 							className={cnMerge(
 								`flex h-9 w-fit items-center justify-center self-end rounded-[10px] bg-school-blue
 								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,

@@ -160,6 +160,7 @@ function ScratchCardForm() {
 						className={cnMerge(
 							`mt-4 flex h-10 w-[min(120px,100%)] items-center justify-center rounded-lg
 							bg-resultBtn p-2 text-sm font-semibold text-textWhite`,
+							isSubmitting && "grid",
 							!isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>

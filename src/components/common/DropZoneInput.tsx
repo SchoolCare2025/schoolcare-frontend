@@ -18,7 +18,7 @@ export function DropZoneInput(props: DropZoneInputProps) {
 
 		if (!isFile(ctx.filesWithPreview[0]?.file)) return;
 
-		onChange(ctx.filesWithPreview[0]?.file);
+		onChange(ctx.filesWithPreview[0].file);
 	};
 
 	return (

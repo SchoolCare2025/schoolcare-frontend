@@ -70,7 +70,6 @@ export const studentsByClassQuery = (studentClass: string) => {
 			return callBackendApiForQuery<{ students: StudentsByClassOrID[] }>(
 				"/school/students/class-students",
 				{
-					meta: { toast: { success: true } },
 					query: { class: studentClass },
 				}
 			);
@@ -80,20 +79,16 @@ export const studentsByClassQuery = (studentClass: string) => {
 	});
 };
 
-export const studentsByIDQuery = (
-	options: Pick<CallApiExtraOptions, "onSuccess"> & { studentId: string }
-) => {
-	const { onSuccess, studentId } = options;
+export const studentsByIDQuery = (options: { studentId: string }) => {
+	const { studentId } = options;
 
 	return queryOptions({
 		queryFn: () => {
 			return callBackendApiForQuery<StudentsByClassOrID>("/school/students/students-by-reg-number", {
 				meta: { toast: { errorMessageField: "reg", success: true } },
-				onSuccess,
 				query: { reg: studentId },
 			});
 		},
-		// eslint-disable-next-line tanstack-query/exhaustive-deps
 		queryKey: ["students", "school", { id: studentId }],
 		staleTime: Infinity,
 	});

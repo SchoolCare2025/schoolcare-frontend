@@ -130,7 +130,12 @@ function SigninPage() {
 								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
 							</span>
 						)}
-						<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+						<p
+							className={cnJoin(
+								"flex items-center gap-1",
+								methods.formState.isSubmitting && "invisible [grid-area:1/1]"
+							)}
+						>
 							Login
 							<span className="inline-block size-6">
 								<IconBox icon="material-symbols:arrow-outward-rounded" className="size-full" />

@@ -4,7 +4,7 @@ import { Sidebar } from "./_components/Sidebar";
 
 function DashBoardLayout() {
 	return (
-		<div className="flex grow bg-[hsl(0,0%,85%)]">
+		<div className="flex grow bg-[hsl(0,0%,92%)]">
 			<Sidebar className="max-md:hidden" />
 
 			<div className="flex w-full grow flex-col">

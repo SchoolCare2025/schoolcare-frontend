@@ -6,7 +6,6 @@ import { refreshUserSession } from "./refreshUserSession";
 const checkUserSession = async () => {
 	const { data, error } = await callBackendApi<SessionData>("/check-user-session", {
 		dedupeStrategy: "defer",
-		defaultErrorMessage: "",
 	});
 
 	if (data) {

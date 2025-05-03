@@ -53,11 +53,7 @@ function UploadPage() {
 
 		await callBackendApi("/school/results", {
 			body: formData,
-			meta: {
-				toast: {
-					success: true,
-				},
-			},
+			meta: { toast: { success: true } },
 			method: "POST",
 
 			onSuccess: () => {

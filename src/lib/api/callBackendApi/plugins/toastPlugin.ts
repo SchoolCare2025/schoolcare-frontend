@@ -13,7 +13,9 @@ export type ToastPluginMeta = {
 		error?: boolean;
 		errorMessageField?: string;
 		errorsToSkip?: Array<CallApiResultErrorVariant<unknown>["error"]["name"]>;
-		errorsToSkipCondition?: (error: CallApiResultErrorVariant<ApiErrorResponse>["error"]) => boolean;
+		errorsToSkipCondition?: (
+			error: CallApiResultErrorVariant<ApiErrorResponse>["error"]
+		) => boolean | undefined;
 		success?: boolean;
 	};
 };

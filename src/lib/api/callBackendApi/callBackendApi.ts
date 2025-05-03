@@ -4,6 +4,7 @@ import {
 	type AuthHeaderInclusionPluginMeta,
 	type ToastPluginMeta,
 	authHeaderInclusionPlugin,
+	isAuthTokenRelatedError,
 	toastPlugin,
 } from "./plugins";
 
@@ -34,13 +35,7 @@ export const sharedFetchClient = createFetchClient((ctx) => ({
 		toast: {
 			error: true,
 			errorsToSkip: ["AbortError"],
-			errorsToSkipCondition: (error) => {
-				const isAuthTokenRelatedError =
-					("code" in error && error.code === "token_not_valid")
-					|| ("detail" in error && error.detail === "Authentication credentials were not provided.");
-
-				return isAuthTokenRelatedError;
-			},
+			errorsToSkipCondition: (error) => isAuthTokenRelatedError(error),
 			...ctx.options.meta?.toast,
 		},
 	},

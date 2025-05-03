@@ -29,12 +29,11 @@ function ViewSingleStudent() {
 	const onSubmit = methods.handleSubmit(async (data) => {
 		useViewStudentFormStore.setState({ studentId: data.reg_number });
 
-		await useQueryClientStore.getState().queryClient.prefetchQuery(
-			studentsByIDQuery({
-				onSuccess: () => void navigate("./table"),
-				studentId: data.reg_number,
-			})
-		);
+		await useQueryClientStore
+			.getState()
+			.queryClient.prefetchQuery(studentsByIDQuery({ studentId: data.reg_number }));
+
+		void navigate("./table");
 	});
 
 	return (
@@ -75,7 +74,7 @@ function ViewSingleStudent() {
 						</button>
 
 						<Form.Submit
-							disabled={methods.formState.isSubmitting}
+							// disabled={methods.formState.isSubmitting}
 							className={cnMerge(
 								`flex h-9 w-fit items-center justify-center self-end rounded-[10px] bg-school-blue
 								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,

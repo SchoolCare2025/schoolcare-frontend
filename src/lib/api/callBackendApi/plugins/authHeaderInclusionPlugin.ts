@@ -1,4 +1,9 @@
-import { type ResponseErrorContext, definePlugin } from "@zayne-labs/callapi";
+import {
+	type CallApiResultErrorVariant,
+	type ResponseErrorContext,
+	definePlugin,
+} from "@zayne-labs/callapi";
+import { isHTTPError } from "@zayne-labs/callapi/utils";
 import { hardNavigate } from "@zayne-labs/toolkit-core";
 import type { ApiErrorResponse } from "../callBackendApi";
 import { refreshUserSession } from "./utils/refreshUserSession";
@@ -74,22 +79,33 @@ export const authHeaderInclusionPlugin = definePlugin(() => ({
 
 		// == Method 2: Only call refreshUserSession on auth token related errors, and remake the request
 		onResponseError: async (ctx: ResponseErrorContext<ApiErrorResponse>) => {
-			const isAuthTokenRelatedError =
-				("code" in ctx.error.errorData && ctx.error.errorData.code === "token_not_valid")
-				|| ("detail" in ctx.error.errorData
-					&& ctx.error.errorData.detail === "Authentication credentials were not provided.");
-
 			if (
 				ctx.response.status === 401
-				&& isAuthTokenRelatedError
+				&& isAuthTokenRelatedError(ctx.error)
 				&& !ctx.options.fullURL?.endsWith("/check-user-session")
 			) {
 				await refreshUserSession();
 
-				// == React query is the one to handle retries here instead
-				// ctx.options.retryStatusCodes = [...(ctx.options.retryStatusCodes ?? []), 401];
-				// ctx.options.retryAttempts = 1;
+				// NOTE: This will not work for requests made via react query, which in that case retries are up to react query
+				ctx.options.retryAttempts = 1;
 			}
 		},
 	},
 }));
+
+type ErrorDataWithCodeAndDetail = { code: string; detail: string } | { code?: never; detail: string };
+
+export const isAuthTokenRelatedError = (
+	error: CallApiResultErrorVariant<ApiErrorResponse>["error"]
+): error is { errorData: ErrorDataWithCodeAndDetail } & typeof error => {
+	if (!isHTTPError(error)) {
+		return false;
+	}
+
+	const errorData = error.errorData;
+
+	return (
+		("code" in errorData && errorData.code === "token_not_valid")
+		|| ("detail" in errorData && errorData.detail === "Authentication credentials were not provided.")
+	);
+};
