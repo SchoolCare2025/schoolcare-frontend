@@ -5,6 +5,7 @@ import {
 	type AllSubjectsInSchool,
 	type ClassesData,
 	type StudentsByClassOrID,
+	type StudentsGenderResponse,
 	callBackendApiForQuery,
 } from "@/lib/api/callBackendApi";
 import { checkUserSession } from "@/lib/api/callBackendApi/plugins/utils";
@@ -29,14 +30,6 @@ export const allClassesQuery = () => {
 	});
 };
 
-export const allClassesInSchoolQuery = () => {
-	return queryOptions({
-		queryFn: () => callBackendApiForQuery<ClassesData[]>("/school/classes"),
-		queryKey: ["classes", "school"],
-		staleTime: Infinity,
-	});
-};
-
 export const allSubjectsQuery = () => {
 	return queryOptions({
 		queryFn: () => callBackendApiForQuery<AllSubjects>("/main-subject"),
@@ -45,13 +38,18 @@ export const allSubjectsQuery = () => {
 	});
 };
 
-export const allSubjectsInSchoolQuery = (school = "") => {
+export const allClassesInSchoolQuery = () => {
 	return queryOptions({
-		enabled: Boolean(school),
-		queryFn: () =>
-			callBackendApiForQuery<AllSubjectsInSchool>("/school/subjects", { query: { school } }),
-		// eslint-disable-next-line tanstack-query/exhaustive-deps
-		queryKey: ["subjects", ...(school ? [{ school }] : [])],
+		queryFn: () => callBackendApiForQuery<ClassesData[]>("/school/classes"),
+		queryKey: ["classes", "school"],
+		staleTime: Infinity,
+	});
+};
+
+export const allSubjectsInSchoolQuery = () => {
+	return queryOptions({
+		queryFn: () => callBackendApiForQuery<AllSubjectsInSchool>("/school/subjects"),
+		queryKey: ["subjects", "school"],
 		staleTime: Infinity,
 	});
 };
@@ -96,8 +94,7 @@ export const studentsByIDQuery = (options: { studentId: string }) => {
 
 export const studentsGenderQuery = () => {
 	return queryOptions({
-		queryFn: () =>
-			callBackendApiForQuery<{ female: number; male: number }>("/school/students/students-by-gender"),
+		queryFn: () => callBackendApiForQuery<StudentsGenderResponse>("/school/students/students-by-gender"),
 		queryKey: ["students", "school", "gender-ratio"],
 		staleTime: Infinity,
 	});

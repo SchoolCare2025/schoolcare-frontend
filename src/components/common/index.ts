@@ -5,3 +5,4 @@ export * from "./Show";
 export * from "./Switch";
 export { SonnerToaster } from "./Toaster";
 export * from "./LoadingSpinner";
+export { Image } from "./Image";

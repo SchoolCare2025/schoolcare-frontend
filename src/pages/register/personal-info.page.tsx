@@ -55,13 +55,13 @@ function PersonalInfoPage() {
 								<DropZoneInput
 									onChange={field.onChange}
 									allowedFileTypes={["image/png", "image/jpeg", "image/jpg"]}
-									classNames={{ base: "w-fit", input: "hidden" }}
+									withDefaultFilePicker={false}
 									onFilesChange={(ctx) => {
 										const preview = ctx.filesWithPreview[0]?.preview;
-										if (!preview) return;
 
-										useRegisterFormStore.setState({ logoPreview: preview });
+										preview && useRegisterFormStore.setState({ logoPreview: preview });
 									}}
+									classNames={{ base: "w-fit" }}
 								>
 									{(ctx) => (
 										<span

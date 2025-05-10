@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@hookform/resolvers':
         specifier: ^5.0.1
-        version: 5.0.1(react-hook-form@7.56.1(react@19.1.0))
+        version: 5.0.1(react-hook-form@7.56.2(react@19.1.0))
       '@lottiefiles/dotlottie-react':
         specifier: ^0.13.5
         version: 0.13.5(react@19.1.0)
@@ -18,23 +18,26 @@ importers:
         specifier: ^0.5.9
         version: 0.5.9(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@tanstack/react-query':
-        specifier: ^5.75.1
-        version: 5.75.1(react@19.1.0)
+        specifier: ^5.75.2
+        version: 5.75.2(react@19.1.0)
+      '@unpic/react':
+        specifier: ^1.0.1
+        version: 1.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@zayne-labs/callapi':
-        specifier: 1.7.8
-        version: 1.7.8
+        specifier: 1.7.15
+        version: 1.7.15
       '@zayne-labs/toolkit-core':
-        specifier: ^0.9.35
-        version: 0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35)
+        specifier: ^0.9.40
+        version: 0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40)
       '@zayne-labs/toolkit-react':
-        specifier: ^0.9.35
-        version: 0.9.35(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35))(@zayne-labs/toolkit-type-helpers@0.9.35)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
+        specifier: ^0.9.40
+        version: 0.9.40(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40))(@zayne-labs/toolkit-type-helpers@0.9.40)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
       '@zayne-labs/toolkit-type-helpers':
-        specifier: ^0.9.35
-        version: 0.9.35
+        specifier: ^0.9.40
+        version: 0.9.40
       '@zayne-labs/ui-react':
-        specifier: ^0.8.18
-        version: 0.8.18(@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35))(@zayne-labs/toolkit-react@0.9.35(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35))(@zayne-labs/toolkit-type-helpers@0.9.35)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))))(@zayne-labs/toolkit-type-helpers@0.9.35)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.1(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(tailwindcss@4.1.5)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
+        specifier: ^0.9.6
+        version: 0.9.6(@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40))(@zayne-labs/toolkit-react@0.9.40(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40))(@zayne-labs/toolkit-type-helpers@0.9.40)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))))(@zayne-labs/toolkit-type-helpers@0.9.40)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.2(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(tailwindcss@4.1.5)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
       aos:
         specifier: 3.0.0-beta.6
         version: 3.0.0-beta.6
@@ -57,8 +60,8 @@ importers:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
       react-hook-form:
-        specifier: ^7.56.1
-        version: 7.56.1(react@19.1.0)
+        specifier: ^7.56.2
+        version: 7.56.2(react@19.1.0)
       react-router:
         specifier: 7.5.3
         version: 7.5.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -100,8 +103,8 @@ importers:
         specifier: ^5.74.7
         version: 5.74.7(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
       '@tanstack/react-query-devtools':
-        specifier: ^5.75.1
-        version: 5.75.1(@tanstack/react-query@5.75.1(react@19.1.0))(react@19.1.0)
+        specifier: ^5.75.2
+        version: 5.75.2(@tanstack/react-query@5.75.2(react@19.1.0))(react@19.1.0)
       '@total-typescript/ts-reset':
         specifier: ^0.6.1
         version: 0.6.1
@@ -122,7 +125,7 @@ importers:
         version: 3.9.0(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.2)(lightningcss@1.29.2)(yaml@2.7.1))
       '@zayne-labs/eslint-config':
         specifier: ^0.8.2
-        version: 0.8.2(@eslint-react/eslint-plugin@1.48.5(eslint@9.26.0(jiti@2.4.2))(ts-api-utils@2.1.0(typescript@5.8.3))(typescript@5.8.3))(@tanstack/eslint-plugin-query@5.74.7(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3))(@zayne-labs/toolkit-type-helpers@0.9.35)(eslint-plugin-react-hooks@5.2.0(eslint@9.26.0(jiti@2.4.2)))(eslint-plugin-react-refresh@0.4.20(eslint@9.26.0(jiti@2.4.2)))(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
+        version: 0.8.2(@eslint-react/eslint-plugin@1.48.5(eslint@9.26.0(jiti@2.4.2))(ts-api-utils@2.1.0(typescript@5.8.3))(typescript@5.8.3))(@tanstack/eslint-plugin-query@5.74.7(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3))(@zayne-labs/toolkit-type-helpers@0.9.40)(eslint-plugin-react-hooks@5.2.0(eslint@9.26.0(jiti@2.4.2)))(eslint-plugin-react-refresh@0.4.20(eslint@9.26.0(jiti@2.4.2)))(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
       '@zayne-labs/prettier-config':
         specifier: ^0.8.2
         version: 0.8.2
@@ -191,10 +194,6 @@ packages:
 
   '@babel/helper-string-parser@7.25.9':
     resolution: {integrity: sha512-4A/SCr/2KLd5jrtOMFzaKjVtAei3+2r/NChoBNoZ3EyP/+GlhoaEGoWOZUmFmoITP7zOJyHIMm+DYRd8o3PvHA==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/helper-validator-identifier@7.25.9':
-    resolution: {integrity: sha512-Ed61U6XJc3CVRfkERJWDz4dJwKe7iLmmJsbOGu9wSloNSFttHV0I8g6UAgb7qnK5ly5bGLPd4oXZlxCdANBOWQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helper-validator-identifier@7.27.1':
@@ -1613,14 +1612,14 @@ packages:
   '@tanstack/query-devtools@5.74.7':
     resolution: {integrity: sha512-nSNlfuGdnHf4yB0S+BoNYOE1o3oAH093weAYZolIHfS2stulyA/gWfSk/9H4ZFk5mAAHb5vNqAeJOmbdcGPEQw==}
 
-  '@tanstack/react-query-devtools@5.75.1':
-    resolution: {integrity: sha512-6S71fJRBlb0adlG5z/OHRqZqtHoPYVCklf/KCnOoZ3vdx9O/K9BLvqeeDeMUkZ6Rak/IupbEbvBsFoUiMHwZiQ==}
+  '@tanstack/react-query-devtools@5.75.2':
+    resolution: {integrity: sha512-bOwfNBka4Xc4Q2EhOW15arll7UkavwMgEAbbqnEDbrpHFxbZR33EYIMh9SyUmqVsZEv0rGmbvzK8OsXRjTTTuA==}
     peerDependencies:
-      '@tanstack/react-query': ^5.75.1
+      '@tanstack/react-query': ^5.75.2
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.75.1':
-    resolution: {integrity: sha512-tN+gG+eXCHYm+VpmdXUP1rfE9LUrRzgYozTkBZtJV1/WFM3vwWNKQC8G6b2RKcs+2cPg+hdToZHZfjL3bF4yIQ==}
+  '@tanstack/react-query@5.75.2':
+    resolution: {integrity: sha512-8F8VOsWUfSkCFoi62O9HSZT9jDgg28Ln8Z2dYKfRo/O2A0sgvr0uxTuNoon3PPXoDuHofv5V3elBI1M2Gh1MPg==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -1702,6 +1701,10 @@ packages:
     resolution: {integrity: sha512-BMNLOElPxrtNQMIsFHE+3P0Yf1z0dJqV9zLdDxN/xLlWMlXK/ApEsVEKzpizg9oal8bAT5Sc7+ocal7AC1HCVw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript-eslint/scope-manager@8.32.0':
+    resolution: {integrity: sha512-jc/4IxGNedXkmG4mx4nJTILb6TMjL66D41vyeaPWvDUmeYQzF3lKtN15WsAeTr65ce4mPxwopPSo1yUUAWw0hQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@typescript-eslint/type-utils@8.31.1':
     resolution: {integrity: sha512-fNaT/m9n0+dpSp8G/iOQ05GoHYXbxw81x+yvr7TArTuZuCA6VVKbqWYVZrV5dVagpDTtj/O8k5HBEE/p/HM5LA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1713,8 +1716,18 @@ packages:
     resolution: {integrity: sha512-SfepaEFUDQYRoA70DD9GtytljBePSj17qPxFHA/h3eg6lPTqGJ5mWOtbXCk1YrVU1cTJRd14nhaXWFu0l2troQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@typescript-eslint/types@8.32.0':
+    resolution: {integrity: sha512-O5Id6tGadAZEMThM6L9HmVf5hQUXNSxLVKeGJYWNhhVseps/0LddMkp7//VDkzwJ69lPL0UmZdcZwggj9akJaA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@typescript-eslint/typescript-estree@8.31.1':
     resolution: {integrity: sha512-kaA0ueLe2v7KunYOyWYtlf/QhhZb7+qh4Yw6Ni5kgukMIG+iP773tjgBiLWIXYumWCwEq3nLW+TUywEp8uEeag==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <5.9.0'
+
+  '@typescript-eslint/typescript-estree@8.32.0':
+    resolution: {integrity: sha512-pU9VD7anSCOIoBFnhTGfOzlVFQIA1XXiQpH/CezqOBaDppRwTglJzCC6fUQGpfwey4T183NKhF1/mfatYmjRqQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <5.9.0'
@@ -1726,9 +1739,33 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/utils@8.32.0':
+    resolution: {integrity: sha512-8S9hXau6nQ/sYVtC3D6ISIDoJzS1NsCK+gluVhLN2YkBPX+/1wkwyUiDKnxRh15579WoOIyVWnoyIf3yGI9REw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <5.9.0'
+
   '@typescript-eslint/visitor-keys@8.31.1':
     resolution: {integrity: sha512-I+/rgqOVBn6f0o7NDTmAPWWC6NuqhV174lfYvAm9fUaWeiefLdux9/YI3/nLugEn9L8fcSi0XmpKi/r5u0nmpw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/visitor-keys@8.32.0':
+    resolution: {integrity: sha512-1rYQTCLFFzOI5Nl0c8LUpJT8HxpwVRn9E4CkMsYfuN6ctmQqExjSTzzSk0Tz2apmXy7WU6/6fyaZVVA/thPN+w==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@unpic/core@1.0.1':
+    resolution: {integrity: sha512-e0cwxOhtWPd4J32rV1V6jFmDGAi1r4p/f+lDqlnx+fhgFwMTyQQKw5lL7VEthUPBHFNaNBsXNbNKwnaIs2V71Q==}
+
+  '@unpic/react@1.0.1':
+    resolution: {integrity: sha512-JmKVmf7ZhKDlVFK8yfbgiWp9K4rXXovE8mWrbkqjDJHKhDqbF5uUp7754Tk7oNSYJcvIXfH8P/nYRCfG2ca0/w==}
+    peerDependencies:
+      next: ^13.0.0 || ^14.0.0 || ^15.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      next:
+        optional: true
 
   '@unrs/resolver-binding-darwin-arm64@1.7.2':
     resolution: {integrity: sha512-vxtBno4xvowwNmO/ASL0Y45TpHqmNkAaDtz4Jqb+clmcVSSl8XCG/PNFFkGsXXXS6AMjP+ja/TtNCFFa1QwLRg==}
@@ -1820,8 +1857,8 @@ packages:
     peerDependencies:
       vite: ^4 || ^5 || ^6
 
-  '@zayne-labs/callapi@1.7.8':
-    resolution: {integrity: sha512-ReiZg7hIUgO/x8UazUv16HkjHXShfOXAcjCGGHv1lJbxOpSkuiFyTid37ZB1yDR7VdefmDKTPYLg2UkjS9gOXg==}
+  '@zayne-labs/callapi@1.7.15':
+    resolution: {integrity: sha512-2K8lv5vlhJhJPfMFFnJrSaXxJOFGkDTC5XUkQFzAM3QmwCOdfEc4fzgo0kwQegQkgZxXNY/m9hGDU6loTaOhYw==}
     engines: {node: '>=v18.17.0'}
 
   '@zayne-labs/eslint-config@0.8.2':
@@ -1875,19 +1912,19 @@ packages:
     resolution: {integrity: sha512-5dchwDJUuNRFVj6ZdcbB88zh2InQiNIw+dvYiTJ6mzmleAuj+fUZSt+sQwej1IQmQI5v9IIBcVgCZ9ibs0Ec6g==}
     engines: {node: '>=18.x'}
 
-  '@zayne-labs/toolkit-core@0.9.35':
-    resolution: {integrity: sha512-OIT3zJENPD+Wz/JNkRb3eAKa0sRjKYefrSOJEVRr8xahI9VAJ67Arvnub4GqaERr7IjlPUZtAoA0u46gQyJT7Q==}
+  '@zayne-labs/toolkit-core@0.9.40':
+    resolution: {integrity: sha512-YGvWXeNYQ9mDX2nM5iQ5rXOebugD3cjxsolyvv+4zWOm6/ZAHTbhO6p060J9wkZgaJRqT6T84yxwuoZ9HoAOTQ==}
     engines: {node: '>=18.x'}
     peerDependencies:
-      '@zayne-labs/toolkit-type-helpers': ^0.9.35
+      '@zayne-labs/toolkit-type-helpers': ^0.9.40
 
-  '@zayne-labs/toolkit-react@0.9.35':
-    resolution: {integrity: sha512-IWq3uC+hJm5UCIon39yF4peK/1AfrPbyRlvT3vnpSWJejIDsVCVaPFpg0Gogtgf+WDj4w02KZSkp1iliJlnR1g==}
+  '@zayne-labs/toolkit-react@0.9.40':
+    resolution: {integrity: sha512-+9KOGfBgVCR84PkuJdKjdRt7gxyTA+/emNyAXIRNYiyqj9EB4ma4sX4juYuQ26fbVC5+zGgSD24MBluptkqTkQ==}
     engines: {node: '>=18.x'}
     peerDependencies:
       '@types/react': '>=18.0.0'
-      '@zayne-labs/toolkit-core': ^0.9.35
-      '@zayne-labs/toolkit-type-helpers': ^0.9.35
+      '@zayne-labs/toolkit-core': ^0.9.40
+      '@zayne-labs/toolkit-type-helpers': ^0.9.40
       react: '>=18.0.0'
       zustand: '>=5.0.0'
     peerDependenciesMeta:
@@ -1898,20 +1935,20 @@ packages:
       zustand:
         optional: true
 
-  '@zayne-labs/toolkit-type-helpers@0.9.35':
-    resolution: {integrity: sha512-WKU8O490ZuXkyF3xb9YB5lZX6I8OSCDLVfRE8cA55iPGFhz0RDq19zotdYU/mvAb4bGNiwllMwV7UpUfm0I5RA==}
+  '@zayne-labs/toolkit-type-helpers@0.9.40':
+    resolution: {integrity: sha512-LpRm+cDLX3K7cVXNrujJqy8hvzxnbeIP/tVs2239zqfNQ6fmdyZCY0Db860d++Ga2RPdxQII3v/hBVzrMDIZuw==}
     engines: {node: '>=18.x'}
 
   '@zayne-labs/tsconfig@0.8.2':
     resolution: {integrity: sha512-0joAnHMfM0koqzQ6ry6IhCPidffWIeRl0UuRuH0OoLKM7burCqydovCiFGBV/imNSZW96k/igW9ibuy4Jeggqg==}
 
-  '@zayne-labs/ui-react@0.8.18':
-    resolution: {integrity: sha512-RyfYdd/ebu1ierqD34whbj8Jn9Qnx7wYCRxPAewzvC29iRrDA9eF5mdifyiIQy9t8DUhwAqG4acvtq2R1Gni5w==}
+  '@zayne-labs/ui-react@0.9.6':
+    resolution: {integrity: sha512-oII8sE/5yOJBtRRl8GOCSNr1T7IzB+7HdKHpOyrLDbCJ+cmFvsaYzyP0t4CVs1q0Q09HVFMS+uE+EEc8F/ClNQ==}
     engines: {node: '>=18.x'}
     peerDependencies:
-      '@zayne-labs/toolkit-core': ^0.9.33
-      '@zayne-labs/toolkit-react': ^0.9.33
-      '@zayne-labs/toolkit-type-helpers': ^0.9.33
+      '@zayne-labs/toolkit-core': ^0.9.38
+      '@zayne-labs/toolkit-react': ^0.9.38
+      '@zayne-labs/toolkit-type-helpers': ^0.9.38
       react: 19.x.x
       react-dom: 19.x.x
       react-hook-form: 7.x.x
@@ -2036,8 +2073,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001716:
-    resolution: {integrity: sha512-49/c1+x3Kwz7ZIWt+4DvK3aMJy9oYXXG6/97JKsnjdCk/6n9vVyWL8NAwVt95Lwt9eigI10Hl782kDfZUUlRXw==}
+  caniuse-lite@1.0.30001717:
+    resolution: {integrity: sha512-auPpttCq6BDEG8ZAuHJIplGw6GODhjw+/11e7IjpnYCxZcW/ONgPs0KVBJ0d1bY3e2+7PRe5RCLyP+PfwVgkYw==}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -2243,8 +2280,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.149:
-    resolution: {integrity: sha512-UyiO82eb9dVOx8YO3ajDf9jz2kKyt98DEITRdeLPstOEuTlLzDA4Gyq5K9he71TQziU5jUVu2OAu5N48HmQiyQ==}
+  electron-to-chromium@1.5.151:
+    resolution: {integrity: sha512-Rl6uugut2l9sLojjS4H4SAr3A4IgACMLgpuEMPYCVcKydzfyPrn5absNRju38IhQOf/NwjJY8OGWjlteqYeBCA==}
 
   emoji-regex@10.4.0:
     resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==}
@@ -3321,8 +3358,8 @@ packages:
     peerDependencies:
       react: ^19.1.0
 
-  react-hook-form@7.56.1:
-    resolution: {integrity: sha512-qWAVokhSpshhcEuQDSANHx3jiAEFzu2HAaaQIzi/r9FNPm1ioAvuJSD4EuZzWd7Al7nTRKcKPnBKO7sRn+zavQ==}
+  react-hook-form@7.56.2:
+    resolution: {integrity: sha512-vpfuHuQMF/L6GpuQ4c3ZDo+pRYxIi40gQqsCmmfUBwm+oqvBhKhwghCuj2o00YCgSfU6bR9KC/xnQGWm3Gr08A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
@@ -3686,6 +3723,9 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
+  unpic@4.1.2:
+    resolution: {integrity: sha512-sau6i25EUxumNIL7e0kDpPWkVw3yxghLYcEwxPvm08263UfABDxtUJPT3H55z7W15cVXJB/PEhw4z6Oc+idWCA==}
+
   unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
@@ -3866,7 +3906,7 @@ snapshots:
 
   '@babel/code-frame@7.26.2':
     dependencies:
-      '@babel/helper-validator-identifier': 7.25.9
+      '@babel/helper-validator-identifier': 7.27.1
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
@@ -3886,8 +3926,6 @@ snapshots:
       - supports-color
 
   '@babel/helper-string-parser@7.25.9': {}
-
-  '@babel/helper-validator-identifier@7.25.9': {}
 
   '@babel/helper-validator-identifier@7.27.1': {}
 
@@ -3920,7 +3958,7 @@ snapshots:
   '@babel/types@7.27.0':
     dependencies:
       '@babel/helper-string-parser': 7.25.9
-      '@babel/helper-validator-identifier': 7.25.9
+      '@babel/helper-validator-identifier': 7.27.1
 
   '@clack/core@0.4.2':
     dependencies:
@@ -4299,10 +4337,10 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  '@hookform/resolvers@5.0.1(react-hook-form@7.56.1(react@19.1.0))':
+  '@hookform/resolvers@5.0.1(react-hook-form@7.56.2(react@19.1.0))':
     dependencies:
       '@standard-schema/utils': 0.3.0
-      react-hook-form: 7.56.1(react@19.1.0)
+      react-hook-form: 7.56.2(react@19.1.0)
 
   '@humanfs/core@0.19.1': {}
 
@@ -5186,7 +5224,7 @@ snapshots:
 
   '@stylistic/eslint-plugin@4.2.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:
-      '@typescript-eslint/utils': 8.31.1(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.32.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
       eslint: 9.26.0(jiti@2.4.2)
       eslint-visitor-keys: 4.2.0
       espree: 10.3.0
@@ -5325,13 +5363,13 @@ snapshots:
 
   '@tanstack/query-devtools@5.74.7': {}
 
-  '@tanstack/react-query-devtools@5.75.1(@tanstack/react-query@5.75.1(react@19.1.0))(react@19.1.0)':
+  '@tanstack/react-query-devtools@5.75.2(@tanstack/react-query@5.75.2(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@tanstack/query-devtools': 5.74.7
-      '@tanstack/react-query': 5.75.1(react@19.1.0)
+      '@tanstack/react-query': 5.75.2(react@19.1.0)
       react: 19.1.0
 
-  '@tanstack/react-query@5.75.1(react@19.1.0)':
+  '@tanstack/react-query@5.75.2(react@19.1.0)':
     dependencies:
       '@tanstack/query-core': 5.75.0
       react: 19.1.0
@@ -5423,6 +5461,11 @@ snapshots:
       '@typescript-eslint/types': 8.31.1
       '@typescript-eslint/visitor-keys': 8.31.1
 
+  '@typescript-eslint/scope-manager@8.32.0':
+    dependencies:
+      '@typescript-eslint/types': 8.32.0
+      '@typescript-eslint/visitor-keys': 8.32.0
+
   '@typescript-eslint/type-utils@8.31.1(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:
       '@typescript-eslint/typescript-estree': 8.31.1(typescript@5.8.3)
@@ -5436,10 +5479,26 @@ snapshots:
 
   '@typescript-eslint/types@8.31.1': {}
 
+  '@typescript-eslint/types@8.32.0': {}
+
   '@typescript-eslint/typescript-estree@8.31.1(typescript@5.8.3)':
     dependencies:
       '@typescript-eslint/types': 8.31.1
       '@typescript-eslint/visitor-keys': 8.31.1
+      debug: 4.4.0
+      fast-glob: 3.3.3
+      is-glob: 4.0.3
+      minimatch: 9.0.5
+      semver: 7.7.1
+      ts-api-utils: 2.1.0(typescript@5.8.3)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/typescript-estree@8.32.0(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/types': 8.32.0
+      '@typescript-eslint/visitor-keys': 8.32.0
       debug: 4.4.0
       fast-glob: 3.3.3
       is-glob: 4.0.3
@@ -5461,10 +5520,36 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/utils@8.32.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.7.0(eslint@9.26.0(jiti@2.4.2))
+      '@typescript-eslint/scope-manager': 8.32.0
+      '@typescript-eslint/types': 8.32.0
+      '@typescript-eslint/typescript-estree': 8.32.0(typescript@5.8.3)
+      eslint: 9.26.0(jiti@2.4.2)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/visitor-keys@8.31.1':
     dependencies:
       '@typescript-eslint/types': 8.31.1
       eslint-visitor-keys: 4.2.0
+
+  '@typescript-eslint/visitor-keys@8.32.0':
+    dependencies:
+      '@typescript-eslint/types': 8.32.0
+      eslint-visitor-keys: 4.2.0
+
+  '@unpic/core@1.0.1':
+    dependencies:
+      unpic: 4.1.2
+
+  '@unpic/react@1.0.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      '@unpic/core': 1.0.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   '@unrs/resolver-binding-darwin-arm64@1.7.2':
     optional: true
@@ -5526,9 +5611,9 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@zayne-labs/callapi@1.7.8': {}
+  '@zayne-labs/callapi@1.7.15': {}
 
-  '@zayne-labs/eslint-config@0.8.2(@eslint-react/eslint-plugin@1.48.5(eslint@9.26.0(jiti@2.4.2))(ts-api-utils@2.1.0(typescript@5.8.3))(typescript@5.8.3))(@tanstack/eslint-plugin-query@5.74.7(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3))(@zayne-labs/toolkit-type-helpers@0.9.35)(eslint-plugin-react-hooks@5.2.0(eslint@9.26.0(jiti@2.4.2)))(eslint-plugin-react-refresh@0.4.20(eslint@9.26.0(jiti@2.4.2)))(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)':
+  '@zayne-labs/eslint-config@0.8.2(@eslint-react/eslint-plugin@1.48.5(eslint@9.26.0(jiti@2.4.2))(ts-api-utils@2.1.0(typescript@5.8.3))(typescript@5.8.3))(@tanstack/eslint-plugin-query@5.74.7(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3))(@zayne-labs/toolkit-type-helpers@0.9.40)(eslint-plugin-react-hooks@5.2.0(eslint@9.26.0(jiti@2.4.2)))(eslint-plugin-react-refresh@0.4.20(eslint@9.26.0(jiti@2.4.2)))(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)':
     dependencies:
       '@antfu/install-pkg': 1.0.0
       '@clack/prompts': 0.10.1
@@ -5536,7 +5621,7 @@ snapshots:
       '@eslint/compat': 1.2.9(eslint@9.26.0(jiti@2.4.2))
       '@eslint/js': 9.25.1
       '@stylistic/eslint-plugin': 4.2.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
-      '@zayne-labs/toolkit-type-helpers': 0.9.35
+      '@zayne-labs/toolkit-type-helpers': 0.9.40
       ansis: 3.17.0
       cac: 6.7.14
       eslint: 9.26.0(jiti@2.4.2)
@@ -5574,35 +5659,35 @@ snapshots:
 
   '@zayne-labs/prettier-config@0.8.2':
     dependencies:
-      '@zayne-labs/toolkit-type-helpers': 0.9.35
+      '@zayne-labs/toolkit-type-helpers': 0.9.40
 
-  '@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35)':
+  '@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40)':
     dependencies:
-      '@zayne-labs/toolkit-type-helpers': 0.9.35
+      '@zayne-labs/toolkit-type-helpers': 0.9.40
 
-  '@zayne-labs/toolkit-react@0.9.35(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35))(@zayne-labs/toolkit-type-helpers@0.9.35)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
+  '@zayne-labs/toolkit-react@0.9.40(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40))(@zayne-labs/toolkit-type-helpers@0.9.40)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
     dependencies:
-      '@zayne-labs/toolkit-core': 0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35)
-      '@zayne-labs/toolkit-type-helpers': 0.9.35
+      '@zayne-labs/toolkit-core': 0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40)
+      '@zayne-labs/toolkit-type-helpers': 0.9.40
     optionalDependencies:
       '@types/react': 19.1.2
       react: 19.1.0
       zustand: 5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
 
-  '@zayne-labs/toolkit-type-helpers@0.9.35': {}
+  '@zayne-labs/toolkit-type-helpers@0.9.40': {}
 
   '@zayne-labs/tsconfig@0.8.2': {}
 
-  '@zayne-labs/ui-react@0.8.18(@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35))(@zayne-labs/toolkit-react@0.9.35(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35))(@zayne-labs/toolkit-type-helpers@0.9.35)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))))(@zayne-labs/toolkit-type-helpers@0.9.35)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.1(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(tailwindcss@4.1.5)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
+  '@zayne-labs/ui-react@0.9.6(@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40))(@zayne-labs/toolkit-react@0.9.40(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40))(@zayne-labs/toolkit-type-helpers@0.9.40)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))))(@zayne-labs/toolkit-type-helpers@0.9.40)(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.56.2(react@19.1.0))(react@19.1.0)(tailwind-merge@3.2.0)(tailwindcss@4.1.5)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))':
     dependencies:
-      '@zayne-labs/toolkit-core': 0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35)
-      '@zayne-labs/toolkit-react': 0.9.35(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.35(@zayne-labs/toolkit-type-helpers@0.9.35))(@zayne-labs/toolkit-type-helpers@0.9.35)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
-      '@zayne-labs/toolkit-type-helpers': 0.9.35
+      '@zayne-labs/toolkit-core': 0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40)
+      '@zayne-labs/toolkit-react': 0.9.40(@types/react@19.1.2)(@zayne-labs/toolkit-core@0.9.40(@zayne-labs/toolkit-type-helpers@0.9.40))(@zayne-labs/toolkit-type-helpers@0.9.40)(react@19.1.0)(zustand@5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)))
+      '@zayne-labs/toolkit-type-helpers': 0.9.40
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       tailwind-merge: 3.2.0
     optionalDependencies:
-      react-hook-form: 7.56.1(react@19.1.0)
+      react-hook-form: 7.56.2(react@19.1.0)
       tailwindcss: 4.1.5
       zustand: 5.0.4(@types/react@19.1.2)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
 
@@ -5697,8 +5782,8 @@ snapshots:
 
   browserslist@4.24.5:
     dependencies:
-      caniuse-lite: 1.0.30001716
-      electron-to-chromium: 1.5.149
+      caniuse-lite: 1.0.30001717
+      electron-to-chromium: 1.5.151
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.5)
 
@@ -5720,7 +5805,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001716: {}
+  caniuse-lite@1.0.30001717: {}
 
   chalk@4.1.2:
     dependencies:
@@ -5892,7 +5977,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.149: {}
+  electron-to-chromium@1.5.151: {}
 
   emoji-regex@10.4.0: {}
 
@@ -6013,7 +6098,7 @@ snapshots:
 
   eslint-plugin-import-x@4.11.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3):
     dependencies:
-      '@typescript-eslint/utils': 8.31.1(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.32.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
       comment-parser: 1.4.1
       debug: 4.4.0
       eslint: 9.26.0(jiti@2.4.2)
@@ -6073,8 +6158,8 @@ snapshots:
 
   eslint-plugin-perfectionist@4.12.3(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3):
     dependencies:
-      '@typescript-eslint/types': 8.31.1
-      '@typescript-eslint/utils': 8.31.1(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
+      '@typescript-eslint/types': 8.32.0
+      '@typescript-eslint/utils': 8.32.0(eslint@9.26.0(jiti@2.4.2))(typescript@5.8.3)
       eslint: 9.26.0(jiti@2.4.2)
       natural-orderby: 5.0.0
     transitivePeerDependencies:
@@ -7056,7 +7141,7 @@ snapshots:
       react: 19.1.0
       scheduler: 0.26.0
 
-  react-hook-form@7.56.1(react@19.1.0):
+  react-hook-form@7.56.2(react@19.1.0):
     dependencies:
       react: 19.1.0
 
@@ -7426,6 +7511,8 @@ snapshots:
   ufo@1.6.1: {}
 
   undici-types@6.21.0: {}
+
+  unpic@4.1.2: {}
 
   unpipe@1.0.0: {}
 

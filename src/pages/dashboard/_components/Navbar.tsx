@@ -1,4 +1,4 @@
-import { IconBox, getElementList } from "@/components/common";
+import { IconBox, Image, Show, getElementList } from "@/components/common";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { sessionQuery } from "@/store/react-query/queryFactory";
 import { useQuery } from "@tanstack/react-query";
@@ -73,8 +73,18 @@ function DesktopNavContent(props: { className?: string }) {
 
 			<div className="flex items-center gap-6">
 				<IconBox icon="material-symbols:notifications-outline-rounded" className="size-8" />
-				{/* FIXME - Replace with real avatar */}
-				<span className="block size-[70px] shrink-0 rounded-full bg-[hsl(0,0%,85%)]" />
+
+				<Show.Root when={sessionQueryResult.data?.data?.logo}>
+					{(logo) => (
+						<>
+							<Image src={logo} width={70} height={70} className="rounded-full" />
+
+							<Show.Otherwise>
+								<span className="block size-[70px] shrink-0 rounded-full bg-[hsl(0,0%,85%)]" />
+							</Show.Otherwise>
+						</>
+					)}
+				</Show.Root>
 			</div>
 		</section>
 	);

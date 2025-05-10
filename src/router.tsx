@@ -9,7 +9,7 @@ import {
 	createRoutesFromElements,
 } from "react-router";
 import RootLayout from "./pages/layout";
-import { protectionLoader } from "./store/react-query/loaders";
+import { dashboardLoader, protectionLoader } from "./store/react-query/loaders";
 import { useQueryClientStore } from "./store/react-query/queryClientStore";
 
 const queryClient = new QueryClient({
@@ -73,7 +73,11 @@ const routes = createRoutesFromElements(
 
 		<Route Component={ProtectionLayout} loader={protectionLoader}>
 			<Route path="/dashboard" Component={DashboardLayout}>
-				<Route index={true} Component={lazy(() => import("./pages/dashboard/page"))} />
+				<Route
+					index={true}
+					loader={dashboardLoader}
+					Component={lazy(() => import("./pages/dashboard/page"))}
+				/>
 
 				<Route
 					path="register/student"

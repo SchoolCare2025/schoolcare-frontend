@@ -1,6 +1,6 @@
 import TestImage1 from "@/assets/images/testimonial.png";
 import { getElementList } from "@/components/common";
-import { useDragScroll } from "@zayne-labs/ui-react/drag-scroll";
+import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
 
 const Testimonials = () => {
 	const { getItemProps, getRootProps } = useDragScroll();

@@ -1,11 +1,11 @@
 import { IconBox, getElementList } from "@/components/common";
+import { Form } from "@/components/ui";
 import { type CheckResultResponse, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useStorageState } from "@zayne-labs/toolkit-react";
-import { Form } from "@zayne-labs/ui-react/form";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { z } from "zod";

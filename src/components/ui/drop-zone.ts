@@ -1,1 +1,1 @@
-export * from "@zayne-labs/ui-react/drop-zone";
+export * from "@zayne-labs/ui-react/ui/drop-zone";

@@ -1,6 +1,7 @@
 export type LoginData = {
 	access: string;
 	email: string;
+	logo: string;
 	refresh: string;
 	school: string;
 };
@@ -29,6 +30,11 @@ export type StudentsByClassOrID = {
 	registration_number: string;
 };
 
+export type StudentsGenderResponse = {
+	female: number;
+	male: number;
+};
+
 export type InputScoresResponse = {
 	class_session_term: {
 		school_class: string;
@@ -43,6 +49,7 @@ export type InputScoresResponse = {
 
 export type SessionData = {
 	email: string;
+	logo: string;
 	school: string;
 };
 

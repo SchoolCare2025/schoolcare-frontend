@@ -5,7 +5,7 @@ import {
 	allClassesInSchoolQuery,
 	allStudentsInSchoolQuery,
 	allSubjectsInSchoolQuery,
-	sessionQuery,
+	studentsGenderQuery,
 } from "@/store/react-query/queryFactory";
 import NumberFlow from "@number-flow/react";
 import { useQuery } from "@tanstack/react-query";
@@ -13,15 +13,13 @@ import GenderRatioChart from "./_components/GenderRatioChart";
 import Main from "./_components/Main";
 
 function DashboardPage() {
-	const sessionQueryResult = useQuery(sessionQuery());
-
-	const allSubjectsInSchoolQueryResult = useQuery(
-		allSubjectsInSchoolQuery(sessionQueryResult.data?.data?.school)
-	);
+	const allSubjectsInSchoolQueryResult = useQuery(allSubjectsInSchoolQuery());
 
 	const allStudentsInSchoolQueryResult = useQuery(allStudentsInSchoolQuery());
 
 	const allClassesInSchoolQueryResult = useQuery(allClassesInSchoolQuery());
+
+	const studentsGenderQueryResult = useQuery(studentsGenderQuery());
 
 	const [InfoCardList] = getElementList();
 
@@ -83,7 +81,7 @@ function DashboardPage() {
 				<section />
 
 				<section className="md:ml-auto md:w-[calc(100%/3.3)]">
-					<GenderRatioChart />
+					<GenderRatioChart genderResponse={studentsGenderQueryResult.data?.data} />
 				</section>
 			</div>
 		</Main>

@@ -2,7 +2,7 @@ import { DropZoneInput, DropZoneInputImagePreview, IconBox, getElementList } fro
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
-import { allSubjectsInSchoolQuery, sessionQuery } from "@/store/react-query/queryFactory";
+import { allSubjectsInSchoolQuery } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -29,11 +29,7 @@ function UploadPage() {
 		resolver: zodResolver(UploadSchema),
 	});
 
-	const sessionQueryResult = useQuery(sessionQuery());
-
-	const schoolSubjectsQueryResult = useQuery(
-		allSubjectsInSchoolQuery(sessionQueryResult.data?.data?.school)
-	);
+	const schoolSubjectsQueryResult = useQuery(allSubjectsInSchoolQuery());
 
 	const [SubjectList] = getElementList("base");
 
@@ -134,24 +130,15 @@ function UploadPage() {
 									maxFileSize={6}
 									onChange={field.onChange}
 								>
-									{({ dropZoneActions, dropZoneState }) => (
-										<>
-											<span className="block size-8 shrink-0 md:size-10">
-												<IconBox icon="solar:file-send-outline" className="size-full" />
-											</span>
+									<span className="block size-8 shrink-0 md:size-10">
+										<IconBox icon="solar:file-send-outline" className="size-full" />
+									</span>
 
-											<p className="text-[14px] md:text-base">
-												Drag and drop or <span className="text-school-blue">Browse</span> your
-												file
-											</p>
+									<p className="text-[14px] md:text-base">
+										Drag and drop or <span className="text-school-blue">Browse</span> your file
+									</p>
 
-											<DropZoneInputImagePreview
-												classNames={{ listItem: "px-3 md:px-6" }}
-												filesWithPreview={dropZoneState.filesWithPreview}
-												removeFile={dropZoneActions.removeFile}
-											/>
-										</>
-									)}
+									<DropZoneInputImagePreview classNames={{ listItem: "px-3 md:px-6" }} />
 								</DropZoneInput>
 							)}
 						/>
