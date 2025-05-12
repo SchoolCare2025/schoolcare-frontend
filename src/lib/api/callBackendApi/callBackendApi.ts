@@ -17,12 +17,12 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const BACKEND_URL = "https://api.schoolcare.com.ng";
+const BACKEND_HOST = import.meta.env.MODE === "development" ? "" : "https://api.schoolcare.com.ng";
 
-const API_BASE_URL = "api";
+const BASE_API_URL = "api";
 
 export const sharedFetchClient = createFetchClient((ctx) => ({
-	baseURL: `${BACKEND_URL}/${API_BASE_URL}`,
+	baseURL: `${BACKEND_HOST}/${BASE_API_URL}`,
 
 	plugins: [authHeaderInclusionPlugin(), toastPlugin()],
 

@@ -38,13 +38,14 @@ export const toastPlugin = definePlugin(() => ({
 
 			if (shouldSkipError) return;
 
-			const errorMessageField = ctx.options.meta?.toast?.errorMessageField ?? "message";
+			if (!isHTTPError(ctx.error) || !ctx.error.errorData.errors) {
+				toast.error(ctx.error.message);
+				return;
+			}
 
-			const errorMessage = isHTTPError(ctx.error)
-				? (ctx.error.errorData.errors?.[errorMessageField] ?? ctx.error.message)
-				: ctx.error.message;
-
-			errorMessage && toast.error(errorMessage);
+			for (const message of Object.values(ctx.error.errorData.errors)) {
+				toast.error(message);
+			}
 		},
 
 		onSuccess: (ctx: SuccessContext<ApiSuccessResponse>) => {

@@ -17,6 +17,7 @@ export const sessionQuery = () => {
 		queryFn: () => checkUserSession(),
 		queryKey: ["session"],
 		refetchInterval: 9 * 60 * 1000, // 9 minutes
+		refetchOnWindowFocus: false,
 		retry: false,
 		staleTime: Infinity,
 	});

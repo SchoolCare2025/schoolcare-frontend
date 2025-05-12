@@ -117,7 +117,7 @@ export function ViewAllStudentsPage() {
 						</button>
 
 						<Form.Submit
-							// disabled={methods.formState.isSubmitting}
+							disabled={methods.formState.isSubmitting}
 							className={cnMerge(
 								`flex h-9 w-fit items-center justify-center self-end rounded-[10px] bg-school-blue
 								px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8 md:text-[18px]`,

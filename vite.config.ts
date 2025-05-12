@@ -9,7 +9,7 @@ export default defineConfig({
 		proxy: {
 			"/api": {
 				changeOrigin: true,
-				target: "https://api.schoolcare.com.ng",
+				target: "http://127.0.0.1:8000",
 			},
 		},
 	},

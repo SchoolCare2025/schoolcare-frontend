@@ -33,12 +33,6 @@ function AdminRegisterPage() {
 			body: data,
 			method: "POST",
 
-			onResponseError: (ctx) => {
-				methods.setError("root.serverError", {
-					message: ctx.error.errorData.errors?.school,
-				});
-			},
-
 			onSuccess: () => {
 				void navigate("/signin");
 			},
@@ -97,15 +91,12 @@ function AdminRegisterPage() {
 						<Form.ErrorMessage className="text-red-600" />
 					</Form.Field>
 
-					<Form.ErrorMessage type="root" errorField="serverError" className="text-red-600" />
-
 					<Form.Submit
 						disabled={methods.formState.isSubmitting}
 						className={cnMerge(
 							`mt-12 flex h-9 w-fit items-center justify-center self-end rounded-[10px]
 							bg-school-blue px-5 text-[14px] font-semibold text-white md:h-[56px] md:px-8
 							md:text-[18px]`,
-							!methods.formState.isValid && "cursor-not-allowed bg-gray-400",
 							methods.formState.isSubmitting && "grid"
 						)}
 					>
