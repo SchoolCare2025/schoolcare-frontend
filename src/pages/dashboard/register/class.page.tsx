@@ -2,12 +2,12 @@ import { IconBox, Show, getElementList } from "@/components/common";
 import { Command, Form, Popover } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allClassesInSchoolQuery, allClassesQuery } from "@/store/react-query/queryFactory";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import Main from "../_components/Main";
 
 const RegisterClassSchema = z.object({
@@ -24,7 +24,7 @@ function RegisterClassPage() {
 			school_class: "",
 		},
 		mode: "onChange",
-		resolver: zodResolver(RegisterClassSchema),
+		resolver: standardSchemaResolver(RegisterClassSchema),
 	});
 
 	const allClassesQueryResult = useQuery(allClassesQuery());

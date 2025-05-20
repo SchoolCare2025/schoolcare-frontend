@@ -2,16 +2,16 @@ import { IconBox, getElementList } from "@/components/common";
 import { Form } from "@/components/ui";
 import { type CheckResultResponse, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import { schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQuery } from "@tanstack/react-query";
 import { useStorageState } from "@zayne-labs/toolkit-react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { z } from "zod";
 
 const ScratchCardFormSchema = z.object({
-	class_grade: z.string().min(1, "Grade level is required"),
+	class_grade: z.string().min(1, { error: "Grade level is required" }),
 	school_class: z.string().min(1, "Class is required"),
 	school_ID: z.string().min(1, "School ID is required"),
 	scratch_card_code: z.string().min(1, "Scratch card code is required"),
@@ -29,8 +29,8 @@ function ScratchCardForm() {
 
 	const [For] = getElementList("base");
 
-	const methods = useForm({
-		resolver: zodResolver(ScratchCardFormSchema),
+	const methods = useForm<z.infer<typeof ScratchCardFormSchema>>({
+		resolver: standardSchemaResolver(ScratchCardFormSchema),
 	});
 
 	const navigate = useNavigate();

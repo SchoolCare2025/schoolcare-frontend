@@ -74,13 +74,13 @@ const Navbar = () => {
 						<NavLink to="/about-us">About Us</NavLink>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<NavLink to="HowItWorks">How it Works</NavLink>
+						<NavLink to="/how-it-works">How it Works</NavLink>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
 						<NavLink to="/faq">FAQs</NavLink>
 					</li>
 					<li className="mx-4 mb-5 hover:text-cosBlue">
-						<NavLink to="ContactUs">Contact Us</NavLink>
+						<NavLink to="/contact-us">Contact Us</NavLink>
 					</li>
 				</ul>
 

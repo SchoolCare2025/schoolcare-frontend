@@ -17,7 +17,8 @@ declare module "@zayne-labs/callapi" {
 	}
 }
 
-const BACKEND_HOST = import.meta.env.MODE === "development" ? "" : "https://api.schoolcare.com.ng";
+const BACKEND_HOST = "https://api.schoolcare.com.ng";
+// const BACKEND_HOST = import.meta.env.MODE === "development" ? "" : "https://api.schoolcare.com.ng";
 
 const BASE_API_URL = "api";
 

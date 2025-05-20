@@ -2,17 +2,17 @@ import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { type LoginData, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import { sessionQuery } from "@/store/react-query/queryFactory";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQueryClient } from "@tanstack/react-query";
 import { omitKeys } from "@zayne-labs/toolkit-core";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
-import { z } from "zod";
 
 const SignInSchema = z.object({
-	email: z.string().email("Please enter a valid email!"),
-	password: z.string().min(1, "Password is required"),
+	email: z.email({ error: "Please enter a valid email!" }),
+	password: z.string().min(1, { error: "Password is required" }),
 });
 
 type SignupFormValues = z.infer<typeof SignInSchema>;
@@ -23,7 +23,7 @@ function SigninPage() {
 			email: "",
 			password: "",
 		},
-		resolver: zodResolver(SignInSchema),
+		resolver: standardSchemaResolver(SignInSchema),
 	});
 
 	const navigate = useNavigate();

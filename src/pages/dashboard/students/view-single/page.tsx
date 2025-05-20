@@ -1,13 +1,13 @@
 import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { studentsByIDQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { z } from "zod";
 import Main from "../../_components/Main";
 
 const ViewSingleStudentsSchema = z.object({
@@ -23,7 +23,7 @@ function ViewSingleStudent() {
 		defaultValues: {
 			reg_number: "",
 		},
-		resolver: zodResolver(ViewSingleStudentsSchema),
+		resolver: standardSchemaResolver(ViewSingleStudentsSchema),
 	});
 
 	const onSubmit = methods.handleSubmit(async (data) => {

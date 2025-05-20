@@ -2,14 +2,14 @@ import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import Main from "@/pages/_components/Main";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { z } from "zod";
 
 const AdminRegisterSchema = z.object({
-	email: z.string().email("Please enter a valid email!"),
+	email: z.email("Please enter a valid email!"),
 	password: z.string().min(1, "Password is required").min(8, "Password must be at least 8 characters"),
 	school: z.string().min(1, "School name is required"),
 });
@@ -25,7 +25,7 @@ function AdminRegisterPage() {
 			password: "",
 			school: "",
 		},
-		resolver: zodResolver(AdminRegisterSchema),
+		resolver: standardSchemaResolver(AdminRegisterSchema),
 	});
 
 	const onSubmit = async (data: AdminRegisterFormData) => {

@@ -3,13 +3,13 @@ import { Command, Form, Popover, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { isFile } from "@zayne-labs/toolkit-type-helpers";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import { z } from "zod";
 import Main from "../_components/Main";
 
 const AddressSchema = z.object({
@@ -32,7 +32,7 @@ function AddressPage() {
 	const methods = useForm({
 		defaultValues: formStepData,
 		mode: "onChange",
-		resolver: zodResolver(AddressSchema),
+		resolver: standardSchemaResolver(AddressSchema) as never,
 	});
 
 	const navigate = useNavigate();

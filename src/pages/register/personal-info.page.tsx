@@ -2,17 +2,17 @@ import { DropZoneInput, IconBox } from "@/components/common";
 import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
 import { cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { z } from "zod";
 import Main from "../_components/Main";
 
 const PersonalInfoSchema = z.object({
-	email: z.string().email({ message: "Please enter a valid email!" }),
-	logo: z.instanceof(File, { message: "Please upload a logo!" }),
-	name: z.string().min(1, { message: "Name is required" }).max(50, { message: "Name is too long" }),
+	email: z.email({ error: "Please enter a valid email!" }),
+	logo: z.file({ error: "Please upload a logo!" }),
+	name: z.string().min(1, { error: "Name is required" }).max(50, { error: "Name is too long" }),
 });
 
 function PersonalInfoPage() {
@@ -25,7 +25,7 @@ function PersonalInfoPage() {
 	const methods = useForm({
 		defaultValues: formStepData,
 		mode: "onChange",
-		resolver: zodResolver(PersonalInfoSchema),
+		resolver: standardSchemaResolver(PersonalInfoSchema) as never,
 	});
 
 	const navigate = useNavigate();

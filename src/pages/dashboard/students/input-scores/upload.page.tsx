@@ -2,17 +2,17 @@ import { DropZoneInput, DropZoneInputImagePreview, IconBox, getElementList } fro
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import { allSubjectsInSchoolQuery } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { z } from "zod";
 import Main from "../../_components/Main";
 
 const UploadSchema = z.object({
-	file: z.instanceof(File, { message: "File is required" }).nullable(),
+	file: z.file({ error: "File is required" }),
 	subject: z.string().min(1, "Subject is required"),
 });
 
@@ -23,10 +23,9 @@ function UploadPage() {
 
 	const methods = useForm<UploadFormData>({
 		defaultValues: {
-			file: null,
 			subject: "",
 		},
-		resolver: zodResolver(UploadSchema),
+		resolver: standardSchemaResolver(UploadSchema),
 	});
 
 	const schoolSubjectsQueryResult = useQuery(allSubjectsInSchoolQuery());
@@ -38,11 +37,11 @@ function UploadPage() {
 		responseData: { class_session_term },
 	} = useInputScoreFormStore((state) => state);
 
-	const onSubmit = async (data: UploadFormData) => {
+	const onSubmit = methods.handleSubmit(async (data: UploadFormData) => {
 		const formData = new FormData();
 
 		for (const [key, value] of Object.entries(data)) {
-			formData.set(key, value as NonNullable<typeof value>);
+			formData.set(key, value as never);
 		}
 
 		formData.set("class_session_term", JSON.stringify(class_session_term));
@@ -57,7 +56,7 @@ function UploadPage() {
 				void navigate("/dashboard");
 			},
 		});
-	};
+	});
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -69,7 +68,7 @@ function UploadPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-10 md:gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Field<typeof methods.control> name="subject" className="w-full gap-3 md:gap-4">
 						<Form.Label className="text-[14px] font-medium md:text-base">Subject</Form.Label>

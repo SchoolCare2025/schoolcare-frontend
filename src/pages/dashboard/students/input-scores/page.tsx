@@ -2,17 +2,17 @@ import { IconBox, getElementList } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { type InputScoresResponse, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
 import {
 	allClassesInSchoolQuery,
 	schoolSessionQuery,
 	schoolTermQuery,
 } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { z } from "zod";
 import Main from "../../_components/Main";
 
 const AddScoresSchema = z.object({
@@ -32,7 +32,7 @@ function AddScoresPage() {
 			session: "",
 			term: "",
 		},
-		resolver: zodResolver(AddScoresSchema),
+		resolver: standardSchemaResolver(AddScoresSchema),
 	});
 
 	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
