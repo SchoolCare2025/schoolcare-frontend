@@ -19,6 +19,7 @@
 
 	/* App Colors */
 	--color-school-blue: hsl(209, 97%, 50%);
+	--color-school-body-color: hsl(0, 0%, 20%);
 	--color-school-gray: hsl(313, 0%, 42%);
 	--color-school-gray-lighter: hsl(0, 0%, 76%);
 	--color-school-dark-blue: hsl(201, 100%, 4%);
@@ -213,6 +214,7 @@
 	body {
 		line-height: 1.5;
 		font-family: var(--font-outfit);
+		color: var(--color-school-body-color);
 	}
 
 	body {

@@ -4,13 +4,13 @@ import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
+import { Main } from "@/pages/dashboard/_components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { isFile } from "@zayne-labs/toolkit-type-helpers";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import Main from "../_components/Main";
 
 const AddressSchema = z.object({
 	address: z.string().min(1, "Address is required"),

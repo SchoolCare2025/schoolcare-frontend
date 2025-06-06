@@ -32,7 +32,7 @@ export const dashboardLinkItems = [
 	},
 	{
 		icon: "streamline:interface-edit-view-eye-eyeball-open-view",
-		label: "View Single Student",
+		label: "View a Student",
 		link: "/dashboard/students/view-single",
 	},
 	{

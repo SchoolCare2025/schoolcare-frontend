@@ -10,7 +10,7 @@ import {
 import NumberFlow from "@number-flow/react";
 import { useQuery } from "@tanstack/react-query";
 import GenderRatioChart from "./_components/GenderRatioChart";
-import Main from "./_components/Main";
+import { Main } from "./_components/Main";
 
 function DashboardPage() {
 	const allSubjectsInSchoolQueryResult = useQuery(allSubjectsInSchoolQuery());

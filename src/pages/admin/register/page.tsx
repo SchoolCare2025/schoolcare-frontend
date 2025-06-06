@@ -3,7 +3,7 @@ import { Form } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
-import Main from "@/pages/_components/Main";
+import { Main } from "@/pages/dashboard/_components/Main";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -40,7 +40,7 @@ function AdminRegisterPage() {
 	};
 
 	return (
-		<Main className="flex flex-col gap-8">
+		<Main className="flex flex-col gap-8 p-0 md:p-0">
 			<header>
 				<h1 className="text-[24px] font-bold md:text-[30px]">Admin Register</h1>
 			</header>

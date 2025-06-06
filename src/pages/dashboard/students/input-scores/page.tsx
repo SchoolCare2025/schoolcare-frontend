@@ -13,7 +13,7 @@ import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import Main from "../../_components/Main";
+import { Main } from "../../_components/Main";
 
 const AddScoresSchema = z.object({
 	school_class: z.string().min(1, "Class is required"),

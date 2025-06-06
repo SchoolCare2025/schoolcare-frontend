@@ -8,7 +8,7 @@ import { allClassesInSchoolQuery, allStudentsInSchoolQuery } from "@/store/react
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import Main from "../_components/Main";
+import { Main } from "../_components/Main";
 
 const RegisterStudentSchema = z.object({
 	gender: z.string().min(1, "Gender is required"),

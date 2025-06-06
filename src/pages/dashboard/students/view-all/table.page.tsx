@@ -4,7 +4,7 @@ import { studentsByClassQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { useQuery } from "@tanstack/react-query";
 import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
-import Main from "../../_components/Main";
+import { Main } from "../../_components/Main";
 
 const columns = defineEnum(["Name", "Gender", "Reg. No"]);
 
@@ -30,8 +30,8 @@ function TablePage() {
 								<Table.Head
 									key={column}
 									className={cnMerge(
-										`border-b border-b-[hsl(0,0%,3%)] px-7 py-4 not-last:border-r
-										not-last:border-r-[hsl(0,0%,3%)]`,
+										`min-w-[60px] border-b border-b-[hsl(0,0%,3%)] p-4 text-center font-bold
+										text-black not-last:border-r not-last:border-r-[hsl(0,0%,3%)]`,
 										tableData.length === 0 && "border-b-0"
 									)}
 								>

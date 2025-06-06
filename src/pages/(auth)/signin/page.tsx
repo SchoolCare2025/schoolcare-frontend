@@ -35,9 +35,7 @@ function SigninPage() {
 			body: data,
 
 			meta: {
-				toast: {
-					success: true,
-				},
+				toast: { success: true },
 			},
 
 			method: "POST",

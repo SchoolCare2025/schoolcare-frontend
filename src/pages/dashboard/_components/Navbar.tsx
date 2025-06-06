@@ -9,7 +9,7 @@ import { Fragment } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
 import { dashboardLinkItems } from "./constants";
 
-function Navbar() {
+export function Navbar() {
 	const [isNavShow, toggleNavShow] = useToggle(false);
 
 	const handleToggleNavShow = () => {
@@ -143,5 +143,3 @@ function MobileNavigation(props: MobileNavProps) {
 		</section>
 	);
 }
-
-export default Navbar;

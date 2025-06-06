@@ -4,7 +4,7 @@ import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
 import { download, generateCsv, mkConfig } from "export-to-csv";
 import { Navigate, useNavigate } from "react-router";
 import { toast } from "sonner";
-import Main from "../../_components/Main";
+import { Main } from "../../_components/Main";
 
 const columns = defineEnum(["Name", "Reg. No", "First CA", "Second CA", "Exam", "Total", "Grade"]);
 
@@ -53,8 +53,8 @@ function TablePage() {
 							{columns.map((column) => (
 								<Table.Head
 									key={column}
-									className="border-b border-b-[hsl(0,0%,3%)] px-7 py-4 not-last:border-r
-										not-last:border-r-[hsl(0,0%,3%)]"
+									className="min-w-[60px] border-b border-b-[hsl(0,0%,3%)] p-4 text-center
+										font-bold text-black not-last:border-r not-last:border-r-[hsl(0,0%,3%)]"
 								>
 									{column}
 								</Table.Head>

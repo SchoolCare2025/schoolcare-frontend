@@ -46,7 +46,7 @@ function ScratchCardForm() {
 			onSuccess: (ctx) => {
 				storageActions.setState(ctx.data.data);
 
-				void navigate("/result-sheet");
+				void navigate("/student-result");
 			},
 		});
 	});

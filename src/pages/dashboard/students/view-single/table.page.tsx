@@ -3,7 +3,7 @@ import { studentsByIDQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { useQuery } from "@tanstack/react-query";
 import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
-import Main from "../../_components/Main";
+import { Main } from "../../_components/Main";
 
 const columns = defineEnum(["Name", "Gender", "Reg. No"]);
 
@@ -29,8 +29,8 @@ function TablePage() {
 							{columns.map((column) => (
 								<Table.Head
 									key={column}
-									className="border-b border-b-[hsl(0,0%,3%)] px-7 py-4 not-last:border-r
-										not-last:border-r-[hsl(0,0%,3%)]"
+									className="min-w-[60px] border-b border-b-[hsl(0,0%,3%)] p-4 text-center
+										font-bold text-black not-last:border-r not-last:border-r-[hsl(0,0%,3%)]"
 								>
 									{column}
 								</Table.Head>

@@ -3,11 +3,11 @@ import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
 import { cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
+import { Main } from "@/pages/dashboard/_components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import Main from "../_components/Main";
 
 const PersonalInfoSchema = z.object({
 	email: z.email({ error: "Please enter a valid email!" }),
@@ -37,7 +37,7 @@ function PersonalInfoPage() {
 	});
 
 	return (
-		<Main className="flex flex-col gap-8">
+		<Main className="flex flex-col gap-8 p-0 md:p-0">
 			<header>
 				<h1 className="text-[18px] font-bold md:text-[30px]">Register your school</h1>
 				<p className="mt-2 text-[10px] md:text-[18px]">Please fill in the details below</p>

@@ -8,7 +8,7 @@ import { allSubjectsInSchoolQuery, allSubjectsQuery } from "@/store/react-query/
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import Main from "../_components/Main";
+import { Main } from "../_components/Main";
 
 const RegisterSubjectSchema = z.object({
 	subject: z.string().min(1, "Subject is required"),
