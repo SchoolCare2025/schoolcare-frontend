@@ -41,6 +41,11 @@ function ResultSheetPage() {
 					</Table.Header>
 
 					<Table.Body>
+						{tableData.length === 0 && (
+							<Table.Row className="flex h-[56px] items-center justify-center">
+								No results found
+							</Table.Row>
+						)}
 						{tableData.map((result) => (
 							<Table.Row
 								key={result.Subject}
@@ -65,13 +70,16 @@ function ResultSheetPage() {
 						border-[hsl(0,0%,76%)] bg-[hsl(0,0%,96%)] px-5 py-6 md:px-10 md:py-12"
 				>
 					<p className="font-semibold">Average score:</p>
-					<p className="text-[hsl(2,84%,59%)]">84.4%</p>
+					<p className="text-[hsl(2,84%,59%)]">{data?.average}</p>
 
 					<p className="font-semibold">Class Position:</p>
-					<p className="text-[hsl(2,84%,59%)]">1st</p>
+					<p className="text-[hsl(2,84%,59%)]">{data?.position}</p>
 
 					<p className="font-semibold">Number in class:</p>
 					<p className="text-[hsl(2,84%,59%)]">40</p>
+
+					{/* <p className="font-semibold">Total Score:</p>
+					<p className="text-[hsl(2,84%,59%)]">{data?.total_score}</p> */}
 				</article>
 
 				<article
@@ -79,7 +87,7 @@ function ResultSheetPage() {
 						border-[hsl(0,100%,71%)] bg-[hsl(0,61%,99%)] px-7 md:px-13"
 				>
 					<h5 className="text-[20px] font-semibold">Teacher's Comment:</h5>
-					<p>Sarah has shown consistent improvement throughout the term.</p>
+					<p>{data?.comment}</p>
 				</article>
 			</section>
 

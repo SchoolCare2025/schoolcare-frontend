@@ -4,7 +4,7 @@ import { type CheckResultResponse, callBackendApi } from "@/lib/api/callBackendA
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { schoolSessionQuery, schoolTermQuery } from "@/store/react-query/queryFactory";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useStorageState } from "@zayne-labs/toolkit-react";
 import { useForm } from "react-hook-form";
@@ -29,8 +29,8 @@ function ScratchCardForm() {
 
 	const [For] = getElementList("base");
 
-	const methods = useForm<z.infer<typeof ScratchCardFormSchema>>({
-		resolver: standardSchemaResolver(ScratchCardFormSchema),
+	const methods = useForm({
+		resolver: zodResolver(ScratchCardFormSchema),
 	});
 
 	const navigate = useNavigate();

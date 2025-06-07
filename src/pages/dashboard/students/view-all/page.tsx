@@ -5,7 +5,7 @@ import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allClassesInSchoolQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -16,16 +16,14 @@ const ViewAllStudentsSchema = z.object({
 	class: z.string().min(1, "Class is required"),
 });
 
-type ViewAllStudentsFormData = z.infer<typeof ViewAllStudentsSchema>;
-
 export function ViewAllStudentsPage() {
 	const navigate = useNavigate();
 
-	const methods = useForm<ViewAllStudentsFormData>({
+	const methods = useForm({
 		defaultValues: {
 			class: "",
 		},
-		resolver: standardSchemaResolver(ViewAllStudentsSchema),
+		resolver: zodResolver(ViewAllStudentsSchema),
 	});
 
 	const classesQueryResult = useQuery(allClassesInSchoolQuery());

@@ -5,7 +5,7 @@ import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allClassesInSchoolQuery, allStudentsInSchoolQuery } from "@/store/react-query/queryFactory";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Main } from "../_components/Main";
@@ -17,10 +17,8 @@ const RegisterStudentSchema = z.object({
 	surname: z.string().min(1, "Surname is required"),
 });
 
-type RegisterStudentFormData = z.infer<typeof RegisterStudentSchema>;
-
 function RegisterStudentPage() {
-	const methods = useForm<RegisterStudentFormData>({
+	const methods = useForm({
 		defaultValues: {
 			gender: "",
 			other_names: "",
@@ -28,14 +26,14 @@ function RegisterStudentPage() {
 			surname: "",
 		},
 		mode: "onChange",
-		resolver: standardSchemaResolver(RegisterStudentSchema),
+		resolver: zodResolver(RegisterStudentSchema),
 	});
 
 	const [ClassesList] = getElementList("base");
 
 	const classesQueryResult = useQuery(allClassesInSchoolQuery());
 
-	const onSubmit = async (data: RegisterStudentFormData) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		const { other_names, surname, ...restOfData } = data;
 
 		await callBackendApi("/school/students", {
@@ -60,7 +58,7 @@ function RegisterStudentPage() {
 					.queryClient.invalidateQueries({ queryKey: allStudentsInSchoolQuery().queryKey });
 			},
 		});
-	};
+	});
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -72,7 +70,7 @@ function RegisterStudentPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-6 md:gap-8"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Field<typeof methods.control> name="surname" className="gap-4">
 						<Form.Label className="text-[14px] font-medium md:text-base">Surname*</Form.Label>

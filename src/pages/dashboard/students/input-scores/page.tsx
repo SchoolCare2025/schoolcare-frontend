@@ -9,7 +9,7 @@ import {
 	schoolTermQuery,
 } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -21,18 +21,16 @@ const AddScoresSchema = z.object({
 	term: z.string().min(1, "Term is required"),
 });
 
-type AddScoresFormData = z.infer<typeof AddScoresSchema>;
-
 function AddScoresPage() {
 	const navigate = useNavigate();
 
-	const methods = useForm<AddScoresFormData>({
+	const methods = useForm({
 		defaultValues: {
 			school_class: "",
 			session: "",
 			term: "",
 		},
-		resolver: standardSchemaResolver(AddScoresSchema),
+		resolver: zodResolver(AddScoresSchema),
 	});
 
 	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
@@ -41,7 +39,7 @@ function AddScoresPage() {
 
 	const [List] = getElementList("base");
 
-	const onSubmit = async (data: AddScoresFormData) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		await callBackendApi<InputScoresResponse>("/school/results/get-class-session-term", {
 			body: data,
 			method: "POST",
@@ -53,7 +51,7 @@ function AddScoresPage() {
 				void navigate("/dashboard/students/input-scores/table");
 			},
 		});
-	};
+	});
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -65,7 +63,7 @@ function AddScoresPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-10 md:gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<div className="flex gap-6 md:gap-[70px]">
 						<Form.Field<typeof methods.control> name="session" className="w-full min-w-0 gap-4">

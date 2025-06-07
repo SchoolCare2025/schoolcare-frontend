@@ -5,7 +5,7 @@ import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allSubjectsInSchoolQuery, allSubjectsQuery } from "@/store/react-query/queryFactory";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Main } from "../_components/Main";
@@ -14,22 +14,20 @@ const RegisterSubjectSchema = z.object({
 	subject: z.string().min(1, "Subject is required"),
 });
 
-type RegisterSubjectFormData = z.infer<typeof RegisterSubjectSchema>;
-
 function RegisterSubjectPage() {
-	const methods = useForm<RegisterSubjectFormData>({
+	const methods = useForm({
 		defaultValues: {
 			subject: "",
 		},
 		mode: "onChange",
-		resolver: standardSchemaResolver(RegisterSubjectSchema),
+		resolver: zodResolver(RegisterSubjectSchema),
 	});
 
 	const [SubjectList] = getElementList("base");
 
 	const subjectQueryResult = useQuery(allSubjectsQuery());
 
-	const onSubmit = async (data: RegisterSubjectFormData) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		await callBackendApi("/school/subjects", {
 			body: data,
 			meta: { toast: { success: true } },
@@ -49,7 +47,7 @@ function RegisterSubjectPage() {
 				});
 			},
 		});
-	};
+	});
 
 	return (
 		<Main className="flex flex-col gap-8">
@@ -61,7 +59,7 @@ function RegisterSubjectPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-6 md:gap-8"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Field<typeof methods.control> name="subject" className="gap-4">
 						<Form.Label className="text-[14px] font-medium md:text-base">Select Subject</Form.Label>

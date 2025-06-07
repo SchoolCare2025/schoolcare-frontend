@@ -5,7 +5,7 @@ import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { studentsByIDQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Main } from "../../_components/Main";
@@ -14,16 +14,14 @@ const ViewSingleStudentsSchema = z.object({
 	reg_number: z.string().min(1, "Reg number is required"),
 });
 
-type ViewSingleStudentsFormData = z.infer<typeof ViewSingleStudentsSchema>;
-
 function ViewSingleStudent() {
 	const navigate = useNavigate();
 
-	const methods = useForm<ViewSingleStudentsFormData>({
+	const methods = useForm({
 		defaultValues: {
 			reg_number: "",
 		},
-		resolver: standardSchemaResolver(ViewSingleStudentsSchema),
+		resolver: zodResolver(ViewSingleStudentsSchema),
 	});
 
 	const onSubmit = methods.handleSubmit(async (data) => {

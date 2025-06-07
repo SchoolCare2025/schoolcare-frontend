@@ -6,7 +6,7 @@ import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { Main } from "@/pages/dashboard/_components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { isFile } from "@zayne-labs/toolkit-type-helpers";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -32,7 +32,7 @@ function AddressPage() {
 	const methods = useForm({
 		defaultValues: formStepData,
 		mode: "onChange",
-		resolver: standardSchemaResolver(AddressSchema) as never,
+		resolver: zodResolver(AddressSchema),
 	});
 
 	const navigate = useNavigate();

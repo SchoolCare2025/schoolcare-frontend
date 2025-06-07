@@ -54,6 +54,11 @@ export type SessionData = {
 };
 
 export type CheckResultResponse = {
+	average: number;
+	class_session_term: string;
+	comment: string;
+	logo: string;
+	position: number;
 	results: Array<{
 		class_session_term: number;
 		exam: number;
@@ -64,7 +69,10 @@ export type CheckResultResponse = {
 		subject: number;
 		total: number;
 	}>;
-	student: string;
+	school: string;
+	student_name: string;
 	student_reg_number: string;
+	subject_count: number;
+	total_score: number;
 	use_count: number;
 };

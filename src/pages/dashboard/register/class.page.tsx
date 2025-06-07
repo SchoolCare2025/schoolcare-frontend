@@ -5,7 +5,7 @@ import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allClassesInSchoolQuery, allClassesQuery } from "@/store/react-query/queryFactory";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Main } from "../_components/Main";
@@ -15,23 +15,21 @@ const RegisterClassSchema = z.object({
 	school_class: z.string().min(1, "School class is required"),
 });
 
-type RegisterClassFormData = z.infer<typeof RegisterClassSchema>;
-
 function RegisterClassPage() {
-	const methods = useForm<RegisterClassFormData>({
+	const methods = useForm({
 		defaultValues: {
 			grade: "",
 			school_class: "",
 		},
 		mode: "onChange",
-		resolver: standardSchemaResolver(RegisterClassSchema),
+		resolver: zodResolver(RegisterClassSchema),
 	});
 
 	const allClassesQueryResult = useQuery(allClassesQuery());
 
 	const [ClassList] = getElementList("base");
 
-	const onSubmit = async (data: RegisterClassFormData) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		await callBackendApi("/school/classes", {
 			body: data,
 			meta: { toast: { success: true } },
@@ -51,7 +49,7 @@ function RegisterClassPage() {
 					.queryClient.invalidateQueries({ queryKey: allClassesInSchoolQuery().queryKey });
 			},
 		});
-	};
+	});
 
 	const watchedSchoolClass = methods.watch("school_class");
 
@@ -65,7 +63,7 @@ function RegisterClassPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-6 md:gap-8"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Field<typeof methods.control> name="school_class" className="gap-3 md:gap-4">
 						<Form.Label className="text-[14px] font-medium md:text-base">Class Name</Form.Label>

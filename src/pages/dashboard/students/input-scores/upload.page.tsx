@@ -5,7 +5,7 @@ import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { allSubjectsInSchoolQuery } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -16,16 +16,14 @@ const UploadSchema = z.object({
 	subject: z.string().min(1, "Subject is required"),
 });
 
-type UploadFormData = z.infer<typeof UploadSchema>;
-
 function UploadPage() {
 	const navigate = useNavigate();
 
-	const methods = useForm<UploadFormData>({
+	const methods = useForm({
 		defaultValues: {
 			subject: "",
 		},
-		resolver: standardSchemaResolver(UploadSchema),
+		resolver: zodResolver(UploadSchema),
 	});
 
 	const schoolSubjectsQueryResult = useQuery(allSubjectsInSchoolQuery());
@@ -37,7 +35,7 @@ function UploadPage() {
 		responseData: { class_session_term },
 	} = useInputScoreFormStore((state) => state);
 
-	const onSubmit = methods.handleSubmit(async (data: UploadFormData) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		const formData = new FormData();
 
 		for (const [key, value] of Object.entries(data)) {

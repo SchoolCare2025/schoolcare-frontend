@@ -5,7 +5,7 @@ import { cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { Main } from "@/pages/dashboard/_components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
@@ -25,7 +25,7 @@ function PersonalInfoPage() {
 	const methods = useForm({
 		defaultValues: formStepData,
 		mode: "onChange",
-		resolver: standardSchemaResolver(PersonalInfoSchema) as never,
+		resolver: zodResolver(PersonalInfoSchema),
 	});
 
 	const navigate = useNavigate();

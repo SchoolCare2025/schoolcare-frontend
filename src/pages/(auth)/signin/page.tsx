@@ -4,7 +4,7 @@ import { type LoginData, callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { sessionQuery } from "@/store/react-query/queryFactory";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { omitKeys } from "@zayne-labs/toolkit-core";
 import { useForm } from "react-hook-form";
@@ -15,22 +15,20 @@ const SignInSchema = z.object({
 	password: z.string().min(1, { error: "Password is required" }),
 });
 
-type SignupFormValues = z.infer<typeof SignInSchema>;
-
 function SigninPage() {
-	const methods = useForm<SignupFormValues>({
+	const methods = useForm({
 		defaultValues: {
 			email: "",
 			password: "",
 		},
-		resolver: standardSchemaResolver(SignInSchema),
+		resolver: zodResolver(SignInSchema),
 	});
 
 	const navigate = useNavigate();
 
 	const queryClient = useQueryClient();
 
-	const onSubmit = async (data: SignupFormValues) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		await callBackendApi<LoginData>("/login", {
 			body: data,
 
@@ -54,7 +52,7 @@ function SigninPage() {
 				void navigate("/dashboard");
 			},
 		});
-	};
+	});
 
 	return (
 		<main className="flex flex-col gap-8 px-6 py-16 md:px-[92px] md:py-[52px]">
@@ -67,7 +65,7 @@ function SigninPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-10 md:gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Field<typeof methods.control> name="email" className="gap-3 md:gap-4">
 						<Form.Label className="text-[14px] font-medium md:text-base">

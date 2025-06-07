@@ -4,7 +4,7 @@ import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { Main } from "@/pages/dashboard/_components/Main";
-import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
@@ -14,21 +14,19 @@ const AdminRegisterSchema = z.object({
 	school: z.string().min(1, "School name is required"),
 });
 
-type AdminRegisterFormData = z.infer<typeof AdminRegisterSchema>;
-
 function AdminRegisterPage() {
 	const navigate = useNavigate();
 
-	const methods = useForm<AdminRegisterFormData>({
+	const methods = useForm({
 		defaultValues: {
 			email: "",
 			password: "",
 			school: "",
 		},
-		resolver: standardSchemaResolver(AdminRegisterSchema),
+		resolver: zodResolver(AdminRegisterSchema),
 	});
 
-	const onSubmit = async (data: AdminRegisterFormData) => {
+	const onSubmit = methods.handleSubmit(async (data) => {
 		await callBackendApi("/school/admin/register", {
 			body: data,
 			method: "POST",
@@ -37,7 +35,7 @@ function AdminRegisterPage() {
 				void navigate("/signin");
 			},
 		});
-	};
+	});
 
 	return (
 		<Main className="flex flex-col gap-8 p-0 md:p-0">
@@ -49,7 +47,7 @@ function AdminRegisterPage() {
 				<Form.Root
 					methods={methods}
 					className="gap-10 md:gap-[56px]"
-					onSubmit={(event) => void methods.handleSubmit(onSubmit)(event)}
+					onSubmit={(event) => void onSubmit(event)}
 				>
 					<Form.Field<typeof methods.control> name="school" className="w-full gap-4">
 						<Form.Label className="text-[14px] font-medium md:text-base">School Name</Form.Label>
