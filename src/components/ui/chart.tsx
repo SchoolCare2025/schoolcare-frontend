@@ -263,7 +263,7 @@ export function ChartTooltipContent(
 											<span
 												className="font-mono font-medium text-shadcn-foreground tabular-nums"
 											>
-												{item.value?.toLocaleString()}
+												{item.value.toLocaleString()}
 											</span>
 										)}
 									</div>

@@ -6,6 +6,25 @@ import { Main } from "../dashboard/_components/Main";
 
 const columns = defineEnum(["Subject", "First CA", "Second CA", "Exam", "Total", "Grade", "Remark"]);
 
+const toOrdinal = (number: number) => {
+	const rules = new Intl.PluralRules("en", { type: "ordinal" });
+
+	const suffixes = {
+		few: "rd",
+		many: "th",
+		one: "st",
+		other: "th",
+		two: "nd",
+		zero: "th",
+	} satisfies Record<Intl.LDMLPluralRule, string>;
+
+	const rule = rules.select(number);
+
+	const selectedSuffix = suffixes[rule];
+
+	return `${number}${selectedSuffix}`;
+};
+
 function ResultSheetPage() {
 	const [data] = useStorageState<CheckResultResponse | null>("scratch-card-result", null);
 
@@ -17,7 +36,7 @@ function ResultSheetPage() {
 			[columns[3]]: result.exam,
 			[columns[4]]: result.total,
 			[columns[5]]: result.grade,
-			[columns[6]]: "Sharp",
+			[columns[6]]: result.remark,
 		})) ?? [];
 
 	return (
@@ -70,13 +89,15 @@ function ResultSheetPage() {
 						border-[hsl(0,0%,76%)] bg-[hsl(0,0%,96%)] px-5 py-6 md:px-10 md:py-12"
 				>
 					<p className="font-semibold">Average score:</p>
-					<p className="text-[hsl(2,84%,59%)]">{data?.average}</p>
+					<p className="text-[hsl(2,84%,59%)]">{data?.average}%</p>
 
 					<p className="font-semibold">Class Position:</p>
-					<p className="text-[hsl(2,84%,59%)]">{data?.position}</p>
+					<p className="text-[hsl(2,84%,59%)]">
+						{Boolean(data?.position) && toOrdinal(data.position)}
+					</p>
 
-					<p className="font-semibold">Number in class:</p>
-					<p className="text-[hsl(2,84%,59%)]">40</p>
+					<p className="font-semibold">Total Number in class:</p>
+					<p className="text-[hsl(2,84%,59%)]">{data?.class_students_count}</p>
 
 					{/* <p className="font-semibold">Total Score:</p>
 					<p className="text-[hsl(2,84%,59%)]">{data?.total_score}</p> */}

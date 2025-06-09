@@ -5,12 +5,4 @@ import viteTsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
 	plugins: [viteTsconfigPaths(), react(), tailwindcss()],
-	server: {
-		proxy: {
-			"/api": {
-				changeOrigin: true,
-				target: "http://127.0.0.1:8000",
-			},
-		},
-	},
 });

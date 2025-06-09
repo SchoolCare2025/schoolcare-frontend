@@ -40,6 +40,9 @@ function ScratchCardForm() {
 			body: data,
 			meta: {
 				skipAuthHeaderAddition: true,
+				toast: {
+					success: true,
+				},
 			},
 			method: "POST",
 
