@@ -19,12 +19,16 @@ function HomeLayout() {
 				<div className="mt-9 flex flex-col items-center gap-5.5">
 					<button
 						type="button"
-						className="w-fit rounded-[8px] border border-[hsla(0,0%,98%,1)] px-6 py-2"
+						className="w-fit rounded-[8px] border border-[hsla(0,0%,98%,1)] px-6 py-2 text-[14px]
+							font-semibold"
 					>
 						Login
 					</button>
 
-					<button type="button" className="rounded-[8px] bg-210-79-44 px-6 py-2">
+					<button
+						type="button"
+						className="rounded-[8px] bg-210-79-44 px-6 py-2 text-[14px] font-semibold"
+					>
 						Register School
 					</button>
 				</div>
