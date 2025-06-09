@@ -29,11 +29,11 @@ const AboutUs = lazy(() => import("./pages/(legacy)/AboutUs"));
 const ContactUs = lazy(() => import("./pages/(legacy)/ContactUs"));
 const FaQ = lazy(() => import("./pages/(legacy)/FaQ"));
 const HowItWorks = lazy(() => import("./pages/(legacy)/HowItWorks"));
-const LandingPage = lazy(() => import("./pages/(legacy)/LandingPage"));
 const WhoWeAre = lazy(() => import("./pages/(legacy)/WhoWeAre"));
 
 /* Layouts */
 const ProtectionLayout = lazy(() => import("./pages/layout.protect"));
+const HomeLayout = lazy(() => import("./pages/(home)/layout"));
 const RegisterLayout = lazy(() => import("./pages/(auth)/register/layout"));
 const DashboardLayout = lazy(() => import("./pages/dashboard/layout"));
 const StudentResultLayout = lazy(() => import("./pages/student-result/layout"));
@@ -42,7 +42,7 @@ const AdminLayout = lazy(() => import("./pages/admin/layout"));
 const routes = createRoutesFromElements(
 	<Route element={<RootLayout />}>
 		<Route element={<MainLayout />}>
-			<Route path="/" element={<LandingPage />} />
+			{/* <Route path="/" element={<LandingPage />} /> */}
 			<Route path="/who-we-are" element={<WhoWeAre />} />
 			<Route path="/faq" element={<FaQ />} />
 			<Route path="/contact-us" element={<ContactUs />} />
@@ -51,6 +51,10 @@ const routes = createRoutesFromElements(
 		</Route>
 
 		{/* eslint-disable react/no-nested-lazy-component-declarations */}
+		<Route Component={HomeLayout}>
+			<Route path="/" Component={lazy(() => import("./pages/(home)/page"))} />
+		</Route>
+
 		<Route path="/test" Component={lazy(() => import("./pages/page.test"))} />
 
 		<Route Component={StudentResultLayout}>

@@ -87,7 +87,7 @@ function UploadPage() {
 
 									<Select.Content
 										classNames={{
-											base: "bg-white/90 p-0 backdrop-blur-lg",
+											base: "bg-white/90 backdrop-blur-lg",
 											viewport: "gap-1",
 										}}
 									>
