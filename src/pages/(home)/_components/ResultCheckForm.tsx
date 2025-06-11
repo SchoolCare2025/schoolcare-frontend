@@ -23,9 +23,7 @@ const ResultCheckFormSchema = z.object({
 
 const [For] = getElementList("base");
 
-function ResultCheckForm(props: { className?: string }) {
-	const { className } = props;
-
+function ResultCheckForm() {
 	const { 1: storageActions } = useStorageState<CheckResultResponse | null>("scratch-card-result", null);
 
 	const schoolSessionQueryResult = useQuery(schoolSessionQuery({ meta: { toast: { error: false } } }));
@@ -60,61 +58,68 @@ function ResultCheckForm(props: { className?: string }) {
 		<Form.Root
 			methods={methods}
 			onSubmit={(event) => void onSubmit(event)}
-			className={cnMerge("rounded-[24px] border-[2px] border-white px-9 py-11", className)}
+			className="w-full max-w-[578px] rounded-[24px] border-[2px] border-white px-9 py-11 md:px-10
+				md:py-14 lg:border-[3px]"
 		>
-			<h3 className="text-center text-[14px] font-semibold">Check Result</h3>
+			<h3 className="text-center text-[14px] font-semibold lg:text-[24px]">Check Result</h3>
 
-			<div className="mt-5.5 grid grid-cols-2 gap-x-7 gap-y-4">
+			<div className="mt-5.5 grid grid-cols-2 gap-x-7 gap-y-4 lg:mt-7 lg:gap-x-11.5 lg:gap-y-6.5">
 				<Form.Field<typeof methods.control> name="school_ID" className="flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">School ID</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">School ID</Form.Label>
 					<Form.Input
 						placeholder="Enter school ID"
-						className="rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3 text-[10px]
-							data-invalid:border-[hsl(2,84%,59%)]"
+						className="h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+							text-[10px] data-invalid:border-[hsl(2,84%,59%)] lg:h-[48px] lg:rounded-[12px]
+							lg:border-[2px] lg:px-6 lg:py-4 lg:text-base"
 					/>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="student_reg_number" className="flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">Reg. Number</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">Reg. Number</Form.Label>
 					<Form.Input
 						placeholder="e.g: 20246..."
-						className="rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3 text-[10px]
-							data-invalid:border-[hsl(2,84%,59%)]"
+						className="h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+							text-[10px] data-invalid:border-[hsl(2,84%,59%)] lg:h-[48px] lg:rounded-[12px]
+							lg:border-[2px] lg:px-6 lg:py-4 lg:text-base"
 					/>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="school_class" className="flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">Class</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">Class</Form.Label>
 					<Form.Input
 						placeholder="e.g: JSS1"
-						className="rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3 text-[10px]
-							data-invalid:border-[hsl(2,84%,59%)]"
+						className="h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+							text-[10px] data-invalid:border-[hsl(2,84%,59%)] lg:h-[48px] lg:rounded-[12px]
+							lg:border-[2px] lg:px-6 lg:py-4 lg:text-base"
 					/>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="class_grade" className="flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">Class Grade</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">Class Grade</Form.Label>
 					<Form.Input
 						placeholder="e.g: A"
-						className="rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3 text-[10px]
-							data-invalid:border-[hsl(2,84%,59%)]"
+						className="h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+							text-[10px] data-invalid:border-[hsl(2,84%,59%)] lg:h-[48px] lg:rounded-[12px]
+							lg:border-[2px] lg:px-6 lg:py-4 lg:text-base"
 					/>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="session" className="group flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">Result Session</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">Result Session</Form.Label>
 
 					<Form.FieldController
 						render={({ field }) => (
 							<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 								<Select.Trigger
 									classNames={{
-										base: `rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
-										text-[10px] group-data-invalid:border-[hsl(2,84%,59%)]`,
+										base: `h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+										text-[10px] group-data-invalid:border-[hsl(2,84%,59%)]
+										data-placeholder:text-shadcn-muted-foreground lg:h-[48px] lg:rounded-[12px]
+										lg:border-[2px] lg:px-6 lg:py-4 lg:text-base`,
 										icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 									}}
 								>
-									<Select.Value placeholder="Select the session" />
+									<Select.Value placeholder="Select session" />
 								</Select.Trigger>
 
 								<Select.Content
@@ -131,7 +136,7 @@ function ResultCheckForm(props: { className?: string }) {
 												value={item}
 												className="h-6 bg-gray-200 text-[10px] font-medium text-210-79-44
 													focus:bg-gray-300 focus:text-210-100-13
-													data-[state=checked]:bg-gray-300"
+													data-[state=checked]:bg-gray-300 lg:text-base"
 											>
 												{item}
 											</Select.Item>
@@ -144,19 +149,21 @@ function ResultCheckForm(props: { className?: string }) {
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="term" className="group flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">Term</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">Term</Form.Label>
 
 					<Form.FieldController
 						render={({ field }) => (
 							<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 								<Select.Trigger
 									classNames={{
-										base: `rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
-										text-[10px] group-data-invalid:border-[hsl(2,84%,59%)]`,
+										base: `h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+										text-[10px] group-data-invalid:border-[hsl(2,84%,59%)]
+										data-placeholder:text-shadcn-muted-foreground lg:h-[48px] lg:rounded-[12px]
+										lg:border-[2px] lg:px-6 lg:py-4 lg:text-base`,
 										icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 									}}
 								>
-									<Select.Value placeholder="Select the term" />
+									<Select.Value placeholder="Select term" />
 								</Select.Trigger>
 
 								<Select.Content
@@ -173,7 +180,7 @@ function ResultCheckForm(props: { className?: string }) {
 												value={item}
 												className="h-6 bg-gray-200 text-[10px] font-medium text-210-79-44
 													focus:bg-gray-300 focus:text-210-100-13
-													data-[state=checked]:bg-gray-300"
+													data-[state=checked]:bg-gray-300 lg:text-base"
 											>
 												{item}
 											</Select.Item>
@@ -186,20 +193,22 @@ function ResultCheckForm(props: { className?: string }) {
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="scratch_card_code" className="flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">Card Pin</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">Card Pin</Form.Label>
 					<Form.Input
 						placeholder="Enter card pin"
-						className="rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3 text-[10px]
-							data-invalid:border-[hsl(2,84%,59%)]"
+						className="h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+							text-[10px] data-invalid:border-[hsl(2,84%,59%)] lg:h-[48px] lg:rounded-[12px]
+							lg:border-[2px] lg:px-6 lg:py-4 lg:text-base"
 					/>
 				</Form.Field>
 
 				<Form.Field<typeof methods.control> name="serial_number" className="flex flex-col gap-3">
-					<Form.Label className="text-[12px] font-medium">Card Serial No.</Form.Label>
+					<Form.Label className="text-[12px] font-medium lg:text-base">Card Serial No.</Form.Label>
 					<Form.Input
 						placeholder="e.g: 12348..."
-						className="rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3 text-[10px]
-							data-invalid:border-[hsl(2,84%,59%)]"
+						className="h-[40px] rounded-[8px] border-[2px] border-[hsl(0,0%,98%)] px-4 py-3
+							text-[10px] data-invalid:border-[hsl(2,84%,59%)] lg:h-[48px] lg:rounded-[12px]
+							lg:border-[2px] lg:px-6 lg:py-4 lg:text-base"
 					/>
 				</Form.Field>
 			</div>
@@ -209,8 +218,9 @@ function ResultCheckForm(props: { className?: string }) {
 					<Form.Submit
 						disabled={isSubmitting}
 						className={cnMerge(
-							`mx-auto mt-12 flex h-10 w-[min(130px,100%)] items-center justify-center rounded-[8px]
-							bg-210-79-44 text-[14px] font-semibold`,
+							`mx-auto mt-12 flex h-10 w-full max-w-[120px] items-center justify-center
+							rounded-[8px] bg-210-79-44 text-[14px] font-semibold lg:mt-14 lg:h-[64px]
+							lg:max-w-[216px] lg:rounded-[12px] lg:text-[24px]`,
 							isSubmitting && "grid",
 							!isValid && "cursor-not-allowed bg-gray-400"
 						)}

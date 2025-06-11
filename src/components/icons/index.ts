@@ -3,3 +3,7 @@ export { default as BookIcon } from "./BookIcon";
 export { default as SchoolIcon } from "./SchoolIcon";
 export { default as RouteIndicator } from "./RouteIndicator";
 export { default as EditIcon } from "./EditIcon";
+export { default as UploadIcon } from "./UploadIcon";
+export { default as PieIcon } from "./PieIcon";
+export { default as LineGraphIcon } from "./LineGraphIcon";
+export { default as PageIcon } from "./PageIcon";

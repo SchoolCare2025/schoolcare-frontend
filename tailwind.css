@@ -8,7 +8,8 @@
 @theme {
 	--color-210-100-13: hsl(210, 100%, 13%);
 	--color-210-79-44: hsl(210, 79%, 44%);
-	--color-201-100-9: hsl(201, 100%, 9%);
+	--color-210-78-82: hsl(210, 78%, 82%);
+	--color-210-77-95: hsl(210, 77%, 95%);
 
 	--color-school-blue: hsl(209, 97%, 50%);
 	--color-school-body-color: hsl(0, 0%, 20%);
@@ -265,26 +266,5 @@
 @utility scrollbar-hidden {
 	&::-webkit-scrollbar {
 		display: none;
-	}
-}
-
-@utility custom-select {
-	& {
-		appearance: none;
-		display: grid;
-		grid-template-areas: "select";
-		align-items: center;
-		position: relative;
-	}
-
-	&::after {
-		position: absolute;
-		content: "";
-		top: 14px;
-		right: 10px;
-		width: 0;
-		height: 0;
-		border: 6px solid transparent;
-		border-color: #fff transparent transparent transparent;
 	}
 }

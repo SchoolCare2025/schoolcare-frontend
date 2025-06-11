@@ -13,7 +13,7 @@ const checkUserSession = async () => {
 	}
 
 	if (isJavascriptError(error)) {
-		throw error.errorData;
+		throw error.originalError;
 	}
 
 	await refreshUserSession();
