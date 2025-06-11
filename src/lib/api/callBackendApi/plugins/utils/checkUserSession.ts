@@ -1,4 +1,4 @@
-import { isJavascriptError } from "@zayne-labs/callapi/utils";
+import { isHTTPError } from "@zayne-labs/callapi/utils";
 import { callBackendApi, callBackendApiForQuery } from "../../callBackendApi";
 import type { SessionData } from "../../types";
 import { refreshUserSession } from "./refreshUserSession";
@@ -12,13 +12,13 @@ const checkUserSession = async () => {
 		return data;
 	}
 
-	if (isJavascriptError(error)) {
-		throw error.originalError;
+	if (isHTTPError(error)) {
+		await refreshUserSession();
+
+		return callBackendApiForQuery<SessionData>("/check-user-session");
 	}
 
-	await refreshUserSession();
-
-	return callBackendApiForQuery<SessionData>("/check-user-session");
+	throw error.originalError;
 };
 
 export { checkUserSession };
