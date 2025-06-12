@@ -1,6 +1,18 @@
-import { chart, person, schoolFour, schoolOne, schoolThree, schoolTwo } from "@/assets/images/landing";
+import {
+	cardOne,
+	cardThree,
+	cardTwo,
+	chart,
+	person,
+	schoolFour,
+	schoolOne,
+	schoolThree,
+	schoolTwo,
+} from "@/assets/images/landing";
 import { ForWithWrapper, Image, getElementList } from "@/components/common";
 import { BrainIcon, LineGraphIcon, PageIcon, PieIcon, StudentIcon, UploadIcon } from "@/components/icons";
+import { Card } from "@/components/ui";
+import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
 import { AccordionFaqs } from "./-components/AccordionFaqs";
 import { ResultCheckForm } from "./-components/ResultCheckForm";
 
@@ -62,11 +74,34 @@ const reasons = [
 	},
 ];
 
+const blogPosts = [
+	{
+		description:
+			"Lagos State Governor, Mr Babajide Sanwo-Olu, on Thursday, announced a cash gift of N10 million for Miss Isioma Sybil Nwosu, who emerged as the...",
+		imageURL: cardOne,
+		title: "Lagos State Governor, Mr Babajide Sanwo-Olu, on Thursday, announced a cash gift of N10 million for Miss Isioma Sybil Nwosu",
+	},
+	{
+		description:
+			"Bunmi-Alade Opeyemi, a young Nigerian woman, has overcome incredible odds to graduate as a licensed medical doctor from Bukovinian State Medical University in Chernivtsi, Ukraine",
+		imageURL: cardTwo,
+		title: "From Refugee to Medical Doctor . Young Nigerian Lady Celebrates Inspiring Achievement",
+	},
+	{
+		description:
+			"Bunmi-Alade Opeyemi, a young Nigerian woman, has overcome incredible odds to graduate as a licensed medical doctor from Bukovinian State Medical University in Chernivtsi, Ukraine",
+		imageURL: cardThree,
+		title: "From Refugee to Medical Doctor . Young Nigerian Lady Celebrates Inspiring Achievement",
+	},
+];
+
 const [List] = getElementList();
 
 function HomePage() {
+	const { getItemProps, getRootProps } = useDragScroll<HTMLUListElement>();
+
 	return (
-		<main className="flex grow flex-col gap-9 lg:gap-[100px]">
+		<main className="flex grow flex-col gap-9 pb-[120px] lg:gap-[100px]">
 			<section
 				className="flex flex-col items-center justify-between gap-14 bg-210-100-13 px-6 pt-[84px] pb-14
 					text-white lg:flex-row lg:items-start lg:gap-[96px] lg:px-[80px] lg:pb-[104px]"
@@ -226,6 +261,55 @@ function HomePage() {
 				<h3 className="text-center font-bold lg:text-[32px]">Frequently Asked Questions</h3>
 
 				<AccordionFaqs />
+			</section>
+
+			<section className="flex flex-col items-center gap-6 px-6 lg:gap-[52px] lg:px-[80px]">
+				<h3 className="text-center font-bold lg:text-[32px]">Latest Blog Posts</h3>
+
+				<List
+					{...getRootProps({ className: "select-none gap-7.5 md:justify-between" })}
+					each={blogPosts}
+					render={(post) => (
+						<Card.Root
+							key={post.imageURL}
+							as="li"
+							{...getItemProps({
+								className: "max-w-[379px] lg:max-w-[408px] flex flex-col shrink-0 w-full",
+							})}
+						>
+							<div className="h-[258px]">
+								<Image
+									className="h-full rounded-t-[24px] object-cover"
+									src={post.imageURL}
+									draggable={false}
+									width={383}
+									height={258}
+								/>
+							</div>
+
+							<div
+								className="flex grow flex-col gap-3 rounded-b-[12px] border-[2px]
+									border-[hsl(0,0%,78%)] px-4 py-6 lg:rounded-b-[24px] lg:border-[3px]"
+							>
+								<Card.Header className="flex grow flex-col justify-between gap-5">
+									<Card.Title className="text-[14px] font-medium lg:text-base">
+										{post.title}
+									</Card.Title>
+
+									<Card.Description className="text-[12px] text-[color:inherit] lg:text-[14px]">
+										{post.description}
+									</Card.Description>
+								</Card.Header>
+
+								<Card.Footer>
+									<a href="#" className="text-[12px] text-[hsl(0,0%,46%)] lg:text-[14px]">
+										See more...
+									</a>
+								</Card.Footer>
+							</div>
+						</Card.Root>
+					)}
+				/>
 			</section>
 		</main>
 	);
