@@ -58,7 +58,7 @@ function ResultCheckForm() {
 		<Form.Root
 			methods={methods}
 			onSubmit={(event) => void onSubmit(event)}
-			className="w-full max-w-[578px] rounded-[24px] border-[2px] border-white px-9 py-11 md:px-10
+			className="w-full max-w-[600px] rounded-[24px] border-[2px] border-white px-9 py-11 md:px-10
 				md:py-14 lg:border-[3px]"
 		>
 			<h3 className="text-center text-[14px] font-semibold lg:text-[24px]">Check Result</h3>
