@@ -4,7 +4,7 @@ import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
-import { Main } from "@/pages/dashboard/_components/Main";
+import { Main } from "@/pages/dashboard/-components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isFile } from "@zayne-labs/toolkit-type-helpers";

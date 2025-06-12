@@ -8,7 +8,7 @@ import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { Main } from "../../_components/Main";
+import { Main } from "../../-components/Main";
 
 const ViewSingleStudentsSchema = z.object({
 	reg_number: z.string().min(1, "Reg number is required"),

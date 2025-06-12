@@ -4,7 +4,7 @@ import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
 import { download, generateCsv, mkConfig } from "export-to-csv";
 import { Navigate, useNavigate } from "react-router";
 import { toast } from "sonner";
-import { Main } from "../../_components/Main";
+import { Main } from "../../-components/Main";
 
 const columns = defineEnum(["Name", "Reg. No", "First CA", "Second CA", "Exam", "Total", "Grade"]);
 

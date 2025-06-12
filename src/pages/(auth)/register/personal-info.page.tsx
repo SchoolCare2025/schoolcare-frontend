@@ -3,7 +3,7 @@ import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
 import { cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
-import { Main } from "@/pages/dashboard/_components/Main";
+import { Main } from "@/pages/dashboard/-components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

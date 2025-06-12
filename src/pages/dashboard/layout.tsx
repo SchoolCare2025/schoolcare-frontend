@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
-import { Navbar } from "./_components/Navbar";
-import { Sidebar } from "./_components/Sidebar";
+import { Navbar } from "./-components/Navbar";
+import { Sidebar } from "./-components/Sidebar";
 
 function DashBoardLayout() {
 	return (

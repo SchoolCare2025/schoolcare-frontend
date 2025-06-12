@@ -5,8 +5,12 @@ function TableRoot(props: InferProps<"table">) {
 	const { className, ...restOfProps } = props;
 
 	return (
-		<div className="relative w-full overflow-auto">
-			<table className={cnMerge("w-full caption-bottom text-sm", className)} {...restOfProps} />
+		<div data-slot="table-container" className="relative w-full overflow-auto">
+			<table
+				data-slot="table-root"
+				className={cnMerge("w-full caption-bottom text-sm", className)}
+				{...restOfProps}
+			/>
 		</div>
 	);
 }
@@ -14,13 +18,21 @@ function TableRoot(props: InferProps<"table">) {
 function TableHeader(props: InferProps<HTMLTableSectionElement>) {
 	const { className, ...restOfProps } = props;
 
-	return <thead className={cnMerge("[&_tr]:border-b", className)} {...restOfProps} />;
+	return (
+		<thead data-slot="table-header" className={cnMerge("[&_tr]:border-b", className)} {...restOfProps} />
+	);
 }
 
 function TableBody(props: InferProps<HTMLTableSectionElement>) {
 	const { className, ...restOfProps } = props;
 
-	return <tbody className={cnMerge("[&_tr:last-child]:border-0", className)} {...restOfProps} />;
+	return (
+		<tbody
+			data-slot="table-body"
+			className={cnMerge("[&_tr:last-child]:border-0", className)}
+			{...restOfProps}
+		/>
+	);
 }
 
 function TableFooter(props: InferProps<HTMLTableSectionElement>) {
@@ -28,7 +40,8 @@ function TableFooter(props: InferProps<HTMLTableSectionElement>) {
 
 	return (
 		<tfoot
-			className={cnMerge("border-t bg-shadcn-muted/50 font-medium last:[&>tr]:border-b-0", className)}
+			data-slot="table-footer"
+			className={cnMerge("border-t bg-shadcn-muted/50 font-medium [&>tr]:last:border-b-0", className)}
 			{...restOfProps}
 		/>
 	);
@@ -39,6 +52,7 @@ function TableRow(props: InferProps<HTMLTableRowElement>) {
 
 	return (
 		<tr
+			data-slot="table-row"
 			className={cnMerge(
 				"border-b transition-colors hover:bg-shadcn-muted/50 data-[state=selected]:bg-shadcn-muted",
 				className
@@ -53,8 +67,9 @@ function TableHead(props: InferProps<HTMLTableCellElement>) {
 
 	return (
 		<th
+			data-slot="table-head"
 			className={cnMerge(
-				`h-10 px-2 text-left align-middle font-medium text-shadcn-muted-foreground
+				`h-10 px-2 text-left align-middle font-medium whitespace-nowrap text-shadcn-foreground
 				[&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]`,
 				className
 			)}
@@ -68,8 +83,10 @@ function TableCell(props: InferProps<HTMLTableCellElement>) {
 
 	return (
 		<td
+			data-slot="table-cell"
 			className={cnMerge(
-				"p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+				`p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0
+				[&>[role=checkbox]]:translate-y-[2px]`,
 				className
 			)}
 			{...restOfProps}
@@ -82,6 +99,7 @@ function TableCaption(props: InferProps<HTMLTableCaptionElement>) {
 
 	return (
 		<caption
+			data-slot="table-caption"
 			className={cnMerge("mt-4 text-sm text-shadcn-muted-foreground", className)}
 			{...restOfProps}
 		/>

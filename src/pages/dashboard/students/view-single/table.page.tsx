@@ -3,7 +3,7 @@ import { studentsByIDQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
 import { useQuery } from "@tanstack/react-query";
 import { defineEnum } from "@zayne-labs/toolkit-type-helpers";
-import { Main } from "../../_components/Main";
+import { Main } from "../../-components/Main";
 
 const columns = defineEnum(["Name", "Gender", "Reg. No"]);
 

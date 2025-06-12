@@ -7,3 +7,4 @@ export { default as UploadIcon } from "./UploadIcon";
 export { default as PieIcon } from "./PieIcon";
 export { default as LineGraphIcon } from "./LineGraphIcon";
 export { default as PageIcon } from "./PageIcon";
+export { default as BrainIcon } from "./BrainIcon";

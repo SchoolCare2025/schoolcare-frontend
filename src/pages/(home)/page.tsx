@@ -1,8 +1,7 @@
-import { chart } from "@/assets/images/landing";
-import { ForWithWrapper, Image } from "@/components/common";
-import { LineGraphIcon, PageIcon, PieIcon, StudentIcon, UploadIcon } from "@/components/icons";
-import BrainIcon from "@/components/icons/BrainIcon";
-import { Main } from "../dashboard/_components/Main";
+import { chart, person } from "@/assets/images/landing";
+import { ForWithWrapper, Image, getElementList } from "@/components/common";
+import { BrainIcon, LineGraphIcon, PageIcon, PieIcon, StudentIcon, UploadIcon } from "@/components/icons";
+import { AccordionFaqs } from "./-components/AccordionFaqs";
 
 const experiences = [
 	{
@@ -44,10 +43,32 @@ const features = [
 	},
 ];
 
+const reasons = [
+	{
+		description:
+			"SchoolCare simplifies school management by bringing admin tasks, student records, communication, and more into one easy-to-use platform.",
+		title: "All-in-One Solution",
+	},
+	{
+		description:
+			"Designed with both tech-savvy and non-tech users in mind, SchoolCare ensures that teachers, parents, and admins can navigate effortlessly anytime, anywhere.",
+		title: "User-Friendly & Accessible",
+	},
+	{
+		description:
+			"From instant updates to streamlined workflows, SchoolCare enhances collaboration between staff and parents, saving time and reducing miscommunication.",
+		title: "Boosts Efficiency and Communication",
+	},
+];
+
+const [List] = getElementList();
+
 function HomePage() {
 	return (
-		<Main className="px-6 pt-0 pb-[140px] lg:px-[80px] lg:pb-[80px]">
-			<section className="flex flex-col items-center gap-6 py-9 lg:gap-[52px] lg:py-[78px]">
+		<main
+			className="mt-[46px] flex grow flex-col gap-9 pb-[140px] lg:mt-[78px] lg:gap-[120px] lg:pb-[80px]"
+		>
+			<section className="flex flex-col items-center gap-6 px-6 lg:gap-[52px] lg:px-[80px]">
 				<h3 className="text-center font-bold lg:text-[32px]">Your SchoolCare Experience</h3>
 
 				<ForWithWrapper
@@ -55,6 +76,7 @@ function HomePage() {
 					each={experiences}
 					render={(experience) => (
 						<li
+							key={experience.title}
 							className="flex h-[218px] w-full flex-col items-center justify-center gap-3
 								rounded-[12px] border-[3px] border-210-78-82 px-[52px] text-center lg:h-[285px]
 								lg:rounded-[24px] lg:border-[5px] lg:px-8"
@@ -75,12 +97,15 @@ function HomePage() {
 				/>
 			</section>
 
-			<section className="flex flex-col items-center gap-6 py-9 lg:gap-[52px] lg:py-[78px]">
+			<section
+				className="flex flex-col items-center gap-6 bg-[hsl(210,25%,97%)] px-6 py-[20px_40px]
+					lg:gap-[52px] lg:px-[80px] lg:py-[60px_94px]"
+			>
 				<h3 className="text-center font-bold lg:text-[32px]">
 					How SchoolCare Supports an Academic Journey
 				</h3>
 
-				<div className="flex flex-col gap-6 max-lg:items-center lg:flex-row lg:gap-[64px]">
+				<div className="flex flex-col items-center gap-6 lg:flex-row lg:gap-[64px]">
 					<Image
 						src={chart}
 						width={376}
@@ -88,11 +113,12 @@ function HomePage() {
 						className="h-[360px] max-w-[376px] lg:h-[528px] lg:max-w-[583px]"
 					/>
 
-					<ForWithWrapper
+					<List
 						className="flex flex-col gap-6"
 						each={features}
 						render={(feature) => (
 							<li
+								key={feature.title}
 								className="flex items-start gap-3.5 rounded-[12px] bg-210-79-44 px-9 py-7.5
 									text-white lg:gap-6.5 lg:rounded-[24px] lg:px-[50px]"
 							>
@@ -112,7 +138,44 @@ function HomePage() {
 					/>
 				</div>
 			</section>
-		</Main>
+
+			<section className="flex flex-col items-center gap-6 px-6 lg:gap-[52px] lg:px-[80px]">
+				<h3 className="text-center font-bold lg:text-[32px]">Why SchoolCare is Your Ideal Platform</h3>
+
+				<div className="flex flex-col items-center gap-6 lg:flex-row-reverse lg:gap-10">
+					<Image
+						src={person}
+						width={379}
+						height={333}
+						className="h-[333px] max-w-[379px] lg:h-[497px] lg:max-w-[623px]"
+					/>
+
+					<List
+						className="flex flex-col gap-6 lg:gap-11.5"
+						each={reasons}
+						render={(reason) => (
+							<li
+								key={reason.title}
+								className="flex flex-col gap-1 rounded-[12px] border-[3px] border-210-78-82 px-6
+									py-4 lg:rounded-[24px] lg:px-10 lg:py-5.5"
+							>
+								<h4 className="text-[14px] font-medium lg:text-[24px]">{reason.title}</h4>
+								<p className="text-[12px] lg:text-[14px]">{reason.description}</p>
+							</li>
+						)}
+					/>
+				</div>
+			</section>
+
+			<section
+				className="flex flex-col items-center gap-6 bg-[hsl(210,25%,97%)] px-6 py-[20px_40px]
+					lg:gap-[52px] lg:px-[80px] lg:py-[60px_94px]"
+			>
+				<h3 className="text-center font-bold lg:text-[32px]">Frequently Asked Questions</h3>
+
+				<AccordionFaqs />
+			</section>
+		</main>
 	);
 }
 

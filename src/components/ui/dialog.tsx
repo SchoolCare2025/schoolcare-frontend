@@ -72,8 +72,8 @@ function DialogOverlay(props: InferProps<typeof DialogPrimitive.Overlay>) {
 	);
 }
 
-function DialogContent(props: InferProps<typeof DialogPrimitive.Content> & { withCloseBtn?: boolean }) {
-	const { children, className, withCloseBtn = true, ...restOfProps } = props;
+function DialogContent(props: InferProps<typeof DialogPrimitive.Content> & { withCloseButton?: boolean }) {
+	const { children, className, withCloseButton = true, ...restOfProps } = props;
 
 	return (
 		<DialogPrimitive.Portal>
@@ -94,7 +94,7 @@ function DialogContent(props: InferProps<typeof DialogPrimitive.Content> & { wit
 			>
 				{children}
 
-				{withCloseBtn && (
+				{withCloseButton && (
 					<DialogPrimitive.Close
 						className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-shadcn-background
 							transition-opacity hover:opacity-100 focus:ring-2 focus:ring-shadcn-ring

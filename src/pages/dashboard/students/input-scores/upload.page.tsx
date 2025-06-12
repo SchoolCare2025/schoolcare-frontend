@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { Main } from "../../_components/Main";
+import { Main } from "../../-components/Main";
 
 const UploadSchema = z.object({
 	file: z.file({ error: "File is required" }),

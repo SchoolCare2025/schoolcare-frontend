@@ -6,5 +6,6 @@ export * as Drawer from "./drawer";
 export * as Popover from "./popover";
 export * as Dialog from "./dialog";
 export * as Command from "./command";
+export * as Accordion from "./accordion";
 export { Card } from "./card";
 export { DropZone } from "./drop-zone";

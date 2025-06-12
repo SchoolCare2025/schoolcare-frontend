@@ -1,5 +1,6 @@
 import { cnMerge } from "@/lib/utils/cn";
-import type { InferProps } from "@zayne-labs/toolkit-react/utils";
+import { css } from "@zayne-labs/toolkit-core";
+import type { CssWithCustomProperties, InferProps } from "@zayne-labs/toolkit-react/utils";
 import { createContext, use, useId, useMemo } from "react";
 import * as RechartsPrimitive from "recharts";
 import type { Payload } from "recharts/types/component/DefaultLegendContent";
@@ -12,7 +13,16 @@ export type ChartConfig = Record<
 	{
 		icon?: React.ComponentType;
 		label?: React.ReactNode;
-	} & ({ color?: never; theme: Record<keyof typeof THEMES, string> } | { color?: string; theme?: never })
+	} & (
+		| {
+				color?: never;
+				theme: Record<keyof typeof THEMES, string>;
+		  }
+		| {
+				color?: string;
+				theme?: never;
+		  }
+	)
 >;
 
 type ChartContextProps = {
@@ -32,7 +42,7 @@ const useChart = () => {
 };
 
 // Helper to extract item config from a payload.
-const getPayloadConfigFromPayload = (config: ChartConfig, payload: unknown, key: string) => {
+const getConfigItemFromPayload = (config: ChartConfig, payload: unknown, key: string) => {
 	if (typeof payload !== "object" || payload === null) {
 		return;
 	}
@@ -42,38 +52,37 @@ const getPayloadConfigFromPayload = (config: ChartConfig, payload: unknown, key:
 			? payload.payload
 			: null;
 
-	let configLabelKey: string = key;
+	let configLabelKey = key;
 
-	if (key in payload && typeof payload[key as keyof typeof payload] === "string") {
-		configLabelKey = payload[key as keyof typeof payload] as string;
-	} else if (
-		payloadPayload
-		&& key in payloadPayload
-		&& typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
-	) {
-		configLabelKey = payloadPayload[key as keyof typeof payloadPayload] as string;
+	if (key in payload && typeof payload[key as never] === "string") {
+		configLabelKey = payload[key as never] as string;
+	}
+
+	if (payloadPayload && key in payloadPayload && typeof payloadPayload[key as never] === "string") {
+		configLabelKey = payloadPayload[key as never] as string;
 	}
 
 	return configLabelKey in config ? config[configLabelKey] : config[key];
 };
 
 export function ChartContainer(
-	props: InferProps<"div"> & {
-		children: InferProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
-		config: ChartConfig;
-	}
+	props: InferProps<"div">
+		& Pick<InferProps<typeof RechartsPrimitive.ResponsiveContainer>, "children"> & {
+			config: ChartConfig;
+		}
 ) {
 	const { children, className, config, id, ...restOfProps } = props;
 
 	const uniqueId = useId();
 	const chartId = `chart-${id ?? uniqueId.replaceAll(":", "")}`;
 
-	// eslint-disable-next-line react/no-unstable-context-value
+	// eslint-disable-next-line react/no-unstable-context-value -- Adding a useMemo is useless here
 	const contextValue = { config };
 
 	return (
 		<ChartContext value={contextValue}>
 			<div
+				data-slot="chart-root"
 				data-chart={chartId}
 				className={cnMerge(
 					`flex aspect-video justify-center text-xs
@@ -102,31 +111,30 @@ export function ChartContainer(
 export function ChartStyle(props: { config: ChartConfig; id: string }) {
 	const { config, id } = props;
 
-	const colorConfig = Object.entries(config).filter(([, $config]) => $config.theme ?? $config.color);
+	const colorConfig = Object.entries(config).filter(
+		({ 1: configItem }) => configItem.theme ?? configItem.color
+	);
 
 	if (colorConfig.length === 0) {
 		return null;
 	}
 
-	const innerHtmlContent = Object.entries(THEMES)
-		.map(
-			([theme, prefix]) => `
-							${prefix} [data-chart=${id}] {
-							${colorConfig
-								.map(([key, itemConfig]) => {
-									const color =
-										itemConfig.theme?.[theme as keyof typeof itemConfig.theme]
-										?? itemConfig.color;
-									return color ? `  --color-${key}: ${color};` : null;
-								})
-								.join("\n")}
-							}
-							`
-		)
-		.join("\n");
+	const cssStringArray = Object.entries(THEMES).map(
+		([theme, prefix]) => css`
+			${prefix} [data-chart=${id}] {
+				${colorConfig
+					.map(([key, configItem]) => {
+						const color =
+							configItem.theme?.[theme as keyof typeof configItem.theme] ?? configItem.color;
 
-	// eslint-disable-next-line react-dom/no-dangerously-set-innerhtml
-	return <style dangerouslySetInnerHTML={{ __html: innerHtmlContent }} />;
+						return color ? `--color-${key}: ${color};` : null;
+					})
+					.join("\n")}
+			}
+		`
+	);
+
+	return <style>{cssStringArray.join("\n")}</style>;
 }
 
 export const ChartTooltip = RechartsPrimitive.Tooltip;
@@ -157,21 +165,23 @@ export function ChartTooltipContent(
 		labelKey,
 		nameKey,
 		payload,
-		ref,
 	} = props;
 
 	const { config } = useChart();
 
 	const tooltipLabel = useMemo(() => {
-		if (hideLabel || !payload?.length) {
+		if (hideLabel || !payload || payload.length === 0) {
 			return null;
 		}
 
 		const [item] = payload;
+
 		const key = `${labelKey ?? item?.dataKey ?? item?.name ?? "value"}`;
-		const itemConfig = getPayloadConfigFromPayload(config, item, key);
+
+		const configItem = getConfigItemFromPayload(config, item, key);
+
 		const value =
-			!labelKey && typeof label === "string" ? (config[label]?.label ?? label) : itemConfig?.label;
+			!labelKey && typeof label === "string" ? (config[label]?.label ?? label) : configItem?.label;
 
 		if (labelFormatter) {
 			return (
@@ -186,7 +196,7 @@ export function ChartTooltipContent(
 		return <div className={cnMerge("font-medium", labelClassName)}>{value}</div>;
 	}, [label, labelFormatter, payload, hideLabel, labelClassName, config, labelKey]);
 
-	if (!active || !payload?.length) {
+	if (!active || !payload || payload.length === 0) {
 		return null;
 	}
 
@@ -194,25 +204,25 @@ export function ChartTooltipContent(
 
 	return (
 		<div
-			ref={ref}
 			className={cnMerge(
-				`grid min-w-32 items-start gap-1.5 rounded-lg border border-shadcn-border/50
+				`grid min-w-[128px] items-start gap-1.5 rounded-lg border border-shadcn-border/50
 				bg-shadcn-background px-2.5 py-1.5 text-xs shadow-xl`,
 				className
 			)}
 		>
 			{!nestLabel ? tooltipLabel : null}
+
 			<div className="grid gap-1.5">
 				{payload.map((item, index) => {
 					const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`;
-					const itemConfig = getPayloadConfigFromPayload(config, item, key);
+					const configItem = getConfigItemFromPayload(config, item, key);
 					const indicatorColor = color ?? item.payload.fill ?? item.color;
 
 					return (
 						<div
 							key={item.dataKey}
 							className={cnMerge(
-								`flex w-full flex-wrap items-stretch gap-2 [&>svg]:size-2.5
+								`flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5
 								[&>svg]:text-shadcn-muted-foreground`,
 								indicator === "dot" && "items-center"
 							)}
@@ -223,26 +233,24 @@ export function ChartTooltipContent(
 								formatter(item.value, item.name, item, index, item.payload)
 							) : (
 								<>
-									{itemConfig?.icon ? (
-										<itemConfig.icon />
+									{configItem?.icon ? (
+										<configItem.icon />
 									) : (
 										!hideIndicator && (
 											<div
 												className={cnMerge(
 													"shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
-													{
-														"h-2.5 w-2.5": indicator === "dot",
-														"my-0.5": nestLabel && indicator === "dashed",
-														"w-0 border-[1.5px] border-dashed bg-transparent":
-															indicator === "dashed",
-														"w-1": indicator === "line",
-													}
+													indicator === "dot" && "size-2.5",
+													nestLabel && indicator === "dashed" && "my-0.5",
+													indicator === "dashed"
+														&& "w-0 border-[1.5px] border-dashed bg-transparent",
+													indicator === "line" && "w-1"
 												)}
 												style={
 													{
 														"--color-bg": indicatorColor,
 														"--color-border": indicatorColor,
-													} as React.CSSProperties
+													} satisfies CssWithCustomProperties as CssWithCustomProperties
 												}
 											/>
 										)
@@ -256,9 +264,10 @@ export function ChartTooltipContent(
 										<div className="grid gap-1.5">
 											{nestLabel ? tooltipLabel : null}
 											<span className="text-shadcn-muted-foreground">
-												{itemConfig?.label ?? item.name}
+												{configItem?.label ?? item.name}
 											</span>
 										</div>
+
 										{Boolean(item.value) && (
 											<span
 												className="font-mono font-medium text-shadcn-foreground tabular-nums"
@@ -288,24 +297,23 @@ export function ChartLegendContent(
 				legendItemIcon?: string;
 				legendItemLabel?: string;
 			};
-			hideIcon?: boolean;
 			nameKey?: string;
 			renderItem?: (context: {
 				index: number;
-				itemConfig: ReturnType<typeof getPayloadConfigFromPayload>;
+				itemConfig: ReturnType<typeof getConfigItemFromPayload>;
 				payloadItem: Payload;
 			}) => React.ReactNode;
+			withIcon?: boolean;
 		}
 ) {
 	const {
 		className,
 		classNames,
-		hideIcon = false,
 		nameKey,
 		payload,
-		ref,
 		renderItem,
 		verticalAlign = "bottom",
+		withIcon = true,
 	} = props;
 
 	const { config } = useChart();
@@ -316,7 +324,6 @@ export function ChartLegendContent(
 
 	return (
 		<div
-			ref={ref}
 			className={cnMerge(
 				"flex items-center justify-center gap-4",
 				verticalAlign === "top" ? "pb-3" : "pt-3",
@@ -327,7 +334,7 @@ export function ChartLegendContent(
 			{payload.map((item, index) => {
 				// eslint-disable-next-line ts-eslint/restrict-template-expressions
 				const key = `${nameKey ?? item.dataKey ?? "value"}`;
-				const itemConfig = getPayloadConfigFromPayload(config, item, key);
+				const itemConfig = getConfigItemFromPayload(config, item, key);
 
 				if (renderItem) {
 					return renderItem({
@@ -346,7 +353,7 @@ export function ChartLegendContent(
 							classNames?.legendItem
 						)}
 					>
-						{itemConfig?.icon && !hideIcon ? (
+						{itemConfig?.icon && withIcon ? (
 							<itemConfig.icon />
 						) : (
 							<span
