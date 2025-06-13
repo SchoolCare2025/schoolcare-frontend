@@ -4,10 +4,10 @@ import { NavLink } from "react-router";
 function Footer() {
 	return (
 		<footer
-			className="flex flex-col justify-items-center gap-10 bg-school-dark-blue px-4 py-8 text-white
-				lg:grid lg:grid-cols-3 lg:gap-12 lg:px-24 lg:py-[100px]"
+			className="flex flex-col gap-12 bg-school-dark-blue px-6 py-10 text-white lg:grid lg:grid-cols-3
+				lg:justify-items-center lg:gap-12 lg:px-[80px] lg:py-[100px]"
 		>
-			<section className="flex flex-col gap-5">
+			<article className="flex flex-col gap-5 lg:gap-8">
 				<h3 className="text-lg font-semibold">MY SCHOOL</h3>
 
 				<p className="text-base leading-relaxed text-gray-200">
@@ -42,13 +42,12 @@ function Footer() {
 						className="size-[22px] text-school-blue"
 					/>
 				</div>
-			</section>
+			</article>
 
-			{/* Useful Links Section */}
-			<section className="flex flex-col gap-3">
+			<article className="flex flex-col gap-5 lg:gap-8">
 				<h3 className="text-lg font-semibold">Useful Links</h3>
 
-				<ul className="flex flex-col gap-2 text-base">
+				<ul className="flex flex-col gap-2 text-base lg:gap-4">
 					<li>
 						<NavLink to="/" className="transition-colors hover:text-gray-300">
 							Home
@@ -75,24 +74,27 @@ function Footer() {
 						</NavLink>
 					</li>
 				</ul>
-			</section>
+			</article>
 
-			{/* Contact Form Section */}
-			<section className="flex w-full flex-col gap-3">
+			<article className="flex w-full flex-col gap-5 lg:gap-8">
 				<h3 className="text-lg font-semibold">Leave Us a Message</h3>
-				<textarea
-					className="min-h-[100px] w-full rounded-lg border border-white bg-transparent p-3 text-base
-						text-white placeholder-gray-400 focus:border-school-blue focus:outline-none"
-					placeholder="Type your message here..."
-				/>
-				<button
-					type="submit"
-					className="w-fit rounded-lg bg-school-blue px-4 py-2 text-base font-medium transition-colors
-						hover:bg-blue-600 lg:w-fit"
-				>
-					Send Message
-				</button>
-			</section>
+
+				<div className="flex flex-col gap-4">
+					<textarea
+						className="min-h-[100px] w-full rounded-lg border border-white bg-transparent p-3
+							text-base text-white placeholder-gray-400 focus:border-school-blue focus:outline-none"
+						placeholder="Type your message here..."
+					/>
+
+					<button
+						type="submit"
+						className="w-fit rounded-lg bg-school-blue px-4 py-2 text-base font-medium
+							transition-colors hover:bg-blue-600 lg:w-fit"
+					>
+						Send Message
+					</button>
+				</div>
+			</article>
 		</footer>
 	);
 }

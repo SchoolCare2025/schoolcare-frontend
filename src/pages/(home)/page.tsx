@@ -103,10 +103,10 @@ function HomePage() {
 	return (
 		<main className="flex grow flex-col gap-9 pb-[120px] lg:gap-[100px]">
 			<section
-				className="flex flex-col items-center justify-between gap-14 bg-210-100-13 px-6 pt-[84px] pb-14
-					text-white lg:flex-row lg:items-start lg:gap-[96px] lg:px-[80px] lg:pb-[104px]"
+				className="flex flex-col items-center justify-between gap-14 bg-210-100-13 px-6 py-[84px_56px]
+					text-white lg:flex-row lg:items-start lg:gap-[96px] lg:px-[80px] lg:py-[200px_104px]"
 			>
-				<article className="flex w-fit flex-col items-center lg:items-start">
+				<article className="flex w-full flex-col items-center lg:items-start">
 					<h1
 						className="max-w-[353px] text-[24px] font-bold max-lg:text-center lg:max-w-[588px]
 							lg:text-[48px]"
@@ -186,7 +186,7 @@ function HomePage() {
 
 			<section
 				className="flex flex-col items-center gap-6 bg-[hsl(210,25%,97%)] px-6 py-[20px_40px]
-					lg:gap-[52px] lg:px-[80px] lg:py-[60px_94px]"
+					lg:gap-[52px] lg:px-[80px] lg:py-[60px_100px]"
 			>
 				<h3 className="text-center font-bold lg:text-[32px]">
 					How SchoolCare Supports an Academic Journey
@@ -256,7 +256,7 @@ function HomePage() {
 
 			<section
 				className="flex flex-col items-center gap-6 bg-[hsl(210,25%,97%)] px-6 py-[20px_40px]
-					lg:gap-[52px] lg:px-[80px] lg:py-[60px_94px]"
+					lg:gap-[52px] lg:px-[80px] lg:py-[60px_100px]"
 			>
 				<h3 className="text-center font-bold lg:text-[32px]">Frequently Asked Questions</h3>
 

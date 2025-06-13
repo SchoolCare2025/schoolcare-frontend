@@ -30,6 +30,16 @@ function ResultCheckForm() {
 	const schoolTermQueryResult = useQuery(schoolTermQuery({ meta: { toast: { error: false } } }));
 
 	const methods = useForm({
+		defaultValues: {
+			class_grade: "",
+			school_class: "",
+			school_ID: "",
+			scratch_card_code: "",
+			serial_number: "",
+			session: "",
+			student_reg_number: "",
+			term: "",
+		},
 		resolver: zodResolver(ResultCheckFormSchema),
 	});
 
@@ -58,8 +68,8 @@ function ResultCheckForm() {
 		<Form.Root
 			methods={methods}
 			onSubmit={(event) => void onSubmit(event)}
-			className="w-full max-w-[600px] rounded-[24px] border-[2px] border-white px-9 py-11 md:px-10
-				md:py-14 lg:border-[3px]"
+			className="w-full max-w-[600px] rounded-[24px] border-[2px] border-white px-9 py-11
+				lg:border-[3px] lg:px-10 lg:py-14"
 		>
 			<h3 className="text-center text-[14px] font-semibold lg:text-[24px]">Check Result</h3>
 
@@ -134,9 +144,8 @@ function ResultCheckForm() {
 											<Select.Item
 												key={item}
 												value={item}
-												className="h-6 bg-gray-200 text-[11px] font-medium text-210-79-44
-													focus:bg-gray-300 focus:text-210-100-13
-													data-[state=checked]:bg-gray-300"
+												className="h-6 bg-gray-200 text-[11px] font-medium focus:bg-gray-300
+													focus:text-210-79-44 data-[state=checked]:bg-gray-300"
 											>
 												{item}
 											</Select.Item>
@@ -178,9 +187,8 @@ function ResultCheckForm() {
 											<Select.Item
 												key={item}
 												value={item}
-												className="h-6 bg-gray-200 text-[11px] font-medium text-210-79-44
-													focus:bg-gray-300 focus:text-210-100-13
-													data-[state=checked]:bg-gray-300"
+												className="h-6 bg-gray-200 text-[11px] font-medium focus:bg-gray-300
+													focus:text-210-79-44 data-[state=checked]:bg-gray-300"
 											>
 												{item}
 											</Select.Item>
