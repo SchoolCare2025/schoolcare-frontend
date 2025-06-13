@@ -106,7 +106,7 @@ function HomePage() {
 				className="flex flex-col items-center justify-between gap-14 bg-210-100-13 px-6 pt-[84px] pb-14
 					text-white lg:flex-row lg:items-start lg:gap-[96px] lg:px-[80px] lg:pb-[104px]"
 			>
-				<div className="flex w-fit flex-col items-center lg:items-start">
+				<article className="flex w-fit flex-col items-center lg:items-start">
 					<h1
 						className="max-w-[353px] text-[24px] font-bold max-lg:text-center lg:max-w-[588px]
 							lg:text-[48px]"
@@ -150,7 +150,7 @@ function HomePage() {
 
 						<p className="text-[12px] font-medium lg:text-base">500+ Schools joined School Care</p>
 					</div>
-				</div>
+				</article>
 
 				<ResultCheckForm />
 			</section>

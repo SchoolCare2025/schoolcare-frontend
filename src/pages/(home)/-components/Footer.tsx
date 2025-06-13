@@ -1,0 +1,100 @@
+import { IconBox } from "@/components/common";
+import { NavLink } from "react-router";
+
+function Footer() {
+	return (
+		<footer
+			className="flex flex-col justify-items-center gap-10 bg-school-dark-blue px-4 py-8 text-white
+				lg:grid lg:grid-cols-3 lg:gap-12 lg:px-24 lg:py-[100px]"
+		>
+			<section className="flex flex-col gap-5">
+				<h3 className="text-lg font-semibold">MY SCHOOL</h3>
+
+				<p className="text-base leading-relaxed text-gray-200">
+					Get access to all academic results with ease. Whether you're eagerly anticipating your final
+					exam results or need to track your performance throughout the semester,
+				</p>
+
+				<div className="flex flex-col gap-1.5">
+					<p className="text-base">
+						<span className="font-semibold">Phone</span>: 0903 8746 894 0814 7736 125
+					</p>
+					<p className="text-base">
+						<span className="font-semibold">Email</span>: schoolcare.office@gmail.com
+					</p>
+				</div>
+
+				<div className="flex gap-2.5">
+					<IconBox
+						icon="entypo-social:facebook-with-circle"
+						className="size-[22px] text-school-blue"
+					/>
+					<IconBox
+						icon="entypo-social:twitter-with-circle"
+						className="size-[22px] text-school-blue"
+					/>
+					<IconBox
+						icon="entypo-social:linkedin-with-circle"
+						className="size-[22px] text-school-blue"
+					/>
+					<IconBox
+						icon="entypo-social:instagram-with-circle"
+						className="size-[22px] text-school-blue"
+					/>
+				</div>
+			</section>
+
+			{/* Useful Links Section */}
+			<section className="flex flex-col gap-3">
+				<h3 className="text-lg font-semibold">Useful Links</h3>
+
+				<ul className="flex flex-col gap-2 text-base">
+					<li>
+						<NavLink to="/" className="transition-colors hover:text-gray-300">
+							Home
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to="/about-us" className="transition-colors hover:text-gray-300">
+							About Us
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to="/how-it-works" className="transition-colors hover:text-gray-300">
+							How it Works
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to="/faq" className="transition-colors hover:text-gray-300">
+							FAQs
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to="/contact-us" className="transition-colors hover:text-gray-300">
+							Contact Us
+						</NavLink>
+					</li>
+				</ul>
+			</section>
+
+			{/* Contact Form Section */}
+			<section className="flex w-full flex-col gap-3">
+				<h3 className="text-lg font-semibold">Leave Us a Message</h3>
+				<textarea
+					className="min-h-[100px] w-full rounded-lg border border-white bg-transparent p-3 text-base
+						text-white placeholder-gray-400 focus:border-school-blue focus:outline-none"
+					placeholder="Type your message here..."
+				/>
+				<button
+					type="submit"
+					className="w-fit rounded-lg bg-school-blue px-4 py-2 text-base font-medium transition-colors
+						hover:bg-blue-600 lg:w-fit"
+				>
+					Send Message
+				</button>
+			</section>
+		</footer>
+	);
+}
+
+export { Footer };
