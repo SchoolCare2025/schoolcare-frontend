@@ -28,7 +28,7 @@ function AccordionTrigger(
 			<AccordionPrimitive.Trigger
 				data-slot="accordion-trigger"
 				className={cnMerge(
-					`flex flex-1 items-start justify-between gap-4 rounded-md text-left text-[14px] font-medium
+					`flex flex-1 items-center justify-between gap-4 rounded-md text-left text-[14px] font-medium
 					transition-all outline-none hover:underline focus-visible:border-shadcn-ring
 					focus-visible:ring-[3px] focus-visible:ring-shadcn-ring/50 disabled:pointer-events-none
 					disabled:opacity-50 [&[data-state=open]>svg,_&[data-state=open]>[data-icon]>svg]:rotate-180`,
