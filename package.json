@@ -29,6 +29,7 @@
 		"aos": "3.0.0-beta.6",
 		"clsx": "^2.1.1",
 		"cmdk": "^1.1.1",
+		"embla-carousel-react": "^8.6.0",
 		"export-to-csv": "^1.4.0",
 		"radix-ui": "^1.4.2",
 		"react": "19.1.0",
@@ -39,6 +40,7 @@
 		"remixicon": "^4.6.0",
 		"sonner": "^2.0.5",
 		"tailwind-merge": "^3.3.1",
+		"tailwind-variants": "^1.0.0",
 		"vaul": "^1.1.2",
 		"zod": "^3.25.64",
 		"zustand": "^5.0.5"
