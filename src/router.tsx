@@ -2,11 +2,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lazy } from "react";
 import {
+	createBrowserRouter,
+	createRoutesFromElements,
 	Navigate,
 	Route,
 	RouterProvider,
-	createBrowserRouter,
-	createRoutesFromElements,
 } from "react-router";
 import RootLayout from "./pages/layout";
 import { dashboardLoader, protectionLoader } from "./store/react-query/loaders";
@@ -44,10 +44,10 @@ const routes = createRoutesFromElements(
 		<Route element={<MainLayout />}>
 			{/* <Route path="/" element={<LandingPage />} /> */}
 			<Route path="/who-we-are" element={<WhoWeAre />} />
-			<Route path="/faq" element={<FaQ />} />
-			<Route path="/contact-us" element={<ContactUs />} />
+			<Route path="/faqs" element={<FaQ />} />
+			<Route path="/contact" element={<ContactUs />} />
 			<Route path="/how-it-works" element={<HowItWorks />} />
-			<Route path="/about-us" element={<AboutUs />} />
+			<Route path="/about" element={<AboutUs />} />
 		</Route>
 
 		{/* eslint-disable react/no-nested-lazy-component-declarations */}

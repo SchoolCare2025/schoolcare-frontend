@@ -1,6 +1,6 @@
 "use client";
 
-import { lockScroll } from "@zayne-labs/toolkit-core";
+import { dataAttr, lockScroll } from "@zayne-labs/toolkit-core";
 import { useToggle } from "@zayne-labs/toolkit-react";
 import { NavLink } from "react-router";
 import { IconBox } from "@/components/common";
@@ -21,7 +21,7 @@ function NavBar() {
 	return (
 		<header
 			className={cnMerge(
-				"absolute z-500 flex w-full flex-col px-(--padding-value) pt-7 [--padding-value:--spacing(4)]",
+				"absolute z-500 flex w-full flex-col px-(--padding-value) pt-7 [--padding-value:--spacing(10)]",
 				isNavShow && "pr-[calc(var(--padding-value)+var(--scrollbar-padding))]"
 			)}
 		>
@@ -137,7 +137,12 @@ function MobileNavigation(props: MobileNavProps) {
 				</div>
 			</article>
 
-			<button type="button" className="z-10 w-6 self-end text-white lg:hidden" onClick={toggleNavShow}>
+			<button
+				type="button"
+				data-nav-show={dataAttr(isNavShow)}
+				className="z-10 w-6 self-end data-nav-show:text-white lg:hidden"
+				onClick={toggleNavShow}
+			>
 				{isNavShow ?
 					<IconBox icon="ri:close-line" className="size-full" />
 				:	<IconBox icon="ri:menu-fill" className="size-full" />}

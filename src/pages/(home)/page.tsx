@@ -1,3 +1,4 @@
+import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
 import {
 	cardOne,
 	cardThree,
@@ -9,10 +10,9 @@ import {
 	schoolThree,
 	schoolTwo,
 } from "@/assets/images/landing";
-import { ForWithWrapper, Image, getElementList } from "@/components/common";
+import { ForWithWrapper, getElementList, Image } from "@/components/common";
 import { BrainIcon, LineGraphIcon, PageIcon, PieIcon, StudentIcon, UploadIcon } from "@/components/icons";
 import { Card } from "@/components/ui";
-import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
 import { AccordionFaqs } from "./-components/AccordionFaqs";
 import { ResultCheckForm } from "./-components/ResultCheckForm";
 
@@ -159,7 +159,7 @@ function HomePage() {
 				<h3 className="text-center font-bold lg:text-[32px]">Your SchoolCare Experience</h3>
 
 				<ForWithWrapper
-					className="max flex flex-col gap-6 lg:flex-row lg:gap-8"
+					className="flex flex-col gap-6 lg:flex-row lg:gap-8"
 					each={experiences}
 					render={(experience) => (
 						<li

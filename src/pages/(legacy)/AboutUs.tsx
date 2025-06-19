@@ -1,6 +1,6 @@
+import { Link } from "react-router";
 import YoungLady from "@/assets/images/youngLady.jpg";
 import { cnMerge } from "@/lib/utils/cn";
-import { Link } from "react-router";
 
 const AboutUs = ({
 	className = "my-40",
@@ -13,13 +13,13 @@ const AboutUs = ({
 		<div className={`w-full overflow-hidden px-5 md:px-3 ${className}`}>
 			<h2 className="mb-16 text-center text-4xl font-bold">About Us</h2>
 			<div
-				className="sxl:px-9 mx-4 flex flex-col-reverse items-center justify-between gap-24 md:flex-row
-					md:items-center md:justify-center md:gap-9 lg:justify-center"
+				className="mx-4 flex flex-col-reverse items-center justify-between gap-24 md:flex-row
+					md:items-center md:justify-center md:gap-9 lg:justify-center xl:px-9"
 			>
-				<div className="sxl:w-full w-full md:mt-5 md:w-full">
+				<div className="w-full md:mt-5 md:w-full xl:w-full">
 					<p
 						className={cnMerge(
-							"sxl:pr-24 text-xl leading-8 md:px-2 md:text-base lg:text-[18px]",
+							"text-xl leading-8 md:px-2 md:text-base lg:text-[18px] xl:pr-24",
 							variant === "home" && "line-clamp-6"
 						)}
 					>
@@ -50,8 +50,8 @@ const AboutUs = ({
 				</div>
 
 				<div
-					className="sxl:w-[50%] relative w-full rounded-lg md:w-[50%] lg:items-center
-						lg:justify-center"
+					className="relative w-full rounded-lg md:w-[50%] lg:items-center lg:justify-center
+						xl:w-[50%]"
 				>
 					<div
 						className="absolute top-10 left-[-10%] flex h-10 w-44 items-center justify-center
@@ -61,14 +61,14 @@ const AboutUs = ({
 						<p>Get access to academic results</p>
 					</div>
 
-					<div className="sxl:w-full md:w-[105%]">
+					<div className="w-full">
 						<img src={YoungLady} alt="" className="h-auto w-full min-w-[300px] rounded-2xl" />
 					</div>
 
 					<div
-						className="sxl:top-80 absolute top-32 right-[-10%] flex h-10 w-36 items-center
-							justify-center rounded-xl bg-cosWhite px-1 py-4 text-center text-xs font-semibold
-							text-cosBlue shadow-xl md:top-48 md:px-3 lg:top-72"
+						className="absolute top-32 right-[-10%] flex h-10 w-36 items-center justify-center
+							rounded-xl bg-cosWhite px-1 py-4 text-center text-xs font-semibold text-cosBlue
+							shadow-xl md:top-48 md:px-3 lg:top-72 xl:top-80"
 					>
 						<p>Track your performance</p>
 					</div>
