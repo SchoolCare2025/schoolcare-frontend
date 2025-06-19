@@ -1,5 +1,5 @@
-import { IconBox } from "@/components/common";
 import { NavLink } from "react-router";
+import { IconBox } from "@/components/common";
 
 function Footer() {
 	return (
@@ -8,7 +8,7 @@ function Footer() {
 				lg:justify-items-center lg:gap-12 lg:px-[80px] lg:py-[100px]"
 		>
 			<article className="flex flex-col gap-5 lg:gap-8">
-				<h3 className="text-lg font-semibold">MY SCHOOL</h3>
+				<h3 className="text-lg font-semibold">SCHOOL CARE</h3>
 
 				<p className="text-base leading-relaxed text-gray-200">
 					Get access to all academic results with ease. Whether you're eagerly anticipating your final

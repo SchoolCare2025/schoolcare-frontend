@@ -1,9 +1,0 @@
-export { default as schoolOne } from "./school-1.svg";
-export { default as schoolTwo } from "./school-2.svg";
-export { default as schoolThree } from "./school-3.svg";
-export { default as schoolFour } from "./school-4.svg";
-export { default as chart } from "./chart.svg";
-export { default as person } from "./person.svg";
-export { default as cardOne } from "./card-1.svg";
-export { default as cardTwo } from "./card-2.svg";
-export { default as cardThree } from "./card-3.svg";

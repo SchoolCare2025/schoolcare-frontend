@@ -1,8 +1,9 @@
+import { IconBox } from "@/components/common";
 import AiImage from "../../assets/images/AiImage.png";
 
-const ContactUs = () => {
+function ContactUs() {
 	return (
-		<div className="px-8 py-12 md:flex md:gap-7 lg:gap-36">
+		<div className="flex flex-col md:flex-row md:gap-7 lg:gap-36">
 			<div className="md:w-[45%]">
 				<img src={AiImage} alt="" />
 
@@ -15,7 +16,7 @@ const ContactUs = () => {
 							<p>You can email us here</p>
 							<p className="font-semibold">schoolcare.office@gmail.com</p>
 						</div>
-						<i className="ri-arrow-right-line"></i>
+						<IconBox icon="ri-arrow-right-line" />
 					</div>
 
 					<div
@@ -27,15 +28,15 @@ const ContactUs = () => {
 
 							<p className="font-semibold"> +234 9038 7468 94</p>
 						</div>
-						<i className="ri-arrow-right-line"></i>
+						<IconBox icon="ri-arrow-right-line" />
 					</div>
 
 					<p className="sm:hidden md:block">Follow Us on Social Media</p>
 					<div className="mt-2 flex sm:hidden md:block">
-						<i className="ri-facebook-circle-fill text-[24px]"></i>
-						<i className="ri-twitter-x-fill mx-4 text-[24px]"></i>
-						<i className="ri-linkedin-box-fill text-[24px]"></i>
-						<i className="ri-instagram-fill ml-4 text-[24px]"></i>
+						<IconBox icon="ri-facebook-circle-fill" />
+						<IconBox icon="ri-twitter-x-fill" className="mx-4 text-[24px]" />
+						<IconBox icon="ri-linkedin-box-fill" />
+						<IconBox icon="ri-instagram-fill" />
 					</div>
 				</div>
 			</div>
@@ -55,6 +56,7 @@ const ContactUs = () => {
 						placeholder="Enter your name"
 						className="w-[100%] rounded-lg border border-[hsl(0,0%,78%)] p-3 outline-hidden"
 					/>
+
 					<div className="my-3 gap-4 sm:flex">
 						<div>
 							<h1 className="font-semibold">Email*</h1>
@@ -74,7 +76,9 @@ const ContactUs = () => {
 							/>
 						</div>
 					</div>
+
 					<h1 className="font-semibold">Subject*</h1>
+
 					<input
 						type="text"
 						placeholder="Enter your subject"
@@ -82,12 +86,16 @@ const ContactUs = () => {
 					/>
 
 					<h1 className="mt-4 font-semibold">Message*</h1>
+
 					<input
 						type="text"
 						placeholder="Enter your message"
 						className="w-[100%] rounded-lg border border-[hsl(0,0%,78%)] pb-20 pl-3 outline-hidden"
 					/>
-					<button className="my-3 mt-10 rounded-lg bg-cosBlue p-2 text-cosWhite">Send Message</button>
+
+					<button type="submit" className="my-3 mt-10 rounded-lg bg-cosBlue p-2 text-cosWhite">
+						Send Message
+					</button>
 				</div>
 			</div>
 
@@ -100,7 +108,7 @@ const ContactUs = () => {
 						<p>You can email us here</p>
 						<p className="font-semibold">schoolcare.office@gmail.com</p>
 					</div>
-					<i className="ri-arrow-right-line"></i>
+					<IconBox icon="ri-arrow-right-line" />
 				</div>
 
 				<div className="flex items-center justify-between rounded-lg border-2 p-3 px-4 md:w-[100%]">
@@ -109,18 +117,19 @@ const ContactUs = () => {
 
 						<p className="font-semibold"> +234 9038 7468 94 </p>
 					</div>
-					<i className="ri-arrow-right-line"></i>
+					<IconBox icon="ri-arrow-right-line" />
 				</div>
 
 				<p className="">Follow Us on Social Media</p>
-				<div className="mt-2 flex gap-3">
-					<i className="ri-facebook-circle-fill text-[24px]"></i>
-					<i className="ri-twitter-x-fill text-[24px]"></i>
-					<i className="ri-linkedin-box-fill text-[24px]"></i>
-					<i className="ri-instagram-fill text-[24px]"></i>
+				<div className="mt-2 flex gap-3 text-[24px]">
+					<IconBox icon="ri-facebook-circle-fill" />
+					<IconBox icon="ri-twitter-x-fill" />
+					<IconBox icon="ri-linkedin-box-fill" />
+					<IconBox icon="ri-instagram-fill" />
 				</div>
 			</div>
 		</div>
 	);
-};
+}
+
 export default ContactUs;

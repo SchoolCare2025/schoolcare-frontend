@@ -24,16 +24,15 @@ const queryClient = new QueryClient({
 useQueryClientStore.setState({ queryClient });
 
 // Legacy
-const MainLayout = lazy(() => import("./pages/(legacy)/MainLayout"));
-const AboutUs = lazy(() => import("./pages/(legacy)/AboutUs"));
-const ContactUs = lazy(() => import("./pages/(legacy)/ContactUs"));
-const FaQ = lazy(() => import("./pages/(legacy)/FaQ"));
-const HowItWorks = lazy(() => import("./pages/(legacy)/HowItWorks"));
-const WhoWeAre = lazy(() => import("./pages/(legacy)/WhoWeAre"));
+const ContactUs = lazy(() => import("./pages/(primary)/ContactUs"));
+const FaQ = lazy(() => import("./pages/(primary)/FaQ"));
+const HowItWorks = lazy(() => import("./pages/(primary)/HowItWorks"));
+const WhoWeAre = lazy(() => import("./pages/(primary)/WhoWeAre"));
 
 /* Layouts */
-const ProtectionLayout = lazy(() => import("./pages/layout.protect"));
+const PrimaryLayout = lazy(() => import("./pages/(primary)/layout"));
 const HomeLayout = lazy(() => import("./pages/(home)/layout"));
+const ProtectionLayout = lazy(() => import("./pages/layout.protect"));
 const RegisterLayout = lazy(() => import("./pages/(auth)/register/layout"));
 const DashboardLayout = lazy(() => import("./pages/dashboard/layout"));
 const StudentResultLayout = lazy(() => import("./pages/student-result/layout"));
@@ -41,27 +40,26 @@ const AdminLayout = lazy(() => import("./pages/admin/layout"));
 
 const routes = createRoutesFromElements(
 	<Route element={<RootLayout />}>
-		<Route element={<MainLayout />}>
-			{/* <Route path="/" element={<LandingPage />} /> */}
-			<Route path="/who-we-are" element={<WhoWeAre />} />
-			<Route path="/faqs" element={<FaQ />} />
-			<Route path="/contact" element={<ContactUs />} />
-			<Route path="/how-it-works" element={<HowItWorks />} />
-			<Route path="/about" element={<AboutUs />} />
-		</Route>
-
 		{/* eslint-disable react/no-nested-lazy-component-declarations */}
+
+		<Route path="/test" Component={lazy(() => import("./pages/page.test"))} />
+
 		<Route Component={HomeLayout}>
 			<Route path="/" Component={lazy(() => import("./pages/(home)/page"))} />
 		</Route>
 
-		<Route path="/test" Component={lazy(() => import("./pages/page.test"))} />
+		<Route element={<PrimaryLayout />}>
+			<Route path="/who-we-are" element={<WhoWeAre />} />
+			<Route path="/faqs" element={<FaQ />} />
+			<Route path="/contact" element={<ContactUs />} />
+			<Route path="/how-it-works" element={<HowItWorks />} />
+		</Route>
 
 		<Route Component={StudentResultLayout}>
 			<Route path="/student-result" Component={lazy(() => import("./pages/student-result/page"))} />
 		</Route>
 
-		<Route path="/signin" Component={lazy(() => import("./pages/(auth)/signin/page"))} />
+		<Route path="/login" Component={lazy(() => import("./pages/(auth)/login/page"))} />
 
 		<Route Component={RegisterLayout}>
 			<Route path="/register" element={<Navigate to="/register/personal-info" />} />

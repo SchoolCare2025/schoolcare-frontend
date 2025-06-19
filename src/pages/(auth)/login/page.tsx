@@ -1,21 +1,21 @@
-import { IconBox } from "@/components/common";
-import { Form } from "@/components/ui";
-import { type LoginData, callBackendApi } from "@/lib/api/callBackendApi";
-import { cnJoin, cnMerge } from "@/lib/utils/cn";
-import { z } from "@/lib/zod";
-import { sessionQuery } from "@/store/react-query/queryFactory";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { omitKeys } from "@zayne-labs/toolkit-core";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
+import { IconBox } from "@/components/common";
+import { Form } from "@/components/ui";
+import { callBackendApi, type LoginData } from "@/lib/api/callBackendApi";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { z } from "@/lib/zod";
+import { sessionQuery } from "@/store/react-query/queryFactory";
 
 const SignInSchema = z.object({
 	email: z.email({ error: "Please enter a valid email!" }),
 	password: z.string().min(1, { error: "Password is required" }),
 });
 
-function SigninPage() {
+function LoginPage() {
 	const methods = useForm({
 		defaultValues: {
 			email: "",
@@ -124,11 +124,6 @@ function SigninPage() {
 							!methods.formState.isValid && "cursor-not-allowed bg-gray-400"
 						)}
 					>
-						{methods.formState.isSubmitting && (
-							<span className="flex justify-center [grid-area:1/1]">
-								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
-							</span>
-						)}
 						<p
 							className={cnJoin(
 								"flex items-center gap-1",
@@ -140,6 +135,12 @@ function SigninPage() {
 								<IconBox icon="material-symbols:arrow-outward-rounded" className="size-full" />
 							</span>
 						</p>
+
+						{methods.formState.isSubmitting && (
+							<span className="flex justify-center [grid-area:1/1]">
+								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
+							</span>
+						)}
 					</Form.Submit>
 				</Form.Root>
 			</section>
@@ -147,4 +148,4 @@ function SigninPage() {
 	);
 }
 
-export default SigninPage;
+export default LoginPage;

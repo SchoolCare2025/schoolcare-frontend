@@ -2,8 +2,8 @@ import Coworkers from "../../assets/images/coworkers.png";
 
 const WhoWeAre = () => {
 	return (
-		<div>
-			<div className="grid gap-6 px-10 text-center md:my-6 md:flex">
+		<main>
+			<section className="flex flex-col gap-6 text-center md:flex-row">
 				<div className="md:w-[50%] md:object-cover xl:order-2">
 					<img src={Coworkers} alt="" className="rounded-xl" />
 				</div>
@@ -20,11 +20,13 @@ const WhoWeAre = () => {
 						impactful.
 					</p>
 				</div>
-			</div>
+			</section>
 
 			<h1 className="my-8 text-center text-2xl font-bold text-black">Our Core Value</h1>
 
-			<div className="grid gap-12 bg-bgTestimonials-65 px-10 py-12 md:grid-cols-2 md:gap-10 md:px-12">
+			<section
+				className="grid gap-12 bg-bgTestimonials-65 px-10 py-12 md:grid-cols-2 md:gap-10 md:px-12"
+			>
 				<div className="rounded-xl bg-cosWhite px-6 py-12 text-center md:h-72 md:py-7 lg:w-[100%]">
 					<div>
 						<i className="ri-lightbulb-flash-line text-[56px] text-cosBlue md:text-[44px]"></i>
@@ -69,8 +71,8 @@ const WhoWeAre = () => {
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			</section>
+		</main>
 	);
 };
 

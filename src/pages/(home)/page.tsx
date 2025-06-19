@@ -1,4 +1,5 @@
 import { useDragScroll } from "@zayne-labs/ui-react/ui/drag-scroll";
+import { NavLink } from "react-router";
 import {
 	cardOne,
 	cardThree,
@@ -9,7 +10,7 @@ import {
 	schoolOne,
 	schoolThree,
 	schoolTwo,
-} from "@/assets/images/landing";
+} from "@/assets/images/home";
 import { ForWithWrapper, getElementList, Image } from "@/components/common";
 import { BrainIcon, LineGraphIcon, PageIcon, PieIcon, StudentIcon, UploadIcon } from "@/components/icons";
 import { Card } from "@/components/ui";
@@ -120,21 +121,23 @@ function HomePage() {
 					</p>
 
 					<div className="mt-9 flex flex-col items-center gap-5.5 lg:mt-[64px] lg:flex-row lg:gap-7">
-						<button
-							type="button"
-							className="rounded-[8px] border border-[hsla(0,0%,98%,1)] px-6 py-2 font-semibold
-								lg:rounded-[12px] lg:py-4 lg:text-[24px]"
-						>
-							Login
+						<button type="button">
+							<NavLink
+								to="/login"
+								className="block rounded-[8px] border border-[hsla(0,0%,98%,1)] px-6 py-2
+									font-semibold lg:rounded-[12px] lg:py-4 lg:text-[24px]"
+							>
+								Login
+							</NavLink>
 						</button>
 
-						<button
-							type="button"
-							className="rounded-[8px] bg-210-79-44 px-6 py-2 font-semibold lg:rounded-[12px]
+						<NavLink
+							to="/register"
+							className="block rounded-[8px] bg-210-79-44 px-6 py-2 font-semibold lg:rounded-[12px]
 								lg:py-4 lg:text-[24px]"
 						>
 							Register School
-						</button>
+						</NavLink>
 					</div>
 
 					<div

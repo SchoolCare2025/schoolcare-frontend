@@ -1,13 +1,21 @@
 "use client";
 
-import { lockScroll } from "@zayne-labs/toolkit-core";
+import { dataAttr, lockScroll } from "@zayne-labs/toolkit-core";
 import { useToggle } from "@zayne-labs/toolkit-react";
 import { NavLink } from "react-router";
 import { IconBox } from "@/components/common";
 import { getElementList } from "@/components/common/For";
 import { cnMerge } from "@/lib/utils/cn";
 
-function NavBar() {
+function NavBar(props: {
+	classNames?: {
+		base?: string;
+		desktop?: DesktopNavigationProps["classNames"];
+		mobile?: MobileNavigationProps["classNames"];
+	};
+}) {
+	const { classNames } = props;
+
 	const [isNavShow, toggleNavShow] = useToggle(false);
 
 	const handleToggleNavShow = () => {
@@ -21,16 +29,19 @@ function NavBar() {
 	return (
 		<header
 			className={cnMerge(
-				"absolute z-500 flex w-full flex-col px-(--padding-value) pt-7 [--padding-value:--spacing(4)]",
-				isNavShow && "pr-[calc(var(--padding-value)+var(--scrollbar-padding))]"
+				`absolute z-500 flex w-full flex-col pt-7 [--padding-x-value:--spacing(6)]
+				max-lg:px-(--padding-x-value)`,
+				isNavShow && "max-lg:pr-[calc(var(--padding-x-value)+var(--scrollbar-padding))]",
+				classNames?.base
 			)}
 		>
-			<DesktopNavigation className="max-lg:hidden" />
+			<DesktopNavigation className="max-lg:hidden" classNames={classNames?.desktop} />
 
 			<MobileNavigation
 				className="lg:hidden"
 				isNavShow={isNavShow}
 				toggleNavShow={handleToggleNavShow}
+				classNames={classNames?.mobile}
 			/>
 		</header>
 	);
@@ -48,13 +59,23 @@ const linkItems = [
 
 const [NavLinksList] = getElementList();
 
-function DesktopNavigation({ className }: { className?: string }) {
+type DesktopNavigationProps = {
+	className?: string;
+	classNames?: {
+		base?: string;
+	};
+};
+
+function DesktopNavigation(props: DesktopNavigationProps) {
+	const { className, classNames } = props;
+
 	return (
 		<article
 			className={cnMerge(
 				`mx-[80px] flex items-center justify-between rounded-[24px] bg-white px-[78px] py-5
 				shadow-[0_4px_8px_hsl(150,20%,25%,0.25)]`,
-				className
+				className,
+				classNames?.base
 			)}
 		>
 			<NavLinksList
@@ -70,24 +91,25 @@ function DesktopNavigation({ className }: { className?: string }) {
 
 			<button type="button">
 				<NavLink
-					to="/signin"
+					to="/register"
 					className="block rounded-[12px] bg-210-79-44 px-6 py-4 font-semibold text-white"
 				>
-					Login
+					Register
 				</NavLink>
 			</button>
 		</article>
 	);
 }
 
-type MobileNavProps = {
+type MobileNavigationProps = {
 	className?: string;
+	classNames?: { base?: string; hamburgerButton?: string };
 	isNavShow: boolean;
 	toggleNavShow: () => void;
 };
 
-function MobileNavigation(props: MobileNavProps) {
-	const { className, isNavShow, toggleNavShow } = props;
+function MobileNavigation(props: MobileNavigationProps) {
+	const { className, classNames, isNavShow, toggleNavShow } = props;
 
 	return (
 		<>
@@ -97,7 +119,8 @@ function MobileNavigation(props: MobileNavProps) {
 					transition-transform duration-300 ease-in-out`,
 					// isNavShow ? "translate-x-0" : "translate-x-full",
 					isNavShow ? "w-full [transition:width_450ms_ease]" : "w-0 [transition:width_250ms_ease]",
-					className
+					className,
+					classNames?.base
 				)}
 				onClick={(event) => {
 					const element = event.target as HTMLElement;
@@ -106,14 +129,13 @@ function MobileNavigation(props: MobileNavProps) {
 				}}
 			>
 				<div
-					className={cnMerge(
-						`flex flex-col gap-[58px] pr-[calc(var(--padding-value)+var(--scrollbar-padding))]
-						pl-(--padding-value) [--padding-value:--spacing(6)]`
-					)}
+					className="flex flex-col gap-[58px]
+						pr-[calc(var(--padding-x-value)+var(--scrollbar-padding))] pl-(--padding-x-value)
+						[--padding-x-value:--spacing(6)]"
 				>
 					<NavLinksList
 						as="nav"
-						className={cnMerge("flex flex-col gap-6 text-[14px] text-nowrap")}
+						className="flex flex-col gap-6 text-[14px] text-nowrap"
 						each={linkItems}
 						render={(linkItem) => (
 							<NavLink
@@ -128,16 +150,21 @@ function MobileNavigation(props: MobileNavProps) {
 
 					<button type="button">
 						<NavLink
-							to="/signin"
+							to="/register"
 							className="block w-full rounded-[8px] bg-210-79-44 py-2.5 font-semibold text-white"
 						>
-							Login
+							Register
 						</NavLink>
 					</button>
 				</div>
 			</article>
 
-			<button type="button" className="z-10 w-6 self-end text-white lg:hidden" onClick={toggleNavShow}>
+			<button
+				type="button"
+				data-nav-show={dataAttr(isNavShow)}
+				className={cnMerge("z-10 w-6 self-end text-white lg:hidden", classNames?.hamburgerButton)}
+				onClick={toggleNavShow}
+			>
 				{isNavShow ?
 					<IconBox icon="ri:close-line" className="size-full" />
 				:	<IconBox icon="ri:menu-fill" className="size-full" />}
