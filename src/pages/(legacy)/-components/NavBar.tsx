@@ -50,13 +50,7 @@ const [NavLinksList] = getElementList();
 
 function DesktopNavigation({ className }: { className?: string }) {
 	return (
-		<article
-			className={cnMerge(
-				`mx-[80px] flex items-center justify-between rounded-[24px] bg-white px-[78px] py-5
-				shadow-[0_4px_8px_hsl(150,20%,25%,0.25)] [transition:box-shadow_0.3s_ease]`,
-				className
-			)}
-		>
+		<article className={cnMerge("flex items-center justify-between bg-white px-[78px] py-5", className)}>
 			<NavLinksList
 				as="nav"
 				className="flex w-fit gap-14 font-medium"

@@ -1,15 +1,15 @@
-import { IconBox, Image, Show, getElementList } from "@/components/common";
-import { cnJoin, cnMerge } from "@/lib/utils/cn";
-import { sessionQuery } from "@/store/react-query/queryFactory";
 import { useQuery } from "@tanstack/react-query";
 import { lockScroll } from "@zayne-labs/toolkit-core";
 import { useToggle } from "@zayne-labs/toolkit-react";
 import { isFunction, isString } from "@zayne-labs/toolkit-type-helpers";
 import { Fragment } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router";
+import { getElementList, IconBox, Image, Show } from "@/components/common";
+import { cnJoin, cnMerge } from "@/lib/utils/cn";
+import { sessionQuery } from "@/store/react-query/queryFactory";
 import { dashboardLinkItems } from "./constants";
 
-export function Navbar() {
+export function NavBar() {
 	const [isNavShow, toggleNavShow] = useToggle(false);
 
 	const handleToggleNavShow = () => {
@@ -43,7 +43,9 @@ export function Navbar() {
 				className="z-10 self-end text-[30px] text-white md:hidden"
 				onClick={handleToggleNavShow}
 			>
-				{isNavShow ? <IconBox icon="ri:close-line" /> : <IconBox icon="ri:menu-fill" />}
+				{isNavShow ?
+					<IconBox icon="ri:close-line" />
+				:	<IconBox icon="ri:menu-fill" />}
 			</button>
 		</header>
 	);

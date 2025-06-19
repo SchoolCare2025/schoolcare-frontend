@@ -48,9 +48,9 @@ const getConfigItemFromPayload = (config: ChartConfig, payload: unknown, key: st
 	}
 
 	const payloadPayload =
-		"payload" in payload && typeof payload.payload === "object" && payload.payload !== null
-			? payload.payload
-			: null;
+		"payload" in payload && typeof payload.payload === "object" && payload.payload !== null ?
+			payload.payload
+		:	null;
 
 	let configLabelKey = key;
 
@@ -228,15 +228,13 @@ export function ChartTooltipContent(
 							)}
 						>
 							{/* eslint-disable react/no-complex-conditional-rendering */}
-							{formatter && item.value !== undefined && item.name ? (
+							{formatter && item.value !== undefined && item.name ?
 								// eslint-disable-next-line ts-eslint/no-unsafe-argument
 								formatter(item.value, item.name, item, index, item.payload)
-							) : (
-								<>
-									{configItem?.icon ? (
+							:	<>
+									{configItem?.icon ?
 										<configItem.icon />
-									) : (
-										!hideIndicator && (
+									:	!hideIndicator && (
 											<div
 												className={cnMerge(
 													"shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
@@ -254,7 +252,7 @@ export function ChartTooltipContent(
 												}
 											/>
 										)
-									)}
+									}
 									<div
 										className={cnMerge(
 											"flex flex-1 justify-between leading-none",
@@ -277,7 +275,7 @@ export function ChartTooltipContent(
 										)}
 									</div>
 								</>
-							)}
+							}
 						</div>
 					);
 				})}
@@ -353,14 +351,13 @@ export function ChartLegendContent(
 							classNames?.legendItem
 						)}
 					>
-						{itemConfig?.icon && withIcon ? (
+						{itemConfig?.icon && withIcon ?
 							<itemConfig.icon />
-						) : (
-							<span
+						:	<span
 								className={cnMerge("size-2 shrink-0 rounded-[2px]", classNames?.legendItemIcon)}
 								style={{ backgroundColor: item.color }}
 							/>
-						)}
+						}
 
 						<span className={classNames?.legendItemLabel}>{itemConfig?.label}</span>
 					</div>

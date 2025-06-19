@@ -191,9 +191,9 @@ function AddressPage() {
 																	icon="lucide:check"
 																	className={cnJoin(
 																		"ml-auto size-[14px]",
-																		item.state === field.value
-																			? "opacity-100"
-																			: "opacity-0"
+																		item.state === field.value ?
+																			"opacity-100"
+																		:	"opacity-0"
 																	)}
 																/>
 															</Command.Item>

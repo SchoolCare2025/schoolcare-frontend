@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { Navbar } from "./-components/Navbar";
+import { NavBar } from "./-components/NavBar";
 import { Sidebar } from "./-components/Sidebar";
 
 function DashBoardLayout() {
@@ -8,7 +8,7 @@ function DashBoardLayout() {
 			<Sidebar className="max-md:hidden" />
 
 			<div className="flex w-full grow flex-col">
-				<Navbar />
+				<NavBar />
 				<Outlet />
 			</div>
 		</div>
