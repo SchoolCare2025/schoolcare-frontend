@@ -121,7 +121,7 @@ function HomePage() {
 					</p>
 
 					<div className="mt-9 flex flex-col items-center gap-5.5 lg:mt-[64px] lg:flex-row lg:gap-7">
-						<button type="button">
+						<button type="button" className="shrink-0">
 							<NavLink
 								to="/login"
 								className="block rounded-[8px] border border-[hsla(0,0%,98%,1)] px-6 py-2
@@ -131,13 +131,15 @@ function HomePage() {
 							</NavLink>
 						</button>
 
-						<NavLink
-							to="/register"
-							className="block rounded-[8px] bg-210-79-44 px-6 py-2 font-semibold lg:rounded-[12px]
-								lg:py-4 lg:text-[24px]"
-						>
-							Register School
-						</NavLink>
+						<button type="button" className="shrink-0">
+							<NavLink
+								to="/register"
+								className="block rounded-[8px] bg-210-79-44 px-6 py-2 font-semibold
+									lg:rounded-[12px] lg:py-4 lg:text-[24px]"
+							>
+								Register School
+							</NavLink>
+						</button>
 					</div>
 
 					<div

@@ -1,13 +1,13 @@
-import { IconBox, getElementList } from "@/components/common";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { getElementList, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allClassesInSchoolQuery, allStudentsInSchoolQuery } from "@/store/react-query/queryFactory";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
 import { Main } from "../-components/Main";
 
 const RegisterStudentSchema = z.object({
@@ -77,9 +77,9 @@ function RegisterStudentPage() {
 
 						<Form.Input
 							placeholder="Enter student's surname"
-							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
-								md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border border-school-gray-lighter bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -90,9 +90,9 @@ function RegisterStudentPage() {
 
 						<Form.Input
 							placeholder="Enter student's other names"
-							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
-								md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border border-school-gray-lighter bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -111,8 +111,8 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-												text-[12px] data-placeholder:text-school-gray md:h-[75px]
+												base: `h-[48px] rounded-[8px] border border-school-gray-lighter
+												bg-white px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -128,17 +128,15 @@ function RegisterStudentPage() {
 										>
 											<Select.Item
 												value="Male"
-												className="h-12 bg-gray-200 text-[12px] font-medium text-black
-													focus:bg-gray-300 focus:text-black data-[state=checked]:bg-gray-300
-													md:text-base"
+												className="h-12 text-[12px] font-medium text-black focus:bg-gray-300
+													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 											>
 												Male
 											</Select.Item>
 											<Select.Item
 												value="Female"
-												className="h-12 bg-gray-200 text-[12px] font-medium text-black
-													focus:bg-gray-300 focus:text-black data-[state=checked]:bg-gray-300
-													md:text-base"
+												className="h-12 text-[12px] font-medium text-black focus:bg-gray-300
+													focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 											>
 												Female
 											</Select.Item>
@@ -162,8 +160,8 @@ function RegisterStudentPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-												text-[12px] data-placeholder:text-school-gray md:h-[75px]
+												base: `h-[48px] rounded-[8px] border border-school-gray-lighter
+												bg-white px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -183,7 +181,7 @@ function RegisterStudentPage() {
 													<Select.Item
 														key={`${item.school_class} ${item.grade}`}
 														value={`${item.school_class} ${item.grade}`}
-														className="h-12 bg-gray-200 text-[12px] font-medium text-black
+														className="h-12 text-[12px] font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
@@ -210,14 +208,14 @@ function RegisterStudentPage() {
 							methods.formState.isSubmitting && "grid"
 						)}
 					>
+						<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
+							Register
+						</p>
 						{methods.formState.isSubmitting && (
 							<span className="flex justify-center [grid-area:1/1]">
 								<IconBox icon="svg-spinners:6-dots-rotate" className="size-6" />
 							</span>
 						)}
-						<p className={cnJoin(methods.formState.isSubmitting && "invisible [grid-area:1/1]")}>
-							Register
-						</p>
 					</Form.Submit>
 				</Form.Root>
 			</section>

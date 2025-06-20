@@ -1,3 +1,4 @@
+import { IconBox } from "@/components/common";
 import Coworkers from "../../assets/images/coworkers.png";
 
 const WhoWeAre = () => {
@@ -29,7 +30,10 @@ const WhoWeAre = () => {
 			>
 				<div className="rounded-xl bg-cosWhite px-6 py-12 text-center md:h-72 md:py-7 lg:w-[100%]">
 					<div>
-						<i className="ri-lightbulb-flash-line text-[56px] text-cosBlue md:text-[44px]"></i>
+						<IconBox
+							icon="ri-lightbulb-flash-line"
+							className="text-[56px] text-cosBlue md:text-[44px]"
+						/>
 					</div>
 					<h1 className="my-2 text-xl font-bold">Innovation</h1>
 					<p>
@@ -44,7 +48,10 @@ const WhoWeAre = () => {
 							md:px-4 lg:w-[100%] xl:w-[90%]"
 					>
 						<div className="mr-3">
-							<i className="ri-verified-badge-line text-[56px] text-cosBlue md:text-[44px]"></i>
+							<IconBox
+								icon="ri-verified-badge-line"
+								className="text-[56px] text-cosBlue md:text-[44px]"
+							/>
 						</div>
 						<div className="md:text-start">
 							<h1 className="my-2 text-xl font-bold">Integrity</h1>
@@ -60,7 +67,7 @@ const WhoWeAre = () => {
 							md:flex md:h-48 md:grid-rows-1 md:items-center md:px-4 lg:w-[100%] xl:w-[90%]"
 					>
 						<div className="mr-3">
-							<i className="ri-team-line text-[56px] text-cosBlue md:text-[44px]"></i>
+							<IconBox icon="ri-team-line" className="text-[56px] text-cosBlue md:text-[44px]" />
 						</div>
 						<div className="md:text-start">
 							<h1 className="my-2 text-xl font-bold">Collaboration</h1>

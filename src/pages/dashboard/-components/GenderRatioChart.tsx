@@ -1,6 +1,6 @@
+import { Pie, PieChart } from "recharts";
 import { Card, Chart } from "@/components/ui";
 import type { ApiSuccessResponse, StudentsGenderResponse } from "@/lib/api/callBackendApi";
-import { Pie, PieChart } from "recharts";
 
 const chartConfig = {
 	female: {
@@ -36,7 +36,7 @@ function GenderRatioChart(props: {
 
 	return (
 		<Card.Root
-			className="flex size-full flex-col items-center rounded-[24px] border-2 border-school-gray-lighter
+			className="flex size-full flex-col items-center rounded-[24px] border-2 border-school-gray
 				bg-white py-[36px_18px]"
 		>
 			<Card.Header>

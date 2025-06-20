@@ -1,14 +1,14 @@
-import { DropZoneInput, DropZoneInputImagePreview, IconBox, getElementList } from "@/components/common";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { DropZoneInput, DropZoneInputImagePreview, getElementList, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { allSubjectsInSchoolQuery } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import { Main } from "../../-components/Main";
 
 const UploadSchema = z.object({
@@ -76,8 +76,8 @@ function UploadPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-											text-[12px] data-placeholder:text-school-gray md:h-[75px]
+											base: `h-[48px] rounded-[8px] border border-school-gray-lighter bg-white
+											px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -97,9 +97,8 @@ function UploadPage() {
 												<Select.Item
 													key={item.subject}
 													value={item.subject}
-													className="h-12 bg-gray-200 text-[12px] font-medium text-black
-														focus:bg-gray-300 focus:text-black
-														data-[state=checked]:bg-gray-300 md:text-base"
+													className="h-12 text-[12px] font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 												>
 													{item.subject}
 												</Select.Item>

@@ -1,3 +1,5 @@
+import NumberFlow from "@number-flow/react";
+import { useQuery } from "@tanstack/react-query";
 import { getElementList } from "@/components/common";
 import { BookIcon, SchoolIcon, StudentIcon } from "@/components/icons";
 import { Card } from "@/components/ui";
@@ -7,8 +9,6 @@ import {
 	allSubjectsInSchoolQuery,
 	studentsGenderQuery,
 } from "@/store/react-query/queryFactory";
-import NumberFlow from "@number-flow/react";
-import { useQuery } from "@tanstack/react-query";
 import GenderRatioChart from "./-components/GenderRatioChart";
 import { Main } from "./-components/Main";
 
@@ -50,7 +50,7 @@ function DashboardPage() {
 				render={(item) => (
 					<Card.Root
 						key={item.title}
-						className="w-[calc(100%/3)] rounded-[8px] border-2 border-school-gray-lighter bg-white
+						className="w-[calc(100%/3)] rounded-[8px] border-2 border-school-gray bg-white
 							py-[20px_9px] md:rounded-[30px] md:py-[30px_32px]"
 					>
 						<Card.Header className="flex flex-col items-center">

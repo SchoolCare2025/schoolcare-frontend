@@ -1,6 +1,10 @@
-import { IconBox, getElementList } from "@/components/common";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { getElementList, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
-import { type InputScoresResponse, callBackendApi } from "@/lib/api/callBackendApi";
+import { callBackendApi, type InputScoresResponse } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import {
@@ -9,10 +13,6 @@ import {
 	schoolTermQuery,
 } from "@/store/react-query/queryFactory";
 import { useInputScoreFormStore } from "@/store/zustand/inputScoresFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import { Main } from "../../-components/Main";
 
 const AddScoresSchema = z.object({
@@ -78,8 +78,8 @@ function AddScoresPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-												text-[12px] data-placeholder:text-school-gray md:h-[75px]
+												base: `h-[48px] rounded-[8px] border border-school-gray-lighter
+												bg-white px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -99,7 +99,7 @@ function AddScoresPage() {
 													<Select.Item
 														key={item}
 														value={item}
-														className="h-12 bg-gray-200 text-[12px] font-medium text-black
+														className="h-12 text-[12px] font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
@@ -125,8 +125,8 @@ function AddScoresPage() {
 									>
 										<Select.Trigger
 											classNames={{
-												base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-												text-[12px] data-placeholder:text-school-gray md:h-[75px]
+												base: `h-[48px] rounded-[8px] border border-school-gray-lighter
+												bg-white px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 												md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 												icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 											}}
@@ -146,7 +146,7 @@ function AddScoresPage() {
 													<Select.Item
 														key={item}
 														value={item}
-														className="h-12 bg-gray-200 text-[12px] font-medium text-black
+														className="h-12 text-[12px] font-medium text-black
 															focus:bg-gray-300 focus:text-black
 															data-[state=checked]:bg-gray-300 md:text-base"
 													>
@@ -169,8 +169,8 @@ function AddScoresPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-											text-[12px] data-placeholder:text-school-gray md:h-[75px]
+											base: `h-[48px] rounded-[8px] border border-school-gray-lighter bg-white
+											px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -190,9 +190,8 @@ function AddScoresPage() {
 												<Select.Item
 													key={`${item.school_class} ${item.grade}`}
 													value={`${item.school_class} ${item.grade}`}
-													className="h-12 bg-gray-200 text-[12px] font-medium text-black
-														focus:bg-gray-300 focus:text-black
-														data-[state=checked]:bg-gray-300 md:text-base"
+													className="h-12 text-[12px] font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 												>
 													{`${item.school_class} ${item.grade}`}
 												</Select.Item>

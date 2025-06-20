@@ -1,4 +1,8 @@
-import { IconBox, Show, getElementList } from "@/components/common";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+import { getElementList, IconBox, Show } from "@/components/common";
 import { Command, Form, Popover, Select } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { nigeriaStatesAndLGA } from "@/lib/api/nigeria";
@@ -6,11 +10,7 @@ import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { Main } from "@/pages/dashboard/-components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { isFile } from "@zayne-labs/toolkit-type-helpers";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
-import { toast } from "sonner";
+import { PersonalInfoSchema } from "./personal-info.page";
 
 const AddressSchema = z.object({
 	address: z.string().min(1, "Address is required"),
@@ -42,8 +42,13 @@ function AddressPage() {
 
 		const requestBody = { ...formStepData, ...stepTwoData };
 
-		if (!isFile(requestBody.logo)) {
-			toast.error("Logo is missing! Please return to the previous step and upload a logo");
+		const logoResult = PersonalInfoSchema.pick({ logo: true }).safeParse(requestBody);
+
+		if (!logoResult.success) {
+			toast.error(
+				"Your school logo was lost due to page refresh. Please return to the previous step to re-upload it",
+				{ duration: 4000 }
+			);
 			return;
 		}
 
@@ -96,8 +101,8 @@ function AddressPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-											text-[12px] data-placeholder:text-school-gray md:h-[75px]
+											base: `h-[48px] rounded-[8px] border border-school-gray-lighter bg-white
+											px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -113,9 +118,8 @@ function AddressPage() {
 									>
 										<Select.Item
 											value="Nigeria"
-											className="h-12 bg-gray-200 text-[12px] font-medium text-black
-												focus:bg-gray-300 focus:text-black data-[state=checked]:bg-gray-300
-												md:text-base"
+											className="h-12 text-[12px] font-medium text-black focus:bg-gray-300
+												focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 										>
 											Nigeria
 										</Select.Item>
@@ -134,9 +138,9 @@ function AddressPage() {
 
 						<Form.Input
 							placeholder="Enter school address"
-							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
-								md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border border-school-gray-lighter bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
@@ -150,8 +154,8 @@ function AddressPage() {
 								<Popover.Root>
 									<Popover.Trigger
 										className={cnJoin(
-											`flex h-[48px] items-center justify-between rounded-[8px] border-2
-											border-school-gray bg-white px-4 text-[12px]
+											`flex h-[48px] items-center justify-between rounded-[8px] border
+											border-school-gray-lighter bg-white px-4 text-[12px]
 											data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
 											md:text-base md:text-[14px]`,
 											!(field.value as boolean) && "text-shadcn-muted-foreground"
@@ -182,8 +186,8 @@ function AddressPage() {
 																key={item.state}
 																value={item.state}
 																onSelect={() => field.onChange(item.state)}
-																className="h-12 bg-gray-200 text-[12px] font-medium
-																	text-black focus:bg-gray-300 focus:text-black
+																className="h-12 text-[12px] font-medium text-black
+																	focus:bg-gray-300 focus:text-black
 																	data-[selected=true]:bg-gray-300 md:text-base"
 															>
 																<p>{item.state}</p>
@@ -210,7 +214,7 @@ function AddressPage() {
 						<Form.ErrorMessage control={methods.control} className="text-red-600" />
 					</Form.Field>
 
-					<div className="flex justify-between gap-10 md:gap-[75px]">
+					<div className="flex justify-between gap-1 md:gap-4">
 						<Form.Field<typeof methods.control> name="local_govt" className="w-full gap-3 md:gap-4">
 							<Form.Label className="text-[14px] font-medium md:text-base">LGA</Form.Label>
 
@@ -219,8 +223,8 @@ function AddressPage() {
 									<Popover.Root>
 										<Popover.Trigger
 											className={cnJoin(
-												`flex h-[48px] items-center justify-between rounded-[8px] border-2
-												border-school-gray bg-white px-4 text-[12px]
+												`flex h-[48px] items-center justify-between rounded-[8px] border
+												border-school-gray-lighter bg-white px-4 text-[12px]
 												data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
 												md:text-base md:text-[14px]`,
 												!(field.value as boolean) && "text-shadcn-muted-foreground"
@@ -251,8 +255,8 @@ function AddressPage() {
 																	key={item}
 																	value={item}
 																	onSelect={() => field.onChange(item)}
-																	className="h-12 bg-gray-200 text-[12px] font-medium
-																		text-black focus:bg-gray-300 focus:text-black
+																	className="h-12 text-[12px] font-medium text-black
+																		focus:bg-gray-300 focus:text-black
 																		data-[selected=true]:bg-gray-300 md:text-base"
 																>
 																	<p>{item}</p>
@@ -285,9 +289,9 @@ function AddressPage() {
 							<Form.Input
 								type="number"
 								placeholder="Enter school postal code"
-								className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-									text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
-									md:px-8 md:text-base"
+								className="h-[48px] gap-3.5 rounded-[8px] border border-school-gray-lighter
+									bg-white px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
+									md:rounded-[20px] md:px-8 md:text-base"
 							/>
 
 							<Form.ErrorMessage control={methods.control} className="text-red-600" />

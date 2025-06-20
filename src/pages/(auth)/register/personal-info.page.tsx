@@ -1,3 +1,6 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { DropZoneInput, IconBox } from "@/components/common";
 import { EditIcon } from "@/components/icons";
 import { Form } from "@/components/ui";
@@ -5,11 +8,8 @@ import { cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { Main } from "@/pages/dashboard/-components/Main";
 import { useRegisterFormStore } from "@/store/zustand/registerFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 
-const PersonalInfoSchema = z.object({
+export const PersonalInfoSchema = z.object({
 	email: z.email({ error: "Please enter a valid email!" }),
 	logo: z.file({ error: "Please upload a logo!" }),
 	name: z.string().min(1, { error: "Name is required" }).max(50, { error: "Name is too long" }),
@@ -63,15 +63,13 @@ function PersonalInfoPage() {
 									}}
 									classNames={{ base: "w-fit" }}
 								>
-									{(ctx) => (
+									{({ dropZoneActions }) => (
 										<span
-											className="relative mt-4 block size-[110px] rounded-full bg-gray-200
-												bg-cover md:mt-8 md:size-[200px]"
-											style={{
-												backgroundImage: logoPreview ? `url(${logoPreview})` : "",
-											}}
+											className="relative mt-4 block size-[110px] rounded-full
+												bg-[hsl(0,0%,85%)] bg-cover md:mt-8 md:size-[200px]"
+											style={{ backgroundImage: logoPreview ? `url(${logoPreview})` : "" }}
 										>
-											<button type="button" onClick={ctx.dropZoneActions.openFilePicker}>
+											<button type="button" onClick={dropZoneActions.openFilePicker}>
 												<EditIcon
 													className={cnMerge(
 														"absolute right-3 bottom-2 size-[18px] md:size-[40px]",
@@ -93,9 +91,9 @@ function PersonalInfoPage() {
 
 						<Form.Input
 							placeholder="Enter school name"
-							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
-								md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border border-school-gray-lighter bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />
@@ -107,9 +105,9 @@ function PersonalInfoPage() {
 						<Form.Input
 							type="email"
 							placeholder="Enter school email"
-							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
-								md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border border-school-gray-lighter bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />

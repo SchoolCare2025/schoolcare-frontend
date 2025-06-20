@@ -1,15 +1,15 @@
-import { IconBox, getElementList } from "@/components/common";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+import { getElementList, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allClassesInSchoolQuery, studentsByClassQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
-import { toast } from "sonner";
 import { Main } from "../../-components/Main";
 
 const ViewAllStudentsSchema = z.object({
@@ -69,8 +69,8 @@ export function ViewAllStudentsPage() {
 								<Select.Root name={field.name} value={field.value} onValueChange={field.onChange}>
 									<Select.Trigger
 										classNames={{
-											base: `h-[48px] rounded-[8px] border-2 border-school-gray bg-white px-4
-											text-[12px] data-placeholder:text-school-gray md:h-[75px]
+											base: `h-[48px] rounded-[8px] border border-school-gray-lighter bg-white
+											px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px]
 											md:rounded-[20px] md:px-8 md:text-base md:text-[14px]`,
 											icon: "text-school-gray group-data-[state=open]:rotate-180 md:size-6",
 										}}
@@ -90,9 +90,8 @@ export function ViewAllStudentsPage() {
 												<Select.Item
 													key={`${item.school_class} ${item.grade}`}
 													value={`${item.school_class} ${item.grade}`}
-													className="h-12 bg-gray-200 text-[12px] font-medium text-black
-														focus:bg-gray-300 focus:text-black
-														data-[state=checked]:bg-gray-300 md:text-base"
+													className="h-12 text-[12px] font-medium text-black focus:bg-gray-300
+														focus:text-black data-[state=checked]:bg-gray-300 md:text-base"
 												>
 													{item.school_class} {item.grade}
 												</Select.Item>

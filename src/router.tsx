@@ -23,12 +23,6 @@ const queryClient = new QueryClient({
 
 useQueryClientStore.setState({ queryClient });
 
-// Legacy
-const ContactUs = lazy(() => import("./pages/(primary)/ContactUs"));
-const FaQ = lazy(() => import("./pages/(primary)/FaQ"));
-const HowItWorks = lazy(() => import("./pages/(primary)/HowItWorks"));
-const WhoWeAre = lazy(() => import("./pages/(primary)/WhoWeAre"));
-
 /* Layouts */
 const PrimaryLayout = lazy(() => import("./pages/(primary)/layout"));
 const HomeLayout = lazy(() => import("./pages/(home)/layout"));
@@ -39,7 +33,7 @@ const StudentResultLayout = lazy(() => import("./pages/student-result/layout"));
 const AdminLayout = lazy(() => import("./pages/admin/layout"));
 
 const routes = createRoutesFromElements(
-	<Route element={<RootLayout />}>
+	<Route Component={RootLayout}>
 		{/* eslint-disable react/no-nested-lazy-component-declarations */}
 
 		<Route path="/test" Component={lazy(() => import("./pages/page.test"))} />
@@ -48,11 +42,14 @@ const routes = createRoutesFromElements(
 			<Route path="/" Component={lazy(() => import("./pages/(home)/page"))} />
 		</Route>
 
-		<Route element={<PrimaryLayout />}>
-			<Route path="/who-we-are" element={<WhoWeAre />} />
-			<Route path="/faqs" element={<FaQ />} />
-			<Route path="/contact" element={<ContactUs />} />
-			<Route path="/how-it-works" element={<HowItWorks />} />
+		<Route Component={PrimaryLayout}>
+			<Route path="/who-we-are" Component={lazy(() => import("./pages/(primary)/who-we-are.page"))} />
+			<Route path="/faqs" Component={lazy(() => import("./pages/(primary)/faq.page"))} />
+			<Route path="/contact" Component={lazy(() => import("./pages/(primary)/contact.page"))} />
+			<Route
+				path="/how-it-works"
+				Component={lazy(() => import("./pages/(primary)/how-it-works.page"))}
+			/>
 		</Route>
 
 		<Route Component={StudentResultLayout}>

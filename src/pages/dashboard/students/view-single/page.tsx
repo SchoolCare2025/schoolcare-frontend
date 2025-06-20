@@ -1,3 +1,6 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { IconBox } from "@/components/common";
 import { Form } from "@/components/ui";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
@@ -5,9 +8,6 @@ import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { studentsByIDQuery } from "@/store/react-query/queryFactory";
 import { useViewStudentFormStore } from "@/store/zustand/viewStudentFormStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import { Main } from "../../-components/Main";
 
 const ViewSingleStudentsSchema = z.object({
@@ -51,9 +51,9 @@ function ViewSingleStudent() {
 
 						<Form.Input
 							placeholder="Enter student's reg number"
-							className="h-[48px] gap-3.5 rounded-[8px] border-2 border-school-gray bg-white px-4
-								text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
-								md:text-base"
+							className="h-[48px] gap-3.5 rounded-[8px] border border-school-gray-lighter bg-white
+								px-4 text-[12px] data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px]
+								md:px-8 md:text-base"
 						/>
 
 						<Form.ErrorMessage className="text-red-600" />

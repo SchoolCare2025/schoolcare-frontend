@@ -1,13 +1,13 @@
-import { IconBox, Show, getElementList } from "@/components/common";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { getElementList, IconBox, Show } from "@/components/common";
 import { Command, Form, Popover } from "@/components/ui";
 import { callBackendApi } from "@/lib/api/callBackendApi";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
 import { z } from "@/lib/zod";
 import { useQueryClientStore } from "@/store/react-query/queryClientStore";
 import { allSubjectsInSchoolQuery, allSubjectsQuery } from "@/store/react-query/queryFactory";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
 import { Main } from "../-components/Main";
 
 const RegisterSubjectSchema = z.object({
@@ -69,8 +69,8 @@ function RegisterSubjectPage() {
 								<Popover.Root>
 									<Popover.Trigger
 										className={cnJoin(
-											`flex h-[48px] items-center justify-between rounded-[8px] border-2
-											border-school-gray bg-white px-4 text-[12px]
+											`flex h-[48px] items-center justify-between rounded-[8px] border
+											border-school-gray-lighter bg-white px-4 text-[12px]
 											data-placeholder:text-school-gray md:h-[75px] md:rounded-[20px] md:px-8
 											md:text-base md:text-[14px]`,
 											!(field.value as boolean) && "text-shadcn-muted-foreground"
@@ -103,8 +103,8 @@ function RegisterSubjectPage() {
 																key={item}
 																value={item}
 																onSelect={() => field.onChange(item)}
-																className="h-12 bg-gray-200 text-[12px] font-medium
-																	text-black focus:bg-gray-300 focus:text-black
+																className="h-12 text-[12px] font-medium text-black
+																	focus:bg-gray-300 focus:text-black
 																	data-[selected=true]:bg-gray-300 md:text-base"
 															>
 																<p>{item}</p>
