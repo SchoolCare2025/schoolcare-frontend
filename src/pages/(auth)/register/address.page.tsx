@@ -23,6 +23,25 @@ const AddressSchema = z.object({
 	state: z.string().min(1, "State is required"),
 });
 
+const handlePreviousPageErrors = (requestBody: Record<string, unknown>) => {
+	const personalInfoResult = PersonalInfoSchema.safeParse(requestBody);
+
+	if (personalInfoResult.success) {
+		return true;
+	}
+
+	const fieldErrors = z.flattenError(personalInfoResult.error).fieldErrors;
+
+	for (const path of Object.keys(fieldErrors) as Array<keyof typeof fieldErrors>) {
+		toast.error(
+			`Your school ${path} is missing. Please return to the previous step and ${path === "logo" ? "upload" : "fill"} it`,
+			{ duration: 4000 }
+		);
+	}
+
+	return false;
+};
+
 function AddressPage() {
 	const {
 		actions: { resetFormStore, updateFormData },
@@ -42,15 +61,9 @@ function AddressPage() {
 
 		const requestBody = { ...formStepData, ...stepTwoData };
 
-		const logoResult = PersonalInfoSchema.pick({ logo: true }).safeParse(requestBody);
+		const isSuccess = handlePreviousPageErrors(requestBody);
 
-		if (!logoResult.success) {
-			toast.error(
-				"Your school logo was lost due to page refresh. Please return to the previous step to re-upload it",
-				{ duration: 4000 }
-			);
-			return;
-		}
+		if (!isSuccess) return;
 
 		const formData = new FormData();
 
