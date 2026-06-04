@@ -23,7 +23,7 @@ function DashboardSidebar(props: { className?: string }) {
 			<aside
 				className={cnMerge(
 					// NOTE - These classes allow the sidebar to scroll only within itself.
-					"relative flex h-svh overflow-y-auto",
+					"relative flex min-h-svh overflow-y-auto",
 
 					"custom-scrollbar w-[300px] shrink-0",
 					className
@@ -68,9 +68,7 @@ function DashboardSidebar(props: { className?: string }) {
 										className="group/collapsible"
 										defaultOpen={item.children.some((innerItem) => innerItem.link === pathname)}
 									>
-										<CollapsibleAnimated.Trigger
-											className="flex items-center gap-3 rounded-r-[10px] pl-6"
-										>
+										<CollapsibleAnimated.Trigger className="gap-3 rounded-r-[10px] pl-6">
 											<IconBox icon={item.icon} className="size-5" />
 											{item.label}
 											<IconBox

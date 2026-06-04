@@ -2,7 +2,7 @@ import { cnMerge } from "@/lib/utils/cn";
 import { AvatarGroupAnimated } from "../animated/ui";
 import { Avatar } from "../ui";
 import { Image } from "./Image";
-import { Show } from "./Show";
+import { Show } from "./show";
 
 type AvatarWithTooltipProps = {
 	classNames?: {
@@ -18,8 +18,14 @@ function AvatarWithTooltip(props: AvatarWithTooltipProps) {
 	const { classNames, logo, name } = props;
 
 	return (
-		<AvatarGroupAnimated.Root translate="5%">
-			<Avatar.Root className={cnMerge("size-70 rounded-full", classNames?.base)}>
+		<AvatarGroupAnimated.Root sideOffset={10} translate="5%">
+			<Avatar.Root className={cnMerge("size-[70px] rounded-full", classNames?.base)}>
+				{name && (
+					<AvatarGroupAnimated.Tooltip classNames={{ base: "bg-school-dark-blue-500 text-white" }}>
+						{name}
+					</AvatarGroupAnimated.Tooltip>
+				)}
+
 				<Show.Root control="content">
 					<Show.Content when={logo}>
 						{(definedLogo) => (
@@ -44,12 +50,6 @@ function AvatarWithTooltip(props: AvatarWithTooltipProps) {
 						</span>
 					</Show.Fallback>
 				</Show.Root>
-
-				{name && (
-					<AvatarGroupAnimated.Tooltip classNames={{ base: "bg-school-dark-blue-500 text-white" }}>
-						{name}
-					</AvatarGroupAnimated.Tooltip>
-				)}
 			</Avatar.Root>
 		</AvatarGroupAnimated.Root>
 	);

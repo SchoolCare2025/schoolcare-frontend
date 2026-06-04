@@ -161,8 +161,8 @@ function DashboardPage() {
 
 			<section className="flex grow gap-5">
 				<article
-					className="flex w-[calc(1.36*100%)] flex-col gap-5 rounded-[24px] border
-						border-[hsl(0,0%,84%)] bg-white p-9.5"
+					className="flex w-[136%] flex-col gap-5 rounded-[24px] border border-[hsl(0,0%,84%)]
+						bg-white p-9.5"
 				>
 					<header className="flex justify-between gap-5 text-nowrap">
 						<h3 className="text-[24px] font-medium">Recent Activities</h3>

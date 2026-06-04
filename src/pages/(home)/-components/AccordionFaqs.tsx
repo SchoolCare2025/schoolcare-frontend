@@ -1,5 +1,5 @@
 import { IconBox } from "@/components/common";
-import { For } from "@/components/common/For";
+import { For } from "@/components/common/for";
 import { Accordion } from "@/components/ui";
 
 const FAQs = [

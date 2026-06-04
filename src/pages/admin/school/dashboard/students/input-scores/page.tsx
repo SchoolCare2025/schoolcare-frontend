@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { getElementList, IconBox } from "@/components/common";
+import { For, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { apiSchema, callBackendApi } from "@/lib/api/callBackendApi";
 import {
@@ -31,8 +31,6 @@ function AddScoresPage() {
 	const schoolSessionQueryResult = useQuery(schoolSessionQuery());
 	const schoolTermQueryResult = useQuery(schoolTermQuery());
 	const classesQueryResult = useQuery(allClassesInSchoolQuery());
-
-	const [List] = getElementList("base");
 
 	const onSubmit = form.handleSubmit(async (data) => {
 		await callBackendApi("@post/school/results/get-class-session-term", {
@@ -85,7 +83,7 @@ function AddScoresPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<List
+											<For
 												each={schoolSessionQueryResult.data?.data ?? []}
 												renderItem={(item) => (
 													<Select.Item

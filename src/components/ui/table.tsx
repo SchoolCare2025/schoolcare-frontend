@@ -1,7 +1,8 @@
-import type { InferProps } from "@zayne-labs/toolkit-react/utils";
 import { cnMerge } from "@/lib/utils/cn";
 
-function TableRoot(props: InferProps<"table"> & { classNames?: { container?: string; table?: string } }) {
+function TableRoot(
+	props: React.ComponentProps<"table"> & { classNames?: { container?: string; table?: string } }
+) {
 	const { className, classNames, ...restOfProps } = props;
 
 	return (
@@ -18,7 +19,7 @@ function TableRoot(props: InferProps<"table"> & { classNames?: { container?: str
 	);
 }
 
-function TableHeader(props: InferProps<HTMLTableSectionElement>) {
+function TableHeader(props: React.ComponentProps<"thead">) {
 	const { className, ...restOfProps } = props;
 
 	return (
@@ -26,7 +27,7 @@ function TableHeader(props: InferProps<HTMLTableSectionElement>) {
 	);
 }
 
-function TableBody(props: InferProps<HTMLTableSectionElement>) {
+function TableBody(props: React.ComponentProps<"tbody">) {
 	const { className, ...restOfProps } = props;
 
 	return (
@@ -38,7 +39,7 @@ function TableBody(props: InferProps<HTMLTableSectionElement>) {
 	);
 }
 
-function TableFooter(props: InferProps<HTMLTableSectionElement>) {
+function TableFooter(props: React.ComponentProps<"tfoot">) {
 	const { className, ...restOfProps } = props;
 
 	return (
@@ -50,7 +51,7 @@ function TableFooter(props: InferProps<HTMLTableSectionElement>) {
 	);
 }
 
-function TableRow(props: InferProps<HTMLTableRowElement>) {
+function TableRow(props: React.ComponentProps<"tr">) {
 	const { className, ...restOfProps } = props;
 
 	return (
@@ -65,15 +66,15 @@ function TableRow(props: InferProps<HTMLTableRowElement>) {
 	);
 }
 
-function TableHead(props: InferProps<HTMLTableCellElement>) {
+function TableHead(props: React.ComponentProps<"th">) {
 	const { className, ...restOfProps } = props;
 
 	return (
 		<th
 			data-slot="table-head"
 			className={cnMerge(
-				`h-10 px-2 text-left align-middle font-medium text-shadcn-foreground
-				[&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-[2px]`,
+				`h-10 px-2 text-left align-middle font-medium text-shadcn-foreground has-[[role=checkbox]]:pr-0
+				*:[[role=checkbox]]:translate-y-0.5`,
 				className
 			)}
 			{...restOfProps}
@@ -81,14 +82,14 @@ function TableHead(props: InferProps<HTMLTableCellElement>) {
 	);
 }
 
-function TableCell(props: InferProps<HTMLTableCellElement>) {
+function TableCell(props: React.ComponentProps<"td">) {
 	const { className, ...restOfProps } = props;
 
 	return (
 		<td
 			data-slot="table-cell"
 			className={cnMerge(
-				"p-2 align-middle [&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-[2px]",
+				"p-2 align-middle has-[[role=checkbox]]:pr-0 *:[[role=checkbox]]:translate-y-0.5",
 				className
 			)}
 			{...restOfProps}
@@ -96,7 +97,7 @@ function TableCell(props: InferProps<HTMLTableCellElement>) {
 	);
 }
 
-function TableCaption(props: InferProps<HTMLTableCaptionElement>) {
+function TableCaption(props: React.ComponentProps<"caption">) {
 	const { className, ...restOfProps } = props;
 
 	return (
@@ -108,18 +109,13 @@ function TableCaption(props: InferProps<HTMLTableCaptionElement>) {
 	);
 }
 
-export const Root = TableRoot;
-
-export const Header = TableHeader;
-
-export const Body = TableBody;
-
-export const Footer = TableFooter;
-
-export const Row = TableRow;
-
-export const Head = TableHead;
-
-export const Cell = TableCell;
-
-export const Caption = TableCaption;
+export {
+	TableRoot as Root,
+	TableHeader as Header,
+	TableBody as Body,
+	TableFooter as Footer,
+	TableRow as Row,
+	TableHead as Head,
+	TableCell as Cell,
+	TableCaption as Caption,
+};

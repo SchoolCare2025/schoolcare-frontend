@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
-import { getElementList, IconBox } from "@/components/common";
+import { For, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { allClassesInSchoolQuery, studentsByClassQuery } from "@/lib/react-query/queryOptions";
 import { cnJoin, cnMerge } from "@/lib/utils/cn";
@@ -26,8 +26,6 @@ export function ViewAllStudentsPage() {
 	});
 
 	const classesQueryResult = useQuery(allClassesInSchoolQuery());
-
-	const [ClassesList] = getElementList("base");
 
 	const queryClient = useQueryClient();
 
@@ -83,7 +81,7 @@ export function ViewAllStudentsPage() {
 											viewport: "gap-1",
 										}}
 									>
-										<ClassesList
+										<For
 											each={classesQueryResult.data?.data ?? []}
 											renderItem={(item) => (
 												<Select.Item

@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { getElementList, IconBox } from "@/components/common";
+import { For, IconBox } from "@/components/common";
 import { Form, Select } from "@/components/ui";
 import { apiSchema, callBackendApi } from "@/lib/api/callBackendApi";
 import {
@@ -30,8 +30,6 @@ function RegisterStudentPage() {
 		mode: "onChange",
 		resolver: zodResolver(RegisterStudentSchema),
 	});
-
-	const [ClassesList] = getElementList("base");
 
 	const classesQueryResult = useQuery(allClassesInSchoolQuery());
 
@@ -173,7 +171,7 @@ function RegisterStudentPage() {
 												viewport: "gap-1",
 											}}
 										>
-											<ClassesList
+											<For
 												each={classesQueryResult.data?.data ?? []}
 												renderItem={(item) => (
 													<Select.Item
@@ -196,7 +194,7 @@ function RegisterStudentPage() {
 						</Form.Field>
 					</div>
 
-					<Form.ErrorMessage type="root" errorField="serverError" />
+					<Form.ErrorMessage type="root" name="serverError" />
 
 					<Form.Submit
 						disabled={form.formState.isSubmitting || !form.formState.isValid}

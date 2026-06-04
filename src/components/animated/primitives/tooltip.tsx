@@ -14,7 +14,7 @@ import {
 } from "@floating-ui/react";
 import { createCustomContext } from "@zayne-labs/toolkit-react";
 import { AnimatePresence, LayoutGroup, motion, type HTMLMotionProps, type Transition } from "motion/react";
-import React, {
+import {
 	useCallback,
 	useEffect,
 	useId,
@@ -257,7 +257,6 @@ function TooltipOverlay() {
 			}),
 			flip(),
 			shift({ padding: 8 }),
-			// eslint-disable-next-line react-hooks/refs
 			floatingArrow({ element: arrowRef }),
 		],
 		placement: align === "center" ? side : `${side}-${align}`,
@@ -543,11 +542,14 @@ function TooltipTrigger(props: TooltipTriggerProps) {
 	);
 }
 
-export const Provider = TooltipProvider;
-export const Root = TooltipRoot;
-export const Content = TooltipContent;
-export const Trigger = TooltipTrigger;
-export const Arrow = TooltipArrow;
-
-// eslint-disable-next-line react-refresh/only-export-components
-export { useGlobalTooltipContext, useTooltipContext };
+export {
+	TooltipProvider as Provider,
+	TooltipRoot as Root,
+	TooltipContent as Content,
+	TooltipTrigger as Trigger,
+	TooltipArrow as Arrow,
+	// eslint-disable-next-line react-refresh/only-export-components
+	useGlobalTooltipContext,
+	// eslint-disable-next-line react-refresh/only-export-components
+	useTooltipContext,
+};

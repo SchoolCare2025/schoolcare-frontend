@@ -1,4 +1,3 @@
-/* eslint-disable react/component-hook-factories */
 /* eslint-disable react/no-nested-component-definitions */
 
 import { useControllableState } from "@zayne-labs/toolkit-react";
@@ -83,7 +82,6 @@ export function DateTimePicker(props: DatePickerProps) {
 										className={cnMerge(
 											`size-8.5 hover:bg-school-dark-blue-200 hover:text-school-body-color
 											data-[selected-single=true]:bg-school-blue-500`,
-											// eslint-disable-next-line react/prefer-destructuring-assignment
 											innerProps.className
 										)}
 									/>

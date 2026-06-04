@@ -117,7 +117,7 @@ function RegisterSubjectPage() {
 						<Form.ErrorMessage />
 					</Form.Field>
 
-					<Form.ErrorMessage type="root" errorField="serverError" />
+					<Form.ErrorMessage type="root" name="serverError" />
 
 					<Form.Submit
 						disabled={form.formState.isSubmitting}

@@ -80,7 +80,7 @@ function DashboardPage() {
 				)}
 			/>
 
-			<section className="flex flex-col items-center md:ml-auto md:w-[calc(100%/3.3)]">
+			<section className="flex flex-col items-center md:ml-auto md:w-[calc(100%*1/3)]">
 				<GenderRatioChart genderResponseData={studentsGenderQueryResult.data?.data} />
 			</section>
 		</Main>

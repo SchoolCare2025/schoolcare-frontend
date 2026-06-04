@@ -10,14 +10,14 @@ type PageBlockerOptions = {
 };
 
 const usePageBlocker = (options: PageBlockerOptions) => {
-	const { condition, message, redirectDelay = 500, redirectPath } = options;
+	const { condition, message, redirectDelay = 800, redirectPath } = options;
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
-			if (!condition) return;
+		if (!condition) return;
 
+		const timeout = setTimeout(() => {
 			toast.error(message);
 			void navigate(redirectPath, { replace: true });
 		}, redirectDelay);

@@ -285,7 +285,7 @@ function HomePage() {
 						<Carousel.IndicatorList
 							classNames={{
 								indicator: "size-2 bg-[hsl(0,0%,85%)] data-[selected=true]:bg-210-79-44 lg:size-3",
-								indicatorGroup: "-bottom-5.5 lg:-bottom-[52px]",
+								indicatorGroup: "-bottom-5.5 lg:bottom-[-52px]",
 							}}
 						/>
 					</Carousel.Root>

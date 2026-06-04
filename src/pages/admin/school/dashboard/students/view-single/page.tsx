@@ -64,7 +64,7 @@ function ViewSingleStudent() {
 						<Form.ErrorMessage />
 					</Form.Field>
 
-					<Form.ErrorMessage type="root" errorField="serverError" />
+					<Form.ErrorMessage type="root" name="serverError" />
 
 					<div className="flex gap-6 self-end">
 						<button

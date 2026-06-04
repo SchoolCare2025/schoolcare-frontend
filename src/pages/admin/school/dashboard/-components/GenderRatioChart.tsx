@@ -71,7 +71,7 @@ function GenderRatioChart(props: { genderResponseData: StudentGenderRatioData | 
 												/>
 
 												<span className="text-[18px] font-semibold">
-													{(ctx.payloadItem.payload as { value: number } | undefined)?.value}%
+													{(ctx.payloadItem.payload as { ratio: number } | undefined)?.ratio}%
 												</span>
 											</div>
 

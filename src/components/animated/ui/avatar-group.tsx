@@ -1,3 +1,5 @@
+"use client";
+
 import * as motion from "motion/react-client";
 import * as AvatarGroupPrimitive from "@/components/animated/primitives/avatar-group";
 import { cnMerge } from "@/lib/utils/cn";
@@ -55,6 +57,4 @@ function AvatarGroupTooltip(props: AvatarGroupTooltipProps) {
 	);
 }
 
-export const Root = AvatarGroupRoot;
-
-export const Tooltip = AvatarGroupTooltip;
+export { AvatarGroupRoot as Root, AvatarGroupTooltip as Tooltip };

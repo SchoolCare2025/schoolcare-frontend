@@ -132,7 +132,8 @@ export const authPlugin = (authOptions?: AuthPluginMeta["auth"]) => {
 
 				result.data?.data && authTokenStore.setAccessToken({ access: result.data.data.access });
 
-				ctx.options.retryAttempts = 1;
+				// ctx.options.retryAttempts = 1; // NOTE - Older way of doing things
+				ctx.options.refetch();
 			},
 		},
 	});

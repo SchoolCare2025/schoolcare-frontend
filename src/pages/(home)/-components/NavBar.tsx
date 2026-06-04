@@ -1,7 +1,7 @@
 import { dataAttr, lockScroll } from "@zayne-labs/toolkit-core";
 import { useToggle } from "@zayne-labs/toolkit-react";
 import { IconBox, NavLink } from "@/components/common";
-import { ForWithWrapper } from "@/components/common/For";
+import { ForWithWrapper } from "@/components/common/for";
 import { cnMerge } from "@/lib/utils/cn";
 
 function NavBar(props: {
